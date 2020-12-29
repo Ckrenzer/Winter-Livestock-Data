@@ -32,15 +32,13 @@ livestock_data <- as.vector(livestock_data[[1]])
 livestock_data <- str_to_lower(livestock_data)
 
 
-# The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
-# if the person made more than one purchase, the line starts with "\n\t\t"
-
-# When the word "SOLD" appears, you are in a new section (this algorithm needs some work... perhaps nchar() would be a better option??)
-
-# You could use cumsum() to find the different sections??
-
 # Keyword ideas ------------------------------------------------------
 keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+"
+
+
+# You can "check your work" to the heading removal
+# with the str_view() or str_view_all() functions:
+str_view_all(livestock_data, keywords)
 
 
 # Removes headings and unrelated information from the data
@@ -48,14 +46,21 @@ livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 
 
 
-# We can pull out the first section (which is all we are really interested in)
-# by cutting the vector off at the first element of this which() call
-which((nchar(livestock_data) > 60))
+# Picking Data -------------------------------------------------------
 
-livestock_data[1:20]
+# We can pull out the sales information by removing lines we do not
+# care about. Since we know that the information we want is stored
+# in lines that are much shorter than the others, we can pull out
+# lines that have fewer characters than some optimal number.
+# I chose 60. In other words, I am keeping only those lines
+# (which are stored as elements in the vector) that contain
+# fewer than 60 characters.
+livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
 
 
 
+# The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
+# if the person made more than one purchase, the line starts with "\n\t\t"
 
 
 
