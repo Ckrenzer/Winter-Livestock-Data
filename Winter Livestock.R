@@ -43,11 +43,14 @@ livestock_data <- str_to_lower(livestock_data)
 keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+"
 
 
+# Removes headings and unrelated information from the data
+livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 
-str_view_all(livestock_data, keywords)
 
 
-
+# We can pull out the first section (which is all we are really interested in)
+# by cutting the vector off at the first element of this which() call
+which((nchar(livestock_data) > 60))
 
 livestock_data[1:20]
 
