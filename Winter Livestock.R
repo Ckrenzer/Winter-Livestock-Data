@@ -63,36 +63,3 @@ livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
 # if the person made more than one purchase, the line starts with "\n\t\t"
 
 
-
-
-
-
-
-
-  # It would appear as if we are only interested in indicies 5-100...
-      # To access a list, we are looking for the first index at the 5th position
-observations <- livestock_data[[1]][5]
-for(i in 6:100){
-  observations <- c(observations, livestock_data[[1]][i]) # All of our data is stored in the first position of the list, so now we index through until we get to the 100th position
-}
-
-  # This is the new array with only the observations we care about
-print(observations)
-
-# See for yourself on the website if these are the correct results.
-# Now we have to clean the lines up with then gsub() function the observations
-# and save into a numeric vector (to export to another file, or just use it locally)
-
-
-
-# Perhaps you will want a data frame--one column with the type of cattle,
-# and another containing the price?
-
-# Before we get too far ahead of ourselves, let's finish cleaning this mess up:
-  # Removing newline characters
-observations <- gsub("\n", "", observations)
-head(observations)
-
-  # Removing tab characters
-observations <- gsub("\t", "", observations)
-head(observations)
