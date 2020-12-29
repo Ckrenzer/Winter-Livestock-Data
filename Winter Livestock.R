@@ -71,3 +71,18 @@ livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
 str_view(livestock_data, "\n\t\t")
 
 
+
+# What I need:
+#   1. names of buyers (use the str_detect() line for that one)
+#   2. indices where there is more than one sale?
+#   
+
+
+str_detect(livestock_data, "\n\t\t")
+# I'm no fan of loops, but I think a loop is
+# one of the most straightforward ways of
+# pulling out the needed information...
+for(i in livestock_data){
+   
+  
+}
