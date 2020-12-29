@@ -3,13 +3,32 @@ if(!require(pacman)) install.packages("pacman")
 pacman::p_load(rvest, stringr, tidyr, readr, dplyr)
 
 # Data import --------------------------------------------------
-# Saving url into a String variable
-url <- "http://www.winterlivestock.com/lajunta.php"
-url <- "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport"
-url <- "http://www.winterlivestock.com/lajunta.php?reportID=12703#marketreport"
-url <- "http://www.winterlivestock.com/lajunta.php?reportID=12774#marketreport"
+# Saving url into a String vector
+
+# Note: you can create a schedule to perform this task
+url <- c("http://www.winterlivestock.com/lajunta.php?reportID=12669#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12688#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12703#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12732#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12752#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12774#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12806#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12840#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12865#marketreport")
+
+# The url for the most recent report
+# (which is useful for scheduling a task
+# on your computer instead of writing in
+# all of the urls into a vector):
+
+## Uncomment the next line if you plan on making this a scheduled event ##
+###url <- "http://www.winterlivestock.com/lajunta.php#marketreport"
+
+
+for(k in 1:length(url)){
 # Saving the webpage into a variable
-webpage <- read_html(url)
+webpage <- read_html(url[k])
 
 # Saving data from the webpage written in html
 # The nodes are consistent across market reports
@@ -159,7 +178,7 @@ livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
 
 
 # We are just about there! All that remains is removing the section
-# with NA's introduced (run from line 10 to this line):
+# with NA's introduced:
 as.data.frame(livestock_data)
 
 # How do we fix that? Well, since we may want that information
@@ -170,6 +189,7 @@ as.data.frame(livestock_data)
 livestock_data <- na.omit(livestock_data)
 
 # Finishing Touches --------------------------------------------
+
 # We have all the data we need, though there are still a couple
 # problems with our output.
 #   1. We want a date column
@@ -182,7 +202,7 @@ livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
 
 # Removing the plural of the type--this is especially helpful for
 # use with group_by()
-livestock_data <- str_replace(livestock_data$type, "s$", "")
+livestock_data$type <- str_replace(livestock_data$type, "s$", "")
 
 
 
@@ -194,3 +214,5 @@ write_csv(x = livestock_data,
           file = "La Junta Market Reports.csv",
           append = T,
           col_names = F)
+
+} # end of for loop
