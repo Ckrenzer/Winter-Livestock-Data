@@ -102,6 +102,39 @@ buyers <- str_trim(buyers)
 str_view_all(buyers, "^([a-z]*\\s*&*\\s*[a-z]*)\t") # we can use \\1 to extract the name
 
 
+
+
+
+
+
+
+
+
+
+# I will provide each buyer an ID number to determine
+# which name goes where
+ID_num <- 1
+nums <- numeric(10)
+for(i in 1:length(livestock_data)){
+  if(str_detect(livestock_data[i], "\n\t\t")){
+    # Only multiple purchases will have the "\n\t\t" so we can
+    # use "\n\t\t" as a placeholder for the beginning of the string,
+    # where the buyer's name goes, and make it look the same as the
+    # lines where the name is present
+    livestock_data <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[counter], "\t", sep = ""))
+  } else {
+    ID_num <- ID_num + 1 
+  }
+  nums <- c(nums, counter)
+}
+paste("hi,", "how", "are", "you?", sep = " ")
+
+
+
+
+
+
+
 # I'm no fan of loops, but I think a loop is
 # one of the most straightforward ways of
 # pulling out the needed information...
