@@ -117,7 +117,6 @@ buyers <- str_trim(buyers)
 # to do this task for me, but it does everything we
 # need it to.
 current_ID <- 0
-ID_nums <- 0
 for(i in 1:length(livestock_data)){
   if(str_detect(livestock_data[i], "\n\t\t")){
     # Only multiple purchases will have the "\n\t\t" so we can
@@ -132,26 +131,36 @@ for(i in 1:length(livestock_data)){
     current_ID <- current_ID + 1 
   }
   
-  # add the ID numbers to the ID_nums variable
-  ID_nums <- c(ID_nums, current_ID)
-  
 }# end of for loop
-
-# removing the first element of ID_nums
-ID_nums <- ID_nums[-1]
-
 
 # removing white leading and trailing white space
 livestock_data <- str_trim(livestock_data)
 
-# Making a data frame containing the ID numbers
-# and the livestock data (overwriting
-# livestock_data)
-livestock_data <- data.frame(ID_nums, livestock_data)
 
 
 
 
+# Data frame ---------------------------------------------------
+# Making a data frame
+livestock_data <- tibble(livestock_data)
 
 
-livestock_data
+# making new columns based off the sections
+# separated by "\t"
+livestock_data <- livestock_data %>% 
+  separate(livestock_data, into = c("buyer", "quantity", "weight", "price"), sep = "\t")
+
+# Replaces the space separating the quantity and the type with a semicolon
+livestock_data$quantity <- str_replace(livestock_data$quantity, " ", ";")
+
+# Making quantity and type their own columns
+livestock_data <- livestock_data %>% 
+  separate(quantity, into = c("quantity", "type"), sep = ";")
+
+
+# Making quantity, weight, and price numeric datatypes
+livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
+
+
+
+# Writing data to a file ---------------------------------------
