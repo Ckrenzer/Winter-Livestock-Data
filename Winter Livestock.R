@@ -1,3 +1,4 @@
+# Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
 pacman::p_load(rvest, stringr)
 
@@ -48,7 +49,7 @@ livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 
 
 
-# Picking Data -------------------------------------------------------
+# Removing Headers -------------------------------------------------------
 
 # We can pull out the sales information by removing lines we do not
 # care about. Since we know that the information we want is stored
@@ -74,17 +75,8 @@ str_view(livestock_data, "\n\t\t")
 
 
 
-# What I need:
-#   1. names of buyers (use the str_detect() line for that one)
-#   2. indices where there is more than one sale?
-#   3. paste the names of buyers on the rows where it is missing,
-#      following the same pattern as those that do have the names
-#      present. You are essentially adding the name back into the
-#      observations.
 
-
-
-
+# Buyer names -----------------------------------------------------
 # Step 1. Names of Buyers:
 # Pulling out the indices that contain the buyer's name.
 buyers <- livestock_data[!str_detect(livestock_data, "\n\t\t")]
@@ -107,15 +99,21 @@ str_view(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
 
 # The names of the buyers:
 buyers <- str_extract(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
-# removing unneded whitespace
+
+# removing unneeded white space
 buyers <- str_trim(buyers)
 
 
 
+# Buyer ID numbers ----------------------------------------------
+# This section uses ID numbers to identify the buyer for
+# each sale listed on the market report. It then adds
+# the buyer's name back onto the lines from which it
+# was omitted.
 
 # I will provide each buyer an ID number to determine
 # which name goes where
-current_ID <- 1
+current_ID <- 0
 ID_nums <- 0
 for(i in 1:length(livestock_data)){
   if(str_detect(livestock_data[i], "\n\t\t")){
@@ -124,7 +122,8 @@ for(i in 1:length(livestock_data)){
     # where the buyer's name goes, and make it look the same as the
     # lines where the name is present
     livestock_data[i] <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[current_ID], "\t", sep = ""))
-  } else {
+    
+  } else if(!str_detect(livestock_data[i], "\n\t\t")){
     # if the index lands on the next buyer, give them
     # a new ID number
     current_ID <- current_ID + 1 
@@ -134,11 +133,14 @@ for(i in 1:length(livestock_data)){
   ID_nums <- c(ID_nums, current_ID)
   
 }# end of for loop
+
 # removing the first element of ID_nums
 ID_nums <- ID_nums[-1]
 
 
-paste("hi,", "how", "are", "you?", sep = " ")
+
+# Putting ID numbers with buyer names
+data.frame(ID_nums, livestock_data)
 
 
 
