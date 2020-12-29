@@ -4,7 +4,7 @@ pacman::p_load(rvest, stringr)
 # Data import --------------------------------------------------
 # Saving url into a String variable
 url <- "http://www.winterlivestock.com/lajunta.php"
-
+url <- "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport"
 # Saving the webpage into a variable
 webpage <- read_html(url)
 
@@ -28,9 +28,6 @@ livestock_data <- strsplit(livestock_data, "\r")
 # Let's store everything in a character vector
 livestock_data <- as.vector(livestock_data[[1]])
 
-# Let's remove the heading, which is stored in the first three elements
-livestock_data <- livestock_data[-c(1, 2, 3)]
-
 # making all the text lowercase
 livestock_data <- str_to_lower(livestock_data)
 
@@ -43,7 +40,7 @@ livestock_data <- str_to_lower(livestock_data)
 # You could use cumsum() to find the different sections??
 
 # Keyword ideas ------------------------------------------------------
-keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test|\\s+offer|\\s+selection|\\s+week|\\s+package|\\s+no\\s+|consigned|\\s*now\\s+|special\\s+|\\s+higher|\\s+lower"
+keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+"
 
 
 
