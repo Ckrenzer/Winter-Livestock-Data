@@ -75,14 +75,37 @@ str_view(livestock_data, "\n\t\t")
 # What I need:
 #   1. names of buyers (use the str_detect() line for that one)
 #   2. indices where there is more than one sale?
-#   
+#   3. paste the names of buyers on the rows where it is missing,
+#      following the same pattern as those that do have the names
+#      present. You are essentially adding the name back into the
+#      observations.
 
 
-str_detect(livestock_data, "\n\t\t")
+
+
+# Step 1. Names of Buyers:
+# Pulling out the indices that contain the buyer's name.
+buyers <- livestock_data[!str_detect(livestock_data, "\n\t\t")]
+
+# removing leading newline characters
+buyers <- str_trim(buyers)
+
+# Extracting the buyer's name--the name ends when
+# the first "\t" is encountered:
+
+# From the looks of things, there are four formats for the buyer's name,
+# where the underscore represents a space:
+#   1. word_word
+#   2. word_word_word
+#   3. word_&_word_word
+#   4. word_word_&_word
+str_view_all(buyers, "^([a-z]*\\s*&*\\s*[a-z]*)\t") # we can use \\1 to extract the name
+
+
 # I'm no fan of loops, but I think a loop is
 # one of the most straightforward ways of
 # pulling out the needed information...
 for(i in livestock_data){
-   
+  
   
 }
