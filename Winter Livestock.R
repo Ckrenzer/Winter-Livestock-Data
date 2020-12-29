@@ -1,4 +1,5 @@
-library(rvest)
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(rvest, stringr)
 
 
 # Saving url into a String variable
@@ -8,6 +9,7 @@ url <- "http://www.winterlivestock.com/lajunta.php"
 webpage <- read_html(url)
 
 # Saving some data from the webpage written in html
+# The nodes are consistent across market reports
 livestock_data_html <- html_nodes(webpage, "div:nth-child(9) div.sml")
 
 # Converting the html code to plain text
