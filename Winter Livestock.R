@@ -6,6 +6,7 @@ pacman::p_load(rvest, stringr, tidyr, readr)
 # Saving url into a String variable
 url <- "http://www.winterlivestock.com/lajunta.php"
 url <- "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport"
+url <- "http://www.winterlivestock.com/lajunta.php?reportID=12703#marketreport"
 # Saving the webpage into a variable
 webpage <- read_html(url)
 
@@ -36,7 +37,7 @@ livestock_data <- str_to_lower(livestock_data)
 # Header Removal with Keywords ------------------------------------------------------
 # A set of keywords designed to remove heading information
 # and other information we are not interested in observing
-keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+|la\\s+junta,"
+keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"
 
 
 # You can "check your work" for the heading removal
@@ -60,6 +61,9 @@ livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 # fewer than 60 characters.
 livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
 
+# There is another section detailing the age of the cows, which
+# we are not interested in. Let's remove those, too.
+str_view(livestock_data, "\\s+yr\\s+|\\*$")
 
 
 # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
@@ -85,20 +89,12 @@ buyers <- livestock_data[!str_detect(livestock_data, "\n\t\t")]
 buyers <- str_trim(buyers)
 
 # Extracting the buyer's name--the name ends when
-# the first "\t" is encountered:
-
-# From the looks of things, there are four formats for a buyer's name,
-# where the underscore represents a space:
-#   1. word_word
-#   2. word_word_word
-#   3. word_&_word_word
-#   4. word_word_&_word
-
-# This regex should take care of the four cases above:
-str_view(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
+# the first "\t" is encountered. You can see that
+# with this line:
+str_view(buyers, ".*?(?=\t)")
 
 # The names of the buyers:
-buyers <- str_extract(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
+buyers <- str_extract(buyers, ".*?(?=\t)")
 
 # removing unneeded white space
 buyers <- str_trim(buyers)
@@ -126,8 +122,8 @@ for(i in 1:length(livestock_data)){
     livestock_data[i] <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[current_ID], "\t", sep = ""))
     
   } else if(!str_detect(livestock_data[i], "\n\t\t")){
-    # if the index lands on the next buyer, give them
-    # a new ID number
+    # if the index lands on a new buyer, give them
+    # the next ID number
     current_ID <- current_ID + 1 
   }
   
@@ -162,13 +158,28 @@ livestock_data <- livestock_data %>%
 livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
 
 # Adding the date from the market report as a column
-dates <- 
+#dates
+
+
+# We are just about there! All that remains is removing the section
+# with NA's introduced (run from line 10 to this line):
+as.data.frame(livestock_data)
+
+# How do we fix that? Well, since we may want that information
+# for future use, we won't want to remove it entirely with a
+# keyword search, as was done in the beginning. What we can
+# remove observations with NA values to keep only the data
+# that matches our desired format:
+livestock_data <- na.omit(livestock_data)
+
+as.data.frame(livestock_data)
 
 
 # Writing data to a file ---------------------------------------
+# We are now ready to write the data to a file!
 # Just remember to add in the column names if
 # this file is not already on your computer
 write_csv(x = livestock_data,
-          file = "La Junta Market Reports",
+          file = "La Junta Market Reports.csv",
           append = T,
           col_names = F)
