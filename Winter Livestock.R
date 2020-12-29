@@ -31,13 +31,23 @@ livestock_data <- as.vector(livestock_data[[1]])
 # Let's remove the heading, which is stored in the first three elements
 livestock_data <- livestock_data[-c(1, 2, 3)]
 
-
+# making all the text lowercase
+livestock_data <- str_to_lower(livestock_data)
 
 
 # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
 # if the person made more than one purchase, the line starts with "\n\t\t"
 
 # When the word "SOLD" appears, you are in a new section (this algorithm needs some work... perhaps nchar() would be a better option??)
+
+# You could use cumsum() to find the different sections??
+
+# Keyword ideas ------------------------------------------------------
+keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test|\\s+offer|\\s+selection|\\s+week|\\s+package|\\s+no\\s+|consigned|\\s*now\\s+|special\\s+|\\s+higher|\\s+lower"
+
+
+
+str_view_all(livestock_data, keywords)
 
 
 
