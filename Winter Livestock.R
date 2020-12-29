@@ -60,6 +60,14 @@ livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
 
 
 # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
-# if the person made more than one purchase, the line starts with "\n\t\t"
+# if the person made more than one purchase, the line starts with "\n\t\t"--this is the reason
+# why we cannot make use of str_trim(). We need the "\n\t\t" to indicate whether
+# that element in the vector is really another purchase by the same buyer.
+
+# You can see what I am talking about by running
+# the code below. The "\n\t\t" is hidden, but
+# you can see the highlighted boxes at the
+# beginning of the lines containing the pattern:
+str_view(livestock_data, "\n\t\t")
 
 
