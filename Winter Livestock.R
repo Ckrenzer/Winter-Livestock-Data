@@ -112,7 +112,10 @@ buyers <- str_trim(buyers)
 # was omitted.
 
 # I will provide each buyer an ID number to determine
-# which name goes where
+# which purchases that buyer made. I am not crazy about
+# using loops, as I could probably write a function
+# to do this task for me, but it does everything we
+# need it to.
 current_ID <- 0
 ID_nums <- 0
 for(i in 1:length(livestock_data)){
@@ -138,20 +141,16 @@ for(i in 1:length(livestock_data)){
 ID_nums <- ID_nums[-1]
 
 
+# removing white leading and trailing white space
+livestock_data <- str_trim(livestock_data)
 
-# Putting ID numbers with buyer names
-data.frame(ID_nums, livestock_data)
+# Making a data frame containing the ID numbers
+# and the livestock data (overwriting
+# livestock_data)
+livestock_data <- data.frame(ID_nums, livestock_data)
 
 
 
 
 
 
-
-# I'm no fan of loops, but I think a loop is
-# one of the most straightforward ways of
-# pulling out the needed information...
-for(i in livestock_data){
-  
-  
-}
