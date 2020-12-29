@@ -1,6 +1,6 @@
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(rvest, stringr, tidyr)
+pacman::p_load(rvest, stringr, tidyr, readr)
 
 # Data import --------------------------------------------------
 # Saving url into a String variable
@@ -33,10 +33,10 @@ livestock_data <- as.vector(livestock_data[[1]])
 livestock_data <- str_to_lower(livestock_data)
 
 
-# Keywords ------------------------------------------------------
+# Header Removal with Keywords ------------------------------------------------------
 # A set of keywords designed to remove heading information
 # and other information we are not interested in observing
-keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+"
+keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+|la\\s+junta,"
 
 
 # You can "check your work" for the heading removal
@@ -49,7 +49,7 @@ livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 
 
 
-# Removing Headers -------------------------------------------------------
+# Removing Unwanted Sections -------------------------------------------------------
 
 # We can pull out the sales information by removing lines we do not
 # care about. Since we know that the information we want is stored
@@ -87,7 +87,7 @@ buyers <- str_trim(buyers)
 # Extracting the buyer's name--the name ends when
 # the first "\t" is encountered:
 
-# From the looks of things, there are four formats for the buyer's name,
+# From the looks of things, there are four formats for a buyer's name,
 # where the underscore represents a space:
 #   1. word_word
 #   2. word_word_word
@@ -161,6 +161,14 @@ livestock_data <- livestock_data %>%
 # Making quantity, weight, and price numeric datatypes
 livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
 
+# Adding the date from the market report as a column
+dates <- 
 
 
 # Writing data to a file ---------------------------------------
+# Just remember to add in the column names if
+# this file is not already on your computer
+write_csv(x = livestock_data,
+          file = "La Junta Market Reports",
+          append = T,
+          col_names = F)
