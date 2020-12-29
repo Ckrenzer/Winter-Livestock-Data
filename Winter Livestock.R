@@ -1,32 +1,58 @@
 if(!require(pacman)) install.packages("pacman")
 pacman::p_load(rvest, stringr)
 
-
+# Data import --------------------------------------------------
 # Saving url into a String variable
 url <- "http://www.winterlivestock.com/lajunta.php"
 
-# Saving the read webpage into a variable
+# Saving the webpage into a variable
 webpage <- read_html(url)
 
-# Saving some data from the webpage written in html
+# Saving data from the webpage written in html
 # The nodes are consistent across market reports
 livestock_data_html <- html_nodes(webpage, "div:nth-child(9) div.sml")
 
-# Converting the html code to plain text
+# Converting to plain text
 livestock_data <- html_text(livestock_data_html)
 
-# This is still quite messy
-head(livestock_data)
 
 
-# Next step: cleaning
-# Let's split the String up into an array of Strings using a delimiter ("\r" in this case--I think "\n" would have worked just fine)
+# Data cleaning -----------------------------------------------
+# Let's split the String up into an array of Strings using a delimiter
+# ("\r" in this case--I think "\n" would have worked just fine)
 
-  # We have all the lines separated into a list. Now, we just grab the lines we want and manipulate the new vector to extract the numbers
+# We have all the lines separated into a list.
+# Now, we just grab the lines we want and manipulate the new vector to extract the numbers
 livestock_data <- strsplit(livestock_data, "\r")
 
-# To see what I just did:
-print(livestock_data)
+# Let's store everything in a character vector
+livestock_data <- as.vector(livestock_data[[1]])
+
+# Let's remove the heading, which is stored in the first three elements
+livestock_data <- livestock_data[-c(1, 2, 3)]
+
+
+
+
+# The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
+# if the person made more than one purchase, the line starts with "\n\t\t"
+
+# When the word "SOLD" appears, you are in a new section (this algorithm needs some work... perhaps nchar() would be a better option??)
+
+
+
+
+livestock_data[1:20]
+
+
+
+
+
+
+
+
+
+
 
   # It would appear as if we are only interested in indicies 5-100...
       # To access a list, we are looking for the first index at the 5th position
@@ -55,10 +81,3 @@ head(observations)
   # Removing tab characters
 observations <- gsub("\t", "", observations)
 head(observations)
-
-
-# At this point, you will want to find a function that can pull
-# out information by a keyword or number. I'll leave that to you.
-
-# Cheers!
-# -Connor
