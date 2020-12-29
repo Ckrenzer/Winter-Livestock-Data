@@ -1,12 +1,13 @@
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(rvest, stringr, tidyr, readr)
+pacman::p_load(rvest, stringr, tidyr, readr, dplyr)
 
 # Data import --------------------------------------------------
 # Saving url into a String variable
 url <- "http://www.winterlivestock.com/lajunta.php"
 url <- "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport"
 url <- "http://www.winterlivestock.com/lajunta.php?reportID=12703#marketreport"
+url <- "http://www.winterlivestock.com/lajunta.php?reportID=12774#marketreport"
 # Saving the webpage into a variable
 webpage <- read_html(url)
 
@@ -37,7 +38,7 @@ livestock_data <- str_to_lower(livestock_data)
 # Header Removal with Keywords ------------------------------------------------------
 # A set of keywords designed to remove heading information
 # and other information we are not interested in observing
-keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"
+keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"
 
 
 # You can "check your work" for the heading removal
@@ -60,10 +61,6 @@ livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
 # (which are stored as elements in the vector) that contain
 # fewer than 60 characters.
 livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
-
-# There is another section detailing the age of the cows, which
-# we are not interested in. Let's remove those, too.
-str_view(livestock_data, "\\s+yr\\s+|\\*$")
 
 
 # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
@@ -158,7 +155,7 @@ livestock_data <- livestock_data %>%
 livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
 
 # Adding the date from the market report as a column
-#dates
+
 
 
 # We are just about there! All that remains is removing the section
@@ -172,7 +169,21 @@ as.data.frame(livestock_data)
 # that matches our desired format:
 livestock_data <- na.omit(livestock_data)
 
-as.data.frame(livestock_data)
+# Finishing Touches --------------------------------------------
+# We have all the data we need, though there are still a couple
+# problems with our output.
+#   1. We want a date column
+#   2. We want to remove the "s" at the end of the 
+#      type column to account for cases when there is only one
+#      cow bought by the buyer (Ex. "black cow" vs "black cows")
+
+# Adding in the date
+livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
+
+# Removing the plural of the type--this is especially helpful for
+# use with group_by()
+livestock_data <- str_replace(livestock_data$type, "s$", "")
+
 
 
 # Writing data to a file ---------------------------------------
