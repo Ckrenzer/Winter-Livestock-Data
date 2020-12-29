@@ -1,6 +1,6 @@
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(rvest, stringr)
+pacman::p_load(rvest, stringr, tidyr)
 
 # Data import --------------------------------------------------
 # Saving url into a String variable
@@ -154,3 +154,4 @@ livestock_data <- data.frame(ID_nums, livestock_data)
 
 
 
+livestock_data
