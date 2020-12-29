@@ -32,11 +32,13 @@ livestock_data <- as.vector(livestock_data[[1]])
 livestock_data <- str_to_lower(livestock_data)
 
 
-# Keyword ideas ------------------------------------------------------
+# Keywords ------------------------------------------------------
+# A set of keywords designed to remove heading information
+# and other information we are not interested in observing
 keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|report[:]?\\s+"
 
 
-# You can "check your work" to the heading removal
+# You can "check your work" for the heading removal
 # with the str_view() or str_view_all() functions:
 str_view_all(livestock_data, keywords)
 
@@ -99,34 +101,43 @@ buyers <- str_trim(buyers)
 #   2. word_word_word
 #   3. word_&_word_word
 #   4. word_word_&_word
-str_view_all(buyers, "^([a-z]*\\s*&*\\s*[a-z]*)\t") # we can use \\1 to extract the name
 
+# This regex should take care of the four cases above:
+str_view(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
 
-
-
-
-
-
+# The names of the buyers:
+buyers <- str_extract(buyers, "^([a-z]*\\s*&*\\s*[a-z]*\\s*&*\\s*[a-z]*)\t")
+# removing unneded whitespace
+buyers <- str_trim(buyers)
 
 
 
 
 # I will provide each buyer an ID number to determine
 # which name goes where
-ID_num <- 1
-nums <- numeric(10)
+current_ID <- 1
+ID_nums <- 0
 for(i in 1:length(livestock_data)){
   if(str_detect(livestock_data[i], "\n\t\t")){
     # Only multiple purchases will have the "\n\t\t" so we can
     # use "\n\t\t" as a placeholder for the beginning of the string,
     # where the buyer's name goes, and make it look the same as the
     # lines where the name is present
-    livestock_data <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[counter], "\t", sep = ""))
+    livestock_data[i] <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[current_ID], "\t", sep = ""))
   } else {
-    ID_num <- ID_num + 1 
+    # if the index lands on the next buyer, give them
+    # a new ID number
+    current_ID <- current_ID + 1 
   }
-  nums <- c(nums, counter)
-}
+  
+  # add the ID numbers to the ID_nums variable
+  ID_nums <- c(ID_nums, current_ID)
+  
+}# end of for loop
+# removing the first element of ID_nums
+ID_nums <- ID_nums[-1]
+
+
 paste("hi,", "how", "are", "you?", sep = " ")
 
 
