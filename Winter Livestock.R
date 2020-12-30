@@ -1,3 +1,15 @@
+# Instructions -------------------------------------------------
+# If you don't want to do much work with this--you just want the
+# data and you want it now, just add the market report's url at the
+# end of the url vector and add the corresponding date to the end of the
+# DATE vector, delete the file if you already have it on your computer,
+# run the whole file--and that's it!
+#
+# Otherwise, you will need to find
+# out when Winter Livestock makes these releases and make a schedule.
+# The code for a schedule is also provided in this script, but it
+# is commented out. Enjoy!
+
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
 pacman::p_load(rvest, stringr, tidyr, readr, dplyr)
