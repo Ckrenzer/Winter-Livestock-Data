@@ -38,4 +38,5 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
+# The output file
 La Junta Market Reports.csv
