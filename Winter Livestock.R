@@ -35,7 +35,7 @@ DATE <- c("10-20-2020",
 # on your computer instead of writing in
 # all of the urls into a vector):
 
-## Uncomment the next line if you plan on making this a scheduled event ##
+## Uncomment the next line if you plan on making this a scheduled event ## ----------------------------------------
 ###url <- "http://www.winterlivestock.com/lajunta.php#marketreport"
 
 
@@ -212,7 +212,7 @@ for(k in 1:length(url)){
   #      should both read "black cow")
   
   
-  ## Uncomment the line below this code if you plan to schedule
+  ## Uncomment the line below this code if you plan to schedule -----------------------------------------------
   ## this on your computer, and comment this line out
   livestock_data <- mutate(livestock_data, "date" = DATE[k], .before = 1)
   
