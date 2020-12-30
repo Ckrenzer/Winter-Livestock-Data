@@ -1,0 +1,780 @@
+Date,Buyer,Quantity,Type,Weight,Price
+10-20-2020,dean maverick ranch,18,black str,430,179
+10-20-2020,dean maverick ranch,49,black str,515,146
+10-20-2020,dean maverick ranch,23,black hfr,405,165
+10-20-2020,dean maverick ranch,42,black hfr,495,130
+10-20-2020,mcendree cattle,10,mix str,430,174
+10-20-2020,matt clough,15,angus str,465,172
+10-20-2020,jose munoz,15,angus x str,435,170
+10-20-2020,jose munoz,58,angus x str,495,146
+10-20-2020,jose munoz,89,angus x hfr,485,130
+10-20-2020,ronnie ward,17,black str,425,168
+10-20-2020,ronnie ward,17,black str,520,146
+10-20-2020,jd schier,30,angus x str,410,168
+10-20-2020,donnell & harrington,13,angus x hfr,345,167.5
+10-20-2020,donnell & harrington,45,angus x hfr,460,133
+10-20-2020,dixon sandoval,13,angus str,485,162.5
+10-20-2020,tim schmitt,18,black str,455,161
+10-20-2020,tim schmitt,34,black str,505,144
+10-20-2020,tim schmitt,19,black hfr,470,142.5
+10-20-2020,nelson taylor,16,ang-char x str,460,157.5
+10-20-2020,nelson taylor,13,ang-char x hfr,435,140
+10-20-2020,nelson taylor,43,ang-char x hfr,515,128
+10-20-2020,howard robertson,24,angus str,460,156
+10-20-2020,howard robertson,32,angus hfr,535,125.5
+10-20-2020,flying u ranch,23,black str,505,151
+10-20-2020,menegatti cattle,59,mix str,490,151
+10-20-2020,menegatti cattle,36,mix hfr,470,136
+10-20-2020,menegatti cattle,74,mix hfr,540,129.5
+10-20-2020,dorenkamp ranch,25,angus x str,505,147.5
+10-20-2020,davey family ranch,23,black str,500,147
+10-20-2020,dan & becky doherty,12,red angus hfr,445,145
+10-20-2020,dan & becky doherty,23,red angus hfr,535,126
+10-20-2020,dutro ranch,24,angus x str,525,142
+10-20-2020,dutro ranch,19,angus x hfr,510,133
+10-20-2020,pat mcconnell,34,angus x str,535,140.5
+10-20-2020,pat mcconnell,25,angus x hfr,505,123
+10-20-2020,seal pharmacy,30,char x hfr,410,140.5
+10-20-2020,seal pharmacy,111,char x hfr,495,127
+10-20-2020,colleen jackson,11,mix hfr,440,139
+10-20-2020,lane elliott,79,ang-gel x str,500,138
+10-20-2020,raymond loretto dvm,14,mix hfr,455,133
+10-20-2020,kyle & tammy wezel,32,angus hfr,530,129
+10-20-2020,steven smith,11,black hfr,535,128
+10-20-2020,joe mayo,15,angus x hfr,540,126.5
+10-20-2020,jack dixon ranch,22,angus hfr,525,125
+10-20-2020,steve rzepka,44,black hfr,515,125
+10-20-2020,menegatti cattle,15,mix hfr,615,128
+10-20-2020,william hatcher,16,black hfr,550,126.5
+10-20-2020,william hatcher,13,black hfr,710,126
+10-20-2020,matt clough,68,angus hfr,545,126.5
+10-20-2020,matt clough,74,angus hfr,595,121.5
+10-20-2020,kuykendall ranches,11,char x hfr,775,126
+10-20-2020,kuykendall ranches,17,char x hfr,865,120
+10-20-2020,steven smith,15,black hfr,675,126
+10-20-2020,jose munoz,19,angus x hfr,585,126
+10-20-2020,mike occhiato,18,black hfr,650,125
+10-20-2020,rick howieson,45,black hfr,555,124.5
+10-20-2020,john arrington,12,black hfr,640,124
+10-20-2020,joe mayo,41,angus hfr,615,124
+10-20-2020,seal pharmacy,80,char x hfr,580,124
+10-20-2020,schubert ranches,57,angus hfr,625,123.5
+10-20-2020,kevin hall,16,angus x hfr,545,122
+10-20-2020,tony hass,21,bwf hfr,655,121.5
+10-20-2020,hans hasser,24,angus x hfr,610,119.5
+10-20-2020,lewis fillmore,25,ang-char x hfr,655,119
+10-20-2020,kimberlee schmitz,29,angus x str,555,141.5
+10-20-2020,menegatti cattle,77,mix str,550,138
+10-20-2020,menegatti cattle,32,mix str,625,135.5
+10-20-2020,matt clough,72,angus str,550,138
+10-20-2020,matt clough,129,angus str,625,137.25
+10-20-2020,joe mayo,57,angus str,625,136.5
+10-20-2020,joe mayo,28,angus str,700,129
+10-20-2020,steven smith,12,black str,620,136.5
+10-20-2020,steven smith,13,black str,740,131
+10-20-2020,william hatcher,19,black str,640,135
+10-20-2020,nelson taylor,28,ang-char x str,635,135
+10-20-2020,schubert ranches,24,black str,595,135
+10-20-2020,schubert ranches,33,black str,710,133
+10-20-2020,kyle & tammy wezel,36,black str,560,135
+10-20-2020,jerry palmer,28,angus str,655,134
+10-20-2020,jerry palmer,36,angus str,705,129.5
+10-20-2020,howard robertson,17,angus str,585,134
+10-20-2020,rick howieson,48,black str,585,133.5
+10-20-2020,mike occhiato,21,black str,740,133
+10-20-2020,kevin hall,21,angus x str,570,133
+10-20-2020,tommy culler,21,angus-char x str,640,132.5
+10-20-2020,roger & pat schalla,32,black str,605,132.5
+10-20-2020,tony hass,11,bwf str,635,132.5
+10-20-2020,dorenkamp ranches,91,angus x str,560,132
+10-20-2020,jeremy cordova,27,angus x str,560,132
+10-20-2020,kuykendall ranches,16,char x str,735,131.5
+10-20-2020,berryman angus ranch,19,angus str,710,131
+10-20-2020,hans hasser,21,angus x str,700,130
+10-20-2020,everett jackson,26,angus str,640,129
+10-20-2020,lewis fillmore,36,ang-char x str,705,124
+10-27-2020,rising double r ranch,4,red angus str,330,183
+10-27-2020,rising double r ranch,9,red angus str,435,173
+10-27-2020,godfrey & johnson,18,red & black str,400,181
+10-27-2020,godfrey & johnson,47,red & black str,505,150
+10-27-2020,godfrey & johnson,15,red & black hfr,400,148
+10-27-2020,godfrey & johnson,41,red & black hfr,500,132
+10-27-2020,earl & clay reist,19,sim-angus x str,390,181
+10-27-2020,earl & clay reist,29,sim-angus x str,515,146
+10-27-2020,earl & clay reist,12,sim-angus x hfr,365,159
+10-27-2020,earl & clay reist,39,sim-angus x hfr,470,133
+10-27-2020,paul peterson,7,bwf str,445,176
+10-27-2020,paul peterson,14,bwf hfr,475,133
+10-27-2020,jonathan & matt bush,10,ang-lim x str,395,171
+10-27-2020,jonathan & matt bush,25,ang-lim x str,425,167
+10-27-2020,jonathan & matt bush,92,ang-lim x str,520,150
+10-27-2020,jonathan & matt bush,15,ang-lim x hfr,345,155
+10-27-2020,jonathan & matt bush,30,ang-lim x hfr,525,136.75
+10-27-2020,l & m bagwell,13,red & rwf str,380,171
+10-27-2020,mike smotherman,8,sim-angus str,500,157.5
+10-27-2020,twin peaks ranch,28,char x str,465,155
+10-27-2020,twin peaks ranch,13,char x hfr,420,135
+10-27-2020,dan & becky doherty,16,red angus hfr,395,154
+10-27-2020,dan & becky doherty,52,red angus hfr,455,136
+10-27-2020,hal meredith,43,angus x str,505,150
+10-27-2020,kylie & kody ruzanski,12,char x str,475,148
+10-27-2020,bob peterson,21,sim-angus x hfr,535,127.5
+10-27-2020,bobby eichman,20,black & red hfr,530,127
+10-27-2020,paul peterson,38,bwf hfr,560,130
+10-27-2020,earl & clay reist,45,sim-angus hfr,575,128.25
+10-27-2020,twin peaks ranch,63,char x hfr,575,126.5
+10-27-2020,twin peaks ranch,30,char x hfr,660,120
+10-27-2020,godfrey & johnson,32,red & black hfr,555,125.5
+10-27-2020,wes lewis,50,sim-angus hfr,565,125
+10-27-2020,dave poss,19,black hfr,545,125
+10-27-2020,floyd myers,24,char hfr,560,123
+10-27-2020,m & g associates,34,angus hfr,590,122
+10-27-2020,north fork ranch,11,black hfr,680,121
+10-27-2020,north fork ranch,20,black hfr,840,119.5
+10-27-2020,trampe ranches,44,red angus hfr,955,120
+10-27-2020,bill luther ranch,29,black hfr,705,120
+10-27-2020,l & m bagwell,38,red & rwf hfr,570,120
+10-27-2020,spann ranch ,20,black & wf hfr,970,119.5
+10-27-2020,paul peterson,41,bwf str,550,150.5
+10-27-2020,paul peterson,39,bwf str,655,134
+10-27-2020,cam & jennifer keeler,12,angus str,545,148
+10-27-2020,dean maverick ranch,6,angus str,560,147
+10-27-2020,justin osborne,12,angus x str,550,144
+10-27-2020,twin peaks ranch,58,char x str,575,141
+10-27-2020,twin peaks ranch,52,char x str,665,128.5
+10-27-2020,l & m bagwell,49,red & rwf str,590,138
+10-27-2020,rising double r ranch,17,red angus str,590,137
+10-27-2020,ryan orndoff,15,black & red str,615,135.5
+10-27-2020,ryan orndoff,23,black & red str,740,124
+10-27-2020,floyd myers,21,char str,605,134
+10-27-2020,floyd myers,22,char str,670,130
+10-27-2020,earl & clay reist,35,sim-angus str,610,133.5
+10-27-2020,jeff belveal,15,angus str,745,132
+10-27-2020,sam crowther,18,black str,610,131
+10-27-2020,mike smotherman,16,sim-angus str,605,131
+10-27-2020,bill luther ranch,15,black str,613,130.5
+10-27-2020,bill luther ranch,16,black str,785,125
+10-27-2020,hal meredith,47,angus x str,610,130.25
+10-27-2020,4g mountain angus,14,angus str,655,130
+10-27-2020,jonathan & matt bush,74,ang-lim x str,615,130
+10-27-2020,m & g associates,30,angus str,610,130
+10-27-2020,jej farms,14,black str,745,121.5
+11-03-2020,elk mountain cattle,37,black str,400,197.5
+11-03-2020,elk mountain cattle,24,black str,350,192.5
+11-03-2020,elk mountain cattle,82,black str,455,180
+11-03-2020,elk mountain cattle,43,black str,520,165.5
+11-03-2020,elk mountain cattle,31,black hfr,350,179
+11-03-2020,elk mountain cattle,51,black hfr,400,176
+11-03-2020,elk mountain cattle,69,black hfr,460,162
+11-03-2020,elk mountain cattle,32,black hfr,540,140
+11-03-2020,abrams loapân ranch,16,mix str,345,189
+11-03-2020,abrams loapân ranch,25,mix hfr,355,181
+11-03-2020,hawkins ranch,14,angus x str,435,186
+11-03-2020,hawkins ranch,23,angus x hfr,490,147
+11-03-2020,will ward,8,black & red hfr,330,181
+11-03-2020,will ward,14,black hfr,420,168
+11-03-2020,g l bagwell,23,sim-angus str,470,173.5
+11-03-2020,g l bagwell,17,sim-angus hfr,435,161
+11-03-2020,g l bagwell,64,sim-angus hfr,510,144
+11-03-2020,a quarter circle ranch,14,angus x hfr,390,170
+11-03-2020,a quarter circle ranch,27,angus x str,465,168
+11-03-2020,a quarter circle ranch,19,angus x hfr,460,140
+11-03-2020,russell groves,25,angus x str,475,169
+11-03-2020,russell groves,20,angus x hfr,475,152
+11-03-2020,kay miller,12,angus x str,480,168
+11-03-2020,jay handle,17,black str,505,165
+11-03-2020,dillon thomas,15,black str,505,164.5
+11-03-2020,dillon thomas,17,black hfr,480,153
+11-03-2020,twin peaks ranch,25,char x str,515,161.5
+11-03-2020,twin peaks ranch,29,char x hfr,470,154
+11-03-2020,taramarcaz ranch,12,mix hfr,395,161
+11-03-2020,rutherford brothers,19,angus str,505,157.5
+11-03-2020,rutherford brothers,16,angus hfr,500,147
+11-03-2020,cienega cattle co,23,angus x str,530,156.5
+11-03-2020,cienega cattle co,14,angus x hfr,470,156
+11-03-2020,monte innes,114,hereford x str,510,155
+11-03-2020,chad & jerry cochran,19,mix hfr,470,149
+11-03-2020,buddy taylor,21,angus x hfr,535,139
+11-03-2020,vaughn johnson,20,bwf hfr,555,137.5
+11-03-2020,jeff menegatti,18,char x hfr,615,133.5
+11-03-2020,twin peaks ranch,77,char x hfr,575,132.5
+11-03-2020,cienega cattle co,29,angus x hfr,580,132
+11-03-2020,kevin davis,19,angus hfr,565,130
+11-03-2020,g l bagwell,39,sim-angus hfr,575,129
+11-03-2020,red canyon ranch,39,limousin hfr,560,129
+11-03-2020,zach blacksten,21,angus hfr,670,128.5
+11-03-2020,faucette l & c,31,black & red hfr,805,125.5
+11-03-2020,faucette l & c,28,black & red hfr,910,122
+11-03-2020,faucette l & c,40,black & red hfr,970,120
+11-03-2020,s l ranch,30,red angus hfr,625,125.5
+11-03-2020,walter & pepper,13,black hfr,610,124.5
+11-03-2020,larry copeland,23,mix hfr,665,124
+11-03-2020,bob webb,26,angus hfr,575,123
+11-03-2020,dan borrego,25,angus x str,565,152.5
+11-03-2020,dan borrego,20,angus x str,630,136.5
+11-03-2020,hawkins ranch,28,angus x str,555,150
+11-03-2020,buddy taylor,21,angus x str,570,147.5
+11-03-2020,kevin davis,30,angus str,570,146.5
+11-03-2020,twin peaks ranch,87,char x str,595,146
+11-03-2020,twin peaks ranch,64,char x str,685,136
+11-03-2020,bart & mccarroll,24,angus str,595,142.5
+11-03-2020,jeff menegatti,16,char x str,620,141.5
+11-03-2020,jeff menegatti,20,char x str,725,133
+11-03-2020,wilma mosher,41,angus x str,600,141.5
+11-03-2020,wade mosher,37,angus x str,595,141.5
+11-03-2020,s l ranch,36,red angus str,625,140.5
+11-03-2020,s l ranch,34,red angus str,710,131.5
+11-03-2020,rutherford brothers,17,angus str,645,140
+11-03-2020,larry copeland,23,mix str,710,138
+11-03-2020,bob webb,30,angus str,620,136
+11-03-2020,red canyon ranch,34,limousin str,620,135
+11-03-2020,kay miller,25,angus x str,620,135
+11-03-2020,zach blacksten,17,angus str,720,134
+11-03-2020,g l bagwell,35,sim-angus str,655,133
+11-03-2020,pepper & walter,20,black str,685,132
+11-03-2020,full draw outfitters,23,char-angus x str,665,131
+11-03-2020,bar 19 trust,15,balancer str,710,127
+11-10-2020,crowther ranch,22,gelb-ang x str,340,200
+11-10-2020,crowther ranch,57,gelb-ang x str,410,184
+11-10-2020,crowther ranch,97,gelb-ang x str,495,165.25
+11-10-2020,crowther ranch,38,gelb-ang x hfr,360,160
+11-10-2020,crowther ranch,57,gelb-ang x hfr,430,146
+11-10-2020,hutcherson ranch,13,black & red str,395,195
+11-10-2020,hutcherson ranch,65,black str,515,166
+11-10-2020,denny larsen,14,black str,395,195
+11-10-2020,denny larsen,33,black str,480,173
+11-10-2020,edwards ranch,26,lim-ang x str,425,190
+11-10-2020,edwards ranch,76,lim-ang x str,500,165.5
+11-10-2020,edwards ranch,22,lim-ang x hfr,405,166
+11-10-2020,edwards ranch,75,lim-ang x hfr,490,147
+11-10-2020,will ward,15,black & red str,400,194
+11-10-2020,will ward,12,black & red str,505,162
+11-10-2020,kennon decker,27,black & red str,395,187
+11-10-2020,kennon decker,48,black & red str,505,160
+11-10-2020,kennon decker,23,black & red hfr,380,162
+11-10-2020,buddy elze,24,sim-angus str,440,186
+11-10-2020,buddy elze,81,sim-angus str,540,161
+11-10-2020,buddy elze,51,sim-angus hfr,495,147.5
+11-10-2020,ox cart ranch,31,black str,455,184
+11-10-2020,ox cart ranch,88,black str,530,162
+11-10-2020,ox cart ranch,102,black hfr,490,155
+11-10-2020,fuyu farms,17,sim-angus str,445,184
+11-10-2020,weirich brothers,13,angus str,485,176
+11-10-2020,weirich brothers,42,angus hfr,500,144
+11-10-2020,bledsoe brothers,17,red angus str,465,171
+11-10-2020,bledsoe brothers,32,red angus hfr,420,163
+11-10-2020,dean jagers,23,black str,505,170
+11-10-2020,dean jagers,27,black hfr,480,148
+11-10-2020,spear p ranch,11,ang-gel x str,505,163
+11-10-2020,monte richardson,18,black hfr,475,156
+11-10-2020,eleven v ranch,11,black hfr,440,156
+11-10-2020,corey fischbacher,28,black hfr,440,155
+11-10-2020,leonard cattle co,17,black & red hfr,480,148
+11-10-2020,greg shalberg,25,black hfr,545,141
+11-10-2020,weirich brothers,51,angus hfr,590,140
+11-10-2020,dean jagers,116,black hfr,545,139.75
+11-10-2020,dean jagers,142,black hfr,640,135.75
+11-10-2020,jake & gale tempel,20,red angus hfr,605,136.5
+11-10-2020,willy faris,20,balancer hfr,675,136
+11-10-2020,leonard cattle co,36,black & red hfr,615,135.5
+11-10-2020,spear p ranch,19,ang-gel x hfr,600,135.5
+11-10-2020,olson farms,29,angus hfr,570,135.5
+11-10-2020,olson farms,30,angus hfr,655,133
+11-10-2020,ramon zamora,11,angus hfr,600,135
+11-10-2020,monte richardson,28,black hfr,570,135
+11-10-2020,ox cart ranch,51,black hfr,560,135
+11-10-2020,jim & anne russell,13,black hfr,560,135
+11-10-2020,davis & bowen,37,black hfr,550,135
+11-10-2020,dylan emick,40,angus hfr,555,134.5
+11-10-2020,denny larsen,16,black hfr,565,134
+11-10-2020,cole kirksey,21,black hfr,570,133
+11-10-2020,will ward,28,black & red hfr,550,132.5
+11-10-2020,eleven v ranch,31,black hfr,615,130.5
+11-10-2020,perry barnes,19,red sim x hfr,680,130
+11-10-2020,jim goodrich,32,black limo hfr,645,129
+11-10-2020,becky callaway,33,angus x hfr,650,126
+11-10-2020,jim hribar,15,black hfr,710,124
+11-10-2020,leonard cattle co,55,black & red str,570,158.25
+11-10-2020,weirich brothers,49,angus str,555,157
+11-10-2020,weirich brothers,30,angus str,660,147.5
+11-10-2020,karney kattle kompany,25,black str,555,156
+11-10-2020,karney kattle kompany,57,black str,655,147.5
+11-10-2020,greg shalberg,13,black str,550,156
+11-10-2020,greg shalberg,25,black str,625,148
+11-10-2020,olson farms,23,angus str,585,153
+11-10-2020,olson farms,57,angus str,690,140.5
+11-10-2020,dean jagers,106,black str,600,152.5
+11-10-2020,dean jagers,122,black str,680,146.25
+11-10-2020,carol root,27,angus str,580,151
+11-10-2020,carol root,15,angus str,620,149
+11-10-2020,hutcherson ranch,61,black str,595,148.5
+11-10-2020,monte richardson,36,black str,615,147.5
+11-10-2020,bob canda,38,red angus x str,600,147.5
+11-10-2020,dylan emick,26,angus str,660,145.5
+11-10-2020,steve johnson,40,black limo str,630,145
+11-10-2020,davis & bowen,25,black str,655,144.25
+11-10-2020,spear p ranch,25,ang-gel x str,625,143
+11-10-2020,jim & anne russell,26,black str,690,139
+11-10-2020,jake & gale tempel,37,red angus str,685,137.5
+11-10-2020,perry barnes,25,sim-angus str,675,137
+11-10-2020,perry barnes,28,sim-angus str,780,129
+11-10-2020,jim goodrich,28,black limo str,725,133
+11-10-2020,becky callaway,17,angus x str,725,131
+11-10-2020,randy porco,10,char str,725,131
+11-17-2020,gould ranch,39,black str,305,202
+11-17-2020,gould ranch,102,black str,385,200
+11-17-2020,gould ranch,99,black hfr,375,161
+11-17-2020,gould ranch,56,black hfr,420,161
+11-17-2020,mac garcia,7,limousin x str,360,196
+11-17-2020,ty & dennis crowther,27,black & red str,440,194
+11-17-2020,ty & dennis crowther,21,black & red str,530,160.5
+11-17-2020,ty & dennis crowther,21,black & bwf hfr,470,154
+11-17-2020,s & r mcendree,109,angus x str,460,193
+11-17-2020,s & r mcendree,81,angus x str,530,164.5
+11-17-2020,s & r mcendree,28,angus x hfr,380,157
+11-17-2020,s & r mcendree,156,angus x hfr,470,153
+11-17-2020,trey jagers,10,red & black str,370,190
+11-17-2020,trey jagers,49,red & black str,475,166
+11-17-2020,trey jagers,38,red & black hfr,500,142
+11-17-2020,joe bill nunn,27,black str,460,187
+11-17-2020,joe bill nunn,18,black str,525,158.5
+11-17-2020,joe bill nunn,32,black hfr,470,155
+11-17-2020,esty ranch,22,sim-angus str,440,184
+11-17-2020,esty ranch,57,sim-angus str,525,166.5
+11-17-2020,esty ranch,56,sim-angus hfr,475,164
+11-17-2020,kenneth garcia,20,red & black str,360,180
+11-17-2020,charlie crockett,6,angus str,480,175
+11-17-2020,charlie crockett,27,angus hfr,495,154.5
+11-17-2020,todd shallbetter,43,black str,455,173
+11-17-2020,justin emick,50,angus str,510,168
+11-17-2020,justin emick,37,angus hfr,520,145.5
+11-17-2020,allen kasparian,42,black str,485,165
+11-17-2020,allen kasparian,72,black hfr,505,147
+11-17-2020,sterling whitaker,16,black str,525,163
+11-17-2020,sterling whitaker,11,black hfr,470,156
+11-17-2020,kelvin wollert,21,black str,525,160.5
+11-17-2020,kelvin wollert,12,black hfr,535,143
+11-17-2020,reed ranch,30,mix str,515,160.5
+11-17-2020,daniel borrego,13,angus x str,540,155
+11-17-2020,hutcherson ranch,58,angus hfr,475,155
+11-17-2020,davis ranch inc,20,limousin x str,535,154
+11-17-2020,joe muniz,12,red angus x hfr,425,150
+11-17-2020,roy oliver,33,limousin x hfr,545,141
+11-17-2020,louden ranch,72,red angus hfr,595,148.5
+11-17-2020,hutcherson ranch,60,angus hfr,550,142.5
+11-17-2020,davis ranch inc,19,limousin x hfr,560,139
+11-17-2020,treadwell ranch,11,angus hfr,550,138
+11-17-2020,trey & danny sullivan,20,sim-angus hfr,550,137
+11-17-2020,sterling whitaker,28,black hfr,605,135
+11-17-2020,charlie crockett,39,black & red hfr,605,135
+11-17-2020,tommy crawford,20,angus hfr,580,135
+11-17-2020,jake pargin,25,black hfr,595,134.5
+11-17-2020,spear w ranch,18,angus x hfr,615,133.5
+11-17-2020,joe bill nunn,29,black hfr,625,133.5
+11-17-2020,gary hill,31,angus hfr,660,133
+11-17-2020,idi ranch,64,black hfr,670,132.5
+11-17-2020,idi ranch,59,black hfr,740,125.5
+11-17-2020,jessie bagwell,23,sim-angus hfr,570,131
+11-17-2020,james harkins,33,black hfr,620,129.5
+11-17-2020,doug bagwell,31,black hfr,635,128.5
+11-17-2020,kyle & september atwater,16,angus hfr,660,128
+11-17-2020,huffaker ranch,17,mix hfr,680,126.5
+11-17-2020,a slash cattle co,33,mix hfr,700,125
+11-17-2020,a slash cattle co,30,mix hfr,780,123
+11-17-2020,lonnie jackson,28,red angus hfr,665,122.5
+11-17-2020,jolly cattle co,11,black hfr,880,117
+11-17-2020,kelly goetsch,26,angus hfr,1040,115
+11-17-2020,jake pargin,16,black str,565,154
+11-17-2020,jake pargin,26,black str,670,140
+11-17-2020,jake pargin,15,black str,760,137
+11-17-2020,danny sullivan,33,sim-angus str,575,152
+11-17-2020,james harkins,14,black str,580,151
+11-17-2020,allen kasparian,63,black str,585,150
+11-17-2020,esty ranch ,14,sim-angus str,615,148
+11-17-2020,tracy kester,88,red angus str,575,148
+11-17-2020,justin emick,58,angus str,610,146.5
+11-17-2020,kelly goetsch,18,angus str,600,144
+11-17-2020,jessie bagwell,23,sim-angus str,610,143.5
+11-17-2020,treadwell ranch,44,angus str,670,142
+11-17-2020,tommy crawford,20,angus str,640,142
+11-17-2020,derrell & greg shawcroft,56,black str,625,142
+11-17-2020,derrell & greg shawcroft,86,black str,715,138.25
+11-17-2020,sterling whitaker,24,black str,650,141.5
+11-17-2020,kyle & september atwater,10,angus str,630,141
+11-17-2020,kyle & september atwater,14,angus str,700,138
+11-17-2020,gary hill,42,angus str,690,140.5
+11-17-2020,gary hill,47,angus str,760,139
+11-17-2020,garth perry,14,angus x str,710,140
+11-17-2020,carl thrall estate,31,black str,700,139
+11-17-2020,lonnie jackson,37,red angus str,600,139
+11-17-2020,idi ranch,58,black str,715,138
+11-17-2020,idi ranch,59,black str,755,137.25
+11-17-2020,spear w ranch,27,angus str,695,138
+11-17-2020,doug bagwell,31,black str,705,137.25
+11-17-2020,drew lower,18,black & red str,725,136
+11-17-2020,huffaker ranch,72,mix str,705,134
+11-17-2020,darrell nimmo,1,black cow,1650,59
+11-17-2020,ben christensen,5,black & red cow,1140,59
+11-17-2020,jolly cattle co,22,black cow,1340,57
+11-17-2020,daris jutten,14,black cow,1240,56
+11-17-2020,martille faatz,6,black cow,1205,56
+11-17-2020,kyle atwater,1,black cow,1390,54
+11-17-2020,weston meardon,28,black & red cow,1235,53.75
+11-17-2020,leroy martinez,18,black cow,1175,53.5
+11-17-2020,alvin carter,1,black cow,1160,53
+11-17-2020,tommy crawford,7,mix cow,1130,53
+11-17-2020,reynolds ranch,10,mix cow,1380,52.75
+11-17-2020,bb ranch,4,mix cow,1430,52
+11-17-2020,adelaido martinez,8,black cow,1260,51.5
+11-17-2020,perry barnes,10,red & rwf cow,1580,49
+11-17-2020,esty ranch,12,black cow,1415,48.25
+11-17-2020,chris matthew,2,charolais bull,2165,80.5
+11-24-2020,field land & cattle,8,black str,355,189
+11-24-2020,emily cornell,7,black str,450,165
+11-24-2020,rafter 4 ranch,24,angus str,495,164.5
+11-24-2020,rafter 4 ranch,15,angus hfr,455,141
+11-24-2020,norman zwicker,8,angus x str,490,160
+11-24-2020,gilbert groves,23,angus x str,515,159
+11-24-2020,gilbert groves,15,angus x hfr,485,136
+11-24-2020,ronald zamora,5,black hfr,355,159
+11-24-2020,denny larsen,17,black & red hfr,360,153
+11-24-2020,rafter 4 ranch,37,angus hfr,545,134
+11-24-2020,colby thrall,27,black hfr,565,130
+11-24-2020,gilbert groves,53,angus x hfr,555,130
+11-24-2020,martinez brothers,8,black hfr,640,120
+11-24-2020,pfeifer & jensen,19,black hfr,975,119
+11-24-2020,emily cornell,21,angus str,540,156.5
+11-24-2020,colby thrall,25,black str,555,154
+11-24-2020,colby thrall,13,black str,680,134
+11-24-2020,rafter 4 ranch,40,angus str,595,147.5
+11-24-2020,leslie schnaufer,13,black & red str,580,144
+11-24-2020,norman zwicker,9,angus x str,650,130
+11-24-2020,martinez brothers,8,black str,700,129
+11-24-2020,leonard cattle co,4,angus str,900,129
+11-24-2020,edwards ranch,1,red cow,1760,63
+11-24-2020,steve johnson,7,black & red cow,1685,59.5
+11-24-2020,george pendleton,1,black cow,1520,59
+11-24-2020,talon shipman,1,black cow,1650,58
+11-24-2020,chris matthew,1,black cow,1545,57.5
+11-24-2020,gary brown,1,black cow,1405,56
+11-24-2020,kenneth emick,5,black cow,1175,56
+11-24-2020,tracy kester,16,red cow,1165,55
+11-24-2020,bill kester,7,black & red cow,1140,55
+11-24-2020,dorenkamp ranch,18,black & red cow,1110,53
+11-24-2020,kelly bader,1,red cow,1575,52
+11-24-2020,field land & cattle,12,mix cow,1080,52
+11-24-2020,donald johns jr,2,black bull,1900,83.5
+11-24-2020,sam trotter,1,red bull,1885,81
+11-24-2020,bruce hass,1,black bull,2215,80
+11-24-2020,randy rusk,1,red bull,2090,80
+11-24-2020,trampe ranches,3,red bull,2025,80
+11-24-2020,jeff huntoon,1,black bull,2215,78
+12-01-2020,clock land & cattle,6,angus x str,360,210
+12-01-2020,clock land & cattle,13,angus x str,450,179
+12-01-2020,clock land & cattle,32,angus x hfr,515,144
+12-01-2020,reynolds ranch,7,ang-lim x str,370,203
+12-01-2020,reynolds ranch,13,ang-lim x hfr,400,167.5
+12-01-2020,reynolds ranch,24,ang-lim x hfr,495,142
+12-01-2020,diana tixier,10,black str,375,201
+12-01-2020,diana tixier,62,black str,485,180
+12-01-2020,diana tixier,42,black hfr,455,150.5
+12-01-2020,diana tixier,41,black hfr,520,143
+12-01-2020,tracy kester,17,red lim x str,405,197
+12-01-2020,tracy kester,76,red lim x str,490,173
+12-01-2020,tracy kester,100,red lim x hfr,460,154
+12-01-2020,tracy kester,100,red lim x hfr,540,138.5
+12-01-2020,stirrup ranch,19,black str,410,188
+12-01-2020,stirrup ranch,61,black str,480,178.5
+12-01-2020,vader cloverleaf ranch,10,angus x str,390,185
+12-01-2020,sam webster,10,black str,485,171
+12-01-2020,william spitz,16,black str,480,169
+12-01-2020,william spitz,18,black hfr,490,144
+12-01-2020,keith thelen,11,red & black str,515,168
+12-01-2020,plug hat ranch,16,black str,490,168
+12-01-2020,corpus gallegos ranch,10,ang-lim x str,470,167
+12-01-2020,jeremy & tarah redshaw,25,sim-angus str,535,166
+12-01-2020,jeremy & tarah redshaw,24,sim-angus hfr,525,142.5
+12-01-2020,chet adams,13,ang-lim x hfr,505,146
+12-01-2020,garth perry,18,black & red hfr,515,146
+12-01-2020,hittson land & cattle,20,angus x hfr,540,143
+12-01-2020,reynolds ranch,21,lim flex hfr,475,142.5
+12-01-2020,mike canty,12,angus x hfr,500,140.5
+12-01-2020,a & j tamburelli,17,angus hfr,640,144
+12-01-2020,gilbert groves,34,black hfr,610,141
+12-01-2020,hittson land & cattle,19,angus x hfr,585,140.5
+12-01-2020,plug hat ranch,7,black hfr,550,140
+12-01-2020,reynolds ranch,26,ang-lim x hfr,590,139
+12-01-2020,russell shrout,10,black hfr,580,138.5
+12-01-2020,amanda stagner,19,angus x hfr,625,137
+12-01-2020,dustin tixier,8,bwf & rwf hfr,560,136
+12-01-2020,garth perry,26,black hfr,640,135
+12-01-2020,jim & greg higel,38,ang-lim x hfr,585,135
+12-01-2020,keith thelen,16,black & red hfr,560,135
+12-01-2020,keith thelen,12,black & red hfr,680,125
+12-01-2020,william spitz,18,black hfr,595,134
+12-01-2020,reynolds ranch,20,lim flex hfr,615,132
+12-01-2020,jim & sarah walter,55,balancer hfr,840,131
+12-01-2020,tony valdez,7,red hfr,640,131
+12-01-2020,mike canty,13,angus x hfr,615,131
+12-01-2020,clock land & cattle,21,angus x hfr,635,130
+12-01-2020,brandon oliver,24,angus x hfr,650,129
+12-01-2020,frank ghilarducci,11,char x hfr,670,128
+12-01-2020,adrian ranch,22,angus x hfr,630,128
+12-01-2020,charles stavely,29,red angus str,545,167.5
+12-01-2020,charles stavely,31,red angus str,600,151
+12-01-2020,diana tixier,32,black str,570,163
+12-01-2020,stirrup ranch,72,black str,555,163
+12-01-2020,clock land & cattle,43,angus x str,550,158.5
+12-01-2020,clock land & cattle,38,angus x str,645,142.5
+12-01-2020,tony valdez,13,red str,555,157.5
+12-01-2020,chris downare,10,black lim x str,555,156.5
+12-01-2020,reynolds ranch,14,lim flex str,550,155
+12-01-2020,tracy kester,47,red lim x str,575,154
+12-01-2020,corpus gallegos ranch,27,ang-lim x str,575,153.5
+12-01-2020,dustin tixier,19,bwf & rwf str,605,153
+12-01-2020,rex hiner,10,ang-wf x str,615,152
+12-01-2020,rex hiner,51,ang-wf x str,921,139
+12-01-2020,rex hiner,47,ang-wf x str,830,138
+12-01-2020,moeller ranch,40,wf-ang x str,545,151.5
+12-01-2020,hittson land & cattle,23,angus x str,625,151
+12-01-2020,dave kaess,51,angus str,675,150.5
+12-01-2020,dave kaess,58,angus str,770,141
+12-01-2020,ronnie & karen roberts,37,angus str,685,150
+12-01-2020,ronnie & karen roberts,33,angus str,765,142.5
+12-01-2020,brandon oliver,32,angus x str,605,150
+12-01-2020,adrian ranch,12,angus x str,595,150
+12-01-2020,forst & fury,19,sim-angus str,615,149
+12-01-2020,gilbert groves,36,black str,620,148.5
+12-01-2020,a & j tamburelli,18,angus str,680,147
+12-01-2020,caleb duvall,15,red angus x str,600,146.5
+12-01-2020,jim & greg higel,35,ang-lim x str,640,140
+12-01-2020,jim & greg higel,28,ang-lim x str,760,131
+12-01-2020,willy faris,11,balancer str,775,138
+12-01-2020,jeremy & tarah redshaw,43,sim-angus str,695,137
+12-01-2020,keith thelen,15,black & red str,675,136
+12-01-2020,jim & sarah walter,58,balancer str,925,131.25
+12-08-2020,valley view ranch,13,sim-angus str,390,203
+12-08-2020,valley view ranch,30,sim-angus str,465,186
+12-08-2020,valley view ranch,32,sim-angus str,535,172
+12-08-2020,valley view ranch,23,sim-angus hfr,455,164
+12-08-2020,hasser ranch inc,17,ang-wf x str,400,198
+12-08-2020,hasser ranch inc,43,ang-wf x str,540,173
+12-08-2020,hasser ranch inc,56,ang-wf x hfr,505,152.5
+12-08-2020,peeler land & livestock,88,angus x str,445,185
+12-08-2020,peeler land & livestock,12,angus x hfr,310,167
+12-08-2020,peeler land & livestock,44,angus x hfr,400,151
+12-08-2020,clock land corp,15,lim-flex str,485,179
+12-08-2020,dave adams,14,ang-wf x str,495,175
+12-08-2020,dave adams,64,ang-wf x str,585,151.5
+12-08-2020,steven reed,29,ang-saler str,515,174
+12-08-2020,steven reed,41,ang-saler hfr,475,152
+12-08-2020,stirrup ranch,42,black & red str,495,170
+12-08-2020,stirrup ranch,31,black & red hfr,370,151
+12-08-2020,stirrup ranch,67,black & red hfr,465,150
+12-08-2020,spear p cattle,19,black str,520,166
+12-08-2020,spear p cattle,11,black hfr,395,167
+12-08-2020,spear p cattle,20,black hfr,510,147
+12-08-2020,chris kester,12,angus str,540,166
+12-08-2020,wineinger davis ,44,angus str,535,163.5
+12-08-2020,a t cross cattle,9,black hfr,470,154
+12-08-2020,eleven v ranch,37,black hfr,495,150
+12-08-2020,eleven v ranch,35,black hfr,615,145
+12-08-2020,dorenkamp ranch,55,angus x hfr,530,144
+12-08-2020,estancia valley cattle,42,black hfr,540,149.5
+12-08-2020,estancia valley cattle,49,black hfr,620,144
+12-08-2020,eleven v ranch,30,black hfr,575,148
+12-08-2020,valley view ranch,70,sim-angus hfr,550,145.5
+12-08-2020,steven guerrieri,53,black hfr,565,145
+12-08-2020,hasser ranch,38,ang-wf x hfr,600,145
+12-08-2020,jim foxhoven,22,black & red hfr,605,144
+12-08-2020,nunn ranches,28,black hfr,560,144
+12-08-2020,dorenkamp ranch,90,angus x hfr,565,140
+12-08-2020,chris kester,18,angus hfr,565,140
+12-08-2020,timberline cattle inc,56,sim-angus hfr,625,139.5
+12-08-2020,timberline cattle inc,190,sim-angus hfr,715,130.6
+12-08-2020,clock land corp,82,lim-flex hfr,580,137.5
+12-08-2020,clock land corp,94,lim-flex hfr,660,128.5
+12-08-2020,alvin & deanna russell,68,ang-lim x hfr,665,137
+12-08-2020,jessie bagwell,60,black hfr,630,137
+12-08-2020,dustin & brooke mathew,25,bwf hfr,820,136
+12-08-2020,kevin hronich,22,red sim x hfr,645,132.5
+12-08-2020,brian quinlan,28,angus x hfr,650,131
+12-08-2020,hansen cattle,89,lim-ang x hfr,765,130
+12-08-2020,hansen cattle,121,lim-ang x hfr,860,128
+12-08-2020,chris & malinda matthew,98,charolais hfr,765,130
+12-08-2020,chris & malinda matthew,98,charolais hfr,845,129.5
+12-08-2020,jim hanratty,74,red & black hfr,655,130
+12-08-2020,harvey cundiff,11,sim-angus hfr,655,130
+12-08-2020,chad & heidi ricken,47,lim-ang x hfr,820,129.75
+12-08-2020,levi hansen,30,lim-ang x hfr,850,128.25
+12-08-2020,alvin carter,40,sim-angus hfr,650,128
+12-08-2020,darby makloski,26,angus hfr,695,126
+12-08-2020,marvin schlegel,28,black & red hfr,745,125.75
+12-08-2020,welch cattle co,17,sim-angus str,545,169
+12-08-2020,welch cattle co,54,sim-angus str,610,152.5
+12-08-2020,welch cattle co,39,sim-angus str,695,143.5
+12-08-2020,valley view ranch,92,sim-angus str,590,165.5
+12-08-2020,valley view ranch,122,sim-angus str,665,154.5
+12-08-2020,estancia valley cattle,45,black str,590,165
+12-08-2020,estancia valley cattle,38,black str,675,147
+12-08-2020,brenda mcwright,10,black str,615,158
+12-08-2020,steven reed,50,ang-saler str,600,157.5
+12-08-2020,hasser ranch,76,ang-wf x str,630,156.5
+12-08-2020,idi ranch,41,angus x str,630,156
+12-08-2020,neil mcdonald,24,black str,640,153.5
+12-08-2020,clock land corp,36,lim-flex str,570,153
+12-08-2020,clock land corp,82,lim-flex str,635,146
+12-08-2020,brian quinlan,65,angus x str,655,150.5
+12-08-2020,brian quinlan,48,angus x str,740,143
+12-08-2020,preston wood,33,bwf str,635,150
+12-08-2020,chris kester,44,angus str,625,150
+12-08-2020,chris kester,41,angus str,735,141.5
+12-08-2020,david mccaw,24,black str,670,148.5
+12-08-2020,jim hanratty,116,red & black str,700,145
+12-08-2020,alvin & matt carter,40,sim-angus str,705,144
+12-08-2020,timberline cattle inc,77,sim-angus str,720,140.25
+12-08-2020,timberline cattle inc,209,sim-angus str,795,135
+12-08-2020,timberline cattle inc,121,sim-angus str,895,133.5
+12-08-2020,kevin hronich,21,red sim x str,745,138.5
+12-08-2020,hansen cattle,100,lim-ang x str,805,138
+12-08-2020,hansen cattle,117,lim-ang x str,935,131.75
+12-08-2020,chris & malinda matthew,93,charolais str,905,135
+12-08-2020,chris & malinda matthew,89,charolais str,850,134.75
+12-08-2020,dustin & brooke mathew,21,bwf str,850,134
+12-08-2020,levi hansen,36,lim-ang x str,890,132.25
+12-08-2020,ricken land & cattle,54,lim-ang x str,975,127
+12-15-2020,montana canterbury,6,red angus str,345,215
+12-15-2020,montana canterbury,5,red angus hfr,375,164
+12-15-2020,paul peterson,4,black str,290,212
+12-15-2020,paul peterson,6,black & red str,415,186
+12-15-2020,paul peterson,7,black & red hfr,385,158
+12-15-2020,willett cattle,5,angus str,380,202
+12-15-2020,lester yoder,17,black & red str,390,201
+12-15-2020,lester yoder,38,black str,500,181
+12-15-2020,lester yoder,21,black hfr,375,171
+12-15-2020,lester yoder,42,black hfr,475,161.5
+12-15-2020,reyms ranch,5,black str,375,200
+12-15-2020,chavez ranch,14,black str,385,191
+12-15-2020,chavez ranch,15,black str,490,160
+12-15-2020,jim warner,15,black str,435,187
+12-15-2020,jim warner,10,black hfr,385,161
+12-15-2020,jim warner,9,black hfr,465,150
+12-15-2020,nortonville cattle,22,black str,470,183
+12-15-2020,nortonville cattle,16,black hfr,440,158
+12-15-2020,nortonville cattle,30,black hfr,515,149
+12-15-2020,ben doherty,7,black & red str,485,176
+12-15-2020,jason cole,8,black str,535,172
+12-15-2020,lloyd reynolds,40,black str,535,168
+12-15-2020,lloyd reynolds,42,black hfr,495,153
+12-15-2020,leif berg,12,black str,535,166
+12-15-2020,phil thomas,9,char hfr,500,153
+12-15-2020,joanne goodrich,10,red angus hfr,505,148.5
+12-15-2020,jerry gallegos,12,black & red hfr,485,145
+12-15-2020,joeanne goodrich,32,red angus hfr,550,147
+12-15-2020,rafter j ranch,9,ang-gel x hfr,605,145
+12-15-2020,rafter j ranch,24,ang-gel x hfr,660,131.5
+12-15-2020,nortonville cattle,30,black hfr,565,144.5
+12-15-2020,lester yoder,42,black hfr,595,144
+12-15-2020,justin emick,14,black hfr,565,144
+12-15-2020,lloyd reynolds,44,black hfr,595,143.5
+12-15-2020,larry minkler,23,black hfr,580,139
+12-15-2020,tri lazy w ranch,20,black hfr,555,139
+12-15-2020,john moore,23,black hfr,600,132
+12-15-2020,caldon cattle co,62,black hfr,680,131
+12-15-2020,caldon cattle co,37,black hfr,795,121
+12-15-2020,roger kuchan,27,black & red hfr,600,131
+12-15-2020,t l bar ranch,47,bwf hfr,795,130
+12-15-2020,sleeping indian ranch,37,black & bwf hfr,695,130
+12-15-2020,bryce smith,21,angus x hfr,650,129
+12-15-2020,ken hull,9,charolais hfr,595,128
+12-15-2020,sam vance,20,bwf hfr,705,125
+12-15-2020,nortonville cattle,51,black str,565,168
+12-15-2020,nortonville cattle,73,black & red str,645,155.5
+12-15-2020,nortonville cattle,16,black str,810,136.5
+12-15-2020,lloyd reynolds,19,black str,545,168
+12-15-2020,lloyd reynolds,48,black str,615,159.25
+12-15-2020,lloyd reynolds,21,black str,770,142.75
+12-15-2020,justin emick,15,black str,545,166
+12-15-2020,willett cattle,21,black str,560,164.5
+12-15-2020,willett cattle,70,black str,660,154.6
+12-15-2020,willett cattle,66,black str,735,141.75
+12-15-2020,john moore,22,black str,570,164
+12-15-2020,robert middlemist,29,black str,560,161.5
+12-15-2020,robert middlemist,24,black str,655,149
+12-15-2020,rafter j ranch,27,ang-gel x str,605,160
+12-15-2020,rafter j ranch,21,ang-gel x str,715,146
+12-15-2020,kent johnston,22,black str,590,153.5
+12-15-2020,leif berg,23,black str,645,153
+12-15-2020,jack bamber,16,angus str,625,149
+12-15-2020,jack bamber,8,angus str,765,140
+12-15-2020,smith land & ranch,25,black & red str,685,145.25
+12-15-2020,caldon cattle co,32,sim-angus str,685,144.5
+12-15-2020,caldon cattle co,104,sim-angus str,815,133.5
+12-15-2020,caldon cattle co,59,sim-angus str,895,133.85
+12-15-2020,bryce smith,19,angus x str,715,144
+12-15-2020,jason cole,26,black str,700,142.5
+12-15-2020,sam vance,33,bwf str,700,142
+12-15-2020,pargin ranch,73,angus str,790,138.5
+12-15-2020,pargin ranch,60,angus str,865,137.25
+12-15-2020,t l bar ranch,78,mix str,795,133.5
+12-15-2020,t l bar ranch,28,mix str,880,131.25
+12-15-2020,meadow ranch,12,mix cow,1275,59.5
+12-15-2020,louis martin,2,red cow,1310,57.5
+12-15-2020,cody peterson,1,black cow,1480,57
+12-15-2020,jack bamber,9,black cow,1145,57
+12-15-2020,twin peaks ranch,19,mix cow,1265,56.75
+12-15-2020,baez cattle co,5,mix cow,1195,56
+12-15-2020,garrett godfrey,10,black & red cow,1185,56
+12-15-2020,kyle barnett,11,black cow,1130,54.5
+12-15-2020,adrian absmeier,1,black cow,1440,53.5
+12-15-2020,jacob pargin,2,black bull,2130,86
+12-15-2020,kent johnston,1,red bull,1925,85.5
+12-15-2020,meadow ranch,3,black bull,1870,84.5
+12-15-2020,rose ranch,3,black bull,1765,83.5
+12-15-2020,montana canterbury,1,red bull,1585,83
+12-15-2020,kerri higgs,1,black bull,2205,81
+12-22-2020,doug taylor,7,angus x str,335,217
+12-22-2020,doug taylor,10,angus x str,445,194
+12-22-2020,doug taylor,2,angus x hfr,470,143
+12-22-2020,ben doherty,4,black str,370,212
+12-22-2020,ben doherty,13,black & red hfr,475,152
+12-22-2020,ben doherty,37,black & red hfr,515,143
+12-22-2020,lupe young,5,char x str,410,198
+12-22-2020,lupe young,5,char x hfr,460,145
+12-22-2020,joann pacheco,2,black & red str,390,198
+12-22-2020,clay johnson,2,black limo str,440,192.5
+12-22-2020,valdez land & livestock,12,black str,525,163
+12-22-2020,valdez land & livestock,13,black hfr,520,140
+12-22-2020,thomas gilley,5,black hfr,360,163
+12-22-2020,ron collins,2,black hfr,315,162.5
+12-22-2020,chad johnson,4,black & red str,470,161
+12-22-2020,jacob friesen,4,red & rwf hfr,325,158
+12-22-2020,jacob friesen,7,red & rwf hfr,400,151
+12-22-2020,jacob friesen,14,red & rwf hfr,520,145
+12-22-2020,ben doherty,35,black & red hfr,580,143
+12-22-2020,clay johnson,14,black limo hfr,580,140
+12-22-2020,lupe young,13,char x hfr,550,140
+12-22-2020,stacy bishop,19,black hfr,620,134
+12-22-2020,dick louden,11,red angus hfr,635,125
+12-22-2020,david emick,10,sim-angus hfr,685,123
+12-22-2020,stacy bishop,9,angus str,580,155
+12-22-2020,stacy bishop,16,angus str,680,140.5
+12-22-2020,lupe young,27,char x str,590,152.5
+12-22-2020,lupe young,22,char x str,680,141
+12-22-2020,randall hund,14,char x str,590,152
+12-22-2020,clay johnson,12,black limo str,675,137.5
+12-22-2020,dick louden,4,red cow,1415,58
+12-22-2020,boyd ranch,1,char cow,1435,57.5
+12-22-2020,amy kester,1,black cow,1255,57
+12-22-2020,spitzer farms,8,black cow,1390,56.5
+12-22-2020,brent fillmore,1,black cow,1195,56.5
+12-22-2020,chris kester,5,black cow,1220,56
+12-22-2020,mccloy cattle co,14,black cow,1115,56
+12-22-2020,landon berry,1,black cow,1480,55
+12-22-2020,keith hood,1,black cow,1310,54
+12-22-2020,fuyu farms,1,black cow,1140,53
+12-22-2020,hunter uhland,6,black cow,1095,52
+12-22-2020,colby mick,4,mix cow,1285,51
+12-22-2020,thomas gilley,1,black cow,1250,51
+12-22-2020,monte richardson,3,black cow,1055,51
+12-22-2020,curtis bailey,1,brah bull,1735,80
