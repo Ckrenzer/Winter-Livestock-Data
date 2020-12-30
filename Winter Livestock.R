@@ -17,6 +17,19 @@ url <- c("http://www.winterlivestock.com/lajunta.php?reportID=12669#marketreport
          "http://www.winterlivestock.com/lajunta.php?reportID=12840#marketreport",
          "http://www.winterlivestock.com/lajunta.php?reportID=12865#marketreport")
 
+DATE <- c("10-20-2020",
+          "10-27-2020",
+          "11-03-2020",
+          "11-10-2020",
+          "11-17-2020",
+          "11-24-2020",
+          "12-01-2020",
+          "12-08-2020",
+          "12-15-2020",
+          "12-22-2020")
+
+
+
 # The url for the most recent report
 # (which is useful for scheduling a task
 # on your computer instead of writing in
@@ -198,8 +211,14 @@ for(k in 1:length(url)){
   #      cow bought by the buyer (Ex. "black cow" and "black cows"
   #      should both read "black cow")
   
+  
+  ## Uncomment the line below this code if you plan to schedule
+  ## this on your computer, and comment this line out
+  livestock_data <- mutate(livestock_data, "date" = DATE[k], .before = 1)
+  
   # Adding in the date
-  livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
+  #livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
+  
   
   # Removing the plural of the type--this is especially helpful for
   # use with group_by()
