@@ -1,14 +1,29 @@
 # Instructions -------------------------------------------------
-# If you don't want to do much work with this--you just want the
-# data and you want it now, just add the market report's url at the
-# end of the url vector and add the corresponding date to the end of the
-# DATE vector, delete the file if you already have it on your computer,
-# run the whole file--and that's it!
+# 1. Delete the csv file if you already have it in your directory
+# 2. Add the url to the end of the "url" variable
+# 3. Add the market report's date to the end of the "DATE" variable
+# 4. click ctrl+a, then click ctrl+enter.
+# 5. If needed, run the other script, following a similar process
+# 6. Add the column names to the file using Notepad. Type this
+# on line 1, then hit enter to put the column names on their own
+# line (remove the hashtag, though):
+# Date, Buyer, Quantity, Type, Weight, Price
+
+# Note: If you use the other script, the dates are not 
+# necessarily going to be listed in chronological order. To
+# put them back into chronological order,  you can read the csv
+# file into R (storing the data in a variable) and then use
+# dplyr's arrange() function.
 #
-# Otherwise, you will need to find
-# out when Winter Livestock makes these releases and make a schedule.
-# The code for a schedule is also provided in this script, but it
-# is commented out. Enjoy!
+# The code would look something like this:
+# livestock <- readr::read_csv(file = "La Junta Market Reports.csv",
+#                               col_names = TRUE)
+# livestock <- arrange(livestock, Date)
+
+
+# There are ways of getting the next week's data with fewer 'moving
+# parts,' but few ways of doing so are simpler than this.
+
 
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")
@@ -27,7 +42,9 @@ url <- c("http://www.winterlivestock.com/lajunta.php?reportID=12669#marketreport
          "http://www.winterlivestock.com/lajunta.php?reportID=12783#marketreport",
          "http://www.winterlivestock.com/lajunta.php?reportID=12806#marketreport",
          "http://www.winterlivestock.com/lajunta.php?reportID=12840#marketreport",
-         "http://www.winterlivestock.com/lajunta.php?reportID=12865#marketreport")
+         "http://www.winterlivestock.com/lajunta.php?reportID=12865#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12877#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=12896#marketreport")
 
 DATE <- c("10-20-2020",
           "10-27-2020",
@@ -38,7 +55,9 @@ DATE <- c("10-20-2020",
           "12-01-2020",
           "12-08-2020",
           "12-15-2020",
-          "12-22-2020")
+          "12-22-2020",
+          "12-29-2020",
+          "1-05-2021")
 
 
 
@@ -47,7 +66,6 @@ DATE <- c("10-20-2020",
 # on your computer instead of writing in
 # all of the urls into a vector):
 
-## Uncomment the next line if you plan on making this a scheduled event ## ----------------------------------------
 ###url <- "http://www.winterlivestock.com/lajunta.php#marketreport"
 
 
@@ -66,7 +84,7 @@ for(k in 1:length(url)){
   
   # Data cleaning -----------------------------------------------
   # Let's split the String up into an array of Strings using a delimiter
-  # ("\r" in this case--I think "\n" would have worked just fine)
+  # ("\r" in this case)
   
   # We have all the lines separated into a list.
   # Now, we just grab the lines we want and manipulate the new vector to extract the numbers
