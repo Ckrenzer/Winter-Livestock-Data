@@ -24,15 +24,15 @@ lajunta <- readr::read_csv("La Junta Market Reports.csv")
 
 
 # Step 2: categorizing cattle
-market <- read_csv("La Junta Market Reports.csv")
-market$Date <- lubridate::mdy(market$Date)
+lajunta <- read_csv("La Junta Market Reports.csv")
+lajunta$Date <- lubridate::mdy(lajunta$Date)
 
 # Making a column assigning cattle reproductive status
-market <- market %>% 
-  mutate(Reprod = str_extract(market$Type, "hfr$|str$|bull$|cow$"))
+lajunta <- lajunta %>% 
+  mutate(Reprod = str_extract(lajunta$Type, "hfr$|str$|bull$|cow$"))
 
 # The bulk of the edits
-market$Type <- market %>% 
+lajunta$Type <- lajunta %>% 
   select(Type) %>% 
   unlist() %>% 
   str_remove_all("\\sx.*$|\\s[^\\s]*$") %>%  # removing "x hfr", " hfr", " x str", etc.
@@ -72,7 +72,7 @@ market$Type <- market %>%
 
 
 #combining all colors into a new category--"clr" (optional)
-market$Type <- market %>% 
+lajunta$Type <- lajunta %>% 
   select(Type) %>% 
   unlist() %>% 
   str_replace_all("black red|black|red", "clr") %>%   # "black red," "black," and "red" are all 
