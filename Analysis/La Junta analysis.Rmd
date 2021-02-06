@@ -72,7 +72,7 @@ lajunta %>%
 
 Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
 
-These prices all seem rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate. The data looks like it has homoskedasticity, and there are only two predictors. I think we'll make out grand with these models.
+These prices all seem rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate. The data looks like it has homoskedasticity, and there are only three predictors. I think we'll make out grand with these models.
 
 ```{r linear models}
 
@@ -95,7 +95,7 @@ Since there is almost no variation in the cattle prices of cows and bulls, we ar
 # You can use this to predict prices of cattle
 
 # Predicting the price of a steer:
-predict.lm(object = steer_fit, data.frame(Date = lubridate::as_date("2021-01-20"), Quantity = 1, Weight = 750))
+cat(paste0("$", round(predict.lm(object = steer_fit, data.frame(Date = lubridate::as_date("2021-02-06"), Quantity = 1, Weight = 750)), 2)))
 
 # Predicting the price of a heifer:
 predict.lm(object = heifer_fit, data.frame(Date = lubridate::as_date("2021-01-20"), Quantity = 3, Weight = 600))
