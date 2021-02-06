@@ -1,13 +1,53 @@
 ---
-title: "Ja Junta analysis"
+title: "La Junta analysis"
 author: "Connor Krenzer"
 date: "2/5/2021"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
-This is meant to showcase some things that can be done with the data. Even though we have just seven variables, these profoundly strong predictors allow us to find some very impressive trends (in addition to making predictions).
+This is meant to showcase some things that can be done with the data. Even though we have just seven variables, I think you'll be impressed at what we can do with them...
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+# Don't worry about this, it's just to make the output
+# look how I want it to...
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      error = F,
+                      warning = F,
+                      message = F)
+```
+
+
+```{r packages, echo = FALSE}
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load(dplyr, ggplot2, lubridate, readr)
+
+```
+
+For starters, I want to bring your attention to the distinct types of cattle and how many of them appear in the data.
+```{r cattle types, results = "show"}
+# Reading in the file
+lajunta <- read_csv("La Junta Market Reports_copy.csv")
+
+# Changing the Date column to a date:
+lajunta$Date <- lubridate::mdy(lajunta$Date)
+
+# Changing string vectors to factors:
+lajunta <- lajunta %>% 
+  mutate(across(where(is.character), as.factor))
+
+# Shows the counts in each Reprod group
+knitr::kable(lajunta %>% 
+  count(Reprod) %>% 
+    rename("Number of Obs" = n))
+
+
+lajunta %>%
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
+  facet_wrap(~Type)
+
 ```

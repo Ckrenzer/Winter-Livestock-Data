@@ -10,6 +10,11 @@
 # of livestock.
 
 
+# Note: this isn't a problem now, and there is nothing we can do
+#       about it now, but at some point in the future the prices
+#       should be controlled for inflation.
+
+
 # Packages ------------------------------------------
 if(!require(pacman)) install.packages("pacman")
 pacman::p_load(stringr, readr, dplyr)
