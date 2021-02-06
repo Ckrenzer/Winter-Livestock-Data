@@ -12,7 +12,7 @@
 
 # Packages ------------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(stringr, readr, dplyr, lubridate)
+pacman::p_load(stringr, readr, dplyr)
 
 
 
