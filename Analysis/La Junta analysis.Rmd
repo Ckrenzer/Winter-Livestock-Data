@@ -1,0 +1,13 @@
+---
+title: "Ja Junta analysis"
+author: "Connor Krenzer"
+date: "2/5/2021"
+output: html_document
+---
+
+This is meant to showcase some things that can be done with the data. Even though we have just seven variables, these profoundly strong predictors allow us to find some very impressive trends (in addition to making predictions).
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
