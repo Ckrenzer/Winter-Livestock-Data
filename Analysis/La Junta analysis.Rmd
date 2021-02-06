@@ -9,6 +9,7 @@ editor_options:
 
 TURN THIS INTO A SHINY APP!!!
 
+If you are looking for a good classification problem, you can try KNN on any of these or do a logistic regression determining whether livestock is a cow or bull.
 
 This is meant to showcase some things that can be done with the data. Even though we have just seven variables, I think you'll be impressed at what we can do with them...
 
@@ -65,19 +66,44 @@ lajunta %>%
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
   facet_wrap(~Reprod) +
-  ggtitle("Weight vs. Price by Reprod") 
+  ggtitle("Weight vs. Price by Reproductive Status") 
 
 ```
 
 Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
 
-These prices all seem rather consistent, too. Without looking too much further, that says to me the data does not suggest a "good time to sell." There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem fit. The data looks like it has heteroskedasticity and there are only two predictors, so I think we'll make out grand with these models.
+These prices all seem rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate. The data looks like it has homoskedasticity, and there are only two predictors. I think we'll make out grand with these models.
 
 ```{r linear models}
 
+steer_fit <- lm(data = lajunta, subset = Reprod == "str", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
 
+heifer_fit <- lm(data = lajunta, subset = Reprod == "hfr", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
 
-#bulls_lm
-summary(lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Weight))
+# a 12th degree polynomial gives us an R-squared of .54, but I think that is due to overfitting
+cow_fit <- lm(data = lajunta, subset = Reprod == "cow", formula = Price ~ Date + poly(Weight, 3))
+
+# a 6th degree polynomial gives an R-squared of .87, but I think that is due to overfitting
+# plus, our sample is small so we want to keep the number of predictors small
+bull_fit <- lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Date + poly(Weight, 2))
+
+```
+
+Since there is almost no variation in the cattle prices of cows and bulls, we are not particularly worried about relatively low R-squared values. We can still predict the prices.
+
+```{r predictions}
+# You can use this to predict prices of cattle
+
+# Predicting the price of a steer:
+predict.lm(object = steer_fit, data.frame(Date = lubridate::as_date("2021-01-20"), Quantity = 1, Weight = 750))
+
+# Predicting the price of a heifer:
+predict.lm(object = heifer_fit, data.frame(Date = lubridate::as_date("2021-01-20"), Quantity = 3, Weight = 600))
+
+# Predicting the price of a cow:
+predict.lm(object = cow_fit, data.frame(Date = lubridate::as_date("2020-10-20"), Quantity = 1, Weight = 1250))
+
+# Predicting the price of a bull:
+predict.lm(object = bull_fit, data.frame(Date = lubridate::as_date("2020-10-20"), Quantity = 1, Weight = 2150))
 
 ```
