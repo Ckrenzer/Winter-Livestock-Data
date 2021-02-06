@@ -7,6 +7,9 @@ editor_options:
   chunk_output_type: console
 ---
 
+TURN THIS INTO A SHINY APP!!!
+
+
 This is meant to showcase some things that can be done with the data. Even though we have just seven variables, I think you'll be impressed at what we can do with them...
 
 
@@ -39,15 +42,42 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 lajunta <- lajunta %>% 
   mutate(across(where(is.character), as.factor))
 
+
+# overall plot of weight vs price
+lajunta %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price)) +
+  ggtitle("Weight vs. Price")
+
 # Shows the counts in each Reprod group
 knitr::kable(lajunta %>% 
-  count(Reprod) %>% 
-    rename("Number of Obs" = n))
-
+               count(Reprod) %>% 
+               rename("Number of Obs" = n))
 
 lajunta %>%
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
-  facet_wrap(~Type)
+  facet_wrap(~Type) +
+  ggtitle("Weight vs. Price by Type") 
+
+
+lajunta %>%
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
+  facet_wrap(~Reprod) +
+  ggtitle("Weight vs. Price by Reprod") 
+
+```
+
+Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
+
+These prices all seem rather consistent, too. Without looking too much further, that says to me the data does not suggest a "good time to sell." There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem fit. The data looks like it has heteroskedasticity and there are only two predictors, so I think we'll make out grand with these models.
+
+```{r linear models}
+
+
+
+#bulls_lm
+summary(lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Weight))
 
 ```
