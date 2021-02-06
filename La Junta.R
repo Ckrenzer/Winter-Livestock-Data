@@ -1,13 +1,10 @@
 # Instructions -------------------------------------------------
 # 1. Delete the csv file if you already have it in your directory
-# 2. Add the url to the end of the "url" variable
+# 2. Add the current market report url to the end of the "url" variable
 # 3. Add the market report's date to the end of the "DATE" variable
-# 4. click ctrl+a, then click ctrl+enter.
-# 5. If needed, run the other script, following a similar process
-# 6. Add the column names to the file using Notepad. Type this
-# on line 1, then hit enter to put the column names on their own
-# line (remove the hashtag, though):
-# Date, Buyer, Quantity, Type, Weight, Price
+# 4. click ctrl+a, then click ctrl+enter
+# 5. If needed, run the other script
+# 6. (optional) Run the cleaning script, "La Junta cleaning.R"
 
 # Note: If you use the other script, the dates are not 
 # necessarily going to be listed in chronological order. To
@@ -242,12 +239,7 @@ for(k in 1:length(url)){
   #      should both read "black cow")
   
   
-  ## Uncomment the line below this code if you plan to schedule -----------------------------------------------
-  ## this on your computer, and comment this line out
   livestock_data <- mutate(livestock_data, "date" = DATE[k], .before = 1)
-  
-  # Adding in the date
-  #livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
   
   
   # Removing the plural of the type--this is especially helpful for

@@ -9,24 +9,29 @@
 # yourself what needs to be done to group the different types
 # of livestock.
 
-# Should the header have been made beforehand and
-# therefore not need this code? Probably. That sounds
-# like a headache to implement if the file is already
-# in your system, so a separate script seems more
-# appropriate.
+
+# Packages ------------------------------------------
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(stringr, readr, dplyr, lubridate)
+
+
 
 # Step 1: adding a header to the csv ----------------
-lajunta <- readr::read_csv("La Junta Market Reports.csv")
+lajunta <- readr::read_csv("La Junta Market Reports.csv", 
+                           col_names = F)
+
+# Adding in the column names
+lajunta <- lajunta %>% 
+  rename("Date" = X1,
+         "Buyer" = X2,
+         "Quantity" = X3,
+         "Type" = X4,
+         "Weight" = X5,
+         "Price" = X6)
 
 
 
-
-
-
-# Step 2: categorizing cattle
-lajunta <- read_csv("La Junta Market Reports.csv")
-lajunta$Date <- lubridate::mdy(lajunta$Date)
-
+# Step 2: categorizing cattle -----------------------
 # Making a column assigning cattle reproductive status
 lajunta <- lajunta %>% 
   mutate(Reprod = str_extract(lajunta$Type, "hfr$|str$|bull$|cow$"))
@@ -35,7 +40,7 @@ lajunta <- lajunta %>%
 lajunta$Type <- lajunta %>% 
   select(Type) %>% 
   unlist() %>% 
-  str_remove_all("\\sx.*$|\\s[^\\s]*$") %>%  # removing "x hfr", " hfr", " x str", etc.
+  str_remove_all("\\sx.*$|\\s[^\\s]*$") %>%  # removing " x hfr", " hfr", " x str", etc.
   str_replace_all("angus", "ang") %>% 
   str_remove_all("sim-") %>%                      # removing the sim- from sim-angus
   str_replace_all("sim\\s+ang", "ang") %>%        # removing "sim " from "sim angus"
@@ -80,3 +85,13 @@ lajunta$Type <- lajunta %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
 
 # We now have six categories in the "Type" variable
+
+
+
+
+
+# Step 3: Writing to file ---------------------------
+write_csv(x = lajunta,
+          file = "La Junta Market Reports.csv",
+          append = F,
+          col_names = T)
