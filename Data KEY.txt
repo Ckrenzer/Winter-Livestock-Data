@@ -1,0 +1,41 @@
+### KEY ---------------------------------------------------------
+#### Notes
+> heifers are females between one and two years old that have not given birth
+> bred heifers are pregnant with their first calf
+> cows have been mothers already
+> bulls are males that have not been castrated
+> steers are bulls that have been castrated
+
+> The price column is the unit price
+
+#### How Winter Livestock Categorized
+> steer is coded as "str"
+> heifer is coded as "hfr"
+> bull is coded as "bull"
+> cow is coded as "cow"
+
+> angus is coded as "ang"
+> limousin is coded as "lim"
+> gelbvieh is coded as "gel"
+> charolais is coded as "char"
+> brahman is coded as "brah"
+> hereford is coded as "here"
+> saler is coded as "saler"
+
+> any type with a hyphen is a cross breed
+> the "x" in the Type column means nothing
+> sim stands for "sim-angus"
+> lim flex stands for "flex limousin"
+
+
+#### My Simplifications, which were justified through EDA
+> moved "str," "hfr," "bull," and "cow" to a new column, `Reprod`
+
+> cattle whose only information was the color are coded as "clr"
+> brahman and hereford cattle were assigned "clr" due to few observations
+> bwf stands for "black white faced" but is lumped into the "clr" category (when not a subcategory)
+> wf stands for "white faced" but is lumped into the "clr" category (when not a subcategory)
+> rwf stands for "red white faced" but is lumped into the "clr" category (when not a subcategory)
+
+> all cross breeds, including "balancer," are coded as "mix" (Ex. "char-ang" is recoded as "mix")
+> cattle subcategories are stripped (Ex. "sim-angus" is recoded as "angus", "wf angus" is recoded as "angus", and "black angus" is recoded as "angus")
