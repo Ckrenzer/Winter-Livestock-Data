@@ -1,0 +1,198 @@
+---
+title: "La Junta Predictions"
+author: "Connor Krenzer"
+date: "2/6/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include = FALSE}
+# Don't worry about this, it's just to make the output
+# look how I want it to...
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      error = F,
+                      warning = F,
+                      message = F)
+
+
+```
+
+
+```{r packages, echo = FALSE}
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny)
+
+```
+
+I want to bring your attention to the distinct types of cattle and how many of them appear in the data.
+```{r cattle types, results = "show"}
+# Reading in the file
+lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
+
+# Changing the Date column to a date:
+lajunta$Date <- lubridate::mdy(lajunta$Date)
+
+# Changing string vectors to factors:
+lajunta <- lajunta %>% 
+  mutate(across(where(is.character), as.factor))
+
+
+# overall plot of weight vs price
+lajunta %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price)) +
+  ggtitle("Weight vs. Price")
+
+# Shows the counts in each Reprod group
+knitr::kable(lajunta %>% 
+               count(Reprod) %>% 
+               rename("Number of Obs" = n, "Reproductive Status" = Reprod))
+
+lajunta %>%
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
+  facet_wrap(~Type) +
+  ggtitle("Weight vs. Price by Type") 
+
+
+lajunta %>%
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
+  facet_wrap(~Reprod) +
+  ggtitle("Weight vs. Price by Reproductive Status") 
+
+```
+
+Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
+
+These prices are rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate. The data looks like it has homoskedasticity, and there are only three predictors. I think we'll make out grand with these models.
+
+```{r linear models}
+
+steer_fit <- lm(data = lajunta, subset = Reprod == "str", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
+
+heifer_fit <- lm(data = lajunta, subset = Reprod == "hfr", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
+
+# a 12th degree polynomial gives us an R-squared of .54, but I think that is due to overfitting
+cow_fit <- lm(data = lajunta, subset = Reprod == "cow", formula = Price ~ Date + poly(Weight, 3))
+
+# a 6th degree polynomial gives an R-squared of .87, but I think that is due to overfitting
+# plus, our sample is small so we want to keep the number of predictors small
+bull_fit <- lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Date + poly(Weight, 2))
+
+```
+
+
+# Price Estimator
+You can provide inputs below to estimate the price of the cattle you are selling. Prices for cows and bulls are very flat, so the model cannot identify price changes in these categories very well. Changes in the prices of cows and bulls are remarkably small, however, so this shouldn't really be a problem. You should be skeptical of the results for cows and bulls, however.
+
+Compare the estimated price with the graphs above to compare with the rest of the data.
+
+### Steers
+```{r str predictions, results = "show"}
+ui <- fluidPage(
+  
+  # The three inputs we are interested in seeing
+  dateInput("date", "What is the date of the sale?"),
+  numericInput("quantity", "How many are being sold?", 1, min = 1),
+  numericInput("weight", "What is the livestock's weight in pounds?", 750, min = 25),
+  
+  verbatimTextOutput("price"),
+)
+
+server <- function(input, output, session) {
+  
+  # the price, which is referenced in the UI
+  output$price <- renderText({
+    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = steer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    
+  })
+  
+  
+}
+shinyApp(ui, server)
+```
+
+
+
+### Heifers
+```{r hfr predictions, results = "show"}
+ui <- fluidPage(
+  
+  # The three inputs we are interested in seeing
+  dateInput("date", "What is the date of the sale?"),
+  numericInput("quantity", "How many are being sold?", 1, min = 1),
+  numericInput("weight", "What is the livestock's weight in pounds?", 600, min = 25),
+  
+  verbatimTextOutput("price"),
+)
+
+server <- function(input, output, session) {
+  
+  # the price, which is referenced in the UI
+  output$price <- renderText({
+    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = heifer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    
+  })
+  
+  
+}
+shinyApp(ui, server)
+```
+
+
+
+
+### Cows
+```{r cow predictions, results = "show"}
+ui <- fluidPage(
+  
+  # The three inputs we are interested in seeing
+  dateInput("date", "What is the date of the sale?"),
+  numericInput("quantity", "How many are being sold?", 1, min = 1),
+  numericInput("weight", "What is the livestock's weight in pounds?", 1250, min = 25),
+  
+  verbatimTextOutput("price"),
+)
+
+server <- function(input, output, session) {
+  
+  # the price, which is referenced in the UI
+  output$price <- renderText({
+    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = cow_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    
+  })
+  
+  
+}
+shinyApp(ui, server)
+```
+
+
+
+
+### Bulls
+```{r bull predictions, results = "show"}
+ui <- fluidPage(
+  
+  # The three inputs we are interested in seeing
+  dateInput("date", "What is the date of the sale?"),
+  numericInput("quantity", "How many are being sold?", 1, min = 1),
+  numericInput("weight", "What is the livestock's weight in pounds?", 2150, min = 25),
+  
+  verbatimTextOutput("price"),
+)
+
+server <- function(input, output, session) {
+  
+  # the price, which is referenced in the UI
+  output$price <- renderText({
+    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = bull_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    
+  })
+  
+  
+}
+shinyApp(ui, server)
+```
