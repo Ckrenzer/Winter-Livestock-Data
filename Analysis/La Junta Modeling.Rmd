@@ -45,14 +45,25 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
 
 To familiarize you with the dataset, let's take a quick peek:
 ```{r the dataset, echo = FALSE, results = "show"}
-lajunta
+knitr::kable(lajunta %>% 
+               select(-Buyer) %>% 
+               slice(1:8))
 
 
 ```
 
+You can see that we have data for when the sale took place, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include in this table.
 
+From my previous work with this data (see "La Junta Predictions.Rmd," for instance), I can tell you that the "Type" column is basically useless. The most telling graph I can provide you is this one:
+```{r graph, echo = FALSE, results = "show"}
+lajunta %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
+  ggtitle("Price vs. Weight")
 
+```
 
+We can clearly see four distinct groups, which will be observed in various ways.
 
 
 
