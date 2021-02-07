@@ -50,7 +50,7 @@ knitr::kable(lajunta %>%
                slice(1:8))
 ```
 
-You can see that we have data for when the sale took place, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include in this table. It hasn't proved very useful anyway.
+You can see that we have data for the date of the sale, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include that information in this table. It hasn't proved very useful anyway.
 
 From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently tell you that the "Type" column is utterly useless. The most telling graph I can provide for you is this one:
 ```{r graph, echo = FALSE, results = "show"}
@@ -109,7 +109,7 @@ normalize <- function(x) {
 # Applying normalize() on the predictor
 # columns
 lajunta_knn <- lajunta_knn %>% 
-  mutate(across(.cols = 1:2, normalize))
+  mutate(across(where(is.numeric), normalize))
 ```
 
 
@@ -282,7 +282,7 @@ knitr::kable(summary(bull_fit) %>%
 
 ```
 
-Linear regression is an art as much as it is a science. I could write a [30 page paper](https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx) explaining all the EDA, and providing a play-by-play commentary about how this model could be improved. But today I think I'll leave this with what is presented here.
+Linear regression is an art as much as it is a science. I could write a [30 page paper](https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx) explaining all the EDA, providing a play-by-play commentary about potential improvements to this model. But today I think I'll leave things as they are presented here.
 
 See the accompanying Shiny app (linked above) if you'd like to play with these linear models yourself!
 
