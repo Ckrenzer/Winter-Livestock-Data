@@ -21,21 +21,16 @@ knitr::opts_chunk$set(echo = TRUE,
 # The Dataset
 The La Junta dataset is quickly becoming one of my favorites. I suppose there is something to be said about collecting, cleaning, and analyzing data all by yourself.
 
-
-In this section, you should examine the dataset, explaining the variables and providing some graphs similar (or exactly the same as!) those in the shiny app.
-
-
-# KNN Clustering
-Since the data clusters so nicely, I could not resist checking how KNN performs!
-
-### Step 1: Packages
-
-I will be using the tidymodels package to split the data into testing and training sets. The class package will be used for the KNN algorithm. With this algorithm, I will be classifying cattle reproductive status using weight and market price.
-
-```{r import}
+```{r packages-import}
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(dplyr, readr, tidymodels, class)
 
+# General Packages
+pacman::p_load(dplyr, readr, ggplot2)
+
+# KNN Packages:
+pacman::p_load(rsample, class)
+
+# 
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -47,6 +42,23 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
 # dark LaTex magic!
 
 ```
+
+In this section, you should examine the dataset, explaining the variables and providing some graphs similar (or exactly the same as!) those in the shiny app.
+
+
+
+
+
+
+
+
+# KNN Clustering
+Since the data clusters so nicely, I could not resist checking how KNN performs!
+
+### Step 1: Packages
+
+I will be using the rsample package to split the data into testing and training sets. The class package will be used for the KNN algorithm. With this algorithm, I will be classifying cattle reproductive status using weight and market price.
+
 
 
 
@@ -95,7 +107,7 @@ A stratified, simple random sampling technique will be used to separate values i
 ```{r splicing}
 # Setting the random number stream
 set.seed(2021)
-lajunta_split <- initial_split(lajunta,
+lajunta_split <- rsample::initial_split(lajunta,
                                prob = 0.80,
                                strata = Reprod)
 
@@ -103,10 +115,8 @@ lajunta_split <- initial_split(lajunta,
 # and 289 in test, with a total of 1158 observations
 
 # separating the data into two new data frames
-lajunta_train <- training(lajunta_split)
-lajunta_test <- testing(lajunta_split)
-
-
+lajunta_train <- rsample::training(lajunta_split)
+lajunta_test <- rsample::testing(lajunta_split)
 ```
 
 
@@ -185,8 +195,14 @@ The ideal value was either 30 or 31--very close to 29! Using just two variables,
 
 
 
+
+
 # Linear Regression
 Just use what was in the shiny app here
+
+
+
+
 
 
 
