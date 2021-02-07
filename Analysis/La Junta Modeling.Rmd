@@ -33,7 +33,8 @@ pacman::p_load(dplyr, readr, ggplot2,
 pacman::p_load(rsample, class)
 
 # Logistic Regression Packages
-pacman::p_load(stringr)
+pacman::p_load(stringr, pscl, caret,
+               car, InformationValue)
 
 
 # The raw data for La Junta, which is on GitHub
@@ -312,7 +313,7 @@ I expect zero errors in the third test.
 
 ### Setup and Cleaning
 
-First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents." With this in mind, let's store data for the models:
+First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let's store data for the models:
 
 ```{r data subsets}
 # Data for regression 1
@@ -356,9 +357,9 @@ lajunta_logit1_test <- rsample::testing(lajunta_logit1_split)
 
 
 # REGRESSION 2
-# Setting the random number stream again,
-# in the event R tries to pull some
-# funny business
+# Setting the random number stream again
+# (in the event R tries to pull some
+# funny business)
 set.seed(2021)
 # Stratification for the first regression
 lajunta_logit2_split <- rsample::initial_split(lajunta_logit2,
@@ -373,9 +374,9 @@ lajunta_logit2_test <- rsample::testing(lajunta_logit2_split)
 
 
 # REGRESSION 3
-# Setting the random number stream again,
-# in the event R tries to pull some
-# funny business
+# Setting the random number stream again
+# (in the event R tries to pull some
+# funny business)
 set.seed(2021)
 # Stratification for the first regression
 lajunta_logit3_split <- rsample::initial_split(lajunta_logit3,
@@ -389,7 +390,14 @@ lajunta_logit3_test <- rsample::testing(lajunta_logit3_split)
 
 ### Models
 
+The data is now ready for model assembly. I will be using the stats package's glm() function as the engine for the regressions.
+
 ```{r logistic model}
+
+logit1 <- glm(data = lajunta_logit1_train,
+              formula = Reprod ~ Weight + Price)
+
+
 
 summary(glm(data = transit_cost_data, formula = `RR?` ~ Stations + `Real cost`*Length, family = "binomial"))
 
@@ -402,5 +410,50 @@ summary(glm(data = transit_cost_data, formula = `RR?` ~ Stations + `Real cost`*L
 
 ### Evaluation
 
+We can use the pR2() function from the pscl package to compute McFadden's R-square value, which ranges from 0 to just under 1. Values close to 0 indicate the model as no predictive power. Values over 0.4 suggest the model is a good fit for the data.
+
+```{r McFadden R-squared}
+
+pscl::pR2(model)["McFadden"]
+
+```
 
 
+
+We can compute the importance of each predictor variable in the model by using the varImp() function from the caret package. Higher values indicate more importance. These values can help confirm the validity of p-values.
+```{r variable importance}
+caret::varImp(model)
+
+
+```
+
+We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.
+```{r VIF}
+#calculate VIF values for each predictor variable in our model
+car::vif(model)
+
+
+```
+
+
+
+Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a parent. We can calculate these probabilities with this code:
+
+```{r probabilities}
+predict(model, test, type="response")
+
+```
+
+
+Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.
+
+```{r evaluation}
+#convert defaults from "Yes" and "No" to 1's and 0's
+test$default <- ifelse(test$default=="Yes", 1, 0)
+
+#find optimal cutoff probability to use to maximize accuracy
+optimal <- optimalCutoff(test$default, predicted)[1]
+optimal
+
+##[1] 0.5451712
+```
