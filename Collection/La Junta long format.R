@@ -1,4 +1,4 @@
-# Basically the same as the other file, except this one uses
+# Basically the same as "La Junta.R," except this one uses
 # newline characters as the strsplit() delimiter instead of
 # \r.
 #
