@@ -48,13 +48,11 @@ To familiarize you with the dataset, let's take a quick peek:
 knitr::kable(lajunta %>% 
                select(-Buyer) %>% 
                slice(1:8))
-
-
 ```
 
 You can see that we have data for when the sale took place, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include in this table.
 
-From my previous work with this data (see "La Junta Predictions.Rmd," for instance), I can tell you that the "Type" column is basically useless. The most telling graph I can provide you is this one:
+From my previous work (see "La Junta Predictions.Rmd," for instance), I can confidently tell you that the "Type" column is utterly useless. The most telling graph I can provide for you is this one:
 ```{r graph, echo = FALSE, results = "show"}
 lajunta %>% 
   ggplot() +
@@ -63,7 +61,7 @@ lajunta %>%
 
 ```
 
-We can clearly see four distinct groups, which will be observed in various ways.
+We can clearly see four distinct groups. We will explore these relationships in various ways.
 
 
 
@@ -186,8 +184,8 @@ We can always do better, no? Let's run this again in a loop with changing values
 ```{r optimization}
 # Since I am using a loop, best practice
 # is to pre-allocate space in the vector
-acc <- numeric(300)
-for(i in 1:300){
+acc <- numeric(100)
+for(i in 1:100){
   knn_mod <- class::knn(train = lajunta_knn_train[1:2],
                        test = lajunta_knn_test[1:2],
                        cl = lajunta_knn_train$Reprod,
