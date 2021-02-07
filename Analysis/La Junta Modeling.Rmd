@@ -25,12 +25,13 @@ The La Junta dataset is quickly becoming one of my favorites. I suppose there is
 if(!require(pacman)) install.packages("pacman")
 
 # General Packages
-pacman::p_load(dplyr, readr, ggplot2)
+pacman::p_load(dplyr, readr, ggplot2,
+               patchwork, lubridate,
+               knitr)
 
-# KNN Packages:
+# KNN Packages
 pacman::p_load(rsample, class)
 
-# 
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -38,13 +39,16 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
                       "/Ckrenzer/Winter-Livestock-Data/main",
                       "/La%20Junta%20Market%20Reports.csv"))
 
-# Know that I only used paste0() to avoid getting into that
-# dark LaTex magic!
-
+# Know that I only used paste0() on the url
+# to avoid getting into that dark LaTex magic!
 ```
 
-In this section, you should examine the dataset, explaining the variables and providing some graphs similar (or exactly the same as!) those in the shiny app.
+To familiarize you with the dataset, let's take a quick peek:
+```{r the dataset, echo = FALSE, results = "show"}
+lajunta
 
+
+```
 
 
 
@@ -57,7 +61,7 @@ Since the data clusters so nicely, I could not resist checking how KNN performs!
 
 ### Step 1: Packages
 
-I will be using the rsample package to split the data into testing and training sets. The class package will be used for the KNN algorithm. With this algorithm, I will be classifying cattle reproductive status using weight and market price.
+I will be using the rsample package to split the data into testing and training sets. The class package will be used for the KNN algorithm. With this algorithm, I will be classifying cattle reproductive status (cow, bull, steer, or heifer) using weight and market price.
 
 
 
@@ -70,11 +74,11 @@ There are only two predictors in this model, weight and price.
 
 ```{r prepare}
 # Fortunately, KNN is well-suited for just a few predictors
-lajunta <- lajunta %>% 
+lajunta_knn <- lajunta %>% 
   select(Weight, Price, Reprod)
 
 # storing the string vector as a factor
-lajunta$Reprod <- as.factor(lajunta$Reprod)
+lajunta_knn$Reprod <- as.factor(lajunta_knn$Reprod)
 
 ```
 
@@ -94,7 +98,7 @@ normalize <- function(x) {
 
 # Applying normalize() on the predictor
 # columns
-lajunta <- lajunta %>% 
+lajunta_knn <- lajunta_knn %>% 
   mutate(across(.cols = 1:2, normalize))
 ```
 
@@ -107,7 +111,7 @@ A stratified, simple random sampling technique will be used to separate values i
 ```{r splicing}
 # Setting the random number stream
 set.seed(2021)
-lajunta_split <- rsample::initial_split(lajunta,
+lajunta_knn_split <- rsample::initial_split(lajunta_knn,
                                prob = 0.80,
                                strata = Reprod)
 
@@ -115,8 +119,8 @@ lajunta_split <- rsample::initial_split(lajunta,
 # and 289 in test, with a total of 1158 observations
 
 # separating the data into two new data frames
-lajunta_train <- rsample::training(lajunta_split)
-lajunta_test <- rsample::testing(lajunta_split)
+lajunta_knn_train <- rsample::training(lajunta_knn_split)
+lajunta_knn_test <- rsample::testing(lajunta_knn_split)
 ```
 
 
@@ -127,15 +131,15 @@ To determine the appropriate number for K, I took the square root of the number 
 
 ```{r the model}
 # Determining the appropriate value of K
-sqrt(nrow(lajunta_train)) ## 29.47881
+sqrt(nrow(lajunta_knn_train)) ## 29.47881
 
 # Let's use K = 29
 
 # the cl argument is the factor of the true
 # classifications from the training set
-knn_29 <- class::knn(train = lajunta_train[1:2],
-                     test = lajunta_test[1:2],
-                     cl = lajunta_train$Reprod,
+knn_29 <- class::knn(train = lajunta_knn_train[1:2],
+                     test = lajunta_knn_test[1:2],
+                     cl = lajunta_knn_train$Reprod,
                      k = 29)
 
 
@@ -151,7 +155,7 @@ To calculate the accuracy, the data was thrown into a confusion matrix and the n
 # Create a confusion matrix--The result from knn()
 # and the test data dependent variable are the
 # arguments
-knn_29_mat <- table(knn_29, lajunta_test$Reprod)
+knn_29_mat <- table(knn_29, lajunta_knn_test$Reprod)
 
 
 #This function measures accuracy. It takes the confusion matrix as input
@@ -173,11 +177,11 @@ We can always do better, no? Let's run this again in a loop with changing values
 # is to pre-allocate space in the vector
 acc <- numeric(300)
 for(i in 1:300){
-  knn_mod <- class::knn(train = lajunta_train[1:2],
-                       test = lajunta_test[1:2],
-                       cl = lajunta_train$Reprod,
+  knn_mod <- class::knn(train = lajunta_knn_train[1:2],
+                       test = lajunta_knn_test[1:2],
+                       cl = lajunta_knn_train$Reprod,
                        k = i)
-  acc[i] <- accuracy(table(knn_mod, lajunta_test$Reprod))
+  acc[i] <- accuracy(table(knn_mod, lajunta_knn_test$Reprod))
   
 }
 
@@ -207,5 +211,7 @@ Just use what was in the shiny app here
 
 
 # Logistic Regression
+
+See your Tidying Practice file to see some logistic regression in R.
 
 Try making two logistic regression models based on whether the cattle is a bull vs cow and another based on whether the cattle is a heifer or steer. If you want perfect accuracy, make the decision whether the livestock is one of these two groups: cow/bull or heifer/steer.
