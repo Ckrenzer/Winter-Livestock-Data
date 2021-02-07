@@ -114,7 +114,7 @@ server <- function(input, output, session) {
     input$type
     })
   
-  # the observe() function allows the input to get updated as the user changes the input
+  # the observe() function allows the input to get updated as the user changes the values around
   observe({
     #The if statements check the user's input for reproductive status,
     #then prints the model's prediction for the price.
