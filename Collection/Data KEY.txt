@@ -1,4 +1,22 @@
 ### KEY ---------------------------------------------------------
+
+#### TL;DR (see below for more details)
+> str is a steer
+> hfr is a heifer
+> cow is a cow
+> bull is a bull
+
+> clr is an animal whose only characteristic provided was its color
+> ang is angus
+> mix is a cross between any two breeds
+> char is charolais
+> lim is limousin
+> gel is gelbvieh
+
+
+
+
+
 #### Notes
 > heifers are females between one and two years old that have not given birth
 > bred heifers are pregnant with their first calf

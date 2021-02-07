@@ -6,7 +6,7 @@ output: html_document
 runtime: shiny
 ---
 
-```{r setup and packages, include = FALSE}
+```{r setup-packages-data, include = FALSE}
 # Don't worry about this, it's just to make the output
 # look how I want it to...
 knitr::opts_chunk$set(echo = FALSE,
@@ -19,10 +19,7 @@ knitr::opts_chunk$set(echo = FALSE,
 if(!require("pacman")) install.packages("pacman")
 pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny)
 
-```
 
-I want to bring your attention to the distinct types of cattle and how many of them appear in the data.
-```{r loading data}
 # Reading in the file
 lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
 
@@ -35,13 +32,20 @@ lajunta <- lajunta %>%
 
 ```
 
-
+I want to bring your attention to the distinct types of cattle and how many of them appear in the data. See the data dictionary ("data KEY.txt") in the Collection folder for more info.
 
 ```{r, results = "show"}
 # Shows the counts in each Reprod group
 knitr::kable(lajunta %>% 
                count(Reprod) %>% 
-               rename("Number of Appearances in Data" = n, "Reproductive Status" = Reprod))
+               rename("Number of Appearances in Data" = n, "Reproductive Status" = Reprod) %>% 
+               arrange(desc(`Number of Appearances in Data`)))
+
+# Shows the counts of each Type
+knitr::kable(lajunta %>% 
+               count(Type) %>% 
+               rename("Number of Appearances in Data" = n) %>% 
+               arrange(desc(`Number of Appearances in Data`)))
 
 # overall plot of weight vs price
 lajunta %>% 
