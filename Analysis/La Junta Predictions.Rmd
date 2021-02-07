@@ -92,7 +92,7 @@ bull_fit <- lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Date
 # Price Estimator
 You can provide inputs below to estimate the price of the cattle you are selling. Prices for cows and bulls are very flat, so the model cannot identify price changes in these categories very well. Changes in the prices of cows and bulls are remarkably small, however, so this shouldn't really be a problem. You should be skeptical of the results for cows and bulls, however.
 
-Compare the estimated price with the graphs above to compare with the rest of the data.
+Compare the estimated price with the graphs above to evaluate the model.
 
 ### Steers
 ```{r str predictions, results = "show"}
