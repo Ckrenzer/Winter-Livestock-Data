@@ -34,7 +34,7 @@ lajunta <- lajunta %>%
 
 I want to bring your attention to the distinct types of cattle and how many of them appear in the data. See the data dictionary ("data KEY.txt") in the Collection folder for more info.
 
-```{r, results = "show"}
+```{r plots, results = "show"}
 # Shows the counts in each Reprod group
 knitr::kable(lajunta %>% 
                count(Reprod) %>% 
