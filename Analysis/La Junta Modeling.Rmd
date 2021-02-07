@@ -286,8 +286,49 @@ Linear regression is an art as much as it is a science. I could write a [30 page
 
 See the accompanying Shiny app (linked above) if you'd like to play with these linear models yourself!
 
+
+
+
+
+
+
+
+
+
+
 # Logistic Regression
 
-See your Tidying Practice file to see some logistic regression in R.
+There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. In these regressions, I will be evaluating three models with binary outcomes:
 
-Try making two logistic regression models based on whether the cattle is a bull vs cow and another based on whether the cattle is a heifer or steer. If you want perfect accuracy, make the decision whether the livestock is one of these two groups: cow/bull or heifer/steer.
+1. Determining whether livestock is a steer or a heifer.
+2. Determining whether livestock is a bull or a cow.
+3. Determining whether livestock is either a bull/cow or steer/heifer.
+
+I expect there to be zero errors in the third test.
+
+### Setup
+
+First things first. Let's make some data for each of the categories in the models:
+
+
+
+
+
+### Models
+
+```{r logistic model}
+
+# A logistic regression determining whether a variable is RR or not
+summary(glm(data = transit_cost_data, formula = `RR?` ~ Stations + `Real cost`*Length, family = "binomial"))
+
+
+
+
+```
+
+
+
+### Evaluation
+
+
+
