@@ -58,7 +58,7 @@ lajunta %>%
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   facet_wrap(~Type) +
-  ggtitle("Weight vs. Price by Type") 
+  ggtitle("Weight vs. Price by Type")
 
 
 lajunta %>%
@@ -112,47 +112,47 @@ server <- function(input, output, session) {
   
   type <- reactive({
     input$type
-    })
+  })
   
   # the observe() function allows the input to get updated as the user changes the values around
   observe({
     #The if statements check the user's input for reproductive status,
     #then prints the model's prediction for the price.
-  if(type() == "steer"){
-    # the price, which gets referenced in the UI
-    output$price <- renderText({
-      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = steer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    if(type() == "steer"){
+      # the price, which gets referenced in the UI
+      output$price <- renderText({
+        paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = steer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+        
+      })
       
-    })
-    
-    
-    
-  } else if(type() == "heifer"){
-    # the price, which is referenced in the UI
-    output$price <- renderText({
-      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = heifer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
       
-    })
-    
-    
-    
-  } else if(type() == "cow"){
-    # the price, which is referenced in the UI
-    output$price <- renderText({
-      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = cow_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
       
-    })
-    
-    
-    
-  } else {
-    
-    # the price, which is referenced in the UI
-    output$price <- renderText({
-      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = bull_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+    } else if(type() == "heifer"){
+      # the price, which is referenced in the UI
+      output$price <- renderText({
+        paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = heifer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+        
+      })
       
-    })
-  }#end of conditional
+      
+      
+    } else if(type() == "cow"){
+      # the price, which is referenced in the UI
+      output$price <- renderText({
+        paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = cow_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+        
+      })
+      
+      
+      
+    } else {
+      
+      # the price, which is referenced in the UI
+      output$price <- renderText({
+        paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = bull_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+        
+      })
+    }#end of conditional
     
   })#end of observe()
   
