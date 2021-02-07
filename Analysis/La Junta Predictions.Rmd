@@ -6,7 +6,7 @@ output: html_document
 runtime: shiny
 ---
 
-```{r setup, include = FALSE}
+```{r setup and packages, include = FALSE}
 # Don't worry about this, it's just to make the output
 # look how I want it to...
 knitr::opts_chunk$set(echo = FALSE,
@@ -16,17 +16,13 @@ knitr::opts_chunk$set(echo = FALSE,
                       message = F)
 
 
-```
-
-
-```{r packages, echo = FALSE}
 if(!require("pacman")) install.packages("pacman")
 pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny)
 
 ```
 
 I want to bring your attention to the distinct types of cattle and how many of them appear in the data.
-```{r cattle types, results = "show"}
+```{r loading data}
 # Reading in the file
 lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
 
@@ -37,6 +33,15 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 lajunta <- lajunta %>% 
   mutate(across(where(is.character), as.factor))
 
+```
+
+
+
+```{r, results = "show"}
+# Shows the counts in each Reprod group
+knitr::kable(lajunta %>% 
+               count(Reprod) %>% 
+               rename("Number of Appearances in Data" = n, "Reproductive Status" = Reprod))
 
 # overall plot of weight vs price
 lajunta %>% 
@@ -44,10 +49,6 @@ lajunta %>%
   geom_point(mapping = aes(x = Weight, y = Price)) +
   ggtitle("Weight vs. Price")
 
-# Shows the counts in each Reprod group
-knitr::kable(lajunta %>% 
-               count(Reprod) %>% 
-               rename("Number of Obs" = n, "Reproductive Status" = Reprod))
 
 lajunta %>%
   ggplot() +
@@ -66,7 +67,7 @@ lajunta %>%
 
 Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
 
-These prices are rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate. The data looks like it has homoskedasticity, and there are only three predictors. I think we'll make out grand with these models.
+These prices are rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate.
 
 ```{r linear models}
 
