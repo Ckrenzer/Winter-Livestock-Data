@@ -1,0 +1,195 @@
+---
+title: "La Junta Models"
+author: "Connor Krenzer"
+date: "2/7/2021"
+output: html_document
+---
+
+The Shiny app will be self-contained. Rather than cluttering the Shiny app, I have decided to create this Rmarkdown document for further exploration into the data.
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      include = TRUE,
+                      results = "hide",
+                      error = F,
+                      warning = F,
+                      message = F)
+```
+
+
+
+# The Dataset
+The La Junta dataset is quickly becoming one of my favorites. I suppose there is something to be said about collecting, cleaning, and analyzing data all by yourself.
+
+
+In this section, you should examine the dataset, explaining the variables and providing some graphs similar (or exactly the same as!) those in the shiny app.
+
+
+# KNN Clustering
+Since the data clusters so nicely, I could not resist checking how KNN performs!
+
+### Step 1: Packages
+
+I will be using the tidymodels package to split the data into testing and training sets. The class package will be used for the KNN algorithm. With this algorithm, I will be classifying cattle reproductive status using weight and market price.
+
+```{r import}
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(dplyr, readr, tidymodels, class)
+
+
+# The raw data for La Junta, which is on GitHub
+# (as opposed to the local file):
+lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
+                      "/Ckrenzer/Winter-Livestock-Data/main",
+                      "/La%20Junta%20Market%20Reports.csv"))
+
+# Know that I only used paste0() to avoid getting into that
+# dark LaTex magic!
+
+```
+
+
+
+### Step 2: Prepare Data
+
+Lucky for me, I already spent a full day cleaning this data! All I have to do is select relevant columns and make the character column a factor.
+
+There are only two predictors in this model, weight and price.
+
+```{r prepare}
+# Fortunately, KNN is well-suited for just a few predictors
+lajunta <- lajunta %>% 
+  select(Weight, Price, Reprod)
+
+# storing the string vector as a factor
+lajunta$Reprod <- as.factor(lajunta$Reprod)
+
+```
+
+
+
+### Step 3: Standardize Data
+
+Since KNN is sensitive to different scales, so I will standardize the values of the predictors.
+
+```{r standardize}
+# The normalizing function, which transforms
+# all values into the range from 0 to 1
+normalize <- function(x) {
+ return((x - min(x)) / (max(x) - min(x))) 
+}
+
+
+# Applying normalize() on the predictor
+# columns
+lajunta <- lajunta %>% 
+  mutate(across(.cols = 1:2, normalize))
+```
+
+
+
+### Step 4: Separate into Training and Test Sets
+
+A stratified, simple random sampling technique will be used to separate values into training and testing data. Stratification is necessary in this instance because there are far fewer cows and bulls in the dataset than there are heifers or steers. Eighty percent of the values will be placed in the training set and the remaining twenty percent will go to the test set.
+
+```{r splicing}
+# Setting the random number stream
+set.seed(2021)
+lajunta_split <- initial_split(lajunta,
+                               prob = 0.80,
+                               strata = Reprod)
+
+# As of 2/6/2021, the split is 869 in train
+# and 289 in test, with a total of 1158 observations
+
+# separating the data into two new data frames
+lajunta_train <- training(lajunta_split)
+lajunta_test <- testing(lajunta_split)
+
+
+```
+
+
+
+### Step 5: Build Model
+
+To determine the appropriate number for K, I took the square root of the number of observations in the training set.
+
+```{r the model}
+# Determining the appropriate value of K
+sqrt(nrow(lajunta_train)) ## 29.47881
+
+# Let's use K = 29
+
+# the cl argument is the factor of the true
+# classifications from the training set
+knn_29 <- class::knn(train = lajunta_train[1:2],
+                     test = lajunta_test[1:2],
+                     cl = lajunta_train$Reprod,
+                     k = 29)
+
+
+```
+
+
+
+### Step 6: Evaluate
+
+To calculate the accuracy, the data was thrown into a confusion matrix and the number of correct classifications were calculated as a rate. Though not shown, all cows and bulls are predicted perfectly. The only data which are not classified correctly are steers and heifers.
+
+```{r evaluation}
+# Create a confusion matrix--The result from knn()
+# and the test data dependent variable are the
+# arguments
+knn_29_mat <- table(knn_29, lajunta_test$Reprod)
+
+
+#This function measures accuracy. It takes the confusion matrix as input
+accuracy <- function(x){
+  return(sum(diag(x)/(sum(rowSums(x)))) * 100)
+  }
+
+
+accuracy(knn_29_mat) # 87.2% as of 2/6/2021
+
+```
+
+### Step 7: Optimize
+
+We can always do better, no? Let's run this again in a loop with changing values of K. The K with the greatest accuracy should be used for all future predictions. Also, this value should be somewhat close to 29--if we get a number very far from 29, it is likely that we are overfitting the model. That pesky bias-variance trade-off...
+
+```{r}
+# Since I am using a loop, best practice
+# is to pre-allocate space in the vector
+acc <- numeric(300)
+for(i in 1:300){
+  knn_mod <- class::knn(train = lajunta_train[1:2],
+                       test = lajunta_test[1:2],
+                       cl = lajunta_train$Reprod,
+                       k = i)
+  acc[i] <- accuracy(table(knn_mod, lajunta_test$Reprod))
+  
+}
+
+# finds the value in the vector named
+# "acc" with the greatest accuracy
+which(acc == max(acc)) ## 30  31
+
+# As you can see, 31 was VERY close to our predicted 29 for a good value for K
+acc[31] ## 87.54325
+```
+
+The ideal value was either 30 or 31--very close to 29! Using just two variables, we can predict the reproductive status of livestock with 87.5% accuracy! As previously stated, most of these inaccuracies are between steers and heifers. If we are only interested in cows and bulls, we will virtually _always_ have the right prediction!
+
+
+
+
+
+# Linear Regression
+Just use what was in the shiny app here
+
+
+
+# Logistic Regression
+
+Try making two logistic regression models based on whether the cattle is a bull vs cow and another based on whether the cattle is a heifer or steer. If you want perfect accuracy, make the decision whether the livestock is one of these two groups: cow/bull or heifer/steer.
