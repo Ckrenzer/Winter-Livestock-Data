@@ -94,110 +94,70 @@ You can provide inputs below to estimate the price of the cattle you are selling
 
 Compare the estimated price with the graphs above to evaluate the model.
 
-### Steers
+### Describe Your Livestock
 ```{r str predictions, results = "show"}
 ui <- fluidPage(
   
   # The three inputs we are interested in seeing
+  selectInput("type", "What type of cattle are you interested in?", choices = c("steer", "heifer", "cow", "bull")),
   dateInput("date", "What is the date of the sale?"),
   numericInput("quantity", "How many are being sold?", 1, min = 1),
   numericInput("weight", "What is the livestock's weight in pounds?", 750, min = 25),
   
   verbatimTextOutput("price"),
+  
 )
 
 server <- function(input, output, session) {
   
-  # the price, which is referenced in the UI
-  output$price <- renderText({
-    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = steer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
-    
-  })
+  type <- reactive({
+    input$type
+    })
   
+  # the observe() function allows the input to get updated as the user changes the input
+  observe({
+    #The if statements check the user's input for reproductive status,
+    #then prints the model's prediction for the price.
+  if(type() == "steer"){
+    # the price, which gets referenced in the UI
+    output$price <- renderText({
+      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = steer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+      
+    })
+    
+    
+    
+  } else if(type() == "heifer"){
+    # the price, which is referenced in the UI
+    output$price <- renderText({
+      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = heifer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+      
+    })
+    
+    
+    
+  } else if(type() == "cow"){
+    # the price, which is referenced in the UI
+    output$price <- renderText({
+      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = cow_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+      
+    })
+    
+    
+    
+  } else {
+    
+    # the price, which is referenced in the UI
+    output$price <- renderText({
+      paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = bull_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
+      
+    })
+  }#end of conditional
+    
+  })#end of observe()
   
 }
-shinyApp(ui, server)
-```
 
 
-
-### Heifers
-```{r hfr predictions, results = "show"}
-ui <- fluidPage(
-  
-  # The three inputs we are interested in seeing
-  dateInput("date", "What is the date of the sale?"),
-  numericInput("quantity", "How many are being sold?", 1, min = 1),
-  numericInput("weight", "What is the livestock's weight in pounds?", 600, min = 25),
-  
-  verbatimTextOutput("price"),
-)
-
-server <- function(input, output, session) {
-  
-  # the price, which is referenced in the UI
-  output$price <- renderText({
-    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = heifer_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
-    
-  })
-  
-  
-}
-shinyApp(ui, server)
-```
-
-
-
-
-### Cows
-```{r cow predictions, results = "show"}
-ui <- fluidPage(
-  
-  # The three inputs we are interested in seeing
-  dateInput("date", "What is the date of the sale?"),
-  numericInput("quantity", "How many are being sold?", 1, min = 1),
-  numericInput("weight", "What is the livestock's weight in pounds?", 1250, min = 25),
-  
-  verbatimTextOutput("price"),
-)
-
-server <- function(input, output, session) {
-  
-  # the price, which is referenced in the UI
-  output$price <- renderText({
-    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = cow_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
-    
-  })
-  
-  
-}
-shinyApp(ui, server)
-```
-
-
-
-
-### Bulls
-```{r bull predictions, results = "show"}
-ui <- fluidPage(
-  
-  # The three inputs we are interested in seeing
-  dateInput("date", "What is the date of the sale?"),
-  numericInput("quantity", "How many are being sold?", 1, min = 1),
-  numericInput("weight", "What is the livestock's weight in pounds?", 2150, min = 25),
-  
-  verbatimTextOutput("price"),
-)
-
-server <- function(input, output, session) {
-  
-  # the price, which is referenced in the UI
-  output$price <- renderText({
-    paste0("ESTIMATED PRICE: ", "$", round(predict.lm(object = bull_fit, data.frame(Date = input$date, Quantity = input$quantity, Weight = input$weight)), 2))
-    
-  })
-  
-  
-}
 shinyApp(ui, server)
 ```
