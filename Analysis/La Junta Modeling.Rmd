@@ -57,7 +57,8 @@ From my previous work (see "La Junta Predictions.Rmd," for instance), I can conf
 lajunta %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
-  ggtitle("Price vs. Weight")
+  ggtitle("Price vs. Weight") +
+  theme_dark()
 
 ```
 
