@@ -50,7 +50,7 @@ knitr::kable(lajunta %>%
 # overall plot of weight vs price
 lajunta %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Weight, y = Price)) +
+  geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   ggtitle("Weight vs. Price")
 
 
