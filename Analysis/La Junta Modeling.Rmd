@@ -338,12 +338,52 @@ Now that we have everything in a tibble, we are ready to split up the data.
 
 ### Split into training
 
-Now, the data will be split into testing and training sets.
+The data will be split into testing and training sets with an 80/20 split. For the same reasons used in the KNN classification section, stratified sampling will be used.
 
 ```{r data splicing}
 
+# REGRESSION 1
+# Setting the random number stream
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit1_split <- rsample::initial_split(lajunta_logit1,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit1_train <- rsample::training(lajunta_logit1_split)
+lajunta_logit1_test <- rsample::testing(lajunta_logit1_split)
 
 
+
+# REGRESSION 2
+# Setting the random number stream again,
+# in the event R tries to pull some
+# funny business
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit2_split <- rsample::initial_split(lajunta_logit2,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit2_train <- rsample::training(lajunta_logit2_split)
+lajunta_logit2_test <- rsample::testing(lajunta_logit2_split)
+
+
+
+
+
+# REGRESSION 3
+# Setting the random number stream again,
+# in the event R tries to pull some
+# funny business
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit3_split <- rsample::initial_split(lajunta_logit3,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit3_train <- rsample::training(lajunta_logit3_split)
+lajunta_logit3_test <- rsample::testing(lajunta_logit3_split)
 ```
 
 
