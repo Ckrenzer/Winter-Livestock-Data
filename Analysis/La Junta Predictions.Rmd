@@ -53,14 +53,14 @@ lajunta %>%
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   ggtitle("Weight vs. Price")
 
-
+# weight vs price by type
 lajunta %>%
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   facet_wrap(~Type) +
   ggtitle("Weight vs. Price by Type")
 
-
+# weight vs price by reproductive status
 lajunta %>%
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
