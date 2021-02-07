@@ -8,7 +8,7 @@ output: html_document
 The Shiny app will be self-contained. Rather than cluttering the Shiny app, I have decided to create this Rmarkdown document for further exploration into the data.
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE,
+knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
                       results = "hide",
                       error = F,
@@ -158,7 +158,7 @@ accuracy(knn_29_mat) # 87.2% as of 2/6/2021
 
 We can always do better, no? Let's run this again in a loop with changing values of K. The K with the greatest accuracy should be used for all future predictions. Also, this value should be somewhat close to 29--if we get a number very far from 29, it is likely that we are overfitting the model. That pesky bias-variance trade-off...
 
-```{r}
+```{r optimization}
 # Since I am using a loop, best practice
 # is to pre-allocate space in the vector
 acc <- numeric(300)
@@ -179,7 +179,7 @@ which(acc == max(acc)) ## 30  31
 acc[31] ## 87.54325
 ```
 
-The ideal value was either 30 or 31--very close to 29! Using just two variables, we can predict the reproductive status of livestock with 87.5% accuracy! As previously stated, most of these inaccuracies are between steers and heifers. If we are only interested in cows and bulls, we will virtually _always_ have the right prediction!
+The ideal value was either 30 or 31--very close to 29! Using just two variables, we can predict the reproductive status of livestock with 87.5% accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually _always_ have the right prediction!
 
 
 
