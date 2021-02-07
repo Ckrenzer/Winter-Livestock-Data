@@ -27,7 +27,7 @@ if(!require(pacman)) install.packages("pacman")
 # General Packages
 pacman::p_load(dplyr, readr, ggplot2,
                patchwork, lubridate,
-               knitr)
+               knitr, broom)
 
 # KNN Packages
 pacman::p_load(rsample, class)
@@ -212,13 +212,79 @@ The ideal value was either 30 or 31--very close to 29! Using just two variables,
 
 
 # Linear Regression
-Just use what was in the shiny app here
+The data appears to follow a linear trend, so linear models seem very appropriate for this dataset. There is a linear model for each of the reproductive status. You can see the model's parameters below:
 
 
+```{r linear models}
+# All results are from 2/6/2021...
 
 
+steer_fit <- lm(data = lajunta,
+                subset = Reprod == "str",
+                formula = Price ~ I(lubridate::mdy(Date)) +
+                  Quantity + poly(Weight, degree = 2))
 
 
+heifer_fit <- lm(data = lajunta,
+                 subset = Reprod == "hfr",
+                 formula = Price ~ I(lubridate::mdy(Date)) +
+                   Quantity + poly(Weight, degree = 2))
+
+
+# a 12th degree polynomial gives us an R-squared
+# of .54, but I think that is due to overfitting
+cow_fit <- lm(data = lajunta,
+              subset = Reprod == "cow",
+              formula = Price ~ I(lubridate::mdy(Date)) +
+                poly(Weight, 3))
+
+
+# A 6th degree polynomial gives an R-squared of .87,
+# but I think that is due to overfitting...
+# Our sample is small so we want to keep the
+# number of predictors small
+bull_fit <- lm(data = lajunta,
+               subset = Reprod == "bull",
+               formula = Price ~ I(lubridate::mdy(Date)) +
+                 poly(Weight, 2))
+```
+
+Now, let's see how these models performed:
+
+```{r lm evaluation, results = "show"}
+
+knitr::kable(summary(steer_fit) %>% 
+  broom::tidy(), caption = "Steer Model Evaluation")
+# R-squared: 0.8933
+# Adj. R-squared: 0.8926
+# RSE: 7.199
+
+
+knitr::kable(summary(heifer_fit) %>% 
+  broom::tidy(), caption = "Heifer Model Evaluation")
+# R-squared: 0.7313
+# Adj. R-squared: 0.7289
+# RSE: 6.516
+
+
+knitr::kable(summary(cow_fit) %>% 
+  broom::tidy(), caption = "Cow Model Evaluation")
+# R-squared: 0.4206
+# Adj. R-squared: 0.3884
+# RSE: 3.037
+
+
+knitr::kable(summary(bull_fit) %>% 
+  broom::tidy(), caption = "Bull Model Evaluation")
+# R-squared: 0.7564
+# Adj. R-squared: 0.7232
+# RSE: 2.431
+
+```
+
+Linear regression is an art as much as it is a science. I could write a [30 page paper](https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx) explaining all the EDA, and providing a play-by-play commentary about how this model could be improved. But today I think I'll leave this with what is presented here.
+
+See the accompanying Shiny app (linked above) if you'd like to play with these linear models yourself!
 
 # Logistic Regression
 
