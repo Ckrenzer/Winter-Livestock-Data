@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny)
+pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork)
 
 
 # Reading in the file
@@ -66,6 +66,32 @@ lajunta %>%
   geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
   facet_wrap(~Reprod) +
   ggtitle("Weight vs. Price by Reproductive Status") 
+
+
+
+# Price and Quantity over time
+q1 <- lajunta %>%  
+  filter(Reprod %in% c("str", "hfr")) %>% 
+  group_by(Date) %>% 
+  summarize(Price = mean(Price) , Reprod, Quantity) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Date, y = Price, size = Quantity)) +
+  geom_line(mapping = aes(x = Date, y = Price)) +
+  facet_wrap(~Reprod) +
+  ggtitle("Price and Quantity Over Time")
+
+
+q2 <-  lajunta %>%  
+  filter(Reprod %in% c("bull", "cow")) %>% 
+  group_by(Date) %>% 
+  summarize(Price = mean(Price) , Reprod, Quantity) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Date, y = Price, size = Quantity)) +
+  geom_line(mapping = aes(x = Date, y = Price)) +
+  facet_wrap(~Reprod)
+
+
+q1 / q2
 
 ```
 
