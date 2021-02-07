@@ -32,6 +32,9 @@ pacman::p_load(dplyr, readr, ggplot2,
 # KNN Packages
 pacman::p_load(rsample, class)
 
+# Logistic Regression Packages
+pacman::p_load(stringr)
+
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -40,7 +43,8 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
                       "/La%20Junta%20Market%20Reports.csv"))
 
 # Know that I only used paste0() on the url
-# to avoid getting into that dark LaTex magic!
+# to avoid getting into that dark LaTex magic
+# on pdf output!
 ```
 
 To familiarize you with the dataset, let's take a quick peek:
@@ -304,21 +308,49 @@ There are a few things I want to try with a logistic regression. Though logistic
 2. Determining whether livestock is a bull or a cow.
 3. Determining whether livestock is either a bull/cow or steer/heifer.
 
-I expect there to be zero errors in the third test.
+I expect zero errors in the third test.
 
-### Setup
+### Setup and Cleaning
 
-First things first. Let's make some data for each of the categories in the models:
+First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents." With this in mind, let's store data for the models:
+
+```{r data subsets}
+# Data for regression 1
+lajunta_logit1 <- lajunta %>% 
+  filter(Reprod %in% c("str", "hfr"))
+
+# Data for regression 2
+lajunta_logit2 <- lajunta %>% 
+  filter(Reprod %in% c("bull", "cow"))
+
+# Data for regression 3
+lajunta_logit3 <- lajunta %>% 
+  mutate(Reprod = lajunta[["Reprod"]] %>% 
+           str_replace_all("bull|cow", "par") %>% 
+           str_replace_all("str|hfr", "y"))
+
+```
+
+Now that we have everything in a tibble, we are ready to split up the data.
 
 
 
+
+### Split into training
+
+Now, the data will be split into testing and training sets.
+
+```{r data splicing}
+
+
+
+```
 
 
 ### Models
 
 ```{r logistic model}
 
-# A logistic regression determining whether a variable is RR or not
 summary(glm(data = transit_cost_data, formula = `RR?` ~ Stations + `Real cost`*Length, family = "binomial"))
 
 
