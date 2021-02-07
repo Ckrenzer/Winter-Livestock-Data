@@ -14,3 +14,5 @@ Could that difference easily get turned into a function, or could both R scripts
 Further, there is now a script ("La Junta cleaning.R") that formats the data so that you no longer have to manually enter the column names each time you create a new file with these scripts.
 
 In addition, the 99 categories of cattle are reduced to just six! Many types of cattle have very few observations, so they were lumped in with other groups.
+
+Finally, there is a shiny app you can run to see view analysis of the data, and even predict the price of cattle!
