@@ -8,7 +8,7 @@ output:
     toc_depth: 2
 ---
 
-The Shiny app will be self-contained. Rather than cluttering the Shiny app, I have decided to create this Rmarkdown document for further exploration into the data.
+The Shiny app will be self-contained. Rather than cluttering the Shiny app, this Rmarkdown document has been created for further exploration into the data.
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
@@ -28,14 +28,14 @@ if(!require(pacman)) install.packages("pacman")
 # General Packages
 pacman::p_load(dplyr, readr, ggplot2,
                patchwork, lubridate,
-               knitr, broom)
+               knitr, broom, stringr)
 
 # KNN Packages
 pacman::p_load(rsample, class)
 
 # Logistic Regression Packages
-pacman::p_load(stringr, pscl, caret,
-               car, InformationValue)
+pacman::p_load(pscl, caret, car,
+               InformationValue)
 
 
 # The raw data for La Junta, which is on GitHub
@@ -58,7 +58,8 @@ knitr::kable(lajunta %>%
 
 You can see that we have data for the date of the sale, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include that information in this table. It hasn't proved very useful anyway.
 
-From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently say that the "Type" column is _utterly_ useless. That's a story in and of itself, I suppose. The most telling graph I can provide for you is this one:
+From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently say that the "Type" column is _utterly_ useless. That's a story in and of itself, I suppose. The most telling graph I'll provide for you is this one:
+
 ```{r graph, echo = FALSE, results = "show"}
 lajunta %>% 
   ggplot() +
@@ -68,7 +69,7 @@ lajunta %>%
 
 ```
 
-The dark theme on ggplot looks so nice, don't you think? We can clearly see four distinct groups and will explore these relationships in various ways.
+The dark theme on ggplot looks really nice, don't you think? We can clearly see four distinct groups and will explore these relationships in various ways.
 
 
 
@@ -299,7 +300,7 @@ cat("R-squared:",  summary(bull_fit)$r.squared,
 
 Linear regression is an art as much as it is a science. I could write a [30 page paper](https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx) explaining all the EDA, providing a play-by-play commentary about potential improvements to this model. But today I think I'll leave things as they are presented here.
 
-See the accompanying Shiny app (linked above) if you'd like to play with these linear models yourself!
+See the accompanying Shiny app ("[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," also linked above) if you'd like to play with these linear models yourself!
 
 
 
