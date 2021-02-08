@@ -90,7 +90,7 @@ q2 <-  lajunta %>%
   geom_line(mapping = aes(x = Date, y = Price)) +
   facet_wrap(~Reprod)
 
-
+# using patchwork's "/" operator
 q1 / q2
 
 ```
@@ -126,12 +126,13 @@ Compare the estimated price with the graphs above to evaluate the model.
 ```{r str predictions, results = "show"}
 ui <- fluidPage(
   
-  # The three inputs we are interested in seeing
+  # The four inputs we are interested in seeing
   selectInput("type", "What type of cattle are you interested in?", choices = c("steer", "heifer", "cow", "bull")),
   dateInput("date", "What is the date of the sale?"),
   numericInput("quantity", "How many are being sold?", 1, min = 1),
   numericInput("weight", "What is the livestock's weight in pounds?", 750, min = 25),
   
+  # The output box, which uses data provided by the server
   verbatimTextOutput("price"),
   
 )
