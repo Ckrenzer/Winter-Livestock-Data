@@ -508,9 +508,9 @@ bull_fit &lt;- lm(data = lajunta,
 </tr>
 </tbody>
 </table>
-<pre><code>## R-squared: 0.8933275</code></pre>
-<pre><code>## Ajdusted R-squared: 0.8926116</code></pre>
-<pre><code>## RSE: 7.199308</code></pre>
+<pre><code>## R-squared: 0.8933275 
+## Ajdusted R-squared: 0.8926116 
+## RSE: 7.199308</code></pre>
 <table>
 <caption>Heifer Model Evaluation</caption>
 <thead>
@@ -560,9 +560,9 @@ bull_fit &lt;- lm(data = lajunta,
 </tr>
 </tbody>
 </table>
-<pre><code>## R-squared: 0.7312624</code></pre>
-<pre><code>## Ajdusted R-squared: 0.7288683</code></pre>
-<pre><code>## RSE: 6.515564</code></pre>
+<pre><code>## R-squared: 0.7312624 
+## Ajdusted R-squared: 0.7288683 
+## RSE: 6.515564</code></pre>
 <table>
 <caption>Cow Model Evaluation</caption>
 <thead>
@@ -612,9 +612,9 @@ bull_fit &lt;- lm(data = lajunta,
 </tr>
 </tbody>
 </table>
-<pre><code>## R-squared: 0.4205815</code></pre>
-<pre><code>## Ajdusted R-squared: 0.3883916</code></pre>
-<pre><code>## RSE: 3.036778</code></pre>
+<pre><code>## R-squared: 0.4205815 
+## Ajdusted R-squared: 0.3883916 
+## RSE: 3.036778</code></pre>
 <table>
 <caption>Bull Model Evaluation</caption>
 <thead>
@@ -657,9 +657,9 @@ bull_fit &lt;- lm(data = lajunta,
 </tr>
 </tbody>
 </table>
-<pre><code>## R-squared: 0.7564061</code></pre>
-<pre><code>## Ajdusted R-squared: 0.7231888</code></pre>
-<pre><code>## RSE: 2.431339</code></pre>
+<pre><code>## R-squared: 0.7564061 
+## Ajdusted R-squared: 0.7231888 
+## RSE: 2.431339</code></pre>
 <p>Linear regression is an art as much as it is a science. I could write a <a href="https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx">30 page paper</a> explaining all the EDA, providing a play-by-play commentary about potential improvements to this model. But today I think I’ll leave things as they are presented here.</p>
 <p>See the accompanying Shiny app (linked above) if you’d like to play with these linear models yourself!</p>
 </div>
@@ -843,17 +843,14 @@ logit3 &lt;- glm(data = lajunta_logit3_train,
 <h4>McFadden’s R-square</h4>
 <p>We can use the pR2() function from the pscl package to compute McFadden’s R-square value, which ranges from 0 to just under 1. Values close to 0 indicate the model as no predictive power. Values over 0.4 suggest the model is a good fit for the data.</p>
 <p>Let’s begin with the first regression:</p>
-<pre><code>## fitting null model for pseudo-r2</code></pre>
-<pre><code>##  McFadden 
+<pre><code>## fitting null model for pseudo-r2
 ## 0.4868792</code></pre>
 <p>As expected, the predictors in the first regression do a pretty good job. Let’s see the McFadden statistic from the second regression:</p>
-<pre><code>## fitting null model for pseudo-r2</code></pre>
-<pre><code>## McFadden 
-##        1</code></pre>
+<pre><code>## fitting null model for pseudo-r2
+## 1</code></pre>
 <p>Ah! I see now. The model acts strangely because it is deterministic! I expect this to be the case for the third regression as well:</p>
-<pre><code>## fitting null model for pseudo-r2</code></pre>
-<pre><code>## McFadden 
-##        1</code></pre>
+<pre><code>## fitting null model for pseudo-r2
+## 1</code></pre>
 <p>Yup.</p>
 </div>
 <div id="variable-importance" class="section level4">
