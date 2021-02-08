@@ -194,6 +194,14 @@ summary {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#the-dataset">The Dataset</a></li>
+<li><a href="#knn-clustering">KNN Clustering</a></li>
+<li><a href="#linear-regression">Linear Regression</a></li>
+<li><a href="#logistic-regression">Logistic Regression</a></li>
+</ul>
+</div>
 
 <p>The Shiny app will be self-contained. Rather than cluttering the Shiny app, I have decided to create this Rmarkdown document for further exploration into the data.</p>
 <div id="the-dataset" class="section level1">
@@ -217,8 +225,8 @@ pacman::p_load(stringr, pscl, caret,
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
 lajunta &lt;- read_csv(paste0(&quot;https://raw.githubusercontent.com&quot;,
-                      &quot;/Ckrenzer/Winter-Livestock-Data/main&quot;,
-                      &quot;/La%20Junta%20Market%20Reports.csv&quot;))
+                           &quot;/Ckrenzer/Winter-Livestock-Data/main&quot;,
+                           &quot;/La%20Junta%20Market%20Reports.csv&quot;))
 
 # Know that I only used paste0() on the url
 # to avoid getting into that dark LaTex magic
@@ -330,7 +338,7 @@ lajunta_knn$Reprod &lt;- as.factor(lajunta_knn$Reprod)</code></pre>
 <pre class="r"><code># The normalizing function, which transforms
 # all values into the range from 0 to 1
 normalize &lt;- function(x) {
- return((x - min(x)) / (max(x) - min(x))) 
+  return((x - min(x)) / (max(x) - min(x))) 
 }
 
 
@@ -345,8 +353,8 @@ lajunta_knn &lt;- lajunta_knn %&gt;%
 <pre class="r"><code># Setting the random number stream
 set.seed(2021)
 lajunta_knn_split &lt;- rsample::initial_split(lajunta_knn,
-                               prob = 0.80,
-                               strata = Reprod)
+                                            prob = 0.80,
+                                            strata = Reprod)
 
 # As of 2/6/2021, the split is 869 in train
 # and 289 in test, with a total of 1158 observations
@@ -386,7 +394,7 @@ knn_29_mat &lt;- table(knn_29, lajunta_knn_test$Reprod)
 #This function measures accuracy. It takes the confusion matrix as input
 accuracy &lt;- function(x){
   return(sum(diag(x)/(sum(rowSums(x)))) * 100)
-  }
+}
 
 
 cat(&quot;Accuracy&quot;, accuracy(knn_29_mat)) # 87.2% as of 2/6/2021</code></pre>
@@ -400,9 +408,9 @@ cat(&quot;Accuracy&quot;, accuracy(knn_29_mat)) # 87.2% as of 2/6/2021</code></p
 acc &lt;- numeric(100)
 for(i in 1:100){
   knn_mod &lt;- class::knn(train = lajunta_knn_train[1:2],
-                       test = lajunta_knn_test[1:2],
-                       cl = lajunta_knn_train$Reprod,
-                       k = i)
+                        test = lajunta_knn_test[1:2],
+                        cl = lajunta_knn_train$Reprod,
+                        k = i)
   acc[i] &lt;- accuracy(table(knn_mod, lajunta_knn_test$Reprod))
   
 }
@@ -657,8 +665,8 @@ bull_fit &lt;- lm(data = lajunta,
 </div>
 <div id="logistic-regression" class="section level1">
 <h1>Logistic Regression</h1>
-<div id="the-write-up-uses-data-as-of-262021.-the-code-will-still-work-though-the-output-numbers-i-provide-may-be-different." class="section level6">
-<h6>The write-up uses data as of 2/6/2021. The code will still work, though the output numbers I provide may be different.</h6>
+<div id="the-write-up-uses-data-as-of-262021.-the-code-will-still-work-though-some-of-my-discussion-may-be-inconsistent-with-the-current-data-as-the-csv-gets-updated-over-time." class="section level6">
+<h6>The write-up uses data as of 2/6/2021. The code will still work, though some of my discussion may be inconsistent with the current data, as the csv gets updated over time.</h6>
 <p>There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. In these regressions, I will be evaluating three models with binary outcomes:</p>
 <ol style="list-style-type: decimal">
 <li>Determining whether livestock is a steer or a heifer.</li>
@@ -697,8 +705,8 @@ lajunta_logit3 &lt;- lajunta %&gt;%
 set.seed(2021)
 # Stratification for the first regression
 lajunta_logit1_split &lt;- rsample::initial_split(lajunta_logit1,
-                               prob = 0.80,
-                               strata = Reprod)
+                                               prob = 0.80,
+                                               strata = Reprod)
 # separating the data into two new data frames
 lajunta_logit1_train &lt;- rsample::training(lajunta_logit1_split)
 lajunta_logit1_test &lt;- rsample::testing(lajunta_logit1_split)
@@ -712,8 +720,8 @@ lajunta_logit1_test &lt;- rsample::testing(lajunta_logit1_split)
 set.seed(2021)
 # Stratification for the first regression
 lajunta_logit2_split &lt;- rsample::initial_split(lajunta_logit2,
-                               prob = 0.80,
-                               strata = Reprod)
+                                               prob = 0.80,
+                                               strata = Reprod)
 # separating the data into two new data frames
 lajunta_logit2_train &lt;- rsample::training(lajunta_logit2_split)
 lajunta_logit2_test &lt;- rsample::testing(lajunta_logit2_split)
@@ -729,8 +737,8 @@ lajunta_logit2_test &lt;- rsample::testing(lajunta_logit2_split)
 set.seed(2021)
 # Stratification for the first regression
 lajunta_logit3_split &lt;- rsample::initial_split(lajunta_logit3,
-                               prob = 0.80,
-                               strata = Reprod)
+                                               prob = 0.80,
+                                               strata = Reprod)
 # separating the data into two new data frames
 lajunta_logit3_train &lt;- rsample::training(lajunta_logit3_split)
 lajunta_logit3_test &lt;- rsample::testing(lajunta_logit3_split)</code></pre>
@@ -842,7 +850,7 @@ logit3 &lt;- glm(data = lajunta_logit3_train,
 <pre><code>## fitting null model for pseudo-r2</code></pre>
 <pre><code>## McFadden 
 ##        1</code></pre>
-<p>Ah! I see now. The data fits these points so well that the model is deterministic! I expect this to be the case for the third regression as well:</p>
+<p>Ah! I see now. The model acts strangely because it is deterministic! I expect this to be the case for the third regression as well:</p>
 <pre><code>## fitting null model for pseudo-r2</code></pre>
 <pre><code>## McFadden 
 ##        1</code></pre>
