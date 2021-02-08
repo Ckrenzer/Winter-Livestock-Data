@@ -303,6 +303,8 @@ See the accompanying Shiny app (linked above) if you'd like to play with these l
 
 # Logistic Regression
 
+###### The write-up uses data as of 2/6/2021. The code will still work, though the output numbers I provide may be different.
+
 There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. In these regressions, I will be evaluating three models with binary outcomes:
 
 1. Determining whether livestock is a steer or a heifer.
@@ -526,7 +528,7 @@ car::vif(logit2)
 
 ```
 
-Eh, it could be a problem, but they are still pretty close to five. I opt to willfully ignore the problem. Not shown here, but I already tried transforming the variables to no avail.
+Eh, this could be a problem, but they are still pretty close to five. I opt to willfully ignore the problem. Not shown here, but I already tried transforming the variables to no avail.
 
 The third regression:
 ```{r VIF (logit3), echo = FALSE, results = "show"}
@@ -537,18 +539,48 @@ car::vif(logit3)
 ```
 Good. These scores are not very worrying to me.
 
+
+
+
+
 #### Test Data
-Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a parent. We can calculate these probabilities with this code:
+Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be steer, cow, or heifer/steer (a "y"), respectively. We can calculate these probabilities with this code:
 
-```{r probabilities}
-predict(model, test, type="response")
+```{r probabilities, results = "show"}
+# REGRESSION 1 (steer vs heifer)
+# calculating the probability of being a steer
+# and storing the results in a vector
+logit1_test_probs <- predict(logit1,
+                             lajunta_logit1_test,
+                             type = "response")
 
+# REGRESSION 2 (bull vs cow)
+# calculating the probability of being a cow
+# and storing the results in a vector
+logit2_test_probs <- predict(logit2,
+                             lajunta_logit2_test,
+                             type = "response")
+
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+# calculating the probability of being a
+# heifer/steer (a "y") and storing the
+# results in a vector
+logit3_test_probs <- predict(logit3,
+                             lajunta_logit3_test,
+                             type = "response")
 ```
 
 
 Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.
 
 ```{r evaluation}
+
+
+
+
+
+
+
 #convert defaults from "Yes" and "No" to 1's and 0's
 test$default <- ifelse(test$default=="Yes", 1, 0)
 
