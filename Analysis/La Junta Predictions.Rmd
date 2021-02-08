@@ -95,7 +95,7 @@ q1 / q2
 
 ```
 
-Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle (and don't get me started on the hoops jumped through for the next section)--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seems to drive the price.
+Now, there's quite a bit that can be said for this information. On my end, it took about 8 hours to get down to six different types of cattle (and don't get me started on the hoops jumped through for the next section)--only to find out that there is basically no difference between the breeds. The reproductive status of the cattle, along with the weight, are what seem to drive the price.
 
 These prices are rather consistent, too. There are virtually no outliers. The bright side of this is that we can easily model the price. Since there are four distinct categories, four linear regression models seem appropriate.
 
