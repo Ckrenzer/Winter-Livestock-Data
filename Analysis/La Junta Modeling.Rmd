@@ -68,7 +68,7 @@ lajunta %>%
 
 ```
 
-We can clearly see four distinct groups. We will explore these relationships in various ways.
+The dark theme on ggplot looks so nice, don't you agree? We can clearly see four distinct groups and will explore these relationships in various ways.
 
 
 
@@ -204,12 +204,15 @@ for(i in 1:100){
   acc[i] <- accuracy(table(knn_mod, lajunta_knn_test$Reprod))
   
 }
+```
 
+
+```{r maximum accuracy, echo = FALSE, eval = FALSE}
 # finds the value in the vector named
 # "acc" with the greatest accuracy
 which(acc == max(acc))[1]
 
-# As you can see, the value was VERY close to our predicted 29 for a good value for K
+# The value of K with the highest accuracy
 acc[which(acc == max(acc))[1]]
 ```
 
