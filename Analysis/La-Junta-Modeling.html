@@ -209,6 +209,10 @@ pacman::p_load(dplyr, readr, ggplot2,
 # KNN Packages
 pacman::p_load(rsample, class)
 
+# Logistic Regression Packages
+pacman::p_load(stringr, pscl, caret,
+               car, InformationValue)
+
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -217,7 +221,8 @@ lajunta &lt;- read_csv(paste0(&quot;https://raw.githubusercontent.com&quot;,
                       &quot;/La%20Junta%20Market%20Reports.csv&quot;))
 
 # Know that I only used paste0() on the url
-# to avoid getting into that dark LaTex magic!</code></pre>
+# to avoid getting into that dark LaTex magic
+# on pdf output!</code></pre>
 <p>To familiarize you with the dataset, let’s take a quick peek:</p>
 <table>
 <thead>
@@ -354,16 +359,20 @@ lajunta_knn_test &lt;- rsample::testing(lajunta_knn_split)</code></pre>
 <h3>Step 5: Build Model</h3>
 <p>To determine the appropriate number for K, I took the square root of the number of observations in the training set.</p>
 <pre class="r"><code># Determining the appropriate value of K
-sqrt(nrow(lajunta_knn_train)) ## 29.47881
+optimal_k &lt;- floor(sqrt(nrow(lajunta_knn_train)))
 
-# Let&#39;s use K = 29
+cat(&quot;Optimal value of K:&quot;, optimal_k)
+
+# To explain the variable names, know that the
+# value of optimal_k is 29 (and some change)
+# at the time of writing
 
 # the cl argument is the factor of the true
 # classifications from the training set
 knn_29 &lt;- class::knn(train = lajunta_knn_train[1:2],
                      test = lajunta_knn_test[1:2],
                      cl = lajunta_knn_train$Reprod,
-                     k = 29)</code></pre>
+                     k = optimal_k)</code></pre>
 </div>
 <div id="step-6-evaluate" class="section level3">
 <h3>Step 6: Evaluate</h3>
@@ -380,7 +389,8 @@ accuracy &lt;- function(x){
   }
 
 
-accuracy(knn_29_mat) # 87.2% as of 2/6/2021</code></pre>
+cat(&quot;Accuracy&quot;, accuracy(knn_29_mat)) # 87.2% as of 2/6/2021</code></pre>
+<pre><code>## Accuracy 87.19723</code></pre>
 </div>
 <div id="step-7-optimize" class="section level3">
 <h3>Step 7: Optimize</h3>
@@ -399,11 +409,11 @@ for(i in 1:100){
 
 # finds the value in the vector named
 # &quot;acc&quot; with the greatest accuracy
-which(acc == max(acc)) ## 30  31
+which(acc == max(acc))[1]
 
-# As you can see, 31 was VERY close to our predicted 29 for a good value for K
-acc[31] ## 87.54325</code></pre>
-<p>The ideal value was either 30 or 31–very close to 29! Using just two variables, we can predict the reproductive status of livestock with 87.5% accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually <em>always</em> have the right prediction!</p>
+# As you can see, the value was VERY close to our predicted 29 for a good value for K
+acc[which(acc == max(acc))[1]]</code></pre>
+<p>The ideal value was 30–very close to 29! Using just two variables, we can predict the reproductive status of livestock with 87.5432526 percent accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually <em>always</em> have the right prediction!</p>
 </div>
 </div>
 <div id="linear-regression" class="section level1">
@@ -441,8 +451,6 @@ bull_fit &lt;- lm(data = lajunta,
                formula = Price ~ I(lubridate::mdy(Date)) +
                  poly(Weight, 2))</code></pre>
 <p>Now, let’s see how these models performed:</p>
-<pre class="r"><code>knitr::kable(summary(steer_fit) %&gt;% 
-  broom::tidy(), caption = &quot;Steer Model Evaluation&quot;)</code></pre>
 <table>
 <caption>Steer Model Evaluation</caption>
 <thead>
@@ -492,13 +500,9 @@ bull_fit &lt;- lm(data = lajunta,
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># R-squared: 0.8933
-# Adj. R-squared: 0.8926
-# RSE: 7.199
-
-
-knitr::kable(summary(heifer_fit) %&gt;% 
-  broom::tidy(), caption = &quot;Heifer Model Evaluation&quot;)</code></pre>
+<pre><code>## R-squared: 0.8933275</code></pre>
+<pre><code>## Ajdusted R-squared: 0.8926116</code></pre>
+<pre><code>## RSE: 7.199308</code></pre>
 <table>
 <caption>Heifer Model Evaluation</caption>
 <thead>
@@ -548,13 +552,9 @@ knitr::kable(summary(heifer_fit) %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># R-squared: 0.7313
-# Adj. R-squared: 0.7289
-# RSE: 6.516
-
-
-knitr::kable(summary(cow_fit) %&gt;% 
-  broom::tidy(), caption = &quot;Cow Model Evaluation&quot;)</code></pre>
+<pre><code>## R-squared: 0.7312624</code></pre>
+<pre><code>## Ajdusted R-squared: 0.7288683</code></pre>
+<pre><code>## RSE: 6.515564</code></pre>
 <table>
 <caption>Cow Model Evaluation</caption>
 <thead>
@@ -604,13 +604,9 @@ knitr::kable(summary(cow_fit) %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># R-squared: 0.4206
-# Adj. R-squared: 0.3884
-# RSE: 3.037
-
-
-knitr::kable(summary(bull_fit) %&gt;% 
-  broom::tidy(), caption = &quot;Bull Model Evaluation&quot;)</code></pre>
+<pre><code>## R-squared: 0.4205815</code></pre>
+<pre><code>## Ajdusted R-squared: 0.3883916</code></pre>
+<pre><code>## RSE: 3.036778</code></pre>
 <table>
 <caption>Bull Model Evaluation</caption>
 <thead>
@@ -653,16 +649,363 @@ knitr::kable(summary(bull_fit) %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># R-squared: 0.7564
-# Adj. R-squared: 0.7232
-# RSE: 2.431</code></pre>
+<pre><code>## R-squared: 0.7564061</code></pre>
+<pre><code>## Ajdusted R-squared: 0.7231888</code></pre>
+<pre><code>## RSE: 2.431339</code></pre>
 <p>Linear regression is an art as much as it is a science. I could write a <a href="https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx">30 page paper</a> explaining all the EDA, providing a play-by-play commentary about potential improvements to this model. But today I think I’ll leave things as they are presented here.</p>
 <p>See the accompanying Shiny app (linked above) if you’d like to play with these linear models yourself!</p>
 </div>
 <div id="logistic-regression" class="section level1">
 <h1>Logistic Regression</h1>
-<p>See your Tidying Practice file to see some logistic regression in R.</p>
-<p>Try making two logistic regression models based on whether the cattle is a bull vs cow and another based on whether the cattle is a heifer or steer. If you want perfect accuracy, make the decision whether the livestock is one of these two groups: cow/bull or heifer/steer.</p>
+<div id="the-write-up-uses-data-as-of-262021.-the-code-will-still-work-though-the-output-numbers-i-provide-may-be-different." class="section level6">
+<h6>The write-up uses data as of 2/6/2021. The code will still work, though the output numbers I provide may be different.</h6>
+<p>There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. In these regressions, I will be evaluating three models with binary outcomes:</p>
+<ol style="list-style-type: decimal">
+<li>Determining whether livestock is a steer or a heifer.</li>
+<li>Determining whether livestock is a bull or a cow.</li>
+<li>Determining whether livestock is either a bull/cow or steer/heifer.</li>
+</ol>
+<p>Due to enormous differences between cows/bulls and heifers/steers, I expect zero error in the third regression.</p>
+</div>
+<div id="setup-and-cleaning" class="section level3">
+<h3>Setup and Cleaning</h3>
+<p>First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as “y,” for “young,” while cows and bulls will be recoded as “par,” for “parents” (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let’s store data for the models:</p>
+<pre class="r"><code># Data for regression 1
+lajunta_logit1 &lt;- lajunta %&gt;% 
+  filter(Reprod %in% c(&quot;str&quot;, &quot;hfr&quot;)) %&gt;% 
+  mutate(across(where(is.character), as.factor))
+
+
+# Data for regression 2
+lajunta_logit2 &lt;- lajunta %&gt;% 
+  filter(Reprod %in% c(&quot;bull&quot;, &quot;cow&quot;)) %&gt;% 
+  mutate(across(where(is.character), as.factor))
+
+# Data for regression 3
+lajunta_logit3 &lt;- lajunta %&gt;% 
+  mutate(Reprod = lajunta[[&quot;Reprod&quot;]] %&gt;% 
+           str_replace_all(&quot;bull|cow&quot;, &quot;par&quot;) %&gt;% 
+           str_replace_all(&quot;str|hfr&quot;, &quot;y&quot;)) %&gt;% 
+  mutate(across(where(is.character), as.factor))</code></pre>
+<p>Now that we have everything in a tibble, we are ready to split up the data.</p>
+</div>
+<div id="split-into-training" class="section level3">
+<h3>Split into training</h3>
+<p>The data will be split into testing and training sets with an 80/20 split. For the same reasons used in the KNN classification section, stratified sampling will be used.</p>
+<pre class="r"><code># REGRESSION 1 (steer vs heifer)
+# Setting the random number stream
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit1_split &lt;- rsample::initial_split(lajunta_logit1,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit1_train &lt;- rsample::training(lajunta_logit1_split)
+lajunta_logit1_test &lt;- rsample::testing(lajunta_logit1_split)
+
+
+
+# REGRESSION 2 (bull vs cow)
+# Setting the random number stream again
+# (in the event R tries to pull some
+# funny business)
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit2_split &lt;- rsample::initial_split(lajunta_logit2,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit2_train &lt;- rsample::training(lajunta_logit2_split)
+lajunta_logit2_test &lt;- rsample::testing(lajunta_logit2_split)
+
+
+
+
+
+# REGRESSION 3 (bull/cow vs. steer/heifer)
+# Setting the random number stream again
+# (in the event R tries to pull some
+# funny business)
+set.seed(2021)
+# Stratification for the first regression
+lajunta_logit3_split &lt;- rsample::initial_split(lajunta_logit3,
+                               prob = 0.80,
+                               strata = Reprod)
+# separating the data into two new data frames
+lajunta_logit3_train &lt;- rsample::training(lajunta_logit3_split)
+lajunta_logit3_test &lt;- rsample::testing(lajunta_logit3_split)</code></pre>
+</div>
+<div id="models" class="section level3">
+<h3>Models</h3>
+<p>The data is now ready for model assembly. I will be using the stats package’s glm() function as the engine for the regressions.</p>
+<pre class="r"><code># REGRESSION 1 (steer vs heifer)
+# Quantity is not very different between steers and heifers
+logit1 &lt;- glm(data = lajunta_logit1_train,
+              formula = Reprod ~ Weight + Price,
+              family = &quot;binomial&quot;)
+
+# REGRESSION 2 (bull vs cow)
+logit2 &lt;- glm(data = lajunta_logit2_train,
+              formula = Reprod ~ Weight + Price + Quantity,
+              family = &quot;binomial&quot;)
+
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+logit3 &lt;- glm(data = lajunta_logit3_train,
+              formula = Reprod ~ Weight + Price + Quantity,
+              family = &quot;binomial&quot;)</code></pre>
+<p>Here are the results from the first regression (steers vs heifers):</p>
+<pre><code>## 
+## Call:
+## glm(formula = Reprod ~ Weight + Price, family = &quot;binomial&quot;, data = lajunta_logit1_train)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.92512  -0.53865   0.07971   0.50108   2.56263  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -43.151830   2.996368  -14.40   &lt;2e-16 ***
+## Weight        0.022718   0.001756   12.94   &lt;2e-16 ***
+## Price         0.206868   0.014514   14.25   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1082.62  on 791  degrees of freedom
+## Residual deviance:  555.51  on 789  degrees of freedom
+## AIC: 561.51
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p>From the second regression (bull vs cow):</p>
+<pre><code>## 
+## Call:
+## glm(formula = Reprod ~ Weight + Price + Quantity, family = &quot;binomial&quot;, 
+##     data = lajunta_logit2_train)
+## 
+## Deviance Residuals: 
+##        Min          1Q      Median          3Q         Max  
+## -2.168e-05  -1.100e-08   2.100e-08   2.100e-08   3.326e-05  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  2.555e+02  3.333e+05   0.001    0.999
+## Weight      -3.964e-02  2.872e+02   0.000    1.000
+## Price       -2.486e+00  6.909e+03   0.000    1.000
+## Quantity    -1.647e+00  1.758e+04   0.000    1.000
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 8.8806e+01  on 77  degrees of freedom
+## Residual deviance: 1.8179e-09  on 74  degrees of freedom
+## AIC: 8
+## 
+## Number of Fisher Scoring iterations: 25</code></pre>
+<p>And the third regression (bull/cow vs. steer/heifer):</p>
+<pre><code>## 
+## Call:
+## glm(formula = Reprod ~ Weight + Price + Quantity, family = &quot;binomial&quot;, 
+##     data = lajunta_logit3_train)
+## 
+## Deviance Residuals: 
+##        Min          1Q      Median          3Q         Max  
+## -6.329e-05   2.100e-08   2.100e-08   2.100e-08   9.029e-05  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept) -2.621e+01  5.892e+04   0.000    1.000
+## Weight      -2.885e-02  3.705e+01  -0.001    0.999
+## Price        5.788e-01  3.953e+02   0.001    0.999
+## Quantity     2.519e-01  1.629e+03   0.000    1.000
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 5.2484e+02  on 868  degrees of freedom
+## Residual deviance: 2.1086e-08  on 865  degrees of freedom
+## AIC: 8
+## 
+## Number of Fisher Scoring iterations: 25</code></pre>
+<p>The predictors in the first regression did a pretty good job. Judging by the p-values, the predictors in the second and third regressions did an abysmal job!</p>
+<p>The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average increase of 0.2068676 in the log odds of being a steer.</p>
+<p>Well, this is quite strange. Let’s continue on to the evaluation and see if we can figure out what’s happening.</p>
+</div>
+<div id="evaluation" class="section level3">
+<h3>Evaluation</h3>
+<div id="mcfaddens-r-square" class="section level4">
+<h4>McFadden’s R-square</h4>
+<p>We can use the pR2() function from the pscl package to compute McFadden’s R-square value, which ranges from 0 to just under 1. Values close to 0 indicate the model as no predictive power. Values over 0.4 suggest the model is a good fit for the data.</p>
+<p>Let’s begin with the first regression:</p>
+<pre><code>## fitting null model for pseudo-r2</code></pre>
+<pre><code>##  McFadden 
+## 0.4868792</code></pre>
+<p>As expected, the predictors in the first regression do a pretty good job. Let’s see the McFadden statistic from the second regression:</p>
+<pre><code>## fitting null model for pseudo-r2</code></pre>
+<pre><code>## McFadden 
+##        1</code></pre>
+<p>Ah! I see now. The data fits these points so well that the model is deterministic! I expect this to be the case for the third regression as well:</p>
+<pre><code>## fitting null model for pseudo-r2</code></pre>
+<pre><code>## McFadden 
+##        1</code></pre>
+<p>Yup.</p>
+</div>
+<div id="variable-importance" class="section level4">
+<h4>Variable Importance</h4>
+<p>We can compute the importance of each predictor variable in the model by using the varImp() function from the caret package. Higher values indicate more importance. These values can help confirm the validity of p-values.</p>
+<p>The first regression:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Overall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Weight</td>
+<td align="right">12.93487</td>
+</tr>
+<tr class="even">
+<td align="left">Price</td>
+<td align="right">14.25307</td>
+</tr>
+</tbody>
+</table>
+<p>The values are both pretty big, so both of the predictors seem to be ‘carrying their weight.’ This is consistent with our analysis thus far.</p>
+<p>What about the second regression?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Overall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Weight</td>
+<td align="right">0.0001380</td>
+</tr>
+<tr class="even">
+<td align="left">Price</td>
+<td align="right">0.0003598</td>
+</tr>
+<tr class="odd">
+<td align="left">Quantity</td>
+<td align="right">0.0000937</td>
+</tr>
+</tbody>
+</table>
+<p>That is certainly consistent with the p-values. The third regression?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Overall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Weight</td>
+<td align="right">0.0007788</td>
+</tr>
+<tr class="even">
+<td align="left">Price</td>
+<td align="right">0.0014643</td>
+</tr>
+<tr class="odd">
+<td align="left">Quantity</td>
+<td align="right">0.0001546</td>
+</tr>
+</tbody>
+</table>
+<p>Quite low, quite low.</p>
+</div>
+<div id="variance-inflation-factor" class="section level4">
+<h4>Variance Inflation Factor</h4>
+<p>We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.</p>
+<p>The first regression:</p>
+<pre><code>##   Weight    Price 
+## 2.964014 2.964014</code></pre>
+<p>What a relief! Multicollinearity, as measured by VIF, is not a big problem in the data.</p>
+<p>The second regression:</p>
+<pre><code>##   Weight    Price Quantity 
+## 5.236167 5.687037 1.982861</code></pre>
+<p>Eh, this could be a problem, but they are still pretty close to five. I opt to willfully ignore the problem. Not shown here, but I already tried transforming the variables to no avail.</p>
+<p>The third regression:</p>
+<pre><code>##   Weight    Price Quantity 
+## 3.182178 1.993148 4.722170</code></pre>
+<p>Good. These scores are not very worrying to me.</p>
+</div>
+<div id="test-data" class="section level4">
+<h4>Test Data</h4>
+<p>Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be steer, cow, or heifer/steer (a “y”), respectively. We can calculate these probabilities with this code:</p>
+<pre class="r"><code># REGRESSION 1 (steer vs heifer)
+# calculating the probability of being a steer
+# and storing the results in a vector
+logit1_test_probs &lt;- predict(logit1,
+                             lajunta_logit1_test,
+                             type = &quot;response&quot;)
+
+# REGRESSION 2 (bull vs cow)
+# calculating the probability of being a cow
+# and storing the results in a vector
+logit2_test_probs &lt;- predict(logit2,
+                             lajunta_logit2_test,
+                             type = &quot;response&quot;)
+
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+# calculating the probability of being a
+# heifer/steer (a &quot;y&quot;) and storing the
+# results in a vector
+logit3_test_probs &lt;- predict(logit3,
+                             lajunta_logit3_test,
+                             type = &quot;response&quot;)</code></pre>
+<p>Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.</p>
+<p>Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.</p>
+<pre class="r"><code># converting &quot;str&quot; to 1&#39;s and &quot;hfr&quot; to 0&#39;s
+# This is needed for the optimalCutoff() call
+# below
+lajunta_logit1_test$Reprod &lt;- ifelse(lajunta_logit1_test$Reprod == &quot;str&quot;, 1, 0)
+
+# finding optimal cutoff probability to use to maximize accuracy
+logit1_optimal &lt;- optimalCutoff(lajunta_logit1_test$Reprod,
+                                logit1_test_probs)[1]
+
+# print the optimal probability
+cat(logit1_optimal)</code></pre>
+<pre><code>## 0.5399724</code></pre>
+<p>The optimal probability is <em>0.5399724</em>. With this new threshold (the old threshold was 0.5, remember), any livestock with a probability of being a steer at or above 0.5399724 will be classified as a steer, with the rest being classified as heifers.</p>
+</div>
+<div id="confusion-matrix" class="section level4">
+<h4>Confusion Matrix</h4>
+<p>Using the optimal threshold, we can create a confusion matrix showing how the model performed on the test data.</p>
+<p>As always, let’s begin with the first regression:</p>
+<pre><code>##   hfr str
+## 0  90  20
+## 1  23 130</code></pre>
+<p>The zeroes are heifers and the ones are steers. As we can see, 23 heifers were incorrectly identified as steers and 20 steers were incorrectly identified as heifers. Cool!</p>
+<p>Let’s repeat the process for the second regression:</p>
+<pre><code>##   bull cow
+## 0    6   0
+## 1    0  19</code></pre>
+<p>The model is deterministic. Zero misclassifications!</p>
+<p>I expect the same for the third regression:</p>
+<pre><code>##   par   y
+## 0  25   0
+## 1   0 264</code></pre>
+<p>Deterministic indeed.</p>
+</div>
+<div id="roc-curves" class="section level4">
+<h4>ROC Curves</h4>
+<p>We can also calculate the sensitivity (the “true positive rate”), specificity (the “true negative rate”), and the total number of misclassifications using the numbers from the confusion matrix. I’ll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won’t waste anyone’s precious time telling us that the error rate is 0 percent.</p>
+<p>The misclassification error rate for the first regression at the optimal threshold:</p>
+<pre><code>## 0.1521</code></pre>
+<p>The data were classified incorrectly on the test data 15.21 percent of the time.</p>
+<p>Finally, we can put together ROC curves to visualize how well the models fit. The greater the AUC (area under the curve), the more accurately the model predicts.</p>
+<p>For the first regression <img src="data:image/png;base64,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" width="672" /></p>
+<p>The first regression seems to be a reasonably good fit, as measured by the ROC curve.</p>
+<p>The second curve? That’s just a gigantic blue rectangle. The same is true of the ROC curve for the third regression. My intuition at the outset of this section was correct. There was no error in the third regression.</p>
+</div>
+</div>
 </div>
 
 
