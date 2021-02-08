@@ -575,9 +575,11 @@ Thankfully, mathematical wizards around the world have put together a magical wa
 
 Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.
 
-```{r evaluation}
+```{r evaluation, results = "show"}
 
 # converting "str" to 1's and "hfr" to 0's
+# This is needed for the optimalCutoff() call
+# below
 lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == "str", 1, 0)
 
 # finding optimal cutoff probability to use to maximize accuracy
@@ -594,12 +596,39 @@ The optimal probability as of the time writing is *0.5399724*. With this new thr
 #### Confusion Matrix
 Using the optimal threshold, we can create a confusion matrix showing how the model performed on the test data.
 
-```{r confusion matrix}
-InformationValue::confusionMatrix(test$default, predicted)
+As always, let's begin with the first regression:
+```{r confusion matrix (logit1), echo = FALSE, results = "show"}
+# Changing 1's back into steers and 0's back into heifers
+# This line is undoing the operation from the previous chunk
+lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == 1, "str", "hfr")
+
+knitr::kable(InformationValue::confusionMatrix(lajunta_logit1_test$Reprod, logit1_test_probs, ))
 
 ```
  
- We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications.
+The zeroes are heifers and the ones are steers. As we can see, 23 heifers were incorrectly identified as steers and 20 steers were incorrectly identified as heifers. Cool!
+
+Let's repeat the process for the second regression:
+```{r confusion matrix (logit2), echo = FALSE, results = "show"}
+knitr::kable(InformationValue::confusionMatrix(lajunta_logit2_test$Reprod, logit2_test_probs))
+
+``` 
+ 
+ 
+ The model is deterministic. Zero misclassifications!
+ 
+ I expect the same for the third regression:
+```{r confusion matrix (logit3), echo = FALSE, results = "show"}
+knitr::kable(InformationValue::confusionMatrix(lajunta_logit3_test$Reprod, logit3_test_probs))
+
+```
+
+Deterministic indeed.
+
+
+#### ROC Curves
+
+We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications.
 
 
 ```{r}
@@ -624,7 +653,6 @@ InformationValue::misClassError(test$default, predicted, threshold=optimal)
 
 
 
-#### ROC Curve
 
 Finally, we can put together ROC curves to visualize how well the models fit. The greater the AUC (area under the curve), the more accurately the model predicts outcomes.
 
