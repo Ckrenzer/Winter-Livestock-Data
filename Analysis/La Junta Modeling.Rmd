@@ -628,53 +628,30 @@ Deterministic indeed.
 
 #### ROC Curves
 
-We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications.
+We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications using the numbers from the confusion matrix. I'll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won't waste anyone's precious time telling us that the error rate is 0 percent.
 
-Sensitivity for the first regression:
-```{r sensitivity (logit1), echo = FALSE, results = "show"}
+The misclassification error rate for the first regression at the optimal threshold:
+```{r misclassifications (logit1), echo = FALSE, results = "show"}
 #calculate sensitivity
-cat(InformationValue::sensitivity(lajunta_logit1_test$Reprod, logit1_test_probs))
+cat(InformationValue::misClassError(lajunta_logit1_test$Reprod, logit1_test_probs, threshold = logit1_optimal))
 
 
 ```
-The data were classified correctly in the test data `cat(InformationValue::sensitivity(lajunta_logit1_test$Reprod, logit1_test_probs))` of the time.
+The data were classified incorrectly on the test data `cat(InformationValue::misClassError(lajunta_logit1_test$Reprod, logit1_test_probs, threshold = logit1_optimal))` of the time.
 
-```{r}
+Finally, we can put together ROC curves to visualize how well the models fit. The greater the AUC (area under the curve), the more accurately the model predicts.
 
-#calculate specificity
-InformationValue::specificity(test$default, predicted)
-
-##[1] 0.9928401
-
-#calculate total misclassification error rate
-InformationValue::misClassError(test$default, predicted, threshold=optimal)
-
-##[1] 0.027
-
-# total misclassification error rate is 2.7%
-
-```
-
-
-
-
-Finally, we can put together ROC curves to visualize how well the models fit. The greater the AUC (area under the curve), the more accurately the model predicts outcomes.
-
-
-```{r roc curve}
+For the first regression
+```{r roc curve (logit1), echo = FALSE, results = "show"}
 #plot the ROC curve
-InformationValue::plotROC(test$default, predicted)
-
-
-# be sure to use the dark theme...
+InformationValue::plotROC(lajunta_logit1_test$Reprod, logit1_test_probs)
 
 ```
 
+The first regression seems to be a reasonably good fit, as measured by the ROC curve.
 
 
-
-
-
+The second curve? That's just a gigantic blue rectangle. The same is true of the ROC curve for the third regression. My intution at the outset of this section was correct. There was no error in the third regression.
 
 
 # Linear Discrminant Analysis
