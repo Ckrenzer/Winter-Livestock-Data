@@ -476,22 +476,66 @@ Yup.
 
 #### Variable Importance
 We can compute the importance of each predictor variable in the model by using the varImp() function from the caret package. Higher values indicate more importance. These values can help confirm the validity of p-values.
-```{r variable importance}
-caret::varImp(model)
+
+The first regression:
+```{r variable importance (logit1), echo = FALSE, results = "show"}
+# REGRESSION 1 (steer vs heifer)
+caret::varImp(logit1)
 
 
 ```
+
+The values are both pretty big, so both of the predictors seem to be 'carrying their weight.' This is consistent with our analysis thus far.
+
+What about the second regression?
+```{r variable importance (logit2), echo = FALSE, results = "show"}
+# REGRESSION 2 (bull vs cow)
+caret::varImp(logit2)
+
+
+```
+
+That is certainly consistent with the p-values. The third regression?
+```{r variable importance (logit3), echo = FALSE, results = "show"}
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+caret::varImp(logit3)
+
+
+```
+
+Quite low, quite low.
 
 #### Variance Inflation Factor
 We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.
 
-```{r VIF}
-#calculate VIF values for each predictor variable in our model
-car::vif(model)
+
+The first regression:
+```{r VIF (logit1), echo = FALSE, results = "show"}
+# REGRESSION 1 (steer vs heifer)
+car::vif(logit1)
+
+
+```
+What a relief! Multicollinearity, as measured by VIF, is not a big problem in the data.
+
+The second regression:
+```{r VIF (logit2), echo = FALSE, results = "show"}
+# REGRESSION 2 (bull vs cow)
+car::vif(logit2)
 
 
 ```
 
+Eh, it could be a problem, but they are still pretty close to five. I opt to willfully ignore the problem. Not shown here, but I already tried transforming the variables to no avail.
+
+The third regression:
+```{r VIF (logit3), echo = FALSE, results = "show"}
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+car::vif(logit3)
+
+
+```
+Good. These scores are not very worrying to me.
 
 #### Test Data
 Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a parent. We can calculate these probabilities with this code:
