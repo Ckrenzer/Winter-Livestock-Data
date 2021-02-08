@@ -575,7 +575,7 @@ Thankfully, mathematical wizards around the world have put together a magical wa
 
 Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.
 
-```{r evaluation, results = "show"}
+```{r evaluation (logit1), results = "show"}
 
 # converting "str" to 1's and "hfr" to 0's
 # This is needed for the optimalCutoff() call
@@ -643,6 +643,10 @@ Finally, we can put together ROC curves to visualize how well the models fit. Th
 
 For the first regression
 ```{r roc curve (logit1), echo = FALSE, results = "show"}
+# converting "str" to 1's and "hfr" to 0's AGAIN!
+# This is needed for the plotROC() call below
+lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == "str", 1, 0)
+
 #plot the ROC curve
 InformationValue::plotROC(lajunta_logit1_test$Reprod, logit1_test_probs)
 
