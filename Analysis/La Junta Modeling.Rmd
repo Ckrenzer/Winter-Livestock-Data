@@ -315,7 +315,7 @@ See the accompanying Shiny app (linked above) if you'd like to play with these l
 
 ###### The write-up uses data as of 2/6/2021. The code will still work, though some of my discussion may be inconsistent with the current data, as the csv gets updated over time.
 
-There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. In these regressions, I will be evaluating three models with binary outcomes:
+There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. Therefore, I will be evaluating three models with binary outcomes:
 
 1. Determining whether livestock is a steer or a heifer.
 2. Determining whether livestock is a bull or a cow.
