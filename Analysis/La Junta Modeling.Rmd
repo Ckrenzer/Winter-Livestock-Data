@@ -309,8 +309,6 @@ There are a few things I want to try with a logistic regression. Though logistic
 2. Determining whether livestock is a bull or a cow.
 3. Determining whether livestock is either a bull/cow or steer/heifer.
 
-I expect zero errors in the third test.
-
 ### Setup and Cleaning
 
 First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let's store data for the models:
@@ -347,7 +345,7 @@ The data will be split into testing and training sets with an 80/20 split. For t
 
 ```{r data splicing}
 
-# REGRESSION 1
+# REGRESSION 1 (steer vs heifer)
 # Setting the random number stream
 set.seed(2021)
 # Stratification for the first regression
@@ -360,7 +358,7 @@ lajunta_logit1_test <- rsample::testing(lajunta_logit1_split)
 
 
 
-# REGRESSION 2
+# REGRESSION 2 (bull vs cow)
 # Setting the random number stream again
 # (in the event R tries to pull some
 # funny business)
@@ -377,7 +375,7 @@ lajunta_logit2_test <- rsample::testing(lajunta_logit2_split)
 
 
 
-# REGRESSION 3
+# REGRESSION 3 (bull/cow vs. steer/heifer)
 # Setting the random number stream again
 # (in the event R tries to pull some
 # funny business)
@@ -397,27 +395,48 @@ lajunta_logit3_test <- rsample::testing(lajunta_logit3_split)
 The data is now ready for model assembly. I will be using the stats package's glm() function as the engine for the regressions.
 
 ```{r logistic model}
-
+# REGRESSION 1 (steer vs heifer)
+# Quantity is not very different between steers and heifers
 logit1 <- glm(data = lajunta_logit1_train,
               formula = Reprod ~ Weight + Price,
               family = "binomial")
 
-glm(data = lajunta_logit1_train,
-              formula = Reprod ~ Weight + Price,
+# REGRESSION 2 (bull vs cow)
+logit2 <- glm(data = lajunta_logit2_train,
+              formula = Reprod ~ Weight + Price + Quantity,
               family = "binomial")
 
-
-```
-
-We can see the model summaries below:
-
-```{r model summary}
-
-
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+logit3 <- glm(data = lajunta_logit3_train,
+              formula = Reprod ~ Weight + Price + Quantity,
+              family = "binomial")
 ```
 
 
+Here are the results from the first regression (steers vs heifers):
+```{r summary 1, echo = FALSE, results = "show"}
 
+summary(logit1)
+
+```
+
+From the second regression (bull vs cow):
+```{r summary 2, echo = FALSE, results = "show"}
+
+summary(logit2)
+
+```
+
+And the third regression (bull/cow vs. steer/heifer):
+```{r summary 3, echo = FALSE, results = "show"}
+
+summary(logit3)
+
+```
+
+The predictors in the first regression did a pretty good job. The predictors in the second and third regressions did an abysmal job! I didn't think having a p-value of 1 was even possible "out in the wild!" The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average increase of 0.207 in the log odds of being a steer.
+
+Well, let's continue on with our analysis.
 
 
 ### Evaluation
@@ -517,3 +536,12 @@ InformationValue::plotROC(test$default, predicted)
 # be sure to use the dark theme...
 
 ```
+
+
+
+
+
+
+
+
+# Linear Discrminant Analysis
