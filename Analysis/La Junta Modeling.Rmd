@@ -318,17 +318,21 @@ First things first. In the first regression, only data for steers and heifers wi
 ```{r data subsets}
 # Data for regression 1
 lajunta_logit1 <- lajunta %>% 
-  filter(Reprod %in% c("str", "hfr"))
+  filter(Reprod %in% c("str", "hfr")) %>% 
+  mutate(across(where(is.character), as.factor))
+
 
 # Data for regression 2
 lajunta_logit2 <- lajunta %>% 
-  filter(Reprod %in% c("bull", "cow"))
+  filter(Reprod %in% c("bull", "cow")) %>% 
+  mutate(across(where(is.character), as.factor))
 
 # Data for regression 3
 lajunta_logit3 <- lajunta %>% 
   mutate(Reprod = lajunta[["Reprod"]] %>% 
            str_replace_all("bull|cow", "par") %>% 
-           str_replace_all("str|hfr", "y"))
+           str_replace_all("str|hfr", "y")) %>% 
+  mutate(across(where(is.character), as.factor))
 
 ```
 
@@ -397,6 +401,11 @@ The data is now ready for model assembly. I will be using the stats package's gl
 logit1 <- glm(data = lajunta_logit1_train,
               formula = Reprod ~ Weight + Price,
               family = "binomial")
+
+glm(data = lajunta_logit1_train,
+              formula = Reprod ~ Weight + Price,
+              family = "binomial")
+
 
 ```
 
