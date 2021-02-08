@@ -369,9 +369,9 @@ lajunta_knn_test &lt;- rsample::testing(lajunta_knn_split)</code></pre>
 <pre class="r"><code># Determining the appropriate value of K
 optimal_k &lt;- floor(sqrt(nrow(lajunta_knn_train)))
 
-cat(&quot;Optimal value of K:&quot;, optimal_k)
-
-# To explain the variable names, know that the
+cat(&quot;Optimal value of K:&quot;, optimal_k)</code></pre>
+<pre><code>## Optimal value of K: 29</code></pre>
+<pre class="r"><code># To explain the variable names, know that the
 # value of optimal_k is 29 (and some change)
 # at the time of writing
 
@@ -419,7 +419,7 @@ for(i in 1:100){
 </div>
 <div id="linear-regression" class="section level1">
 <h1>Linear Regression</h1>
-<p>The data appears to follow a linear trend, so linear models seem very appropriate for this dataset. There is a linear model for each of the reproductive status. You can see the model’s parameters below:</p>
+<p>The data appears linear, so linear models seem appropriate for this dataset. There is a linear model for each reproductive status. You can see each model’s parameters below:</p>
 <pre class="r"><code># All results are from 2/6/2021...
 
 
@@ -435,16 +435,16 @@ heifer_fit &lt;- lm(data = lajunta,
                    Quantity + poly(Weight, degree = 2))
 
 
-# a 12th degree polynomial gives us an R-squared
-# of .54, but I think that is due to overfitting
+# a 12th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting
 cow_fit &lt;- lm(data = lajunta,
               subset = Reprod == &quot;cow&quot;,
               formula = Price ~ I(lubridate::mdy(Date)) +
                 poly(Weight, 3))
 
 
-# A 6th degree polynomial gives an R-squared of .87,
-# but I think that is due to overfitting...
+# a 6th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting...
 # Our sample is small so we want to keep the
 # number of predictors small
 bull_fit &lt;- lm(data = lajunta,
@@ -670,7 +670,7 @@ bull_fit &lt;- lm(data = lajunta,
 </div>
 <div id="setup-and-cleaning" class="section level3">
 <h3>Setup and Cleaning</h3>
-<p>First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as “y,” for “young,” while cows and bulls will be recoded as “par,” for “parents” (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let’s store data for the models:</p>
+<p>First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as “y,” for “young,” while cows and bulls will be recoded as “par,” for “parents” (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a good name for these categories). With this in mind, let’s store data for the models:</p>
 <pre class="r"><code># Data for regression 1
 lajunta_logit1 &lt;- lajunta %&gt;% 
   filter(Reprod %in% c(&quot;str&quot;, &quot;hfr&quot;)) %&gt;% 
@@ -826,7 +826,7 @@ logit3 &lt;- glm(data = lajunta_logit3_train,
 ## AIC: 8
 ## 
 ## Number of Fisher Scoring iterations: 25</code></pre>
-<p>The predictors in the first regression did a pretty good job. Judging by the p-values, the predictors in the second and third regressions did an abysmal job!</p>
+<p>The predictors in the first regression did a pretty good job and, judging by the p-values, the predictors in the second and third regressions did an abysmal job!</p>
 <p>The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average increase of 0.2068676 in the log odds of being a steer.</p>
 <p>Well, this is quite strange. Let’s continue on to the evaluation and see if we can figure out what’s happening.</p>
 </div>
@@ -919,7 +919,7 @@ logit3 &lt;- glm(data = lajunta_logit3_train,
 </div>
 <div id="variance-inflation-factor" class="section level4">
 <h4>Variance Inflation Factor</h4>
-<p>We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.</p>
+<p>We can calculate the VIF of each variable to see if multicollinearity is a problem. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed. Since there are so few variables, multicollinearity is unlikely to have much effect on the results.</p>
 <p>The first regression:</p>
 <pre><code>##   Weight    Price 
 ## 2.964014 2.964014</code></pre>
@@ -957,7 +957,7 @@ logit2_test_probs &lt;- predict(logit2,
 logit3_test_probs &lt;- predict(logit3,
                              lajunta_logit3_test,
                              type = &quot;response&quot;)</code></pre>
-<p>Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.</p>
+<p>Thankfully, mathematical wizards around the world have come together to develop a magical way of determining the optimal probability that maximizes accuracy of the model. The optimalCutoff() function from the InformationValue package finds this value.</p>
 <p>Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.</p>
 <pre class="r"><code># converting &quot;str&quot; to 1&#39;s and &quot;hfr&quot; to 0&#39;s
 # This is needed for the optimalCutoff() call
@@ -994,7 +994,7 @@ cat(logit1_optimal)</code></pre>
 </div>
 <div id="roc-curves" class="section level4">
 <h4>ROC Curves</h4>
-<p>We can also calculate the sensitivity (the “true positive rate”), specificity (the “true negative rate”), and the total number of misclassifications using the numbers from the confusion matrix. I’ll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won’t waste anyone’s precious time telling us that the error rate is 0 percent.</p>
+<p>We can also calculate the sensitivity (the “true positive rate”), specificity (the “true negative rate”), and the total number of misclassifications using the numbers from the confusion matrix. I’ll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won’t waste anyone’s precious time showing that the error rate is 0 percent.</p>
 <p>The misclassification error rate for the first regression at the optimal threshold:</p>
 <pre><code>## 0.1521</code></pre>
 <p>The data were classified incorrectly on the test data 15.21 percent of the time.</p>

@@ -145,7 +145,7 @@ lajunta_knn_test <- rsample::testing(lajunta_knn_split)
 
 To determine the appropriate number for K, I took the square root of the number of observations in the training set.
 
-```{r the model}
+```{r the model, results = "show"}
 # Determining the appropriate value of K
 optimal_k <- floor(sqrt(nrow(lajunta_knn_train)))
 
@@ -225,7 +225,7 @@ The ideal value was `r which(acc == max(acc))[1]`--very close to `r optimal_k`! 
 
 
 # Linear Regression
-The data appears to follow a linear trend, so linear models seem very appropriate for this dataset. There is a linear model for each of the reproductive status. You can see the model's parameters below:
+The data appears linear, so linear models seem appropriate for this dataset. There is a linear model for each reproductive status. You can see each model's parameters below:
 
 
 ```{r linear models}
@@ -244,16 +244,16 @@ heifer_fit <- lm(data = lajunta,
                    Quantity + poly(Weight, degree = 2))
 
 
-# a 12th degree polynomial gives us an R-squared
-# of .54, but I think that is due to overfitting
+# a 12th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting
 cow_fit <- lm(data = lajunta,
               subset = Reprod == "cow",
               formula = Price ~ I(lubridate::mdy(Date)) +
                 poly(Weight, 3))
 
 
-# A 6th degree polynomial gives an R-squared of .87,
-# but I think that is due to overfitting...
+# a 6th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting...
 # Our sample is small so we want to keep the
 # number of predictors small
 bull_fit <- lm(data = lajunta,
@@ -325,7 +325,7 @@ Due to enormous differences between cows/bulls and heifers/steers, I expect zero
 
 ### Setup and Cleaning
 
-First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let's store data for the models:
+First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a good name for these categories). With this in mind, let's store data for the models:
 
 ```{r data subsets}
 # Data for regression 1
@@ -451,7 +451,7 @@ summary(logit3)
 
 ```
 
-The predictors in the first regression did a pretty good job. Judging by the p-values, the predictors in the second and third regressions did an abysmal job!
+The predictors in the first regression did a pretty good job and, judging by the p-values, the predictors in the second and third regressions did an abysmal job!
 
 The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average `r ifelse(log_odds_price >= 0, "increase", "decrease")` of `r abs(log_odds_price)` in the log odds of being a steer.
 
@@ -521,7 +521,7 @@ knitr::kable(caret::varImp(logit3))
 Quite low, quite low.
 
 #### Variance Inflation Factor
-We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.
+We can calculate the VIF of each variable to see if multicollinearity is a problem. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed. Since there are so few variables, multicollinearity is unlikely to have much effect on the results.
 
 
 The first regression:
@@ -584,7 +584,7 @@ logit3_test_probs <- predict(logit3,
 ```
 
 
-Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.
+Thankfully, mathematical wizards around the world have come together to develop a magical way of determining the optimal probability that maximizes accuracy of the model. The optimalCutoff() function from the InformationValue package finds this value.
 
 Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.
 
@@ -617,9 +617,6 @@ lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == 1, "str", "hf
 
 InformationValue::confusionMatrix(lajunta_logit1_test$Reprod, logit1_test_probs)
 
-
-
-
 ```
 
 The zeroes are heifers and the ones are steers. As we can see, `r InformationValue::confusionMatrix(lajunta_logit1_test$Reprod, logit1_test_probs)$hfr[2]` heifers were incorrectly identified as steers and `r InformationValue::confusionMatrix(lajunta_logit1_test$Reprod, logit1_test_probs)$str[1]` steers were incorrectly identified as heifers. Cool!
@@ -644,7 +641,7 @@ Deterministic indeed.
 
 #### ROC Curves
 
-We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications using the numbers from the confusion matrix. I'll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won't waste anyone's precious time telling us that the error rate is 0 percent.
+We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications using the numbers from the confusion matrix. I'll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won't waste anyone's precious time showing that the error rate is 0 percent.
 
 The misclassification error rate for the first regression at the optimal threshold:
 ```{r misclassifications (logit1), echo = FALSE, results = "show"}
