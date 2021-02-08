@@ -573,24 +573,25 @@ logit3_test_probs <- predict(logit3,
 
 Thankfully, mathematical wizards around the world have put together a magical way of determining the optimal probability to maximize the probability of the model. The optimalCutoff() function from the InformationValue package does exactly that.
 
+Since regressions 2 and 3 are deterministic, this process will only be done on the first regression. One problem with this approach, I suppose you could argue, is that it risks overfitting the model. You can decide for yourself what you think.
+
 ```{r evaluation}
 
+# converting "str" to 1's and "hfr" to 0's
+lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == "str", 1, 0)
 
+# finding optimal cutoff probability to use to maximize accuracy
+logit1_optimal <- optimalCutoff(lajunta_logit1_test$Reprod,
+                                logit1_test_probs)[1]
 
-
-
-
-
-#convert defaults from "Yes" and "No" to 1's and 0's
-test$default <- ifelse(test$default=="Yes", 1, 0)
-
-#find optimal cutoff probability to use to maximize accuracy
-optimal <- InformationValue::optimalCutoff(test$default, predicted)[1]
-optimal
-
-##[1] 0.5451712
+# print the optimal probability
+logit1_optimal
 ```
 
+The optimal probability as of the time writing is *0.5399724*. With this new threshold (the old threshold was 0.5, remember), any livestock with a probability of being a steer at or above 0.5399724 will be classified as a steer, with the rest being classified as heifers.
+
+
+#### Confusion Matrix
 Using the optimal threshold, we can create a confusion matrix showing how the model performed on the test data.
 
 ```{r confusion matrix}
