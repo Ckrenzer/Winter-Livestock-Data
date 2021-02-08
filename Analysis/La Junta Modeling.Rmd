@@ -190,7 +190,7 @@ cat("Accuracy", accuracy(knn_29_mat)) # 87.2% as of 2/6/2021
 
 ### Step 7: Optimize
 
-We can always do better, no? Let's run this again in a loop with changing values of K. The K with the greatest accuracy should be used for all future predictions. Also, this value should be somewhat close to 29--if we get a number very far from 29, it is likely that we are overfitting the model. That pesky bias-variance trade-off...
+We can always do better, no? Let's run this again in a loop with changing values of K. The K with the greatest accuracy should be used for all future predictions. Also, this value should be somewhat close to `r optimal_k`--if we get a number very far from `r optimal_k`, it is likely that we are overfitting the model. That pesky bias-variance trade-off...
 
 ```{r optimization}
 # Since I am using a loop, best practice
