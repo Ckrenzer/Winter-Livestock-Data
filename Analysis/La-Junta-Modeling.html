@@ -935,7 +935,7 @@ logit3 &lt;- glm(data = lajunta_logit3_train,
 </div>
 <div id="test-data" class="section level4">
 <h4>Test Data</h4>
-<p>Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be steer, cow, or heifer/steer (a “y”), respectively. We can calculate these probabilities with this code:</p>
+<p>Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a steer, cow, or heifer/steer (a “y”), respectively (for regressions 1, 2, and 3). We can calculate these probabilities with this code:</p>
 <pre class="r"><code># REGRESSION 1 (steer vs heifer)
 # calculating the probability of being a steer
 # and storing the results in a vector

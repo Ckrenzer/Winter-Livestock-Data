@@ -557,7 +557,7 @@ Good. These scores are not very worrying to me.
 
 
 #### Test Data
-Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be steer, cow, or heifer/steer (a "y"), respectively. We can calculate these probabilities with this code:
+Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a steer, cow, or heifer/steer (a "y"), respectively (for regressions 1, 2, and 3). We can calculate these probabilities with this code:
 
 ```{r probabilities, results = "show"}
 # REGRESSION 1 (steer vs heifer)
