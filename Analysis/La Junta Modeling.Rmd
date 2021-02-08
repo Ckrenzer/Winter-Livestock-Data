@@ -395,21 +395,25 @@ The data is now ready for model assembly. I will be using the stats package's gl
 ```{r logistic model}
 
 logit1 <- glm(data = lajunta_logit1_train,
-              formula = Reprod ~ Weight + Price)
+              formula = Reprod ~ Weight + Price,
+              family = "binomial")
 
+```
 
+We can see the model summaries below:
 
-summary(glm(data = transit_cost_data, formula = `RR?` ~ Stations + `Real cost`*Length, family = "binomial"))
-
-
+```{r model summary}
 
 
 ```
 
 
 
+
+
 ### Evaluation
 
+#### McFadden's R-square
 We can use the pR2() function from the pscl package to compute McFadden's R-square value, which ranges from 0 to just under 1. Values close to 0 indicate the model as no predictive power. Values over 0.4 suggest the model is a good fit for the data.
 
 ```{r McFadden R-squared}
@@ -419,7 +423,7 @@ pscl::pR2(model)["McFadden"]
 ```
 
 
-
+#### Variable Importance
 We can compute the importance of each predictor variable in the model by using the varImp() function from the caret package. Higher values indicate more importance. These values can help confirm the validity of p-values.
 ```{r variable importance}
 caret::varImp(model)
@@ -427,6 +431,7 @@ caret::varImp(model)
 
 ```
 
+#### Variance Inflation Factor
 We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.
 ```{r VIF}
 #calculate VIF values for each predictor variable in our model
@@ -436,7 +441,7 @@ car::vif(model)
 ```
 
 
-
+#### Test Data
 Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a parent. We can calculate these probabilities with this code:
 
 ```{r probabilities}
@@ -452,8 +457,54 @@ Thankfully, mathematical wizards around the world have put together a magical wa
 test$default <- ifelse(test$default=="Yes", 1, 0)
 
 #find optimal cutoff probability to use to maximize accuracy
-optimal <- optimalCutoff(test$default, predicted)[1]
+optimal <- InformationValue::optimalCutoff(test$default, predicted)[1]
 optimal
 
 ##[1] 0.5451712
+```
+
+Using the optimal threshold, we can create a confusion matrix showing how the model performed on the test data.
+
+```{r confusion matrix}
+InformationValue::confusionMatrix(test$default, predicted)
+
+```
+ 
+ We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications.
+
+
+```{r}
+#calculate sensitivity
+InformationValue::sensitivity(test$default, predicted)
+
+##[1] 0.3786408
+
+#calculate specificity
+InformationValue::specificity(test$default, predicted)
+
+##[1] 0.9928401
+
+#calculate total misclassification error rate
+InformationValue::misClassError(test$default, predicted, threshold=optimal)
+
+##[1] 0.027
+
+# total misclassification error rate is 2.7%
+
+```
+
+
+
+#### ROC Curve
+
+Finally, we can put together ROC curves to visualize how well the models fit. The greater the AUC (area under the curve), the more accurately the model predicts outcomes.
+
+
+```{r roc curve}
+#plot the ROC curve
+InformationValue::plotROC(test$default, predicted)
+
+
+# be sure to use the dark theme...
+
 ```
