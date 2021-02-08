@@ -309,6 +309,8 @@ There are a few things I want to try with a logistic regression. Though logistic
 2. Determining whether livestock is a bull or a cow.
 3. Determining whether livestock is either a bull/cow or steer/heifer.
 
+Due to enormous differences between cows/bulls and heifers/steers, I expect zero error in the third regression.
+
 ### Setup and Cleaning
 
 First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a name for these categories). With this in mind, let's store data for the models:
@@ -434,9 +436,11 @@ summary(logit3)
 
 ```
 
-The predictors in the first regression did a pretty good job. The predictors in the second and third regressions did an abysmal job! I didn't think having a p-value of 1 was even possible "out in the wild!" The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average increase of 0.207 in the log odds of being a steer.
+The predictors in the first regression did a pretty good job. Judging by the p-values, the predictors in the second and third regressions did an abysmal job!
 
-Well, let's continue on with our analysis.
+The correct interpretation of the Price variable in the first regression, however, is that a one dollar increase in the price of the livestock is associated with an average increase of 0.207 in the log odds of being a steer.
+
+Well, this is quite strange. Let's continue on to the evaluation and see if we can figure out what's going on.
 
 
 ### Evaluation
@@ -444,11 +448,30 @@ Well, let's continue on with our analysis.
 #### McFadden's R-square
 We can use the pR2() function from the pscl package to compute McFadden's R-square value, which ranges from 0 to just under 1. Values close to 0 indicate the model as no predictive power. Values over 0.4 suggest the model is a good fit for the data.
 
-```{r McFadden R-squared}
 
-pscl::pR2(model)["McFadden"]
+Let's begin with the first regression:
+```{r McFadden R-squared (logit1), echo = FALSE, results = "show"}
+# REGRESSION 1 (steer vs heifer)
+pscl::pR2(logit1)["McFadden"]
 
 ```
+
+As expected, the predictors in the first regression do a pretty good job. Let's see the McFadden statistic from the second regression:
+```{r McFadden R-squared (logit2), echo = FALSE, results = "show"}
+# REGRESSION 2 (bull vs cow)
+pscl::pR2(logit2)["McFadden"]
+
+```
+
+
+Ah! I see now. The data fits these points so well that the model is deterministic! I expect this to be the case for the third regression as well:
+```{r McFadden R-squared (logit3), echo = FALSE, results = "show"}
+# REGRESSSION 3 (bull/cow vs. steer/heifer)
+pscl::pR2(logit3)["McFadden"]
+
+```
+
+Yup.
 
 
 #### Variable Importance
@@ -461,6 +484,7 @@ caret::varImp(model)
 
 #### Variance Inflation Factor
 We can calculate the VIF of each variable to see if multicollinearity is a problem. Since there are so few variables, multicollinearity is unlikely to have much effect on the results. VIF scores greater than 5 indicate multicollinearity is an issue that needs to be addressed.
+
 ```{r VIF}
 #calculate VIF values for each predictor variable in our model
 car::vif(model)
