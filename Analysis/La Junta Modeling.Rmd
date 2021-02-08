@@ -482,7 +482,7 @@ We can compute the importance of each predictor variable in the model by using t
 The first regression:
 ```{r variable importance (logit1), echo = FALSE, results = "show"}
 # REGRESSION 1 (steer vs heifer)
-caret::varImp(logit1)
+knitr::kable(caret::varImp(logit1))
 
 
 ```
@@ -492,7 +492,7 @@ The values are both pretty big, so both of the predictors seem to be 'carrying t
 What about the second regression?
 ```{r variable importance (logit2), echo = FALSE, results = "show"}
 # REGRESSION 2 (bull vs cow)
-caret::varImp(logit2)
+knitr::kable(caret::varImp(logit2))
 
 
 ```
@@ -500,7 +500,7 @@ caret::varImp(logit2)
 That is certainly consistent with the p-values. The third regression?
 ```{r variable importance (logit3), echo = FALSE, results = "show"}
 # REGRESSSION 3 (bull/cow vs. steer/heifer)
-caret::varImp(logit3)
+knitr::kable(caret::varImp(logit3))
 
 
 ```
@@ -587,7 +587,7 @@ logit1_optimal <- optimalCutoff(lajunta_logit1_test$Reprod,
                                 logit1_test_probs)[1]
 
 # print the optimal probability
-logit1_optimal
+cat(logit1_optimal)
 ```
 
 The optimal probability as of the time writing is *0.5399724*. With this new threshold (the old threshold was 0.5, remember), any livestock with a probability of being a steer at or above 0.5399724 will be classified as a steer, with the rest being classified as heifers.
@@ -630,12 +630,16 @@ Deterministic indeed.
 
 We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications.
 
+Sensitivity for the first regression:
+```{r sensitivity (logit1), echo = FALSE, results = "show"}
+#calculate sensitivity
+cat(InformationValue::sensitivity(lajunta_logit1_test$Reprod, logit1_test_probs))
+
+
+```
+The data were classified correctly in the test data `cat(InformationValue::sensitivity(lajunta_logit1_test$Reprod, logit1_test_probs))` of the time.
 
 ```{r}
-#calculate sensitivity
-InformationValue::sensitivity(test$default, predicted)
-
-##[1] 0.3786408
 
 #calculate specificity
 InformationValue::specificity(test$default, predicted)
