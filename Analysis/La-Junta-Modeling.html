@@ -697,8 +697,8 @@ lajunta_logit3 &lt;- lajunta %&gt;%
   mutate(across(where(is.character), as.factor))</code></pre>
 <p>Now that we have everything in a tibble, we are ready to split up the data.</p>
 </div>
-<div id="split-into-training" class="section level3">
-<h3>Split into training</h3>
+<div id="split-into-training-and-test-sets" class="section level3">
+<h3>Split into Training and Test Sets</h3>
 <p>The data will be split into testing and training sets with an 80/20 split. For the same reasons used in the KNN classification section, stratified sampling will be used.</p>
 <pre class="r"><code># REGRESSION 1 (steer vs heifer)
 # Setting the random number stream
