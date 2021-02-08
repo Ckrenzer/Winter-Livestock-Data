@@ -20,3 +20,5 @@ Finally, there is a shiny app you can run to see view analysis of the data, and 
 
 ### UPDATE 2/7/2021 ----------------------------------------------
 What was once a simple project in web scraping has turned into my go-to dataset for different statistical techniques and a base to build my programming portfolio.
+
+This repository is the first search result on Duck Duck Go for "winter livestock data"!!!
