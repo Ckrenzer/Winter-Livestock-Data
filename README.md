@@ -1,5 +1,5 @@
 # Winter-Livestock-Data
-Collects data from Winter Livestock La Junta Sale Tuesday reports each week and organizes them into a csv.
+Collects data from Winter Livestock La Junta Sale Tuesday reports each week and organizes them into a csv. Updated Weekly.
 
 This is sales data.
 
