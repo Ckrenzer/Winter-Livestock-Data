@@ -56,7 +56,7 @@ To familiarize you with the dataset, let's take a quick peek:
 
 ```{r the dataset, echo = FALSE, results = "show"}
 knitr::kable(lajunta %>% 
-               select(-Buyer) %>% 
+               dplyr::select(-Buyer) %>% 
                slice(1:8))
 ```
 
@@ -92,7 +92,7 @@ There are only two predictors in this model, weight and price.
 ```{r prepare}
 # Fortunately, KNN is well-suited for just a few predictors
 lajunta_knn <- lajunta %>% 
-  select(Weight, Price, Reprod)
+  dplyr::select(Weight, Price, Reprod)
 
 # storing the string vector as a factor
 lajunta_knn$Reprod <- as.factor(lajunta_knn$Reprod)
@@ -743,7 +743,9 @@ There are three elements of a list from this prediction--the predicted class, po
 
 Let's see the first few posterior probabilities in the test set:
 ```{r lda posterior probs table, echo = FALSE, results = "show"}
-knitr::kable(head(lajunta_lda_probs$posterior))
+knitr::kable(lajunta_lda_probs$posterior %>% 
+               as_tibble() %>% 
+               slice(1:8))
 ```
 
 I imagine that I am losing you by this point, because the outcome for these classification problems all approximate the same thing (that the graph in the introduction shows plain as day). I think it is good to use several approaches to confirm results, however, because that only strengthens our understanding of the interaction between the variables.
@@ -755,19 +757,26 @@ The question you are likely most interested wondering, "Does LDA perform better 
 
 ```{r lda accuracy, eval = FALSE}
 # For you non-R programmers out there,
-# mathematical functions translate
+# R mathematical functions translate
 # TRUE's into 1's and FALSE's into 0's.
 # In other words, sum(TRUE, TRUE, FALSE) equals 2.
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
 ```
 
+Drum roll please! The model correctly identified the reproductive status `r mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
+
+Often times, the people we need to convey these insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct explanation." We will have a much easier time explaining KNN than we would describing dimensionality reduction.
 
 #### Visualization of Separation
 
 ```{r lda viz, results = "show"}
+
+
+
+
 #define data to plot
 lda_plot <- cbind(train, predict(model)$x)
-
+?cbind
 #create plot
 ggplot(lda_plot, aes(LD1, LD2)) +
   geom_point(aes(color = Species))
