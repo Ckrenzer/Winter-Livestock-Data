@@ -10,7 +10,7 @@ output:
 
 The Shiny app will be self-contained. Rather than cluttering the Shiny app, this Rmarkdown document has been created for further exploration into the data.
 
-Some findings could become untrue over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
+Some findings could invert over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
@@ -42,6 +42,9 @@ pacman::p_load(pscl, caret, car,
 
 # LDA Packages
 pacman::p_load(MASS)
+
+# SVM Packages
+pacman::p_load(e1071)
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -789,6 +792,56 @@ ggplot(lajunta_lda_plot, aes(LD1, LD2)) +
 We could make similar plots using LD3 as well, but LD1 and LD2 are by far the most important linear discriminants. There is no real justification for including LD3.
 
 For those of you looking to improve this model, try transforming some of the predictors!
+
+
+
+# Support Vector Machines (SVM)
+I am in the mood to keep going with these classification models. I want to get a model that predicts with 95 percent accuracy, but we haven't met that threshold with any of the preceding models. In this model, I will be classifying only steers and heifers.
+
+The question this model answers: "is the livestock a steer?"
+
+
+
+
+### Packages
+
+
+
+
+
+### Sampling
+
+
+
+
+
+### Computing Support Vectors
+
+
+
+
+### Evaluation
+
+
+
+#### Hyperplane Plot
+
+
+
+
+
+#### Test Set
+In this section, you will predict the new values on the test set, then compare them to the actual, giving you the model's accuracy.
+
+Then, you will summarize findings and compare it to the other models in this file.
+
+
+
+
+
+
+
+
 
 # Thank You!
 
