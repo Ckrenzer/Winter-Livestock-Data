@@ -37,6 +37,8 @@ pacman::p_load(rsample, class)
 pacman::p_load(pscl, caret, car,
                InformationValue)
 
+# LDA Packages
+pacman::p_load(MASS)
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -670,3 +672,32 @@ The first regression seems to be a reasonably good fit, as measured by the ROC c
 
 
 The second curve? That's just a gigantic blue rectangle. The same is true of the ROC curve for the third regression. My intuition at the outset of this section was correct. There was no error in the third regression.
+
+
+
+
+# Linear Discriminant Analysis (LDA)
+
+While we are in the neighborhood of classification models, why don't we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer.
+
+### Packages
+The engine for the LDA model is the one provided in the MASS package.
+
+### Scale Data
+Since one of the key assumptions of LDA is that each predictor has the same variance, they should all be scaled to give the data a mean of zero and a standard deviation of one. We can do this with a mutate(across()) call:
+```{r scaling}
+lajunta_LDA <- lajunta %>% 
+  mutate(across(where(is.numeric), scale))
+
+```
+
+And we can confirm that the standard deviation is, indeed, one after transformation:
+```{r scale confimation}
+knitr::kable(lajunta_LDA %>% 
+  summarize(across(where(is.numeric), sd)))
+```
+
+Excellent. We are now ready to separate into training and test samples.
+
+
+### Samples
