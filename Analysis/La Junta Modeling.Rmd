@@ -738,11 +738,28 @@ Following our prepare-split-train process, we have now come to the step where we
 lajunta_lda_probs <- predict(lajunta_lda_fit,
                              lajunta_lda_test)
 ```
-And let's see the first few posterior probabilities in the test set:
-```{r lda posterior probs table, echo = FALSE, results = "show"}
+There are three elements of a list from this prediction--the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow, with these four probabilities summing up to 1), and the linear discriminants.
 
+
+Let's see the first few posterior probabilities in the test set:
+```{r lda posterior probs table, echo = FALSE, results = "show"}
+knitr::kable(head(lajunta_lda_probs$posterior))
 ```
 
+I imagine that I am losing you by this point, because the outcome for these classification problems all approximate the same thing (that the graph in the introduction shows plain as day). I think it is good to use several approaches to confirm results, however, because that only strengthens our understanding of the interaction between the variables.
+
+With that being said, observation of the above table once again confirms that the difference between heifers and steers is far more ambiguous than differences between any other cattle reproductive statuses.
+
+
+The question you are likely most interested wondering, "Does LDA perform better than KNN or any of the logistic regressions," can be found by comparing the classifications of the predictions to the actual observations in the test set.
+
+```{r lda accuracy, eval = FALSE}
+# For you non-R programmers out there,
+# mathematical functions translate
+# TRUE's into 1's and FALSE's into 0's.
+# In other words, sum(TRUE, TRUE, FALSE) equals 2.
+mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
+```
 
 
 #### Visualization of Separation
