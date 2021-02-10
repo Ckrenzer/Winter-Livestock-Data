@@ -714,13 +714,13 @@ Due to imbalances in the number of observations in reproductive status of the li
 # Setting the random number stream
 set.seed(2021)
 # Stratification for the
-lajunta_lda_split <- rsample::initial_split(lajunta_LDA,
+lajunta_lda_split <- rsample::initial_split(lajunta_lda,
                                                prob = 0.80,
                                                strata = Reprod)
 
 # separating the data into two new data frames
-lajunta_lda_train <- rsample::training(lajunta_knn_split)
-lajunta_lda_test <- rsample::testing(lajunta_knn_split)
+lajunta_lda_train <- rsample::training(lajunta_lda_split)
+lajunta_lda_test <- rsample::testing(lajunta_lda_split)
 ```
 
 
@@ -728,9 +728,38 @@ lajunta_lda_test <- rsample::testing(lajunta_knn_split)
 ### Build Model
 Excellent. Now, let's fit the model and see the results:
 ```{r lda model, results = "show"}
-lajunta_LDA_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity + Date,
+lajunta_LDA_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity,
                        data = lajunta_lda_train)
 
 lajunta_LDA_fit
+```
+
+### Interpretation
+Let's break this output down.
+
+#### Prior Probabilities of Groups
+These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up 2.3% of the observations in the training dataset.
+
+#### Group Means
+The group means are the mean values for each predictor in the model, broken down by the possible outcomes for the dependent variable.
+
+
+
+
+
+
+
+### Evaluation
+
+
+#### Visualization of Separation
+
+```{r lda viz, results = "show"}
+#define data to plot
+lda_plot <- cbind(train, predict(model)$x)
+
+#create plot
+ggplot(lda_plot, aes(LD1, LD2)) +
+  geom_point(aes(color = Species))
 ```
 
