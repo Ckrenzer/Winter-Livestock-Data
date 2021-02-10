@@ -710,7 +710,7 @@ Excellent. We are now ready to separate into training and test samples.
 ### Samples
 
 Due to imbalances in the number of observations in reproductive status of the livestock, stratified sampling will (again) be used. Okay, let's make the 80/20 split:
-```{r}
+```{r lda sampling}
 # Setting the random number stream
 set.seed(2021)
 # Stratification for the
@@ -726,9 +726,11 @@ lajunta_lda_test <- rsample::testing(lajunta_knn_split)
 
 
 ### Build Model
-Excellent. Now, let's fit the model:
-```{r}
-lajunta_LDA_fit <- lda(Reprod ~ Price + Weight + Quantity + Date,
+Excellent. Now, let's fit the model and see the results:
+```{r lda model, results = "show"}
+lajunta_LDA_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity + Date,
                        data = lajunta_lda_train)
+
+lajunta_LDA_fit
 ```
 
