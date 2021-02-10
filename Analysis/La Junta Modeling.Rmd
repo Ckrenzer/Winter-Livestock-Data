@@ -31,7 +31,8 @@ if(!require(pacman)) install.packages("pacman")
 # General Packages
 pacman::p_load(dplyr, readr, ggplot2,
                patchwork, lubridate,
-               knitr, broom, stringr)
+               knitr, broom, stringr,
+               plotly)
 
 # KNN Packages
 pacman::p_load(rsample, class)
@@ -67,7 +68,7 @@ knitr::kable(lajunta %>%
 
 You can see that we have data for the date of the sale, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include that information in this table. It hasn't proved very useful anyway.
 
-From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently say that the "Type" column is *utterly* useless. That's a story in and of itself, I suppose. The most telling graph I'll provide for you is this one:
+From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently say that the "Type" column is *utterly* useless. That's a story in and of itself, I suppose. The simplest graph that tells the bulk of what we need to know is this one:
 
 ```{r graph, echo = FALSE, results = "show"}
 lajunta %>% 
@@ -796,15 +797,26 @@ For those of you looking to improve this model, try transforming some of the pre
 
 
 # Support Vector Machines (SVM)
-I am in the mood to keep going with these classification models. I want to get a model that predicts with 95 percent accuracy, but we haven't met that threshold with any of the preceding models. In this model, I will be classifying only steers and heifers.
+I am in the mood to keep going with these classification models. I want to get a model that predicts with 95 percent accuracy, but we haven't met that threshold with any of the preceding models. This model is similar to the logistic regression model, but instead of filtering data down to just steers and heifers, it includes cows and bulls as well. Only Weight and Price will be used 
 
 The question this model answers: "is the livestock a steer?"
 
 
 
+#### The Hyperplane
+The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (think of margins as the "buffer zone" between the points and the plane--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below.
+
+```{r 3D viz, echo = FALSE, results = "show"}
+plotly::plot_ly(x = lajunta$Weight,
+                y = lajunta$Price,
+                z = lajunta$Quantity,
+                color = lajunta$Reprod) %>% 
+  layout(title = "Livestock by Weight (x), Price (y), and Quantity (z)")
+```
+
 
 ### Packages
-
+The e1071 package will be the engine used to implement the algorithm.
 
 
 
@@ -822,9 +834,6 @@ The question this model answers: "is the livestock a steer?"
 
 ### Evaluation
 
-
-
-#### Hyperplane Plot
 
 
 
