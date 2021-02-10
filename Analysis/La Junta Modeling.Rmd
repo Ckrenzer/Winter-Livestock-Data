@@ -694,7 +694,6 @@ Due to imbalances in the number of observations in reproductive status of the li
 ```{r lda sampling}
 # Setting the random number stream
 set.seed(2021)
-# Stratification for the
 lajunta_lda_split <- rsample::initial_split(lajunta_lda,
                                                prob = 0.80,
                                                strata = Reprod)
@@ -818,13 +817,34 @@ plotly::plot_ly(x = lajunta$Weight,
 
 
 
+### Cleaning
+Character variables will be transformed into factors, and the logical column, "is_Steer," will be added to the data frame.
+
+```{r svm cleaning, echo = TRUE}
+lajunta_svm <- lajunta %>% 
+  mutate(across(where(is.character), as.factor),
+         "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE))
+```
 
 
 
 ### Sampling
+Alright, let's make the split:
 
+```{r svm sampling}
+# Setting the random number stream
+set.seed(2021)
+# transforming character vectors into factors
+# and adding a boolean column 
+lajunta_svm_split <- initial_split(lajunta_svm,
+                                   prob = 0.80,
+                                   strata = Reprod)
 
+# separating the data into two new data frames
+lajunta_svm_train <- training(lajunta_svm_split)
+lajunta_svm_test <- testing(lajunta_svm_split)
 
+```
 
 
 ### Computing Support Vectors
