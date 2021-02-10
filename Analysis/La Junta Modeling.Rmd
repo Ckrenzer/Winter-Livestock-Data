@@ -10,6 +10,8 @@ output:
 
 The Shiny app will be self-contained. Rather than cluttering the Shiny app, this Rmarkdown document has been created for further exploration into the data.
 
+Some findings could become untrue over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
@@ -621,7 +623,7 @@ Deterministic indeed.
 
 #### ROC Curves
 
-We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications using the numbers from the confusion matrix. I'll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won't waste anyone's precious time showing that the error rate is 0 percent.
+We can also calculate the sensitivity (the "true positive rate"), specificity (the "true negative rate"), and the total number of misclassifications using the numbers from the confusion matrix. I'll spare you the details on the sensitivity and specificity and cut straight to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won't waste anyone's precious time showing that the error rate is 0 percent in these two models.
 
 The misclassification error rate for the first regression at the optimal threshold:
 
@@ -654,7 +656,7 @@ The second curve? That's just a gigantic blue rectangle. The same is true of the
 
 # Linear Discriminant Analysis (LDA)
 
-While we are in the neighborhood of classification models, why don't we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer. Also, as you may have guessed, the predictors are price, weight, quantity, and date. Type has too little predictive power to bother including.
+While we are in the neighborhood of classification models, why don't we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer. Also, as you may have guessed, the predictors are price, weight, and quantity. Date is a strange variable, and Type has too little predictive power to bother including.
 
 ### Packages
 
@@ -671,7 +673,7 @@ lajunta_lda <- lajunta %>%
 
 ```
 
-And we can confirm that the standard deviation is, indeed, one after transformation:
+And we can confirm that the standard deviation is, indeed, 1 after transformation:
 
 ```{r scale confimation, results = "show"}
 lajunta_lda %>% 
@@ -715,7 +717,7 @@ Let's break this output down bit by bit...
 
 #### Prior Probabilities of Groups
 
-These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up `r round(lajunta_lda_fit$prior[[1]], 3)` percent of the observations in the training dataset.
+These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up `r 100 * round(lajunta_lda_fit$prior[[1]], 3)` percent of the observations in the training dataset.
 
 #### Group Means
 
@@ -740,7 +742,7 @@ lajunta_lda_probs <- predict(lajunta_lda_fit,
                              lajunta_lda_test)
 ```
 
-There are three elements of a list from this prediction--the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow, with these four probabilities summing up to 1), and the linear discriminants.
+There are three elements of a list from this prediction--the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow--with these four probabilities summing up to 1), and the linear discriminants.
 
 Let's see the first few posterior probabilities in the test set:
 
@@ -760,13 +762,13 @@ The question I think you are likely most interested in, "Does LDA perform better
 # For you non-R programmers out there,
 # R mathematical functions translate
 # TRUE's into 1's and FALSE's into 0's.
-# In other words, sum(TRUE, TRUE, FALSE) equals 2.
+# In other words, sum(TRUE, TRUE, FALSE) returns 2.
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
 ```
 
 Drum roll please! The model correctly identified the true reproductive status `r mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
 
-Often times, the people we need to convey these insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct." Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a "good-enough" job, choose the simpler method.
+Often times, the people we need to convey insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct." Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a "good-enough" job, choose the simpler method.
 
 #### Visualization of Separation
 

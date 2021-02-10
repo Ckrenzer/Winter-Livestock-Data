@@ -206,6 +206,7 @@ summary {
 </div>
 
 <p>The Shiny app will be self-contained. Rather than cluttering the Shiny app, this Rmarkdown document has been created for further exploration into the data.</p>
+<p>Some findings could become untrue over time. I tried to make write-up as flexible as possible with inline code chunks, but–as more data gets added–the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the “Analysis” folder.</p>
 <div id="the-dataset" class="section level1">
 <h1>The Dataset</h1>
 <p>The La Junta dataset is quickly becoming one of my favorites. I suppose there is something to be said about collecting, cleaning, and analyzing data all by yourself.</p>
@@ -999,7 +1000,7 @@ cat(logit1_optimal)</code></pre>
 </div>
 <div id="roc-curves" class="section level4">
 <h4>ROC Curves</h4>
-<p>We can also calculate the sensitivity (the “true positive rate”), specificity (the “true negative rate”), and the total number of misclassifications using the numbers from the confusion matrix. I’ll spare you the details on the sensitivity and specificity and just cut to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won’t waste anyone’s precious time showing that the error rate is 0 percent.</p>
+<p>We can also calculate the sensitivity (the “true positive rate”), specificity (the “true negative rate”), and the total number of misclassifications using the numbers from the confusion matrix. I’ll spare you the details on the sensitivity and specificity and cut straight to the error rate. Further, since we already know regressions 2 and 3 are deterministic, I won’t waste anyone’s precious time showing that the error rate is 0 percent in these two models.</p>
 <p>The misclassification error rate for the first regression at the optimal threshold:</p>
 <pre><code>## 0.1521</code></pre>
 <p>The data were classified incorrectly on the test data 15.21 percent of the time.</p>
@@ -1013,7 +1014,7 @@ cat(logit1_optimal)</code></pre>
 </div>
 <div id="linear-discriminant-analysis-lda" class="section level1">
 <h1>Linear Discriminant Analysis (LDA)</h1>
-<p>While we are in the neighborhood of classification models, why don’t we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer. Also, as you may have guessed, the predictors are price, weight, quantity, and date. Type has too little predictive power to bother including.</p>
+<p>While we are in the neighborhood of classification models, why don’t we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer. Also, as you may have guessed, the predictors are price, weight, and quantity. Date is a strange variable, and Type has too little predictive power to bother including.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
 <p>The engine for the LDA model is the one provided in the MASS package. As usual, the sampling will be done with the rsample package–in the same manner as the previous classifications.</p>
@@ -1024,7 +1025,7 @@ cat(logit1_optimal)</code></pre>
 <pre class="r"><code>lajunta_lda &lt;- lajunta %&gt;% 
   mutate(across(where(is.numeric), scale),
          Date = lubridate::mdy(Date))</code></pre>
-<p>And we can confirm that the standard deviation is, indeed, one after transformation:</p>
+<p>And we can confirm that the standard deviation is, indeed, 1 after transformation:</p>
 <pre class="r"><code>lajunta_lda %&gt;% 
   summarize(across(where(is.numeric), sd)) %&gt;% 
   unlist()</code></pre>
@@ -1082,7 +1083,7 @@ lajunta_lda_fit</code></pre>
 <p>Let’s break this output down bit by bit…</p>
 <div id="prior-probabilities-of-groups" class="section level4">
 <h4>Prior Probabilities of Groups</h4>
-<p>These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up 0.023 percent of the observations in the training dataset.</p>
+<p>These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up 2.3 percent of the observations in the training dataset.</p>
 </div>
 <div id="group-means" class="section level4">
 <h4>Group Means</h4>
@@ -1103,7 +1104,7 @@ lajunta_lda_fit</code></pre>
 <p>Following our prepare-split-train process, we have now come to the step where we analyze the test data.</p>
 <pre class="r"><code>lajunta_lda_probs &lt;- predict(lajunta_lda_fit,
                              lajunta_lda_test)</code></pre>
-<p>There are three elements of a list from this prediction–the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow, with these four probabilities summing up to 1), and the linear discriminants.</p>
+<p>There are three elements of a list from this prediction–the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow–with these four probabilities summing up to 1), and the linear discriminants.</p>
 <p>Let’s see the first few posterior probabilities in the test set:</p>
 <table>
 <thead>
@@ -1171,10 +1172,10 @@ lajunta_lda_fit</code></pre>
 <pre class="r"><code># For you non-R programmers out there,
 # R mathematical functions translate
 # TRUE&#39;s into 1&#39;s and FALSE&#39;s into 0&#39;s.
-# In other words, sum(TRUE, TRUE, FALSE) equals 2.
+# In other words, sum(TRUE, TRUE, FALSE) returns 2.
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)</code></pre>
 <p>Drum roll please! The model correctly identified the true reproductive status 0.8477509 percent of the time! Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future! Regardless, they are both reasonably close to one another, so KNN is probably a better choice.</p>
-<p>Often times, the people we need to convey these insights to have no background in statistics; Occam’s Razor means something approaching, “the simpler explanation is usually the most correct.” Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a “good-enough” job, choose the simpler method.</p>
+<p>Often times, the people we need to convey insights to have no background in statistics; Occam’s Razor means something approaching, “the simpler explanation is usually the most correct.” Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a “good-enough” job, choose the simpler method.</p>
 <div id="visualization-of-separation" class="section level4">
 <h4>Visualization of Separation</h4>
 <p>Finally, we can visualize how well LDA separated the different reproductive statuses of cattle:</p>
