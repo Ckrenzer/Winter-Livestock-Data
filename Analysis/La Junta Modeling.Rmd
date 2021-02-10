@@ -676,24 +676,31 @@ The second curve? That's just a gigantic blue rectangle. The same is true of the
 
 
 
+
+
+
+
+
+
 # Linear Discriminant Analysis (LDA)
 
-While we are in the neighborhood of classification models, why don't we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer.
+While we are in the neighborhood of classification models, why don't we give LDA a go? As we all know by this point, there are four categories to be interested in classifying: bull, cow, steer, and heifer. Also, as you may have guessed, the predictors are price, weight, quantity, and date. Type has too little predictive power to bother including.
 
 ### Packages
-The engine for the LDA model is the one provided in the MASS package.
+The engine for the LDA model is the one provided in the MASS package. As usual, the sampling will be done with the rsample package--in the same manner as the previous classifications.
 
 ### Scale Data
 Since one of the key assumptions of LDA is that each predictor has the same variance, they should all be scaled to give the data a mean of zero and a standard deviation of one. We can do this with a mutate(across()) call:
 ```{r scaling}
-lajunta_LDA <- lajunta %>% 
-  mutate(across(where(is.numeric), scale))
+lajunta_lda <- lajunta %>% 
+  mutate(across(where(is.numeric), scale),
+         Date = lubridate::mdy(Date))
 
 ```
 
 And we can confirm that the standard deviation is, indeed, one after transformation:
 ```{r scale confimation}
-knitr::kable(lajunta_LDA %>% 
+knitr::kable(lajunta_lda %>% 
   summarize(across(where(is.numeric), sd)))
 ```
 
@@ -701,3 +708,27 @@ Excellent. We are now ready to separate into training and test samples.
 
 
 ### Samples
+
+Due to imbalances in the number of observations in reproductive status of the livestock, stratified sampling will (again) be used. Okay, let's make the 80/20 split:
+```{r}
+# Setting the random number stream
+set.seed(2021)
+# Stratification for the
+lajunta_lda_split <- rsample::initial_split(lajunta_LDA,
+                                               prob = 0.80,
+                                               strata = Reprod)
+
+# separating the data into two new data frames
+lajunta_lda_train <- rsample::training(lajunta_knn_split)
+lajunta_lda_test <- rsample::testing(lajunta_knn_split)
+```
+
+
+
+### Build Model
+Excellent. Now, let's fit the model:
+```{r}
+lajunta_LDA_fit <- lda(Reprod ~ Price + Weight + Quantity + Date,
+                       data = lajunta_lda_train)
+```
+
