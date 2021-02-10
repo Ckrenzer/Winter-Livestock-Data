@@ -673,9 +673,10 @@ lajunta_lda <- lajunta %>%
 
 And we can confirm that the standard deviation is, indeed, one after transformation:
 
-```{r scale confimation}
-knitr::kable(lajunta_lda %>% 
-  summarize(across(where(is.numeric), sd)))
+```{r scale confimation, results = "show"}
+lajunta_lda %>% 
+  summarize(across(where(is.numeric), sd)) %>% 
+  unlist()
 ```
 
 Excellent. We are now ready to separate into training and test samples.
@@ -699,7 +700,7 @@ lajunta_lda_test <- rsample::testing(lajunta_lda_split)
 
 ### Build Model
 
-Excellent. Now, let's fit the model and see the results:
+Now, let's fit the model and see the results:
 
 ```{r lda model, results = "show"}
 lajunta_lda_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity,
@@ -710,11 +711,11 @@ lajunta_lda_fit
 
 ### Interpretation
 
-Let's break this output down bit by bit. Usually, it is good to think of LDA as a dimensionality reduction tool in addition to a predictive one.
+Let's break this output down bit by bit...
 
 #### Prior Probabilities of Groups
 
-These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up 2.3% of the observations in the training dataset.
+These represent the proportions of each reproductive status of the livestock in the training set. Bulls, for example, make up `r round(lajunta_lda_fit$prior[[1]], 3)` percent of the observations in the training dataset.
 
 #### Group Means
 
@@ -724,11 +725,11 @@ The group means are the mean values for each predictor in the model, broken down
 
 These coefficients represent the linear combination of predictor variables that are used to form the decision rule of the model. For example,
 
-LD1 = (`r lajunta_lda_fit$scaling[1, 1]`)(Price) `r ifelse(lajunta_lda_fit$scaling[2, 1] > 0, "+", "-")` (`r abs(lajunta_lda_fit$scaling[2, 1])`)(Weight) `r ifelse(lajunta_lda_fit$scaling[3, 1] > 0, "+", "-")` (`r abs(lajunta_lda_fit$scaling[3, 1])`)(Quantity)
+LD1 = `r ifelse(lajunta_lda_fit$scaling[1, 1] >= 0, "", "-")`(`r abs(lajunta_lda_fit$scaling[1, 1])`)(Price) `r ifelse(lajunta_lda_fit$scaling[2, 1] > 0, "+", "-")` (`r abs(lajunta_lda_fit$scaling[2, 1])`)(Weight) `r ifelse(lajunta_lda_fit$scaling[3, 1] > 0, "+", "-")` (`r abs(lajunta_lda_fit$scaling[3, 1])`)(Quantity)
 
 #### Proportion of Trace
 
-Displays the percentage separation achieved by each linear discriminant function.
+Displays the percentage separation achieved by each linear discriminant function (Ex. if LD1 was 0.73, we would say that "LD1 is responsible for 73% of the separation between the groups").
 
 ### Evaluation
 
@@ -738,10 +739,11 @@ Following our prepare-split-train process, we have now come to the step where we
 lajunta_lda_probs <- predict(lajunta_lda_fit,
                              lajunta_lda_test)
 ```
+
 There are three elements of a list from this prediction--the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow, with these four probabilities summing up to 1), and the linear discriminants.
 
-
 Let's see the first few posterior probabilities in the test set:
+
 ```{r lda posterior probs table, echo = FALSE, results = "show"}
 knitr::kable(lajunta_lda_probs$posterior %>% 
                as_tibble() %>% 
@@ -752,8 +754,7 @@ I imagine that I am losing you by this point, because the outcome for these clas
 
 With that being said, observation of the above table once again confirms that the difference between heifers and steers is far more ambiguous than differences between any other cattle reproductive statuses.
 
-
-The question you are likely most interested wondering, "Does LDA perform better than KNN or any of the logistic regressions," can be found by comparing the classifications of the predictions to the actual observations in the test set.
+The question I think you are likely most interested in, "Does LDA perform better than KNN or any of the logistic regressions," can be answered easily by comparing the model's classifications of the test data to the actual observations in the test set.
 
 ```{r lda accuracy, eval = FALSE}
 # For you non-R programmers out there,
@@ -763,21 +764,30 @@ The question you are likely most interested wondering, "Does LDA perform better 
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
 ```
 
-Drum roll please! The model correctly identified the reproductive status `r mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
+Drum roll please! The model correctly identified the true reproductive status `r mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
 
-Often times, the people we need to convey these insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct explanation." We will have a much easier time explaining KNN than we would describing dimensionality reduction.
+Often times, the people we need to convey these insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct." Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a "good-enough" job, choose the simpler method.
 
 #### Visualization of Separation
 
+Finally, we can visualize how well LDA separated the different reproductive statuses of cattle:
+
 ```{r lda viz, results = "show"}
 
+lajunta_lda_plot <- cbind(lajunta_lda_train,
+                    predict(lajunta_lda_fit)$x)
 
-
-
-#define data to plot
-lda_plot <- cbind(train, predict(model)$x)
-?cbind
 #create plot
-ggplot(lda_plot, aes(LD1, LD2)) +
-  geom_point(aes(color = Species))
+ggplot(lajunta_lda_plot, aes(LD1, LD2)) +
+  geom_point(aes(color = Reprod)) +
+  ggtitle("Linear Discriminant 1 vs Linear Discriminant 2") +
+  theme_dark()
 ```
+
+We could make similar plots using LD3 as well, but LD1 and LD2 are by far the most important linear discriminants. There is no real justification for including LD3.
+
+For those of you looking to improve this model, try transforming some of the predictors!
+
+# Thank You!
+
+If you've made it this far--you're a trooper! I hope you enjoyed going through this as much as I did! If you have any questions, do not hesitate [reaching out](https://www.linkedin.com/in/connor-krenzer)!
