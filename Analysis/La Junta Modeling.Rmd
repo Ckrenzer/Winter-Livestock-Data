@@ -805,7 +805,7 @@ The question this model answers: "is the livestock a steer?"
 The e1071 package will be the engine used to implement the algorithm. The plotly package was used to create the diagram in the next section.
 
 ### Data Overlap
-The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (in a 2D setting, you can think of a plane as a line and the margins as the "buffer zone" between the points and the line--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below.
+The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (in a 2D setting, you can think of a plane as a line and the margins as the "buffer zone" between the points and the line--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below (HTML file only).
 
 ```{r 3D viz, echo = FALSE, results = "show"}
 plotly::plot_ly(x = lajunta$Weight,
