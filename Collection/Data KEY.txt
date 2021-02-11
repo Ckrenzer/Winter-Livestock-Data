@@ -25,6 +25,7 @@
 > steers are bulls that have been castrated
 
 > The price column is the unit price
+> This is sales data
 
 #### How Winter Livestock Categorized
 > steer is coded as "str"

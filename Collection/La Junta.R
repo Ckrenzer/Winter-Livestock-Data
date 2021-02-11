@@ -1,12 +1,11 @@
 # Instructions -------------------------------------------------
-# 1. Delete the csv file if you already have it in your directory
-# 2. Add the current market report url to the end of the "url" variable
-# 3. Add the market report's date to the end of the "DATE" variable
-# 4. click ctrl+a, then click ctrl+enter
-# 5. If needed, run the other script
-# 6. (optional) Run the cleaning script, "La Junta cleaning.R"
+# 1. Add the current market report url to the end of the "url" variable
+# 2. Add the market report's date to the end of the "DATE" variable
+# 3. click ctrl+a, then click ctrl+enter
+# 4. If needed, run the other script
+# 5. (optional) Run the cleaning script, "La Junta cleaning.R"
 
-# Note: If you use the other script, the dates are not 
+# Note: If you do not use the cleaning script, the dates are not 
 # necessarily going to be listed in chronological order. To
 # put them back into chronological order,  you can read the csv
 # file into R (storing the data in a variable) and then use
@@ -14,13 +13,18 @@
 #
 # The code would look something like this:
 # livestock <- readr::read_csv(file = "La Junta Market Reports.csv",
-#                               col_names = TRUE)
-# livestock <- arrange(livestock, Date)
+#                               col_names = TRUE) %>% 
+#                     arrange(Date)
 
 
 # There are ways of getting the next week's data with fewer 'moving
 # parts,' but few ways of doing so are simpler than this.
 
+
+# Removing CSV -------------------------------------------------
+if(file.exists("La Junta Market Reports.csv")){
+  file.remove("La Junta Market Reports.csv")
+}
 
 # Packages -----------------------------------------------------
 if(!require(pacman)) install.packages("pacman")

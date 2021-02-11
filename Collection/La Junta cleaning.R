@@ -1,7 +1,7 @@
 # This script is optional, though it will simplify your analysis
 
 # There are two primary goals with this script:
-#   1. Add column names to the csv
+#   1. Add column names to the csv and put entries in chronological order
 #   2. Organize types of cattle into a small number of distinct groups
 
 # goal 1 is a piece of cake, but goal 2 is easier said than done.
@@ -17,7 +17,7 @@
 
 # Packages ------------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(stringr, readr, dplyr)
+pacman::p_load(stringr, readr, dplyr, lubridate)
 
 
 
@@ -34,6 +34,10 @@ lajunta <- lajunta %>%
          "Weight" = X5,
          "Price" = X6)
 
+# Putting the entries in chronological order,
+# first changing the data type to a Date:
+lajunta$Date <- lubridate::mdy(lajunta$Date)
+lajunta <- arrange(lajunta, Date)
 
 
 # Step 2: categorizing cattle -----------------------
@@ -90,7 +94,6 @@ lajunta$Type <- lajunta %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
 
 # We now have six categories in the "Type" variable
-
 
 
 
