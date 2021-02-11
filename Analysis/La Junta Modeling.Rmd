@@ -93,7 +93,7 @@ I will be using the rsample package to split the data into testing and training 
 
 ### Step 2: Prepare Data
 
-Lucky for me, I already spent a full day cleaning this data! All I have to do is select relevant columns and make the character column a factor.
+Lucky for me, I already spent a full day cleaning this data! All I have to do is select relevant columns, make the character column a factor, and standardize the numeric columns.
 
 There are only two predictors in this model, weight and price.
 
@@ -107,7 +107,7 @@ lajunta_knn$Reprod <- as.factor(lajunta_knn$Reprod)
 
 ```
 
-Since KNN is sensitive to different scales, I will standardize the values of the predictors.
+Since KNN is sensitive to different scales, the values of the predictors need to be standardized.
 
 ```{r standardize}
 # The normalizing function, which transforms
