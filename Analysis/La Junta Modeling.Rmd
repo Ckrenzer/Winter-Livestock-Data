@@ -295,8 +295,6 @@ See the accompanying Shiny app ("[La Junta Predictions.Rmd](https://github.com/C
 
 # Logistic Regression
 
-###### The write-up uses data as of 2/6/2021. The code will still work, though some of my discussion may be inconsistent with the current data, as the csv gets updated over time.
-
 There are a few things I want to try with a logistic regression. Though logistic regression can handle more than two categories, it is best-suited for binary dependent variables. Therefore, I will be evaluating three models with binary outcomes:
 
 1.  Determining whether livestock is a steer or a heifer.
@@ -835,7 +833,7 @@ Alright, let's make the split:
 # Setting the random number stream
 set.seed(2021)
 # transforming character vectors into factors
-# and adding a boolean column 
+# and adding the boolean is_Steer column
 lajunta_svm_split <- initial_split(lajunta_svm,
                                    prob = 0.80,
                                    strata = Reprod)
@@ -848,21 +846,145 @@ lajunta_svm_test <- testing(lajunta_svm_split)
 
 
 ### Computing Support Vectors
+Multiple different kernel functions will be tried to find the best fit. Radial basis functions are usually a go-to for these types of operations, and so this is the one I am most interested in.
+
+```{r svm computation}
+# linear
+lajunta_svm_classifier <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
+    type = "C-classification", kernel = "linear")
+
+# quadratic
+lajunta_svm_classifier2 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
+    type = "C-classification", kernel = "polynomial", degree = 2)
+
+# cubic
+lajunta_svm_classifier3 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
+    type = "C-classification", kernel = "polynomial", degree = 3)
+
+# sigmoid
+lajunta_svm_classifier4 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
+    type = "C-classification", kernel = "sigmoid")
+
+# radial
+lajunta_svm_classifier5 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
+    type = "C-classification", kernel = "radial")
+```
 
 
-
+On to the fun part!
 
 ### Evaluation
 
-
-
-
+As usual, we now check the model's performance using the test dataset.
 
 
 #### Test Set
-In this section, you will predict the new values on the test set, then compare them to the actual, giving you the model's accuracy.
 
-Then, you will summarize findings and compare it to the other models in this file.
+```{r svm test results}
+# linear
+lajunta_svm_predict <- predict(lajunta_svm_classifier, newdata = lajunta_svm_test %>% 
+          select(Weight, Price, Quantity, is_Steer))
+
+# quadratic
+lajunta_svm_predict2 <- predict(lajunta_svm_classifier2, newdata = lajunta_svm_test %>% 
+          select(Weight, Price, Quantity, is_Steer))
+
+# cubic
+lajunta_svm_predict3 <- predict(lajunta_svm_classifier3, newdata = lajunta_svm_test %>% 
+          select(Weight, Price, Quantity, is_Steer))
+
+# sigmoid
+lajunta_svm_predict4 <- predict(lajunta_svm_classifier4, newdata = lajunta_svm_test %>% 
+          select(Weight, Price, Quantity, is_Steer))
+
+# radial
+lajunta_svm_predict5 <- predict(lajunta_svm_classifier5, newdata = lajunta_svm_test %>% 
+          select(Weight, Price, Quantity, is_Steer))
+```
+
+
+#### Confusion Matrix
+Now, let's see how the classifier performed with a confusion matrix:
+
+```{r svm confusion matrix, echo = FALSE, results = "show"}
+# linear
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict, lajunta_svm_test$is_Steer), caption = "Linear Kernel Function")
+
+# quadratic
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict2, lajunta_svm_test$is_Steer), caption = "Quadratic Kernel Function")
+
+# cubic
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict3, lajunta_svm_test$is_Steer), caption = "Cubic Kernel Function")
+
+# sigmoid
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict4, lajunta_svm_test$is_Steer), caption = "Sigmoid Kernel Function")
+
+# radial
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict5, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function")
+
+
+
+
+
+# radial, with Date
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict6, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date)")
+
+# radial, with Type
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Type)")
+
+# radial, with Date and Type
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date and Type)")
+```
+
+
+
+
+Using a linear kernel function, the model's specificity and sensitivity are very similar. The misclassification error rate is similar to that of the quadratic and cubic polynomial kernel functions. What is different, of course, is that the models with quadratic and cubic kernel functions have many false negatives and false positives, respectively. What is interesting to note, however, is that the model with the quadratic kernel function has very few false positives and the the cubic function has very few false negatives (in short: _quadratic = few false negatives and many false positives ... cubic = few false positives and many false negatives_).
+
+In other contexts, we might want to be conservative in the amount of false positives we get--even if that means we do this at the expense of the overall misclassification error rate. If this was banking data and we wanted to predict whether someone was going to default on a loan, for instance, we may permit many false positives (predicted they will default, even though they won't) in the model--rejecting people access to credit--if it means avoiding a false negative (in which the firm loses loads of money on someone who defaults, despite the model predicting the individual would not default). These considerations are important, but my goal is to minimize the overall misclassification error rate. People are not losing their businesses because a model predicts livestock of a given weight and price to be a steer when it is a heifer in reality!
+
+The sigmoid function was the least accurate and performed almost as well as random guessing! Both sensitivity and specificity are low. This was the weakest model yet.
+
+The radial function is the most accurate, having a misclassification error rate of `r mean(lajunta_svm_predict5 == lajunta_svm_test$is_Steer)` percent. Not quite the 95 percent we are looking for--and this, too, performs similarly to KNN clustering--so I think we have reached a plateau in predicting power using just three variables.
+
+Before moving on, let's add try some variations on the model with a radial kernel function.
+
+
+### Optimization
+There are three new variants to the model: one with only the Date variable included, one with only the Type variable included, and one with both the Date and Type variables included. You can see confusion matrices below:
+
+```{r svm optimization, echo = FALSE}
+
+# Making the Model ------------------
+# radial, with Date
+lajunta_svm_classifier6 <- svm(data = lajunta_svm_train,
+                               is_Steer ~ Price + Weight + Quantity + I(lubridate::mdy(Date)), 
+                               type = "C-classification", kernel = "radial")
+
+# radial, with Type
+lajunta_svm_classifier7 <- svm(data = lajunta_svm_train,
+                               is_Steer ~ Price + Weight + Quantity + `Type`, 
+                               type = "C-classification", kernel = "radial")
+
+# radial, with Date and Type
+lajunta_svm_classifier8 <- svm(data = lajunta_svm_train,
+                               is_Steer ~ Price + Weight + Quantity + I(lubridate::mdy(Date)) + `Type`, 
+                               type = "C-classification", kernel = "radial")
+
+
+
+# Testing Data ----------------------
+# radial, with Date
+lajunta_svm_predict6 <- predict(lajunta_svm_classifier6, newdata = lajunta_svm_test %>% 
+          select(Weight, Date, Price, Buyer, Quantity, is_Steer))
+
+# radial, with Type
+lajunta_svm_predict7 <- predict(lajunta_svm_classifier7, newdata = lajunta_svm_test %>% 
+          select(Weight, Type, Price, Buyer, Quantity, is_Steer))
+
+# radial, more vars
+lajunta_svm_predict8 <- predict(lajunta_svm_classifier8, newdata = lajunta_svm_test %>% 
+          select(Weight, Date, Type, Price, Buyer, Quantity, is_Steer))
 
 
 
@@ -870,6 +992,14 @@ Then, you will summarize findings and compare it to the other models in this fil
 
 
 
+
+
+
+
+```
+
+
+MOVE THE NEW MODELS AWAY FROM THE OTHER CODE SECTIONS AND INTO NEW CODE CHUNKS BELOW.
 
 
 # Thank You!
