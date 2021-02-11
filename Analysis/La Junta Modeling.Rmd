@@ -12,6 +12,8 @@ The Shiny app will be self-contained. Rather than cluttering the Shiny app, this
 
 Some findings could invert over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
 
+This was written under R version 4.0.3.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
@@ -45,7 +47,8 @@ pacman::p_load(pscl, caret, car,
 pacman::p_load(MASS)
 
 # SVM Packages
-pacman::p_load(e1071)
+pacman::p_load(e1071,
+               ElemStatLearn)
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -921,19 +924,6 @@ knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict4, lajunta_svm
 
 # radial
 knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict5, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function")
-
-
-
-
-
-# radial, with Date
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict6, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date)")
-
-# radial, with Type
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Type)")
-
-# radial, with Date and Type
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date and Type)")
 ```
 
 
@@ -945,7 +935,7 @@ In other contexts, we might want to be conservative in the amount of false posit
 
 The sigmoid function was the least accurate and performed almost as well as random guessing! Both sensitivity and specificity are low. This was the weakest model yet.
 
-The radial function is the most accurate, having a misclassification error rate of `r mean(lajunta_svm_predict5 == lajunta_svm_test$is_Steer)` percent. Not quite the 95 percent we are looking for--and this, too, performs similarly to KNN clustering--so I think we have reached a plateau in predicting power using just three variables.
+The radial function is the most accurate, having a misclassification error rate of `r 100 * mean(lajunta_svm_predict5 == lajunta_svm_test$is_Steer)` percent. Not quite the 95 percent we are looking for--and this, too, performs similarly to KNN clustering--so I think we have reached a plateau in predicting power using just three variables.
 
 Before moving on, let's add try some variations on the model with a radial kernel function.
 
@@ -988,18 +978,20 @@ lajunta_svm_predict8 <- predict(lajunta_svm_classifier8, newdata = lajunta_svm_t
 
 
 
+# Confusion Matrices ---------------
+# radial, with Date
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict6, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date)")
 
+# radial, with Type
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Type)")
 
-
-
-
-
-
-
+# radial, with Date and Type
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date and Type)")
 ```
 
+It would appear that the Type column increases misclassification error. That's too bad--with no prior knowledge, I really thought that the type of cattle would influence the price. I spent a lot of time organizing that column. All the work that went into that was not in vain, though, since I would not have been able to disprove the fact that the type of cattle has no bearing on its price without doing the overhead.
 
-MOVE THE NEW MODELS AWAY FROM THE OTHER CODE SECTIONS AND INTO NEW CODE CHUNKS BELOW.
+The accuracy of the model that added only Date is `r 100 * mean(lajunta_svm_predict6 == lajunta_svm_test$is_Steer)` percent, which is a considerable improvement over its counterpart with only the weight, price, and quantity. This is the most accurate model!
 
 
 # Thank You!
