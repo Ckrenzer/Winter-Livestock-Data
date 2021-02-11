@@ -47,8 +47,7 @@ pacman::p_load(pscl, caret, car,
 pacman::p_load(MASS)
 
 # SVM Packages
-pacman::p_load(e1071,
-               ElemStatLearn)
+pacman::p_load(e1071)
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
@@ -778,7 +777,7 @@ Often times, the people we need to convey insights to have no background in stat
 
 Finally, we can visualize how well LDA separated the different reproductive statuses of cattle:
 
-```{r lda viz, results = "show"}
+```{r lda viz, echo = FALSE, results = "show"}
 
 lajunta_lda_plot <- cbind(lajunta_lda_train,
                     predict(lajunta_lda_fit)$x)
@@ -797,7 +796,7 @@ For those of you looking to improve this model, try transforming some of the pre
 
 
 # Support Vector Machines (SVM)
-I am in the mood to keep going with these classification models. I want to get a model that predicts with 95 percent accuracy, but we haven't met that threshold with any of the preceding models. This model is similar to the logistic regression model, but instead of filtering data down to just steers and heifers, it includes cows and bulls as well. Only Weight and Price will be used 
+I am in the mood to keep going with these classification models. I want to get a model that predicts with 95 percent accuracy, but we haven't met that threshold with any of the preceding models. This model is similar to the logistic regression model, but instead of filtering data down to just steers and heifers, it includes cows and bulls as well. The predictors include Weight, Price, and Quantity.
 
 The question this model answers: "is the livestock a steer?"
 
@@ -806,7 +805,7 @@ The question this model answers: "is the livestock a steer?"
 The e1071 package will be the engine used to implement the algorithm. The plotly package was used to create the diagram in the next section.
 
 ### Data Overlap
-The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (in a 2D setting, you can think of a plane as a line and the margin as the "buffer zone" between the points and the line--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below.
+The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (in a 2D setting, you can think of a plane as a line and the margins as the "buffer zone" between the points and the line--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below.
 
 ```{r 3D viz, echo = FALSE, results = "show"}
 plotly::plot_ly(x = lajunta$Weight,
@@ -819,11 +818,12 @@ plotly::plot_ly(x = lajunta$Weight,
 
 
 ### Cleaning
-Character variables will be transformed into factors, and the logical column, "is_Steer," will be added to the data frame.
+Character variables will be transformed into factors, the Date column will become a date type, and the logical column, "is_Steer," will be added to the data frame.
 
-```{r svm cleaning, echo = TRUE}
+```{r svm cleaning}
 lajunta_svm <- lajunta %>% 
   mutate(across(where(is.character), as.factor),
+         Date = lubridate::mdy(Date),
          "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE))
 ```
 
@@ -886,23 +886,23 @@ As usual, we now check the model's performance using the test dataset.
 ```{r svm test results}
 # linear
 lajunta_svm_predict <- predict(lajunta_svm_classifier, newdata = lajunta_svm_test %>% 
-          select(Weight, Price, Quantity, is_Steer))
+          dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # quadratic
 lajunta_svm_predict2 <- predict(lajunta_svm_classifier2, newdata = lajunta_svm_test %>% 
-          select(Weight, Price, Quantity, is_Steer))
+          dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # cubic
 lajunta_svm_predict3 <- predict(lajunta_svm_classifier3, newdata = lajunta_svm_test %>% 
-          select(Weight, Price, Quantity, is_Steer))
+          dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # sigmoid
 lajunta_svm_predict4 <- predict(lajunta_svm_classifier4, newdata = lajunta_svm_test %>% 
-          select(Weight, Price, Quantity, is_Steer))
+          dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # radial
 lajunta_svm_predict5 <- predict(lajunta_svm_classifier5, newdata = lajunta_svm_test %>% 
-          select(Weight, Price, Quantity, is_Steer))
+          dplyr::select(Weight, Price, Quantity, is_Steer))
 ```
 
 
@@ -935,20 +935,20 @@ In other contexts, we might want to be conservative in the amount of false posit
 
 The sigmoid function was the least accurate and performed almost as well as random guessing! Both sensitivity and specificity are low. This was the weakest model yet.
 
-The radial function is the most accurate, having a misclassification error rate of `r 100 * mean(lajunta_svm_predict5 == lajunta_svm_test$is_Steer)` percent. Not quite the 95 percent we are looking for--and this, too, performs similarly to KNN clustering--so I think we have reached a plateau in predicting power using just three variables.
+The radial function is the most accurate, having a misclassification error rate of `r 100 * round(mean(lajunta_svm_predict5 == lajunta_svm_test$is_Steer), 3)` percent. Not quite the 95 percent we are looking for--and this, too, performs similarly to KNN clustering--so I think we have reached a plateau in predicting power using just three variables.
 
-Before moving on, let's add try some variations on the model with a radial kernel function.
+Let's try adding variations to the model with a radial kernel function.
 
 
 ### Optimization
 There are three new variants to the model: one with only the Date variable included, one with only the Type variable included, and one with both the Date and Type variables included. You can see confusion matrices below:
 
-```{r svm optimization, echo = FALSE}
+```{r svm optimization, echo = FALSE, results = "show"}
 
 # Making the Model ------------------
 # radial, with Date
 lajunta_svm_classifier6 <- svm(data = lajunta_svm_train,
-                               is_Steer ~ Price + Weight + Quantity + I(lubridate::mdy(Date)), 
+                               is_Steer ~ Price + Weight + Quantity + Date, 
                                type = "C-classification", kernel = "radial")
 
 # radial, with Type
@@ -958,7 +958,7 @@ lajunta_svm_classifier7 <- svm(data = lajunta_svm_train,
 
 # radial, with Date and Type
 lajunta_svm_classifier8 <- svm(data = lajunta_svm_train,
-                               is_Steer ~ Price + Weight + Quantity + I(lubridate::mdy(Date)) + `Type`, 
+                               is_Steer ~ Price + Weight + Quantity + Date + `Type`, 
                                type = "C-classification", kernel = "radial")
 
 
@@ -966,34 +966,34 @@ lajunta_svm_classifier8 <- svm(data = lajunta_svm_train,
 # Testing Data ----------------------
 # radial, with Date
 lajunta_svm_predict6 <- predict(lajunta_svm_classifier6, newdata = lajunta_svm_test %>% 
-          select(Weight, Date, Price, Buyer, Quantity, is_Steer))
+          dplyr::select(Weight, Date, Price, Buyer, Quantity, is_Steer))
 
 # radial, with Type
 lajunta_svm_predict7 <- predict(lajunta_svm_classifier7, newdata = lajunta_svm_test %>% 
-          select(Weight, Type, Price, Buyer, Quantity, is_Steer))
+          dplyr::select(Weight, Type, Price, Buyer, Quantity, is_Steer))
 
 # radial, more vars
 lajunta_svm_predict8 <- predict(lajunta_svm_classifier8, newdata = lajunta_svm_test %>% 
-          select(Weight, Date, Type, Price, Buyer, Quantity, is_Steer))
+          dplyr::select(Weight, Date, Type, Price, Buyer, Quantity, is_Steer))
 
 
 
 # Confusion Matrices ---------------
 # radial, with Date
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict6, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date)")
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict6, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (with Date)")
 
 # radial, with Type
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Type)")
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (with Type)")
 
 # radial, with Date and Type
-knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (Date and Type)")
+knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (with Date and Type)")
 ```
 
 It would appear that the Type column increases misclassification error. That's too bad--with no prior knowledge, I really thought that the type of cattle would influence the price. I spent a lot of time organizing that column. All the work that went into that was not in vain, though, since I would not have been able to disprove the fact that the type of cattle has no bearing on its price without doing the overhead.
 
-The accuracy of the model that added only Date is `r 100 * mean(lajunta_svm_predict6 == lajunta_svm_test$is_Steer)` percent, which is a considerable improvement over its counterpart with only the weight, price, and quantity. This is the most accurate model!
+The accuracy of the model that added only Date is `r 100 * round(mean(lajunta_svm_predict6 == lajunta_svm_test$is_Steer), 3)` percent, which is a huge improvement over its counterpart with only the weight, price, and quantity. This is the most accurate model, and it's pretty close to 95 percent!
 
 
 # Thank You!
 
-If you've made it this far--you're a trooper! I hope you enjoyed going through this as much as I did! If you have any questions or want to provide feedback, do not hesitate to [reach out](https://www.linkedin.com/in/connor-krenzer). Take care now!
+If you've made it this far--you're a trooper! I hope you enjoyed going through this as much as I did! It was written over the course of four days. If you have any questions or want to provide feedback, do not hesitate to [reach out](https://www.linkedin.com/in/connor-krenzer). Take care now!
