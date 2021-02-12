@@ -214,7 +214,75 @@ which(acc == max(acc))[1]
 acc[which(acc == max(acc))[1]]
 ```
 
-The ideal value was `r which(acc == max(acc))[1]`--very close to `r optimal_k`! Using just two variables, we can predict the reproductive status of livestock with `r acc[which(acc == max(acc))[1]]` percent accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually *always* have the right prediction!
+The ideal value was `r which(acc == max(acc))[1]`--very close to `r optimal_k`! Using just two variables, we can predict the reproductive status of livestock with `r round(acc[which(acc == max(acc))[1]], 2)` percent accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually *always* have the right prediction!
+
+
+
+
+#### Adding in Quantity
+I am going to repeat this process with Quantity added to the model. Will the accuracy improve?
+
+
+```{r knn with quantity, echo = FALSE}
+# This section combines all the previous sections of KNN
+# into one chunk of code. The reader does not to see it
+# all again
+
+# Fortunately, KNN is well-suited for just a few predictors
+lajunta_knn_q <- lajunta %>% 
+  dplyr::select(Weight, Price, Quantity, Reprod)
+
+# storing the string vector as a factor
+lajunta_knn_q$Reprod <- as.factor(lajunta_knn_q$Reprod)
+
+
+# Applying normalize() on the predictor
+# columns
+lajunta_knn_q <- lajunta_knn_q %>% 
+  mutate(across(where(is.numeric), normalize))
+
+
+
+# Setting the random number stream
+set.seed(2021)
+lajunta_knn_q_split <- rsample::initial_split(lajunta_knn_q,
+                                            prob = 0.80,
+                                            strata = Reprod)
+
+# As of 2/6/2021, the split is 869 in train
+# and 289 in test, with a total of 1158 observations
+
+# separating the data into two new data frames
+lajunta_knn_q_train <- rsample::training(lajunta_knn_q_split)
+lajunta_knn_q_test <- rsample::testing(lajunta_knn_q_split)
+
+
+
+
+# the cl argument is the factor of the true
+# classifications from the training set
+knn_29_q <- class::knn(train = lajunta_knn_q_train[1:3],
+                     test = lajunta_knn_q_test[1:3],
+                     cl = lajunta_knn_q_train$Reprod,
+                     k = optimal_k)
+
+
+acc_q <- numeric(100)
+for(i in 1:100){
+  knn_q_mod <- class::knn(train = lajunta_knn_q_train[1:3],
+                     test = lajunta_knn_q_test[1:3],
+                     cl = lajunta_knn_q_train$Reprod,
+                     k = i)
+  acc_q[i] <- accuracy(table(knn_q_mod, lajunta_knn_q_test$Reprod))
+  
+}
+acc_q
+
+```
+
+
+
+The accuracy after adding Quantity into the model at the optimal value of K is `r round(acc[which(acc_q == max(acc_q))[1]], 2)` `r ifelse(acc[which(acc_q == max(acc_q))[1]] > acc[which(acc == max(acc))[1]], " percent--not bad, huh?", " percent--slightly worse than the model with only two variables. The more you know the better!")`
 
 # Linear Regression
 
