@@ -835,7 +835,7 @@ The question I think you are likely most interested in, "Does LDA perform better
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
 ```
 
-Drum roll please! The model correctly identified the true reproductive status `r mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
+Drum roll please! The model correctly identified the true reproductive status `r 100 * round(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod), 2)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
 
 Often times, the people we need to convey insights to have no background in statistics; Occam's Razor means something approaching, "the simpler explanation is usually the most correct." Chances are that we will have a much easier time explaining KNN than we would describing linear discriminant analysis. If a simpler method does a "good-enough" job, choose the simpler method.
 
