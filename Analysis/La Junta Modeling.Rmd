@@ -3,9 +3,6 @@ title: "La Junta Models"
 author: "Connor Krenzer"
 date: "2/7/2021"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
   html_document:
     toc: yes
     toc_depth: 2
