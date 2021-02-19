@@ -53,7 +53,15 @@ pacman::p_load(e1071)
 # (as opposed to the local file):
 lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
                            "/Ckrenzer/Winter-Livestock-Data/main/",
-                           "La%20Junta%20Market%20Reports.csv"))
+                           "La%20Junta%20Market%20Reports.csv"),
+                    col_types = cols(Date = "D",
+                                     Buyer = col_character(),
+                                     Quantity = col_double(),
+                                     Type = col_character(),
+                                     Weight = col_double(),
+                                     Price = col_double(),
+                                     Reprod = col_character()))
+
 # Know that I only used paste0() on the url
 # to avoid getting into that dark LaTex magic
 # for pdf output!
@@ -293,13 +301,13 @@ The data appears linear, so linear models seem appropriate for this dataset. The
 
 steer_fit <- lm(data = lajunta,
                 subset = Reprod == "str",
-                formula = Price ~ I(lubridate::mdy(Date)) +
+                formula = Price ~ Date +
                   Quantity + poly(Weight, degree = 2))
 
 
 heifer_fit <- lm(data = lajunta,
                  subset = Reprod == "hfr",
-                 formula = Price ~ I(lubridate::mdy(Date)) +
+                 formula = Price ~ Date +
                    Quantity + poly(Weight, degree = 2))
 
 
@@ -307,7 +315,7 @@ heifer_fit <- lm(data = lajunta,
 # R-squared, but I think that is due to overfitting
 cow_fit <- lm(data = lajunta,
               subset = Reprod == "cow",
-              formula = Price ~ I(lubridate::mdy(Date)) +
+              formula = Price ~ Date +
                 poly(Weight, 3))
 
 
@@ -317,7 +325,7 @@ cow_fit <- lm(data = lajunta,
 # number of predictors small
 bull_fit <- lm(data = lajunta,
                subset = Reprod == "bull",
-               formula = Price ~ I(lubridate::mdy(Date)) +
+               formula = Price ~ Date +
                  poly(Weight, 2))
 ```
 
@@ -738,7 +746,7 @@ Since one of the key assumptions of LDA is that each predictor has the same vari
 ```{r scaling}
 lajunta_lda <- lajunta %>% 
   mutate(across(where(is.numeric), scale),
-         Date = lubridate::mdy(Date))
+         Date = Date)
 
 ```
 
@@ -888,7 +896,7 @@ Character variables will be transformed into factors, the Date column will becom
 ```{r svm cleaning}
 lajunta_svm <- lajunta %>% 
   mutate(across(where(is.character), as.factor),
-         Date = lubridate::mdy(Date),
+         Date = Date,
          "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE))
 ```
 
