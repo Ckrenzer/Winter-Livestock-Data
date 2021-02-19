@@ -52,9 +52,8 @@ pacman::p_load(e1071)
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
 lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
-                           "/Ckrenzer/Winter-Livestock-Data/main",
-                           "/La%20Junta%20Market%20Reports.csv"))
-
+                           "/Ckrenzer/Winter-Livestock-Data/main/",
+                           "La%20Junta%20Market%20Reports.csv"))
 # Know that I only used paste0() on the url
 # to avoid getting into that dark LaTex magic
 # for pdf output!

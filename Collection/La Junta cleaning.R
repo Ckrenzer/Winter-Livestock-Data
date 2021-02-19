@@ -47,7 +47,7 @@ lajunta <- lajunta %>%
 
 # The bulk of the edits
 lajunta$Type <- lajunta %>% 
-  select(Type) %>% 
+  dplyr::select(Type) %>% 
   unlist() %>% 
   str_remove_all("\\sx.*$|\\s[^\\s]*$") %>%  # removing " x hfr", " hfr", " x str", etc.
   str_replace_all("angus", "ang") %>% 
@@ -87,9 +87,9 @@ lajunta$Type <- lajunta %>%
 
 #combining all colors into a new category--"clr" (optional)
 lajunta$Type <- lajunta %>% 
-  select(Type) %>% 
+  dplyr::select(Type) %>% 
   unlist() %>% 
-  str_replace_all("black red|black|red", "clr") %>%   # "black red," "black," and "red" are all 
+  str_replace_all("black red|black|red|gray|grey", "clr") %>%   # "black red," "black," and "red" are all 
   str_replace_all("bwf|rwf|wf", "face") %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
 
