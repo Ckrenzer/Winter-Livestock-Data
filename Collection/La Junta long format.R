@@ -17,13 +17,15 @@ url <- c("http://www.winterlivestock.com/lajunta.php?reportID=12947#marketreport
          "http://www.winterlivestock.com/lajunta.php?reportID=12974#marketreport",
          "http://www.winterlivestock.com/lajunta.php?reportID=13044#marketreport",
          "http://www.winterlivestock.com/lajunta.php?reportID=13075#marketreport",
-         "http://www.winterlivestock.com/lajunta.php?reportID=13160#marketreport")
+         "http://www.winterlivestock.com/lajunta.php?reportID=13160#marketreport",
+         "http://www.winterlivestock.com/lajunta.php?reportID=13254#marketreport")
 
 DATE <- c("1-12-2021",
           "1-20-2021",
           "1-26-2021",
           "2-02-2021",
-          "2-16-2021")
+          "2-16-2021",
+          "3-09-2021")
 
 
 
