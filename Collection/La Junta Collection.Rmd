@@ -1,0 +1,18 @@
+---
+title: "Collection (La Junta)"
+author: "Connor Krenzer"
+date: "3/11/2021"
+output: html_document
+---
+
+Alright, I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO. To do this, I will first check whether the web scraper requires "\n" or "\r" as its delimiter. How do you do that? I'm so glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      include = TRUE,
+                      results = "hide",
+                      error = F,
+                      warning = F,
+                      message = F)
+```
