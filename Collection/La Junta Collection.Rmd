@@ -5,14 +5,93 @@ date: "3/11/2021"
 output: html_document
 ---
 
-Alright, I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO. To do this, I will first check whether the web scraper requires "\n" or "\r" as its delimiter. How do you do that? I'm so glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+# Introduction
+
+Alright, I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO.
 
 
-```{r setup, include = FALSE}
+
+
+
+
+
+
+# How It Works
+
+To do this, I will first check whether the web scraper requires "\n" or "\r" as its delimiter. How do you do that? I'm so glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+
+
+```{r setup-packages, include = FALSE}
+
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
                       results = "hide",
                       error = F,
                       warning = F,
                       message = F)
+
+# Packages
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(rvest, stringr, tidyr, readr, dplyr)
+
 ```
+
+
+
+
+
+
+
+
+
+# Remove File
+
+If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
+
+```{r remove csv}
+
+if(file.exists("La Junta Market Reports.csv")){
+  file.remove("La Junta Market Reports.csv")
+}
+
+```
+
+
+# Functions
+
+
+
+
+
+# Implementation
+
+
+
+
+The first problem that must be solved is: how many market report IDs do you check? I'll try the first 15000. It doesn't look like they have gotten past 14000, so the extra thousand should provide ample room.
+
+```{r urls}
+
+urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 1:15000, "#marketreport")
+
+```
+
+
+
+
+
+
+
+
+Once we determine whether the market report is a La Junta market report, we want to extract the date.
+
+
+
+
+
+
+
+
+
+
+
