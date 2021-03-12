@@ -51,8 +51,8 @@ pacman::p_load(e1071)
 
 # The raw data for La Junta, which is on GitHub
 # (as opposed to the local file):
-lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
-                           "/Ckrenzer/Winter-Livestock-Data/main/",
+lajunta <- read_csv(paste0("https://raw.githubusercontent.com/", 
+                           "Ckrenzer/Winter-Livestock-Data/main/",
                            "La%20Junta%20Market%20Reports.csv"),
                     col_types = cols(Date = "D",
                                      Buyer = col_character(),
@@ -89,6 +89,7 @@ From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenz
 
 ```{r graph, echo = FALSE, results = "show"}
 lajunta %>% 
+  filter(Price < 1000) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   ggtitle("Price vs. Weight") +
@@ -863,9 +864,10 @@ Finally, we can visualize how well LDA separated the different reproductive stat
 lajunta_lda_plot <- cbind(lajunta_lda_train,
                           predict(lajunta_lda_fit)$x)
 
-#create plot
+#create plot, excluding the extreme outlier
 ggplot(lajunta_lda_plot, aes(LD1, LD2)) +
   geom_point(aes(color = Reprod)) +
+  ylim(-10, 10) +
   ggtitle("Linear Discriminant 1 vs Linear Discriminant 2") +
   theme_dark()
 ```
@@ -889,24 +891,46 @@ The e1071 package will be the engine used to implement the algorithm. The plotly
 The algorithm is supposed to classify observations by creating a hyperplane with the maximum possible margins (in a 2D setting, you can think of a plane as a line and the margins as the "buffer zone" between the points and the line--we want the largest "buffer zone" possible). Even in the 3D plane, values between steers and heifers overlap often. To remedy this, a kernel function will be used to transform the data into a higher dimension. You can examine the existing overlap yourself using the interactive diagram below (HTML file only).
 
 ```{r 3D viz, echo = FALSE, results = "show"}
-plotly::plot_ly(x = lajunta$Weight,
-                y = lajunta$Price,
-                z = lajunta$Quantity,
-                color = lajunta$Reprod) %>% 
+
+# The filtering removes the extreme outlier so that we can explore the concentration of the data we care about.
+plotly::plot_ly(x = lajunta %>% 
+                  filter(Price < 1000) %>% 
+                  dplyr::select(Weight) %>% 
+                  unlist(),
+                y = lajunta %>% 
+                  filter(Price < 1000) %>% 
+                  dplyr::select(Price) %>% 
+                  unlist(),
+                z = lajunta %>% 
+                  filter(Price < 1000) %>% 
+                  dplyr::select(Quantity) %>% 
+                  unlist(),
+                color = lajunta %>% 
+                  filter(Price < 1000) %>% 
+                  dplyr::select(Reprod) %>% 
+                  unlist()) %>% 
   layout(title = "Livestock by Weight (x), Price (y), and Quantity (z)")
 ```
 
 
 
 ### Cleaning
-Character variables will be transformed into factors, the Date column will become a date type, and the logical column, "is_Steer," will be added to the data frame. Note that missing values for the Date are removed.
+Character variables will be transformed into factors, the Date column will become a date type, and the logical column, "is_Steer," will be added to the data frame. Note that missing values for all variables are removed.
 
 ```{r svm cleaning}
+
 lajunta_svm <- lajunta %>% 
   mutate(across(where(is.character), as.factor),
          Date = Date,
          "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE)) %>% 
-  filter(!is.na(Date))
+  filter(!is.na(Date),
+         !is.na(Buyer),
+         !is.na(Quantity),
+         !is.na(Type),
+         !is.na(Weight),
+         !is.na(Price),
+         !is.na(Reprod),
+         !is.na(is_Steer))
 
 
 
@@ -1039,7 +1063,8 @@ lajunta_svm_classifier6 <- svm(data = lajunta_svm_train,
                                type = "C-classification", kernel = "radial")
 
 # radial, with Type
-lajunta_svm_classifier7 <- svm(data = lajunta_svm_train,
+lajunta_svm_classifier7 <- svm(data = lajunta_svm_train %>% 
+                                 dplyr::select(Weight, Type, Price, Buyer, Quantity, is_Steer),
                                is_Steer ~ Price + Weight + Quantity + `Type`, 
                                type = "C-classification", kernel = "radial")
 
