@@ -79,6 +79,12 @@ collection <- function(urls){
   
   for(URL in urls){
     
+    
+    # simple yet effective way of showing an the operation's progress
+    cat(".")
+    
+    
+    
     # Reading in data from webpage ------------------------------
     # Saving the webpage into a variable
     webpage <- read_html(URL)
@@ -102,13 +108,13 @@ collection <- function(urls){
     delimiter <- "\n"
     
     # Asks whether the list has more than 30 entries after the strsplit(). If there is only one entry, then that means the format uses "\r" as its delimiter or does not contain information we care about.
-    if(length(strsplit(livestock_data, delimiter)) < 30){
+    if(length(strsplit(livestock_data, delimiter)[[1]]) < 30){
       
       # If the first delimiter does not get us what we are looking for, we will try the second delimiter instead.
       delimiter <- "\r" 
       
       # Now we test the second delimiter...
-      if(length(strsplit(livestock_data, delimiter)) < 30){
+      if(length(strsplit(livestock_data, delimiter)[[1]]) < 30){
         
         # If the second delimiter fails to deliver, skip to the next iteration of the loop (this webpage does not contain information we care about).
         next 
@@ -170,28 +176,28 @@ collection <- function(urls){
       #replacing the month name with its corresponding number
       str_replace_all(month_of_sale,
                       case_when(month_of_sale == "january" ~ "1",
-                                              month_of_sale == "february" ~ "2",
-                                              month_of_sale == "march" ~ "3",
-                                              month_of_sale == "april" ~ "4",
-                                              month_of_sale == "may" ~ "5",
-                                              month_of_sale == "june" ~ "6",
-                                              month_of_sale == "july" ~ "7",
-                                              month_of_sale == "august" ~ "8",
-                                              month_of_sale == "september" ~ "9",
-                                              month_of_sale == "october" ~ "10",
-                                              month_of_sale == "november" ~ "11",
-                                              month_of_sale == "december" ~ "12",
-                                              month_of_sale == "jan" ~ "1",
-                                              month_of_sale == "feb" ~ "2",
-                                              month_of_sale == "mar" ~ "3",
-                                              month_of_sale == "apr" ~ "4", #you don't need to repeat may, remember
-                                              month_of_sale == "jun" ~ "6",
-                                              month_of_sale == "jul" ~ "7",
-                                              month_of_sale == "aug" ~ "8",
-                                              month_of_sale == "sept" ~ "9",
-                                              month_of_sale == "oct" ~ "10",
-                                              month_of_sale == "nov" ~ "11",
-                                              month_of_sale == "dec" ~ "12",
+                                month_of_sale == "february" ~ "2",
+                                month_of_sale == "march" ~ "3",
+                                month_of_sale == "april" ~ "4",
+                                month_of_sale == "may" ~ "5",
+                                month_of_sale == "june" ~ "6",
+                                month_of_sale == "july" ~ "7",
+                                month_of_sale == "august" ~ "8",
+                                month_of_sale == "september" ~ "9",
+                                month_of_sale == "october" ~ "10",
+                                month_of_sale == "november" ~ "11",
+                                month_of_sale == "december" ~ "12",
+                                month_of_sale == "jan" ~ "1",
+                                month_of_sale == "feb" ~ "2",
+                                month_of_sale == "mar" ~ "3",
+                                month_of_sale == "apr" ~ "4", #you don't need to repeat may, remember
+                                month_of_sale == "jun" ~ "6",
+                                month_of_sale == "jul" ~ "7",
+                                month_of_sale == "aug" ~ "8",
+                                month_of_sale == "sept" ~ "9",
+                                month_of_sale == "oct" ~ "10",
+                                month_of_sale == "nov" ~ "11",
+                                month_of_sale == "dec" ~ "12",
                       )) %>% 
       #removing letters and replacing space characters with hyphens
       str_replace_all("[a-z]", "") %>% 
@@ -410,9 +416,12 @@ collection <- function(urls){
               append = T,
               col_names = F)
     
+    #says that data was added to the file
+    cat("\nDATA ADDED\n")
+    
   } # end of for loop
-
-
+  
+  
 }#end of collection()
 
 ```
@@ -432,20 +441,13 @@ collection <- function(urls){
 
 
 
-The first problem that must be solved is: how many market report IDs do you check? I'll try the first 15000. It doesn't look like they have gotten past 14000, so the extra thousand should provide ample room.
+I have been changing the URLs around to find different data, but the 11000 to 13500 ballpark seems to be the best range for La Junta.
 
-```{r urls}
+```{r urls-execute}
 
-# This just parses together 15,000 different possible market report IDs
-urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 1:15000, "#marketreport")
+# This just parses together different market report IDs
+urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 10000:13500, "#marketreport")
 
-```
-
-
-
-Now we run the function. This may take quite a bit of time, please remember...
-
-```{r execute}
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
@@ -558,7 +560,6 @@ write_csv(x = lajunta,
           file = "La Junta Market Reports.csv",
           append = F,
           col_names = T)
-
 
 ```
 

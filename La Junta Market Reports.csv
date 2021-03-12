@@ -1,441 +1,2242 @@
 Date,Buyer,Quantity,Type,Weight,Price,Reprod
-2020-10-20,dean maverick ranch,18,clr,430,179,str
-2020-10-20,dean maverick ranch,49,clr,515,146,str
-2020-10-20,dean maverick ranch,23,clr,405,165,hfr
-2020-10-20,dean maverick ranch,42,clr,495,130,hfr
-2020-10-20,mcendree cattle,10,mix,430,174,str
-2020-10-20,matt clough,15,ang,465,172,str
-2020-10-20,jose munoz,15,ang,435,170,str
-2020-10-20,jose munoz,58,ang,495,146,str
-2020-10-20,jose munoz,89,ang,485,130,hfr
-2020-10-20,ronnie ward,17,clr,425,168,str
-2020-10-20,ronnie ward,17,clr,520,146,str
-2020-10-20,jd schier,30,ang,410,168,str
-2020-10-20,donnell & harrington,13,ang,345,167.5,hfr
-2020-10-20,donnell & harrington,45,ang,460,133,hfr
-2020-10-20,dixon sandoval,13,ang,485,162.5,str
-2020-10-20,tim schmitt,18,clr,455,161,str
-2020-10-20,tim schmitt,34,clr,505,144,str
-2020-10-20,tim schmitt,19,clr,470,142.5,hfr
-2020-10-20,nelson taylor,16,mix,460,157.5,str
-2020-10-20,nelson taylor,13,mix,435,140,hfr
-2020-10-20,nelson taylor,43,mix,515,128,hfr
-2020-10-20,howard robertson,24,ang,460,156,str
-2020-10-20,howard robertson,32,ang,535,125.5,hfr
-2020-10-20,flying u ranch,23,clr,505,151,str
-2020-10-20,menegatti cattle,59,mix,490,151,str
-2020-10-20,menegatti cattle,36,mix,470,136,hfr
-2020-10-20,menegatti cattle,74,mix,540,129.5,hfr
-2020-10-20,dorenkamp ranch,25,ang,505,147.5,str
-2020-10-20,davey family ranch,23,clr,500,147,str
-2020-10-20,dan & becky doherty,12,ang,445,145,hfr
-2020-10-20,dan & becky doherty,23,ang,535,126,hfr
-2020-10-20,dutro ranch,24,ang,525,142,str
-2020-10-20,dutro ranch,19,ang,510,133,hfr
-2020-10-20,pat mcconnell,34,ang,535,140.5,str
-2020-10-20,pat mcconnell,25,ang,505,123,hfr
-2020-10-20,seal pharmacy,30,char,410,140.5,hfr
-2020-10-20,seal pharmacy,111,char,495,127,hfr
-2020-10-20,colleen jackson,11,mix,440,139,hfr
-2020-10-20,lane elliott,79,mix,500,138,str
-2020-10-20,raymond loretto dvm,14,mix,455,133,hfr
-2020-10-20,kyle & tammy wezel,32,ang,530,129,hfr
-2020-10-20,steven smith,11,clr,535,128,hfr
-2020-10-20,joe mayo,15,ang,540,126.5,hfr
-2020-10-20,jack dixon ranch,22,ang,525,125,hfr
-2020-10-20,steve rzepka,44,clr,515,125,hfr
-2020-10-20,menegatti cattle,15,mix,615,128,hfr
-2020-10-20,william hatcher,16,clr,550,126.5,hfr
-2020-10-20,william hatcher,13,clr,710,126,hfr
-2020-10-20,matt clough,68,ang,545,126.5,hfr
-2020-10-20,matt clough,74,ang,595,121.5,hfr
-2020-10-20,kuykendall ranches,11,char,775,126,hfr
-2020-10-20,kuykendall ranches,17,char,865,120,hfr
-2020-10-20,steven smith,15,clr,675,126,hfr
-2020-10-20,jose munoz,19,ang,585,126,hfr
-2020-10-20,mike occhiato,18,clr,650,125,hfr
-2020-10-20,rick howieson,45,clr,555,124.5,hfr
-2020-10-20,john arrington,12,clr,640,124,hfr
-2020-10-20,joe mayo,41,ang,615,124,hfr
-2020-10-20,seal pharmacy,80,char,580,124,hfr
-2020-10-20,schubert ranches,57,ang,625,123.5,hfr
-2020-10-20,kevin hall,16,ang,545,122,hfr
-2020-10-20,tony hass,21,clr,655,121.5,hfr
-2020-10-20,hans hasser,24,ang,610,119.5,hfr
-2020-10-20,lewis fillmore,25,mix,655,119,hfr
-2020-10-20,kimberlee schmitz,29,ang,555,141.5,str
-2020-10-20,menegatti cattle,77,mix,550,138,str
-2020-10-20,menegatti cattle,32,mix,625,135.5,str
-2020-10-20,matt clough,72,ang,550,138,str
-2020-10-20,matt clough,129,ang,625,137.25,str
-2020-10-20,joe mayo,57,ang,625,136.5,str
-2020-10-20,joe mayo,28,ang,700,129,str
-2020-10-20,steven smith,12,clr,620,136.5,str
-2020-10-20,steven smith,13,clr,740,131,str
-2020-10-20,william hatcher,19,clr,640,135,str
-2020-10-20,nelson taylor,28,mix,635,135,str
-2020-10-20,schubert ranches,24,clr,595,135,str
-2020-10-20,schubert ranches,33,clr,710,133,str
-2020-10-20,kyle & tammy wezel,36,clr,560,135,str
-2020-10-20,jerry palmer,28,ang,655,134,str
-2020-10-20,jerry palmer,36,ang,705,129.5,str
-2020-10-20,howard robertson,17,ang,585,134,str
-2020-10-20,rick howieson,48,clr,585,133.5,str
-2020-10-20,mike occhiato,21,clr,740,133,str
-2020-10-20,kevin hall,21,ang,570,133,str
-2020-10-20,tommy culler,21,mix,640,132.5,str
-2020-10-20,roger & pat schalla,32,clr,605,132.5,str
-2020-10-20,tony hass,11,clr,635,132.5,str
-2020-10-20,dorenkamp ranches,91,ang,560,132,str
-2020-10-20,jeremy cordova,27,ang,560,132,str
-2020-10-20,kuykendall ranches,16,char,735,131.5,str
-2020-10-20,berryman angus ranch,19,ang,710,131,str
-2020-10-20,hans hasser,21,ang,700,130,str
-2020-10-20,everett jackson,26,ang,640,129,str
-2020-10-20,lewis fillmore,36,mix,705,124,str
-2020-10-27,rising double r ranch,4,ang,330,183,str
-2020-10-27,rising double r ranch,9,ang,435,173,str
-2020-10-27,godfrey & johnson,18,clr,400,181,str
-2020-10-27,godfrey & johnson,47,clr,505,150,str
-2020-10-27,godfrey & johnson,15,clr,400,148,hfr
-2020-10-27,godfrey & johnson,41,clr,500,132,hfr
-2020-10-27,earl & clay reist,19,ang,390,181,str
-2020-10-27,earl & clay reist,29,ang,515,146,str
-2020-10-27,earl & clay reist,12,ang,365,159,hfr
-2020-10-27,earl & clay reist,39,ang,470,133,hfr
-2020-10-27,paul peterson,7,clr,445,176,str
-2020-10-27,paul peterson,14,clr,475,133,hfr
-2020-10-27,jonathan & matt bush,10,mix,395,171,str
-2020-10-27,jonathan & matt bush,25,mix,425,167,str
-2020-10-27,jonathan & matt bush,92,mix,520,150,str
-2020-10-27,jonathan & matt bush,15,mix,345,155,hfr
-2020-10-27,jonathan & matt bush,30,mix,525,136.75,hfr
-2020-10-27,l & m bagwell,13,clr,380,171,str
-2020-10-27,mike smotherman,8,ang,500,157.5,str
-2020-10-27,twin peaks ranch,28,char,465,155,str
-2020-10-27,twin peaks ranch,13,char,420,135,hfr
-2020-10-27,dan & becky doherty,16,ang,395,154,hfr
-2020-10-27,dan & becky doherty,52,ang,455,136,hfr
-2020-10-27,hal meredith,43,ang,505,150,str
-2020-10-27,kylie & kody ruzanski,12,char,475,148,str
-2020-10-27,bob peterson,21,ang,535,127.5,hfr
-2020-10-27,bobby eichman,20,clr,530,127,hfr
-2020-10-27,paul peterson,38,clr,560,130,hfr
-2020-10-27,earl & clay reist,45,ang,575,128.25,hfr
-2020-10-27,twin peaks ranch,63,char,575,126.5,hfr
-2020-10-27,twin peaks ranch,30,char,660,120,hfr
-2020-10-27,godfrey & johnson,32,clr,555,125.5,hfr
-2020-10-27,wes lewis,50,ang,565,125,hfr
-2020-10-27,dave poss,19,clr,545,125,hfr
-2020-10-27,floyd myers,24,char,560,123,hfr
-2020-10-27,m & g associates,34,ang,590,122,hfr
-2020-10-27,north fork ranch,11,clr,680,121,hfr
-2020-10-27,north fork ranch,20,clr,840,119.5,hfr
-2020-10-27,trampe ranches,44,ang,955,120,hfr
-2020-10-27,bill luther ranch,29,clr,705,120,hfr
-2020-10-27,l & m bagwell,38,clr,570,120,hfr
-2020-10-27,spann ranch,20,clr,970,119.5,hfr
-2020-10-27,paul peterson,41,clr,550,150.5,str
-2020-10-27,paul peterson,39,clr,655,134,str
-2020-10-27,cam & jennifer keeler,12,ang,545,148,str
-2020-10-27,dean maverick ranch,6,ang,560,147,str
-2020-10-27,justin osborne,12,ang,550,144,str
-2020-10-27,twin peaks ranch,58,char,575,141,str
-2020-10-27,twin peaks ranch,52,char,665,128.5,str
-2020-10-27,l & m bagwell,49,clr,590,138,str
-2020-10-27,rising double r ranch,17,ang,590,137,str
-2020-10-27,ryan orndoff,15,clr,615,135.5,str
-2020-10-27,ryan orndoff,23,clr,740,124,str
-2020-10-27,floyd myers,21,char,605,134,str
-2020-10-27,floyd myers,22,char,670,130,str
-2020-10-27,earl & clay reist,35,ang,610,133.5,str
-2020-10-27,jeff belveal,15,ang,745,132,str
-2020-10-27,sam crowther,18,clr,610,131,str
-2020-10-27,mike smotherman,16,ang,605,131,str
-2020-10-27,bill luther ranch,15,clr,613,130.5,str
-2020-10-27,bill luther ranch,16,clr,785,125,str
-2020-10-27,hal meredith,47,ang,610,130.25,str
-2020-10-27,4g mountain angus,14,ang,655,130,str
-2020-10-27,jonathan & matt bush,74,mix,615,130,str
-2020-10-27,m & g associates,30,ang,610,130,str
-2020-10-27,jej farms,14,clr,745,121.5,str
-2020-11-03,elk mountain cattle,37,clr,400,197.5,str
-2020-11-03,elk mountain cattle,24,clr,350,192.5,str
-2020-11-03,elk mountain cattle,82,clr,455,180,str
-2020-11-03,elk mountain cattle,43,clr,520,165.5,str
-2020-11-03,elk mountain cattle,31,clr,350,179,hfr
-2020-11-03,elk mountain cattle,51,clr,400,176,hfr
-2020-11-03,elk mountain cattle,69,clr,460,162,hfr
-2020-11-03,elk mountain cattle,32,clr,540,140,hfr
-2020-11-03,abrams loapân ranch,16,mix,345,189,str
-2020-11-03,abrams loapân ranch,25,mix,355,181,hfr
-2020-11-03,hawkins ranch,14,ang,435,186,str
-2020-11-03,hawkins ranch,23,ang,490,147,hfr
-2020-11-03,will ward,8,clr,330,181,hfr
-2020-11-03,will ward,14,clr,420,168,hfr
-2020-11-03,g l bagwell,23,ang,470,173.5,str
-2020-11-03,g l bagwell,17,ang,435,161,hfr
-2020-11-03,g l bagwell,64,ang,510,144,hfr
-2020-11-03,a quarter circle ranch,14,ang,390,170,hfr
-2020-11-03,a quarter circle ranch,27,ang,465,168,str
-2020-11-03,a quarter circle ranch,19,ang,460,140,hfr
-2020-11-03,russell groves,25,ang,475,169,str
-2020-11-03,russell groves,20,ang,475,152,hfr
-2020-11-03,kay miller,12,ang,480,168,str
-2020-11-03,jay handle,17,clr,505,165,str
-2020-11-03,dillon thomas,15,clr,505,164.5,str
-2020-11-03,dillon thomas,17,clr,480,153,hfr
-2020-11-03,twin peaks ranch,25,char,515,161.5,str
-2020-11-03,twin peaks ranch,29,char,470,154,hfr
-2020-11-03,taramarcaz ranch,12,mix,395,161,hfr
-2020-11-03,rutherford brothers,19,ang,505,157.5,str
-2020-11-03,rutherford brothers,16,ang,500,147,hfr
-2020-11-03,cienega cattle co,23,ang,530,156.5,str
-2020-11-03,cienega cattle co,14,ang,470,156,hfr
-2020-11-03,monte innes,114,clr,510,155,str
-2020-11-03,chad & jerry cochran,19,mix,470,149,hfr
-2020-11-03,buddy taylor,21,ang,535,139,hfr
-2020-11-03,vaughn johnson,20,clr,555,137.5,hfr
-2020-11-03,jeff menegatti,18,char,615,133.5,hfr
-2020-11-03,twin peaks ranch,77,char,575,132.5,hfr
-2020-11-03,cienega cattle co,29,ang,580,132,hfr
-2020-11-03,kevin davis,19,ang,565,130,hfr
-2020-11-03,g l bagwell,39,ang,575,129,hfr
-2020-11-03,red canyon ranch,39,lim,560,129,hfr
-2020-11-03,zach blacksten,21,ang,670,128.5,hfr
-2020-11-03,faucette l & c,31,clr,805,125.5,hfr
-2020-11-03,faucette l & c,28,clr,910,122,hfr
-2020-11-03,faucette l & c,40,clr,970,120,hfr
-2020-11-03,s l ranch,30,ang,625,125.5,hfr
-2020-11-03,walter & pepper,13,clr,610,124.5,hfr
-2020-11-03,larry copeland,23,mix,665,124,hfr
-2020-11-03,bob webb,26,ang,575,123,hfr
-2020-11-03,dan borrego,25,ang,565,152.5,str
-2020-11-03,dan borrego,20,ang,630,136.5,str
-2020-11-03,hawkins ranch,28,ang,555,150,str
-2020-11-03,buddy taylor,21,ang,570,147.5,str
-2020-11-03,kevin davis,30,ang,570,146.5,str
-2020-11-03,twin peaks ranch,87,char,595,146,str
-2020-11-03,twin peaks ranch,64,char,685,136,str
-2020-11-03,bart & mccarroll,24,ang,595,142.5,str
-2020-11-03,jeff menegatti,16,char,620,141.5,str
-2020-11-03,jeff menegatti,20,char,725,133,str
-2020-11-03,wilma mosher,41,ang,600,141.5,str
-2020-11-03,wade mosher,37,ang,595,141.5,str
-2020-11-03,s l ranch,36,ang,625,140.5,str
-2020-11-03,s l ranch,34,ang,710,131.5,str
-2020-11-03,rutherford brothers,17,ang,645,140,str
-2020-11-03,larry copeland,23,mix,710,138,str
-2020-11-03,bob webb,30,ang,620,136,str
-2020-11-03,red canyon ranch,34,lim,620,135,str
-2020-11-03,kay miller,25,ang,620,135,str
-2020-11-03,zach blacksten,17,ang,720,134,str
-2020-11-03,g l bagwell,35,ang,655,133,str
-2020-11-03,pepper & walter,20,clr,685,132,str
-2020-11-03,full draw outfitters,23,mix,665,131,str
-2020-11-03,bar 19 trust,15,mix,710,127,str
-2020-11-10,crowther ranch,22,mix,340,200,str
-2020-11-10,crowther ranch,57,mix,410,184,str
-2020-11-10,crowther ranch,97,mix,495,165.25,str
-2020-11-10,crowther ranch,38,mix,360,160,hfr
-2020-11-10,crowther ranch,57,mix,430,146,hfr
-2020-11-10,hutcherson ranch,13,clr,395,195,str
-2020-11-10,hutcherson ranch,65,clr,515,166,str
-2020-11-10,denny larsen,14,clr,395,195,str
-2020-11-10,denny larsen,33,clr,480,173,str
-2020-11-10,edwards ranch,26,mix,425,190,str
-2020-11-10,edwards ranch,76,mix,500,165.5,str
-2020-11-10,edwards ranch,22,mix,405,166,hfr
-2020-11-10,edwards ranch,75,mix,490,147,hfr
-2020-11-10,will ward,15,clr,400,194,str
-2020-11-10,will ward,12,clr,505,162,str
-2020-11-10,kennon decker,27,clr,395,187,str
-2020-11-10,kennon decker,48,clr,505,160,str
-2020-11-10,kennon decker,23,clr,380,162,hfr
-2020-11-10,buddy elze,24,ang,440,186,str
-2020-11-10,buddy elze,81,ang,540,161,str
-2020-11-10,buddy elze,51,ang,495,147.5,hfr
-2020-11-10,ox cart ranch,31,clr,455,184,str
-2020-11-10,ox cart ranch,88,clr,530,162,str
-2020-11-10,ox cart ranch,102,clr,490,155,hfr
-2020-11-10,fuyu farms,17,ang,445,184,str
-2020-11-10,weirich brothers,13,ang,485,176,str
-2020-11-10,weirich brothers,42,ang,500,144,hfr
-2020-11-10,bledsoe brothers,17,ang,465,171,str
-2020-11-10,bledsoe brothers,32,ang,420,163,hfr
-2020-11-10,dean jagers,23,clr,505,170,str
-2020-11-10,dean jagers,27,clr,480,148,hfr
-2020-11-10,spear p ranch,11,mix,505,163,str
-2020-11-10,monte richardson,18,clr,475,156,hfr
-2020-11-10,eleven v ranch,11,clr,440,156,hfr
-2020-11-10,corey fischbacher,28,clr,440,155,hfr
-2020-11-10,leonard cattle co,17,clr,480,148,hfr
-2020-11-10,greg shalberg,25,clr,545,141,hfr
-2020-11-10,weirich brothers,51,ang,590,140,hfr
-2020-11-10,dean jagers,116,clr,545,139.75,hfr
-2020-11-10,dean jagers,142,clr,640,135.75,hfr
-2020-11-10,jake & gale tempel,20,ang,605,136.5,hfr
-2020-11-10,willy faris,20,mix,675,136,hfr
-2020-11-10,leonard cattle co,36,clr,615,135.5,hfr
-2020-11-10,spear p ranch,19,mix,600,135.5,hfr
-2020-11-10,olson farms,29,ang,570,135.5,hfr
-2020-11-10,olson farms,30,ang,655,133,hfr
-2020-11-10,ramon zamora,11,ang,600,135,hfr
-2020-11-10,monte richardson,28,clr,570,135,hfr
-2020-11-10,ox cart ranch,51,clr,560,135,hfr
-2020-11-10,jim & anne russell,13,clr,560,135,hfr
-2020-11-10,davis & bowen,37,clr,550,135,hfr
-2020-11-10,dylan emick,40,ang,555,134.5,hfr
-2020-11-10,denny larsen,16,clr,565,134,hfr
-2020-11-10,cole kirksey,21,clr,570,133,hfr
-2020-11-10,will ward,28,clr,550,132.5,hfr
-2020-11-10,eleven v ranch,31,clr,615,130.5,hfr
-2020-11-10,perry barnes,19,ang,680,130,hfr
-2020-11-10,jim goodrich,32,lim,645,129,hfr
-2020-11-10,becky callaway,33,ang,650,126,hfr
-2020-11-10,jim hribar,15,clr,710,124,hfr
-2020-11-10,leonard cattle co,55,clr,570,158.25,str
-2020-11-10,weirich brothers,49,ang,555,157,str
-2020-11-10,weirich brothers,30,ang,660,147.5,str
-2020-11-10,karney kattle kompany,25,clr,555,156,str
-2020-11-10,karney kattle kompany,57,clr,655,147.5,str
-2020-11-10,greg shalberg,13,clr,550,156,str
-2020-11-10,greg shalberg,25,clr,625,148,str
-2020-11-10,olson farms,23,ang,585,153,str
-2020-11-10,olson farms,57,ang,690,140.5,str
-2020-11-10,dean jagers,106,clr,600,152.5,str
-2020-11-10,dean jagers,122,clr,680,146.25,str
-2020-11-10,carol root,27,ang,580,151,str
-2020-11-10,carol root,15,ang,620,149,str
-2020-11-10,hutcherson ranch,61,clr,595,148.5,str
-2020-11-10,monte richardson,36,clr,615,147.5,str
-2020-11-10,bob canda,38,ang,600,147.5,str
-2020-11-10,dylan emick,26,ang,660,145.5,str
-2020-11-10,steve johnson,40,lim,630,145,str
-2020-11-10,davis & bowen,25,clr,655,144.25,str
-2020-11-10,spear p ranch,25,mix,625,143,str
-2020-11-10,jim & anne russell,26,clr,690,139,str
-2020-11-10,jake & gale tempel,37,ang,685,137.5,str
-2020-11-10,perry barnes,25,ang,675,137,str
-2020-11-10,perry barnes,28,ang,780,129,str
-2020-11-10,jim goodrich,28,lim,725,133,str
-2020-11-10,becky callaway,17,ang,725,131,str
-2020-11-10,randy porco,10,char,725,131,str
-2020-11-17,gould ranch,39,clr,305,202,str
-2020-11-17,gould ranch,102,clr,385,200,str
-2020-11-17,gould ranch,99,clr,375,161,hfr
-2020-11-17,gould ranch,56,clr,420,161,hfr
-2020-11-17,mac garcia,7,lim,360,196,str
-2020-11-17,ty & dennis crowther,27,clr,440,194,str
-2020-11-17,ty & dennis crowther,21,clr,530,160.5,str
-2020-11-17,ty & dennis crowther,21,clr,470,154,hfr
-2020-11-17,s & r mcendree,109,ang,460,193,str
-2020-11-17,s & r mcendree,81,ang,530,164.5,str
-2020-11-17,s & r mcendree,28,ang,380,157,hfr
-2020-11-17,s & r mcendree,156,ang,470,153,hfr
-2020-11-17,trey jagers,10,clr,370,190,str
-2020-11-17,trey jagers,49,clr,475,166,str
-2020-11-17,trey jagers,38,clr,500,142,hfr
-2020-11-17,joe bill nunn,27,clr,460,187,str
-2020-11-17,joe bill nunn,18,clr,525,158.5,str
-2020-11-17,joe bill nunn,32,clr,470,155,hfr
-2020-11-17,esty ranch,22,ang,440,184,str
-2020-11-17,esty ranch,57,ang,525,166.5,str
-2020-11-17,esty ranch,56,ang,475,164,hfr
-2020-11-17,kenneth garcia,20,clr,360,180,str
-2020-11-17,charlie crockett,6,ang,480,175,str
-2020-11-17,charlie crockett,27,ang,495,154.5,hfr
-2020-11-17,todd shallbetter,43,clr,455,173,str
-2020-11-17,justin emick,50,ang,510,168,str
-2020-11-17,justin emick,37,ang,520,145.5,hfr
-2020-11-17,allen kasparian,42,clr,485,165,str
-2020-11-17,allen kasparian,72,clr,505,147,hfr
-2020-11-17,sterling whitaker,16,clr,525,163,str
-2020-11-17,sterling whitaker,11,clr,470,156,hfr
-2020-11-17,kelvin wollert,21,clr,525,160.5,str
-2020-11-17,kelvin wollert,12,clr,535,143,hfr
-2020-11-17,reed ranch,30,mix,515,160.5,str
-2020-11-17,daniel borrego,13,ang,540,155,str
-2020-11-17,hutcherson ranch,58,ang,475,155,hfr
-2020-11-17,davis ranch inc,20,lim,535,154,str
-2020-11-17,joe muniz,12,ang,425,150,hfr
-2020-11-17,roy oliver,33,lim,545,141,hfr
-2020-11-17,louden ranch,72,ang,595,148.5,hfr
-2020-11-17,hutcherson ranch,60,ang,550,142.5,hfr
-2020-11-17,davis ranch inc,19,lim,560,139,hfr
-2020-11-17,treadwell ranch,11,ang,550,138,hfr
-2020-11-17,trey & danny sullivan,20,ang,550,137,hfr
-2020-11-17,sterling whitaker,28,clr,605,135,hfr
-2020-11-17,charlie crockett,39,clr,605,135,hfr
-2020-11-17,tommy crawford,20,ang,580,135,hfr
-2020-11-17,jake pargin,25,clr,595,134.5,hfr
-2020-11-17,spear w ranch,18,ang,615,133.5,hfr
-2020-11-17,joe bill nunn,29,clr,625,133.5,hfr
-2020-11-17,gary hill,31,ang,660,133,hfr
-2020-11-17,idi ranch,64,clr,670,132.5,hfr
-2020-11-17,idi ranch,59,clr,740,125.5,hfr
-2020-11-17,jessie bagwell,23,ang,570,131,hfr
-2020-11-17,james harkins,33,clr,620,129.5,hfr
-2020-11-17,doug bagwell,31,clr,635,128.5,hfr
-2020-11-17,kyle & september atwater,16,ang,660,128,hfr
-2020-11-17,huffaker ranch,17,mix,680,126.5,hfr
-2020-11-17,a slash cattle co,33,mix,700,125,hfr
-2020-11-17,a slash cattle co,30,mix,780,123,hfr
-2020-11-17,lonnie jackson,28,ang,665,122.5,hfr
-2020-11-17,jolly cattle co,11,clr,880,117,hfr
-2020-11-17,kelly goetsch,26,ang,1040,115,hfr
-2020-11-17,jake pargin,16,clr,565,154,str
-2020-11-17,jake pargin,26,clr,670,140,str
-2020-11-17,jake pargin,15,clr,760,137,str
-2020-11-17,danny sullivan,33,ang,575,152,str
-2020-11-17,james harkins,14,clr,580,151,str
-2020-11-17,allen kasparian,63,clr,585,150,str
-2020-11-17,esty ranch,14,ang,615,148,str
-2020-11-17,tracy kester,88,ang,575,148,str
-2020-11-17,justin emick,58,ang,610,146.5,str
-2020-11-17,kelly goetsch,18,ang,600,144,str
-2020-11-17,jessie bagwell,23,ang,610,143.5,str
-2020-11-17,treadwell ranch,44,ang,670,142,str
-2020-11-17,tommy crawford,20,ang,640,142,str
-2020-11-17,derrell & greg shawcroft,56,clr,625,142,str
-2020-11-17,derrell & greg shawcroft,86,clr,715,138.25,str
-2020-11-17,sterling whitaker,24,clr,650,141.5,str
-2020-11-17,kyle & september atwater,10,ang,630,141,str
-2020-11-17,kyle & september atwater,14,ang,700,138,str
-2020-11-17,gary hill,42,ang,690,140.5,str
-2020-11-17,gary hill,47,ang,760,139,str
-2020-11-17,garth perry,14,ang,710,140,str
-2020-11-17,carl thrall estate,31,clr,700,139,str
-2020-11-17,lonnie jackson,37,ang,600,139,str
-2020-11-17,idi ranch,58,clr,715,138,str
-2020-11-17,idi ranch,59,clr,755,137.25,str
-2020-11-17,spear w ranch,27,ang,695,138,str
-2020-11-17,doug bagwell,31,clr,705,137.25,str
-2020-11-17,drew lower,18,clr,725,136,str
-2020-11-17,huffaker ranch,72,mix,705,134,str
-2020-11-17,darrell nimmo,1,clr,1650,59,cow
-2020-11-17,ben christensen,5,clr,1140,59,cow
-2020-11-17,jolly cattle co,22,clr,1340,57,cow
-2020-11-17,daris jutten,14,clr,1240,56,cow
-2020-11-17,martille faatz,6,clr,1205,56,cow
-2020-11-17,kyle atwater,1,clr,1390,54,cow
-2020-11-17,weston meardon,28,clr,1235,53.75,cow
-2020-11-17,leroy martinez,18,clr,1175,53.5,cow
-2020-11-17,alvin carter,1,clr,1160,53,cow
-2020-11-17,tommy crawford,7,mix,1130,53,cow
-2020-11-17,reynolds ranch,10,mix,1380,52.75,cow
-2020-11-17,bb ranch,4,mix,1430,52,cow
-2020-11-17,adelaido martinez,8,clr,1260,51.5,cow
-2020-11-17,perry barnes,10,clr,1580,49,cow
-2020-11-17,esty ranch,12,clr,1415,48.25,cow
-2020-11-17,chris matthew,2,char,2165,80.5,bull
+2019-09-24,dan direzza,20,ang,370,180,str
+2019-09-24,earnie foote,2,clr,325,174,str
+2019-09-24,jared depriest,3,clr,405,172.5,str
+2019-09-24,breen enterprises,8,ang,395,171,str
+2019-09-24,phillip madrid,5,ang,375,164,str
+2019-09-24,vito valdez,6,clr,405,162.5,str
+2019-09-24,grosetta ranch,14,clr,500,158,str
+2019-09-24,richard adams,23,mix,640,136,hfr
+2019-09-24,silva farm & ranch,17,clr,555,135,hfr
+2019-09-24,james martinez,6,lim,545,134,hfr
+2019-09-24,dan direzza,71,ang,570,134,hfr
+2019-09-24,smith & winston,13,clr,745,133.5,hfr
+2019-09-24,bob & tate watkins,16,ang,930,126.5,hfr
+2019-09-24,dan direzza,77,ang,555,155,str
+2019-09-24,breen enterprises,45,ang,550,151,str
+2019-09-24,silva farm & ranch,16,clr,595,145,str
+2019-09-24,lorenzo valdez,9,clr,585,143,str
+2019-09-24,james martinez,7,lim,585,142.5,str
+2019-09-24,smith & winston,16,clr,785,141,str
+2019-09-24,laurel baker,7,clr,845,140.5,str
+2019-09-24,a slash cattle,25,beefmstr,800,137.5,str
+2019-09-24,john hegstrom,6,clr,900,131.5,str
+2019-09-24,thane seufer,1,clr,1350,58,cow
+2019-09-24,dwight proctor,1,clr,1355,56.5,cow
+2019-09-24,steve rzepka,1,mot,1190,55,cow
+2019-09-24,tracy kester,6,mix,1255,54.5,cow
+2019-09-24,clint plagg,2,mix,1055,54,cow
+2019-09-24,bill kester,4,mix,1250,53.5,cow
+2019-09-24,jeff jolly,9,mix,1055,53.5,cow
+2019-09-24,j open a partnership,2,clr,2080,80.5,bull
+2019-09-24,avelino muniz,1,clr,1990,80.5,bull
+2019-09-24,erik melgoza,1,clr,1785,80.5,bull
+2019-09-24,jeff jolly,1,clr,1695,79,bull
+2019-09-24,arnold lugo,1,clr,2105,78,bull
+2019-09-24,richard berg,1,clr,1920,77,bull
+2019-09-24,tony vick,1,clr,1405,76,bull
+2019-09-24,clarence balser,1,clr,1920,75,bull
+2019-09-24,dan direzza,20,ang,370,180,str
+2019-09-24,earnie foote,2,clr,325,174,str
+2019-09-24,jared depriest,3,clr,405,172.5,str
+2019-09-24,breen enterprises,8,ang,395,171,str
+2019-09-24,phillip madrid,5,ang,375,164,str
+2019-09-24,vito valdez,6,clr,405,162.5,str
+2019-09-24,grosetta ranch,14,clr,500,158,str
+2019-09-24,richard adams,23,mix,640,136,hfr
+2019-09-24,silva farm & ranch,17,clr,555,135,hfr
+2019-09-24,james martinez,6,lim,545,134,hfr
+2019-09-24,dan direzza,71,ang,570,134,hfr
+2019-09-24,smith & winston,13,clr,745,133.5,hfr
+2019-09-24,bob & tate watkins,16,ang,930,126.5,hfr
+2019-09-24,dan direzza,77,ang,555,155,str
+2019-09-24,breen enterprises,45,ang,550,151,str
+2019-09-24,silva farm & ranch,16,clr,595,145,str
+2019-09-24,lorenzo valdez,9,clr,585,143,str
+2019-09-24,james martinez,7,lim,585,142.5,str
+2019-09-24,smith & winston,16,clr,785,141,str
+2019-09-24,laurel baker,7,clr,845,140.5,str
+2019-09-24,a slash cattle,25,beefmstr,800,137.5,str
+2019-09-24,john hegstrom,6,clr,900,131.5,str
+2019-09-24,thane seufer,1,clr,1350,58,cow
+2019-09-24,dwight proctor,1,clr,1355,56.5,cow
+2019-09-24,steve rzepka,1,mot,1190,55,cow
+2019-09-24,tracy kester,6,mix,1255,54.5,cow
+2019-09-24,clint plagg,2,mix,1055,54,cow
+2019-09-24,bill kester,4,mix,1250,53.5,cow
+2019-09-24,jeff jolly,9,mix,1055,53.5,cow
+2019-09-24,j open a partnership,2,clr,2080,80.5,bull
+2019-09-24,avelino muniz,1,clr,1990,80.5,bull
+2019-09-24,erik melgoza,1,clr,1785,80.5,bull
+2019-09-24,jeff jolly,1,clr,1695,79,bull
+2019-09-24,arnold lugo,1,clr,2105,78,bull
+2019-09-24,richard berg,1,clr,1920,77,bull
+2019-09-24,tony vick,1,clr,1405,76,bull
+2019-09-24,clarence balser,1,clr,1920,75,bull
+2019-09-24,dan direzza,20,ang,370,180,str
+2019-09-24,earnie foote,2,clr,325,174,str
+2019-09-24,jared depriest,3,clr,405,172.5,str
+2019-09-24,breen enterprises,8,ang,395,171,str
+2019-09-24,phillip madrid,5,ang,375,164,str
+2019-09-24,vito valdez,6,clr,405,162.5,str
+2019-09-24,grosetta ranch,14,clr,500,158,str
+2019-09-24,richard adams,23,mix,640,136,hfr
+2019-09-24,silva farm & ranch,17,clr,555,135,hfr
+2019-09-24,james martinez,6,lim,545,134,hfr
+2019-09-24,dan direzza,71,ang,570,134,hfr
+2019-09-24,smith & winston,13,clr,745,133.5,hfr
+2019-09-24,bob & tate watkins,16,ang,930,126.5,hfr
+2019-09-24,dan direzza,77,ang,555,155,str
+2019-09-24,breen enterprises,45,ang,550,151,str
+2019-09-24,silva farm & ranch,16,clr,595,145,str
+2019-09-24,lorenzo valdez,9,clr,585,143,str
+2019-09-24,james martinez,7,lim,585,142.5,str
+2019-09-24,smith & winston,16,clr,785,141,str
+2019-09-24,laurel baker,7,clr,845,140.5,str
+2019-09-24,a slash cattle,25,beefmstr,800,137.5,str
+2019-09-24,john hegstrom,6,clr,900,131.5,str
+2019-09-24,thane seufer,1,clr,1350,58,cow
+2019-09-24,dwight proctor,1,clr,1355,56.5,cow
+2019-09-24,steve rzepka,1,mot,1190,55,cow
+2019-09-24,tracy kester,6,mix,1255,54.5,cow
+2019-09-24,clint plagg,2,mix,1055,54,cow
+2019-09-24,bill kester,4,mix,1250,53.5,cow
+2019-09-24,jeff jolly,9,mix,1055,53.5,cow
+2019-09-24,j open a partnership,2,clr,2080,80.5,bull
+2019-09-24,avelino muniz,1,clr,1990,80.5,bull
+2019-09-24,erik melgoza,1,clr,1785,80.5,bull
+2019-09-24,jeff jolly,1,clr,1695,79,bull
+2019-09-24,arnold lugo,1,clr,2105,78,bull
+2019-09-24,richard berg,1,clr,1920,77,bull
+2019-09-24,tony vick,1,clr,1405,76,bull
+2019-09-24,clarence balser,1,clr,1920,75,bull
+2019-10-01,freeman family ranch,9,ang,365,172.5,str
+2019-10-01,d & t sullivan,18,ang,450,171,str
+2019-10-01,shoemaker ranch,8,ang,435,170,str
+2019-10-01,jerry norton,7,ang,485,165,str
+2019-10-01,david jones,14,mix,460,160,str
+2019-10-01,randy phillips,8,ang,500,159,str
+2019-10-01,tom sikes,9,ang,430,158,str
+2019-10-01,zach kopasz,6,ang,415,157,str
+2019-10-01,double dot ranch,14,ang,480,150,hfr
+2019-10-01,nunn ranches,15,ang,505,140,hfr
+2019-10-01,larry salazar,7,mix,525,137,hfr
+2019-10-01,zach kopasz,16,ang,645,146.5,hfr
+2019-10-01,peterson ranch,39,mix,630,145,hfr
+2019-10-01,river watch ranch,16,mix,680,144,hfr
+2019-10-01,nunn ranches,21,ang,605,142,hfr
+2019-10-01,palmer brothers,17,ang,680,141.5,hfr
+2019-10-01,justin bennett,7,ang,675,140.5,hfr
+2019-10-01,bill hatcher,31,clr,740,139.75,hfr
+2019-10-01,clinton huffaker,11,gelb,720,139.5,hfr
+2019-10-01,ron collins,11,ang,765,139,hfr
+2019-10-01,bill kolb,32,mix,750,139,hfr
+2019-10-01,david jones,16,mix,770,136,hfr
+2019-10-01,rymes ranch,39,clr,750,136,hfr
+2019-10-01,shoemaker ranch,19,ang,565,136,hfr
+2019-10-01,double dot ranch,18,ang,585,135,hfr
+2019-10-01,jerry norton,23,ang,575,135,hfr
+2019-10-01,nunn ranches,20,ang,535,158,str
+2019-10-01,freeman family ranch,19,ang,550,154,str
+2019-10-01,seal pharmacy,25,mix,755,153.25,str
+2019-10-01,peterson ranch inc,54,mix,730,153.1,str
+2019-10-01,river watch ranch,12,mix,720,153,str
+2019-10-01,wade sumpter,21,ang,645,153,str
+2019-10-01,clinton huffaker,4,gelb,750,152.5,str
+2019-10-01,zach kopasz,5,ang,670,152.5,str
+2019-10-01,david jones,19,mix,655,151.5,str
+2019-10-01,jordan family partnership,13,ang,770,151,str
+2019-10-01,jerry norton,25,ang,550,151,str
+2019-10-01,randy phillips,15,ang,550,151,str
+2019-10-01,larry salazar,12,clr,580,149,str
+2019-10-01,shoemaker ranch,25,ang,595,148,str
+2019-10-01,ron collins,10,ang,810,147,str
+2019-10-01,bill hatcher,12,clr,770,147,str
+2019-10-01,sombrilla ranch,37,mix,810,146.5,str
+2019-10-01,double dot ranch,38,ang,670,145.5,str
+2019-10-01,dave kaess,28,mix,820,145,str
+2019-10-01,js ranch,32,ang,840,144.6,str
+2019-10-01,diamond s ranch,11,clr,640,144.5,str
+2019-10-01,d & t sullivan,18,ang,655,142.5,str
+2019-10-01,jt schalla,11,ang,935,134,str
+2019-10-01,steve payne,13,clr,1000,125,str
+2019-10-01,paul packer,1,clr,1415,67,cow
+2019-10-01,diamond s ranch,1,clr,1675,65,cow
+2019-10-01,andy palestino,2,mix,1635,63.5,cow
+2019-10-01,john thatcher,1,clr,1510,63,cow
+2019-10-01,double dot ranch,13,mix,1430,62,cow
+2019-10-01,jay himes,1,clr,1420,61,cow
+2019-10-01,j open a,5,clr,1375,60,cow
+2019-10-01,rising double r ranch,4,clr,1380,58.5,cow
+2019-10-01,danny sullivan,8,mix,1350,58.5,cow
+2019-10-01,kelby sikes,1,clr,1150,58,cow
+2019-10-01,lori elam,1,clr,1360,57.5,cow
+2019-10-01,tom sikes,9,mix,1265,56.5,cow
+2019-10-01,freeman family ranch,14,brwn,1090,56,cow
+2019-10-01,unwin family ranch,6,clr,1385,54,cow
+2019-10-01,trent brooks,3,clr,1160,50,cow
+2019-10-01,double dot ranch,3,clr,2125,91.5,bull
+2019-10-01,laurel baker,1,clr,1990,80,bull
+2019-10-01,shalom livestock,1,clr,1860,80,bull
+2019-10-01,jerry pursley,1,clr,1570,79,bull
+2019-10-01,rick markus,1,clr,1720,78.5,bull
+2019-10-01,k & k waggoner,1,clr,1830,78,bull
+2019-10-08,kerry campbell,10,ang,410,174,str
+2019-10-08,paul velasquez,6,clr,460,173,str
+2019-10-08,hopps ranch,6,clr,410,172.5,str
+2019-10-08,jacobo salazar,6,ang,380,172,str
+2019-10-08,jesus moreno,4,clr,450,172,str
+2019-10-08,adrian daugaard,6,clr,440,170,str
+2019-10-08,g & r tatsch,13,clr,470,166.5,str
+2019-10-08,lane gooden,22,ang,460,166,str
+2019-10-08,bob eichman,15,ang,450,166,str
+2019-10-08,hugh wittemore,37,ang,505,165,str
+2019-10-08,dan direzza,15,ang,480,163,str
+2019-10-08,dalton davis,9,ang,495,161,str
+2019-10-08,fidel florez,14,ang,520,157,str
+2019-10-08,geiger ranch,13,sim,480,157,str
+2019-10-08,russell casados,8,clr,475,156,str
+2019-10-08,keith packard,11,ang,510,153,str
+2019-10-08,tony hass,10,clr,540,152,str
+2019-10-08,dave stroh,13,char,485,151,str
+2019-10-08,zoe geiger,12,clr,465,134,hfr
+2019-10-08,tony hass,6,clr,695,134,hfr
+2019-10-08,phil jensen,6,ang,650,134,hfr
+2019-10-08,paul garrett,6,gel,580,134,hfr
+2019-10-08,russell groves,9,clr,700,133.5,hfr
+2019-10-08,lewis cattle co,22,mix,555,132.5,hfr
+2019-10-08,jasper kenney,9,clr,780,131.5,hfr
+2019-10-08,gary & karen hall,10,ang,595,131,hfr
+2019-10-08,andreatta ranch,13,clr,620,129,hfr
+2019-10-08,sierra ranch,32,clr,745,128.5,hfr
+2019-10-08,reinhardt ranch,11,clr,900,126,hfr
+2019-10-08,kerry campbell,5,ang,590,126,hfr
+2019-10-08,dalton davis,18,ang,575,124,hfr
+2019-10-08,lane gooden,14,ang,570,123,hfr
+2019-10-08,g & r tatsch,17,clr,575,122.5,hfr
+2019-10-08,jacobo salazar,10,ang,550,122.5,hfr
+2019-10-08,gayle alexander,14,gel,600,120.5,hfr
+2019-10-08,jesus moreno,7,clr,550,150,str
+2019-10-08,velasquez ranch,7,clr,560,149.5,str
+2019-10-08,geiger ranch,13,sim,555,149,str
+2019-10-08,spear p cattle,33,mix,735,148.25,str
+2019-10-08,dan direzza,27,ang,565,147.75,str
+2019-10-08,g & r tatsch,12,clr,615,147.5,str
+2019-10-08,dalton davis,15,ang,625,146,str
+2019-10-08,andreatta ranch,9,ang,640,144.5,str
+2019-10-08,hugh wittemore,41,ang,600,145.25,str
+2019-10-08,tony hass,9,clr,755,144,str
+2019-10-08,gary & karen hall,5,ang,600,144,str
+2019-10-08,wek cattle,9,ang,760,143.5,str
+2019-10-08,stace davis,21,mix,615,142.5,str
+2019-10-08,bob eichman,17,ang,555,142.5,str
+2019-10-08,jacobo salazar,3,ang,750,142,str
+2019-10-08,gayle alexander,18,gel,635,141,str
+2019-10-08,yolanda wilson,8,clr,760,140,str
+2019-10-08,paul velasquez,7,clr,680,140,str
+2019-10-08,russell groves,19,ang,830,138.5,str
+2019-10-08,sierra ranch,40,clr,680,138.5,str
+2019-10-08,satterly gulch ranch,27,clr,860,134,str
+2019-10-08,reinhardt ranch,16,mix,940,125.5,str
+2019-10-08,bob watkins,7,clr,1415,61.5,cow
+2019-10-08,shane schulz,9,clr,1410,61,cow
+2019-10-08,wek cattle,12,clr,1600,60.5,cow
+2019-10-08,max wilson,12,clr,1390,60,cow
+2019-10-08,andy franklin,1,clr,1420,58,cow
+2019-10-08,redden ranches,6,clr,1280,57,cow
+2019-10-08,chris downare,1,clr,1155,57,cow
+2019-10-08,welch cattle co,12,clr,1130,57,cow
+2019-10-08,matt wilson,7,clr,1130,57,cow
+2019-10-08,bradley cattle co,6,clr,1265,56.5,cow
+2019-10-08,jerry palmer,1,clr,1280,55,cow
+2019-10-08,elk mountain cattle,17,mix,1190,54.5,cow
+2019-10-08,unwin family ranch,4,mix,1340,53,cow
+2019-10-08,avelino muniz,2,clr,1755,52,cow
+2019-10-08,shoemaker ranch,6,mix,1200,50.5,cow
+2019-10-08,jerry bogner,1,clr,1910,82,bull
+2019-10-08,albert dionisio,1,clr,1820,80,bull
+2019-10-08,timothy quinn,1,clr,1720,79,bull
+2019-10-08,redd agri,7,mix,1705,79,bull
+2019-10-08,cs cattle,3,mix,1675,78,bull
+2019-10-08,sarah gist,1,clr,1775,76.5,bull
+2019-10-15,m & m bradley,11,ang,445,181,str
+2019-10-15,randy & tony sena,5,clr,325,180,str
+2019-10-15,circle dot ranch,14,clr,380,178,str
+2019-10-15,bar corp ranch,10,ang,400,175,str
+2019-10-15,edgar ranches,8,ang,370,175,str
+2019-10-15,lester & martin bagwell,19,clr,475,171,str
+2019-10-15,muddy valley ranch,9,ang,485,166,str
+2019-10-15,morris & kittye mosimann,5,ang,525,159,str
+2019-10-15,mark harwood farms,12,ang,525,155.5,str
+2019-10-15,gary hall,9,ang,465,134,hfr
+2019-10-15,donna neish,12,mix,540,132,hfr
+2019-10-15,james bond,5,ang,535,130,hfr
+2019-10-15,brian hoy,8,clr,715,139.5,hfr
+2019-10-15,smith farms,12,clr,700,137,hfr
+2019-10-15,reed & gregg,5,clr,680,135,hfr
+2019-10-15,morris & kittye mosimann,20,ang,565,134,hfr
+2019-10-15,equity investments corp,15,brang,795,131.5,hfr
+2019-10-15,gary hall,12,ang,580,131,hfr
+2019-10-15,edgar ranches,15,ang,580,127.5,hfr
+2019-10-15,lester & martin bagwell,56,clr,570,127,hfr
+2019-10-15,morris & kittye mosimann,17,ang,630,151,str
+2019-10-15,edgar ranches,25,ang,645,150,str
+2019-10-15,dusty eikenberg,8,ang,635,149,str
+2019-10-15,gary hall,24,ang,700,148.5,str
+2019-10-15,marvin price,12,clr,655,147,str
+2019-10-15,lane gooden,13,clr,780,146,str
+2019-10-15,john koch,11,clr,740,146,str
+2019-10-15,lester & martin bagwell,21,clr,635,146,str
+2019-10-15,james bond,7,ang,625,145,str
+2019-10-15,larry menegatti,14,lim,645,144,str
+2019-10-15,brian hoy,18,clr,805,142.5,str
+2019-10-15,mason ranch,59,mix,880,137.5,str
+2019-10-15,equity investments corp,22,brang,870,137,str
+2019-10-15,reed & gregg,13,clr,935,133.5,str
+2019-10-15,craig green,1,clr,1395,64,cow
+2019-10-15,jt schalla,3,clr,1305,63.5,cow
+2019-10-15,thatcher land & cattle,1,clr,1545,63,cow
+2019-10-15,chateau hill cattle co,11,clr,1460,61.5,cow
+2019-10-15,dusty eikenberg,7,mix,1445,61.5,cow
+2019-10-15,shawn davis,4,clr,1555,61,cow
+2019-10-15,myron sams,4,clr,1465,61,cow
+2019-10-15,dillon thomas,7,clr,1305,59.5,cow
+2019-10-15,red wind farms,1,clr,1910,59,cow
+2019-10-15,chad andreatta,7,clr,1355,58,cow
+2019-10-15,shoemaker ranch,3,clr,1245,58,cow
+2019-10-15,bill barnett,1,clr,1165,58,cow
+2019-10-15,cc mcclure,1,clr,1870,83,bull
+2019-10-15,jv ranches,8,clr,1940,79,bull
+2019-10-15,clay monks,1,clr,1590,78,bull
+2019-12-03,2b land & livestock,13,clr,430,197.5,str
+2019-12-03,justin emick,10,ang,430,192.5,str
+2019-12-03,dan gaudreault,14,lim,380,189,str
+2019-12-03,jd schier,7,rd ang,405,186,str
+2019-12-03,reynolds ranch,8,lim,445,185,str
+2019-12-03,chad johnson,6,mix,435,177,str
+2019-12-03,twin peaks ranch,17,char,500,176,str
+2019-12-03,chris downare,6,lim,505,166,str
+2019-12-03,los pachecos ranch,6,ang,475,165,str
+2019-12-03,stephen schurr,26,clr,545,164,str
+2019-12-03,red rock ranch,16,clr,530,162,str
+2019-12-03,davey family ranch,12,clr,530,161,str
+2019-12-03,k&t cattle,23,ang,540,155,str
+2019-12-03,dillon thomas,9,clr,455,147,hfr
+2019-12-03,gary dirks,16,clr,460,146,hfr
+2019-12-03,tl cattle & doherty,38,ang,470,144.5,hfr
+2019-12-03,lupe young,11,mix,520,136,hfr
+2019-12-03,red rock ranch,42,clr,750,141,hfr
+2019-12-03,chris matthew,57,char,780,140,hfr
+2019-12-03,willy farris,17,gel,740,139.5,hfr
+2019-12-03,gery dirks,15,clr,555,137,hfr
+2019-12-03,rutherford bros,21,ang,565,136.5,hfr
+2019-12-03,hugh whittemore,37,ang,635,135,hfr
+2019-12-03,timberline cattle inc,42,ang,540,135,hfr
+2019-12-03,dillon thomas,39,clr,555,135,hfr
+2019-12-03,tony valdez,16,ang,580,134.5,hfr
+2019-12-03,sam trotter,15,mix,740,133,hfr
+2019-12-03,spear p cattle,22,ang,635,133,hfr
+2019-12-03,richard partington,17,clr,580,131,hfr
+2019-12-03,twin peaks ranch,86,char,665,130,hfr
+2019-12-03,kent ricken,10,clr,580,130,hfr
+2019-12-03,brown & sons,16,ang,575,129.5,hfr
+2019-12-03,dustin matthew,17,clr,800,128,hfr
+2019-12-03,kevin brown,8,clr,570,128,hfr
+2019-12-03,kyler brown,13,ang,590,126,hfr
+2019-12-03,twin peaks ranch,72,char,605,173.5,str
+2019-12-03,timberline cattle inc,27,ang,570,158,str
+2019-12-03,gery dirks,12,clr,560,157,str
+2019-12-03,tony valdez,23,ang,565,156,str
+2019-12-03,triangle h bar simmentals,7,simmental,720,153,str
+2019-12-03,dave kaess,62,ang,710,152.75,str
+2019-12-03,brown & sons inc,12,ang,585,152.5,str
+2019-12-03,kent johnston,81,clr ang,720,150.25,str
+2019-12-03,rutherford bros,21,ang,645,150,str
+2019-12-03,chris matthew,55,char,840,149.75,str
+2019-12-03,spear p cattle,35,ang,745,149,str
+2019-12-03,sam trotter,12,mix,820,148.5,str
+2019-12-03,red rock ranch,74,clr,765,147.5,str
+2019-12-03,lupe young,17,mix,600,147.5,str
+2019-12-03,dustin matthew,22,ang,890,147.25,str
+2019-12-03,chris downare,10,lim,645,147,str
+2019-12-03,davey family ranch,28,clr,605,147,str
+2019-12-03,lazy v cattle co,74,ang,760,145,str
+2019-12-03,kyler brown,12,ang,620,145,str
+2019-12-03,richard partington,24,clr,640,143,str
+2019-12-03,reynolds ranch,12,mix,1435,59,cow
+2019-12-03,spann ranches,8,mix,1255,59,cow
+2019-12-03,pargin ranch,10,clr,1560,58,cow
+2019-12-03,jolly cattle co,25,clr,1395,57.6,cow
+2019-12-03,jim hanratty,9,mix,1370,56,cow
+2019-12-03,jason espinoza,3,clr,1180,55.5,cow
+2019-12-03,san jose ranch,8,clr,1110,55.5,cow
+2019-12-03,bruce hass,3,clr,1315,54,cow
+2019-12-03,ben christensen,1,clr,1765,53,cow
+2019-12-03,reynolds ranch,1,clr,1960,90.5,bull
+2019-12-03,o d espinoza & sons,2,clr,1860,90,bull
+2019-12-03,max deherrera,1,clr,1860,88,bull
+2019-12-10,lester yoder,19,ang,350,204,str
+2019-12-10,geroux family,11,ang,410,200,str
+2019-12-10,tracy kester,18,lim,395,199,str
+2019-12-10,mangus ranch,23,clr,370,199,str
+2019-12-10,vv ranch,17,ang,445,190,str
+2019-12-10,edwards ranch,18,lim,435,189,str
+2019-12-10,welch cattle co,8,ang,455,185,str
+2019-12-10,reynolds ranch,8,lim,425,180,str
+2019-12-10,marc mckinley,17,ang,480,173.5,str
+2019-12-10,wineinger-davis ranch,28,ang,510,172,str
+2019-12-10,ronnie roberts,35,ang,540,169.5,str
+2019-12-10,steven reed,35,ang,535,169.5,str
+2019-12-10,brown brothers,31,ang,530,168,str
+2019-12-10,law family canyon,18,ang,500,146,hfr
+2019-12-10,4g mountain angus,13,ang,515,137.5,hfr
+2019-12-10,joe bill nunn,29,ang,575,144.5,hfr
+2019-12-10,mangus ranch,23,clr,545,143,hfr
+2019-12-10,guerrieri land & cattle,30,clr,570,141,hfr
+2019-12-10,welch cattle co,49,ang,580,140.5,hfr
+2019-12-10,monty mattson,9,ang,590,138.5,hfr
+2019-12-10,sam vance,22,clr,575,138.5,hfr
+2019-12-10,edwards ranch,42,lim,580,138,hfr
+2019-12-10,wilson ranch,43,ang,560,137.5,hfr
+2019-12-10,gary hill,47,ang,655,137,hfr
+2019-12-10,kyle barnett,23,clr,595,137,hfr
+2019-12-10,david mccow,28,clr,595,137,hfr
+2019-12-10,w & b quinlan,13,clr,580,137,hfr
+2019-12-10,ray cundiff,14,ang,705,134,hfr
+2019-12-10,anthony tamburelli,22,ang,610,134,hfr
+2019-12-10,chris kester,25,ang,600,134,hfr
+2019-12-10,tracy kester,31,lim,595,134,hfr
+2019-12-10,joe mayo,14,ang,550,134,hfr
+2019-12-10,harvey cundiff,16,clr,695,133,hfr
+2019-12-10,lionel valdez,15,ang,630,132,hfr
+2019-12-10,jimmy brown,21,ang,970,125,hfr
+2019-12-10,wineinger-davis ranch,65,ang,565,167.5,str
+2019-12-10,joe bill nunn,29,ang,580,165,str
+2019-12-10,welch cattle co,33,ang,560,163,str
+2019-12-10,marc mckinley,37,ang,575,162.5,str
+2019-12-10,law family canyon,15,ang,550,162,str
+2019-12-10,edwards ranch,43,lim,535,162,str
+2019-12-10,lionel valdez,15,ang,570,160,str
+2019-12-10,caldon farms,14,ang,550,160,str
+2019-12-10,wade yoder,29,clr,560,157.5,str
+2019-12-10,tracy kester,124,lim,565,156,str
+2019-12-10,hudson cattle co,24,ang,615,155,str
+2019-12-10,fort lewis college,15,ang,615,152,str
+2019-12-10,ronnie roberts,65,ang,625,151,str
+2019-12-10,jake pargin,27,ang,635,147,str
+2019-12-10,monty mattson,24,ang,650,148,str
+2019-12-10,wilson ranch,48,ang,630,148,str
+2019-12-10,pargin ranch,102,ang,690,147.5,str
+2019-12-10,clinton huffaker,21,mix,665,147,str
+2019-12-10,4g mountain angus,17,ang,595,147,str
+2019-12-10,larry minkler,22,clr,620,146,str
+2019-12-10,w & b quinlan,49,clr,700,145.5,str
+2019-12-10,steven reed,30,ang,635,144,str
+2019-12-10,ray cundiff,27,ang,720,143,str
+2019-12-10,mohammad abuokal,27,mix,630,143,str
+2019-12-10,anthony tamburelli,14,ang,715,140,str
+2019-12-10,chris kester,19,ang,605,140,str
+2019-12-10,greg higel,42,lim,755,138,str
+2019-12-10,brown brothers,55,ang,665,136.5,str
+2019-12-10,harvey cundiff,12,clr,805,136,str
+2019-12-10,frank ghilarducci,27,char,810,134.25,str
+2019-12-10,kyle barnett,24,clr,710,134,str
+2019-12-10,kevin stephens,42,clr,800,133.5,str
+2019-12-17,todd shallbetter,9,ang,400,202,str
+2019-12-17,jeremy faucette,4,ang,330,197.5,str
+2019-12-17,jolly cattle co,9,clr,430,197,str
+2019-12-17,marlene crowther,9,gel,450,196,str
+2019-12-17,meadow ranch,5,ang,405,193,str
+2019-12-17,andrew mitchek,5,clr,480,188,str
+2019-12-17,joseph pope,9,lim,390,187,str
+2019-12-17,randy gomez,2,clr,310,174,hfr
+2019-12-17,tyler shawcroft,9,clr,530,171,str
+2019-12-17,brian taft,7,lim,530,170,str
+2019-12-17,dennis bollmann,12,clr,415,169,hfr
+2019-12-17,caldon cattle,8,ang,515,166,str
+2019-12-17,field land & cattle,10,clr,380,166,hfr
+2019-12-17,dorenkamp ranch,45,ang,420,165,hfr
+2019-12-17,leonard cattle co,23,ang,530,141,hfr
+2019-12-17,sam webster,10,clr,510,141,hfr
+2019-12-17,dorenkamp ranch,37,ang,585,141.5,hfr
+2019-12-17,terry beckner,44,char,560,141.5,hfr
+2019-12-17,joseph pope,17,lim,575,141,hfr
+2019-12-17,dennis bollmann,16,clr,560,141,hfr
+2019-12-17,morris mosimann,13,ang,565,140.5,hfr
+2019-12-17,flying horse ranch,45,clr,670,137,hfr
+2019-12-17,jeremy faucette,26,ang,590,137,hfr
+2019-12-17,leonard cattle co,15,ang,605,135,hfr
+2019-12-17,kenneth hull,8,lim,635,134,hfr
+2019-12-17,glen ausmus,6,ang,605,130,hfr
+2019-12-17,tyler shawcroft,7,clr,570,130,hfr
+2019-12-17,meadow ranch,6,ang,590,170,str
+2019-12-17,morris mosimann,9,clr,550,170,str
+2019-12-17,terry beckner,34,char,575,168,str
+2019-12-17,tommy crawford,5,ang,550,167,str
+2019-12-17,dennis bollmann,10,clr,590,165,str
+2019-12-17,andrew mitchek,19,clr,565,164,str
+2019-12-17,leonard cattle co,40,ang,600,159,str
+2019-12-17,flying horse ranch,15,ang,615,158,str
+2019-12-17,jeremy faucette,47,ang,630,156.5,str
+2019-12-17,joseph pope,13,lim,620,156,str
+2019-12-17,glen ausmus,7,ang,605,156,str
+2019-12-17,absmyer brothers,15,clr,665,152,str
+2019-12-17,ab benavidez,13,clr,625,152,str
+2019-12-17,garland ranch,34,clr,695,149.5,str
+2019-12-17,castle & tl bar,12,ang,785,146,str
+2019-12-17,willy faris,15,mix,755,145,str
+2019-12-17,bayfield ranch,12,clr,810,141.5,str
+2019-12-17,reeves cattle co,10,clr,735,140,str
+2019-12-17,mckenzie land & livestock,14,mix,730,130.5,str
+2019-12-17,brent fillmore,10,mix,1375,54,cow
+2019-12-17,jerimian wells,1,clr,1700,53,cow
+2019-12-17,wineinger-davis ranch,3,clr,1480,53,cow
+2019-12-17,david hamilton,1,clr,1365,53,cow
+2019-12-17,doug stone,1,clr,1235,53,cow
+2019-12-17,steve ferree,4,mix,1155,53,cow
+2019-12-17,bland ranch,23,mix,1240,51.5,cow
+2019-12-17,meadow ranch,13,mix,1285,51,cow
+2019-12-17,vernon dillon,1,clr,1235,50,cow
+2019-12-17,meadow ranch,18,mix,1200,50,cow
+2019-12-17,roy hocker,4,clr,1240,49,cow
+2019-12-17,brandon ferris,9,mix,1185,48.75,cow
+2019-12-17,sam webster,2,clr,1030,48,cow
+2019-12-17,heath proctor,1,clr,1300,47.5,cow
+2019-12-17,field land & cattle,7,mix,1175,47.5,cow
+2019-12-17,clay johnson,1,clr,1435,47,cow
+2019-12-17,union land & grazing,20,clr,1055,46,cow
+2019-12-17,jose munoz,1,clr,1900,78.5,bull
+2019-12-17,caldon cattle,3,clr,1990,78,bull
+2019-12-17,clay johnson,1,clr,1955,76.5,bull
+2020-01-07,trampe ranches,10,ang,450,205,str
+2020-01-07,phil treadwell,21,ang,465,200,str
+2020-01-07,bert & vickie buhr,6,ang,465,200,str
+2020-01-07,barclay ranch,16,ang,450,200,str
+2020-01-07,danny higgins,14,lim,365,200,str
+2020-01-07,fred bregar,9,clr,425,199,str
+2020-01-07,joseph kropf,15,clr,480,192.5,str
+2020-01-07,gilbert groves,16,ang,485,187,str
+2020-01-07,kenneth treadwell,37,ang,515,181,str
+2020-01-07,john duvall,23,ang,540,179,str
+2020-01-07,twisted arrow cattle,16,ang,530,177.5,str
+2020-01-07,cody duvall,22,ang,545,174,str
+2020-01-07,valdez land & livestock,26,clr,520,150,hfr
+2020-01-07,willett cattle co,21,ang,520,147,hfr
+2020-01-07,joe bill nunn,88,ang,550,158,hfr
+2020-01-07,laurence baird,16,ang,615,153,hfr
+2020-01-07,frank coppa,14,lim,570,145,hfr
+2020-01-07,twisted arrow cattle,51,ang,580,143,hfr
+2020-01-07,bill gray,39,ang,555,141.5,hfr
+2020-01-07,phil lane,27,clr,600,141,hfr
+2020-01-07,kenneth treadwell,19,ang,570,141,hfr
+2020-01-07,gilbert groves,23,ang,600,140,hfr
+2020-01-07,phil treadwell,87,ang,595,140,hfr
+2020-01-07,debbie wallace,43,mix,585,140,hfr
+2020-01-07,leonel chacon,12,clr,565,140,hfr
+2020-01-07,alvin russell,35,mix,640,139,hfr
+2020-01-07,cheyenne sprouse,15,clr,605,139,hfr
+2020-01-07,dwight martin,20,gel,615,138.5,hfr
+2020-01-07,steve uhland,21,clr,690,136,hfr
+2020-01-07,j l d partnership,21,clr,560,136,hfr
+2020-01-07,richard dickerson,24,gel,705,135,hfr
+2020-01-07,john proctor,37,ang,700,135,hfr
+2020-01-07,twisted arrow cattle,13,ang,725,133,hfr
+2020-01-07,ricken farm & ranch,202,mix,745,130.25,hfr
+2020-01-07,lindholm farms,23,ang,760,130,hfr
+2020-01-07,ricken land & cattle,45,lim,770,126.25,hfr
+2020-01-07,hansen cattle inc,129,lim,825,125.75,hfr
+2020-01-07,levi hansen,20,lim,810,125.5,hfr
+2020-01-07,cheyenne sprouse,12,clr,565,177,str
+2020-01-07,joseph kropf,30,clr,560,176,str
+2020-01-07,joe bill nunn,62,ang,580,173,str
+2020-01-07,laurence baird,14,ang,550,173,str
+2020-01-07,kenneth treadwell,29,ang,595,172.5,str
+2020-01-07,simpson & allen,44,clr,630,172,str
+2020-01-07,cody duvall,25,ang,590,171,str
+2020-01-07,frank ghilarducci,24,char,580,171,str
+2020-01-07,phil treadwell,21,ang,590,170.5,str
+2020-01-07,bar nothing ranch,24,ang,595,170,str
+2020-01-07,danny higgins,22,lim,560,170,str
+2020-01-07,willett cattle co,21,ang,615,168,str
+2020-01-07,gilbert groves,34,ang,615,166.5,str
+2020-01-07,wade yoder,17,clr,560,166.5,str
+2020-01-07,unwin family ranch,17,ang,645,163,str
+2020-01-07,john duvall,12,ang,600,162,str
+2020-01-07,john proctor,43,ang,685,154,str
+2020-01-07,phil lane,25,clr,695,152,str
+2020-01-07,steve uhland,20,clr,695,151.5,str
+2020-01-07,richard dickerson,35,gel,735,149,str
+2020-01-07,moeller ranch llc,80,ang,700,146.25,str
+2020-01-07,ron peters,20,ang,815,143,str
+2020-01-07,hansen cattle inc,39,lim,730,143,str
+2020-01-07,lindholm farms,15,ang,785,141.5,str
+2020-01-07,campion ranch company,26,ang,780,140.25,str
+2020-01-07,dwight martin,32,gel,805,140,str
+2020-01-07,ricken farm & ranch,120,mix,780,139.6,str
+2020-01-07,ricken land & cattle,49,lim,855,135.25,str
+2020-01-07,levi hansen,25,lim,905,130,str
+2020-01-14,jda land & cattle,38,ang,350,212,str
+2020-01-14,j l cattle,21,ang,390,197.5,str
+2020-01-14,evan durham,5,ang,395,195,str
+2020-01-14,magnolia ranches,14,ang,415,191,str
+2020-01-14,tim erickson,39,ang,465,187,str
+2020-01-14,ox cart ranch,8,ang,490,184,str
+2020-01-14,bert buhr,9,ang,485,182.5,str
+2020-01-14,cash massey,28,clr,480,182.5,str
+2020-01-14,randy howell,21,clr,495,180,str
+2020-01-14,kim cooley,7,ang,460,180,str
+2020-01-14,shane shulz,24,clr,495,179,str
+2020-01-14,mcclure ranch,34,clr,505,177,str
+2020-01-14,karney kattle kompany,6,ang,470,161,hfr
+2020-01-14,charles crockett,13,ang,480,158,hfr
+2020-01-14,roy hocker,27,ang,530,154,hfr
+2020-01-14,donald andreatta,80,gel,555,156,hfr
+2020-01-14,ox cart ranch,45,ang,570,155,hfr
+2020-01-14,allen & simpson,28,mix,560,150.5,hfr
+2020-01-14,karney kattle kompany,32,ang,580,149,hfr
+2020-01-14,chet baker,20,ang,570,146.5,hfr
+2020-01-14,jack hamilton,14,mix,560,146,hfr
+2020-01-14,brock canty,19,ang,565,145,hfr
+2020-01-14,bert buhr,23,ang,555,144,hfr
+2020-01-14,jack maranville,28,clr,585,141.5,hfr
+2020-01-14,bonds ranch,38,clr,670,140,hfr
+2020-01-14,david morgan,43,ang,610,140,hfr
+2020-01-14,charles crockett,21,ang,570,140,hfr
+2020-01-14,roy hocker,39,ang,620,139.5,hfr
+2020-01-14,stacey sober,29,clr,615,139.5,hfr
+2020-01-14,randy howell,26,clr,585,139.5,hfr
+2020-01-14,larry johnson,29,clr,675,139,hfr
+2020-01-14,elfirio romero,30,lim,685,138,hfr
+2020-01-14,stan krieger,28,clr,640,138,hfr
+2020-01-14,john reed,23,ang,630,137.5,hfr
+2020-01-14,thirsty peak ranch,23,char,625,136.5,hfr
+2020-01-14,casey pridemore,26,clr,605,136.5,hfr
+2020-01-14,lusk farms,23,ang,735,136,hfr
+2020-01-14,paul peterson,26,ang,770,135,hfr
+2020-01-14,tim erickson,53,ang,550,177.5,str
+2020-01-14,ox cart ranch,57,ang,585,174,str
+2020-01-14,donald andreatta,80,gel,570,174,str
+2020-01-14,charles crockett,21,ang,560,172,str
+2020-01-14,larry hooper,28,clr,575,171.5,str
+2020-01-14,kim cooley,28,ang,565,170,str
+2020-01-14,cash massey,60,clr,550,169,str
+2020-01-14,roy hocker,20,ang,545,166,str
+2020-01-14,mike pearce,25,ang,605,165,str
+2020-01-14,j l cattle,21,ang,600,165,str
+2020-01-14,stan krieger,34,clr,600,162,str
+2020-01-14,john reed,30,ang,580,161,str
+2020-01-14,magnolia ranches,44,ang,615,159,str
+2020-01-14,stacey sober,27,ang,655,156,str
+2020-01-14,randy howell,38,clr,640,155.5,str
+2020-01-14,rafter j cattle,15,ang,650,155,str
+2020-01-14,scott maranville,37,clr,615,155,str
+2020-01-14,casey pridemore,25,clr,685,153.5,str
+2020-01-14,don foster,45,ang,665,152.5,str
+2020-01-14,david morgan,30,ang,655,151.5,str
+2020-01-14,jack hamilton,27,mix,685,150.5,str
+2020-01-14,bill duzenack,19,ang,715,150,str
+2020-01-14,brock canty,48,ang,680,149.5,str
+2020-01-14,don larsen,24,ang,675,148.5,str
+2020-01-14,louden cattle co,30,ang,680,147,str
+2020-01-14,elfirio romero,41,lim,765,145.5,str
+2020-01-14,jim paine,46,clr,740,145.5,str
+2020-01-14,lusk farms,26,ang,755,144.5,str
+2020-01-14,bonds ranch,65,ang,770,143,str
+2020-01-14,paul peterson,36,ang,795,139.75,str
+2020-01-21,anthony greenbank,23,clr,405,221,str
+2020-01-21,john stoltzfus,4,mix,385,215,str
+2020-01-21,mark wertz,3,clr,405,210,str
+2020-01-21,jerry knapp,13,clr,445,209,str
+2020-01-21,cash massey,10,clr,430,208,str
+2020-01-21,marc mckinley,10,clr,390,205,str
+2020-01-21,brock canty,12,ang,410,204,str
+2020-01-21,arlene mizer,11,ang,470,202,str
+2020-01-21,matt mosher,21,ang,495,196.5,str
+2020-01-21,clay hasser,7,mix,420,195,str
+2020-01-21,torres ranch,18,ang,480,192.5,str
+2020-01-21,ronnie roberts,15,ang,480,189,str
+2020-01-21,spear p cattle,14,clr,535,182,str
+2020-01-21,leonard olomon,18,ang,530,176.5,str
+2020-01-21,old agency ranch,13,ang,395,176,hfr
+2020-01-21,ziegler farm & ranch,21,clr,505,160,hfr
+2020-01-21,kris hasser,10,mix,535,174,str
+2020-01-21,carlene mosher,42,ang,485,172,hfr
+2020-01-21,carlene mosher,39,ang,570,157.5,hfr
+2020-01-21,ronnie roberts,45,ang,585,156,hfr
+2020-01-21,spear p cattle,22,clr,540,156,hfr
+2020-01-21,leonard olomon,30,ang,560,154,hfr
+2020-01-21,brent fillmore,37,mix,545,153,hfr
+2020-01-21,anthony greenbank,15,clr,545,152,hfr
+2020-01-21,jda land & cattle,29,clr,610,146.5,hfr
+2020-01-21,ziegler farm & ranch,51,clr,650,144,hfr
+2020-01-21,jose munoz,14,ang,600,144,hfr
+2020-01-21,kevin hronich,18,clr,650,143,hfr
+2020-01-21,bryan brunelli,28,lim,640,143,hfr
+2020-01-21,kris hasser,34,mix,610,142.5,hfr
+2020-01-21,lester snethen,17,clr,685,141.5,hfr
+2020-01-21,curto family farms,61,mix,600,141.25,hfr
+2020-01-21,travis thomas,14,char,705,141,hfr
+2020-01-21,austin huntoon,17,ang,700,139.5,hfr
+2020-01-21,nick knapp,12,ang,665,139.5,hfr
+2020-01-21,frank coppa,10,clr,710,139,hfr
+2020-01-21,robert clark,15,mix,685,138.5,hfr
+2020-01-21,faron edens,25,clr,635,138,hfr
+2020-01-21,phil & ryan hemphill,52,ang,745,137.75,hfr
+2020-01-21,john beaty,11,ang,770,137,hfr
+2020-01-21,walter anderson,29,clr,760,137,hfr
+2020-01-21,hyatt & hyatt,30,ang,755,136.5,hfr
+2020-01-21,wilma mosher,35,ang,560,180,str
+2020-01-21,jerry knapp,28,clr,545,180,str
+2020-01-21,jda land & cattle,34,clr,555,178,str
+2020-01-21,john stoltzfus,26,mix,570,177,str
+2020-01-21,torres ranch,39,ang,555,175.5,str
+2020-01-21,matt mosher,16,ang,580,175,str
+2020-01-21,arlene mizer,16,ang,580,170.5,str
+2020-01-21,bryan brunelli,32,lim,625,168,str
+2020-01-21,spear p cattle,39,clr,645,165,str
+2020-01-21,jose munoz,15,ang,615,165,str
+2020-01-21,mark wertz,11,clr,605,164,str
+2020-01-21,curto family farms,23,mix,595,160,str
+2020-01-21,moeller ranch,20,clr,650,154.5,str
+2020-01-21,walter anderson,32,clr,710,150,str
+2020-01-21,ziegler farm & ranch,47,clr,685,150,str
+2020-01-21,kevin hronich,23,clr,720,148.5,str
+2020-01-21,nick knapp,20,ang,725,147.5,str
+2020-01-21,brown & sons inc,21,ang,685,147.5,str
+2020-01-21,hyatt & hyatt,28,ang,700,147,str
+2020-01-21,kris hasser,22,mix,740,145,str
+2020-01-21,john beaty,17,ang,795,140,str
+2020-01-21,phil & ryan hemphill,30,ang,790,140,str
+2020-01-21,frank coppa,12,clr,770,139.5,str
+2020-01-28,tyler turner,11,ang,420,209,str
+2020-01-28,carlton farms,76,clr,460,201,str
+2020-01-28,hyatt & hyatt,8,clr,470,194,str
+2020-01-28,larry hooper,7,clr,475,193,str
+2020-01-28,mike weirich,5,ang,460,192,str
+2020-01-28,buddy adamic,5,ang,335,192,str
+2020-01-28,edwards ranch,3,clr,450,186,bull
+2020-01-28,m & s shaw properties,11,ang,485,184,str
+2020-01-28,william curtis,8,clr strs,370,181,bull
+2020-01-28,jason barnard,16,clr,515,180,str
+2020-01-28,anthony adamic,4,ang,465,178,str
+2020-01-28,chad wright,5,clr,510,177.5,str
+2020-01-28,frank loewen,8,ang,495,177,str
+2020-01-28,gary mestas,6,ang,515,174,str
+2020-01-28,franklin kuhn,6,clr,495,172,str
+2020-01-28,tom caldon,7,ang,515,171,str
+2020-01-28,brent wertz,4,clr,500,153,hfr
+2020-01-28,gary heaston,8,mix,515,150,hfr
+2020-01-28,off family ranch,8,gel,520,149,hfr
+2020-01-28,hyatt & hyatt,28,clr,550,156,hfr
+2020-01-28,gary mestas,23,ang,560,153.5,hfr
+2020-01-28,travis thomas,14,clr,590,148,hfr
+2020-01-28,gary heaston,24,mix,610,146,hfr
+2020-01-28,w e k cattle,15,clr,600,145,hfr
+2020-01-28,albert francis,14,mix,585,145,hfr
+2020-01-28,larry hooper,34,clr,610,144,hfr
+2020-01-28,buddy adamic,8,ang,590,143,hfr
+2020-01-28,vernon john proctor,30,ang,620,142,hfr
+2020-01-28,kimberly gesink,14,ang,645,140,hfr
+2020-01-28,jacob friesen,15,clr,565,139,hfr
+2020-01-28,jim & greg higel,30,mix,665,138,hfr
+2020-01-28,alvin & matt carter,40,ang,745,135,hfr
+2020-01-28,gale temple,42,ang,735,135,hfr
+2020-01-28,hyatt & hyatt,43,clr,575,167.5,str
+2020-01-28,mike weirich,18,ang,540,167,str
+2020-01-28,gary mestas,24,ang,615,166,str
+2020-01-28,vernon john proctor,23,ang,605,163,str
+2020-01-28,charles zimmerman,8,clr,615,161,str
+2020-01-28,tyler turner,35,ang,630,160,str
+2020-01-28,jason barnard,50,clr,600,160,str
+2020-01-28,alvin & matt carter,13,ang,595,159,str
+2020-01-28,w e k cattle,11,clr,590,159,str
+2020-01-28,kimberly gesink,17,ang,635,156,str
+2020-01-28,jim & greg higel,13,mix,600,155,str
+2020-01-28,dutro farms,5,ang,655,153,str
+2020-01-28,eddie duvall,10,ang,605,147,str
+2020-01-28,bill gray,68,ang,700,141.5,str
+2020-01-28,frank loewen,23,ang,705,138,str
+2020-01-28,conrad albert,10,clr,720,136.5,str
+2020-01-28,dwight martin,6,clr,1380,63,cow
+2020-01-28,brandon dunn,1,clr,1250,62,cow
+2020-01-28,ron peters,1,clr,1160,60,cow
+2020-01-28,howard lester,5,mix,1545,58,cow
+2020-01-28,eddie duvall,2,clr,1380,58,cow
+2020-01-28,boyd ranch,5,char,1195,58,cow
+2020-01-28,edwards ranch,1,clr,1315,57,cow
+2020-01-28,bruce hass,4,clr,1280,57,cow
+2020-01-28,bob dutro,1,clr,1065,57,cow
+2020-01-28,tommy goodrich,2,clr,1070,55.5,cow
+2020-01-28,welch cattle company,2,clr,1415,55,cow
+2020-01-28,cooper moore,1,clr,1145,54,cow
+2020-01-28,jack gilleland,1,clr,1750,53,cow
+2020-01-28,lester ranches,1,char,2080,86,bull
+2020-01-28,boyd ranch,1,clr,1715,86,bull
+2020-01-28,scott crawford,1,clr,1595,86,bull
+2020-01-28,james deeth,1,clr,2265,81,bull
+2020-01-28,james martinez,1,clr,1680,80,bull
+2020-02-04,j l cattle,2,clr,375,182.5,str
+2020-02-04,todd wetzel,3,ang,465,180,str
+2020-02-04,rayleene thompson,10,ang,440,179,str
+2020-02-04,k & k ranch,7,clr,485,176,str
+2020-02-04,scott oliver,9,ang,510,171,str
+2020-02-04,r.s. ranch,16,clr,530,166,str
+2020-02-04,dave wilcox,8,clr,480,151,hfr
+2020-02-04,reskurtas west inc,11,ang,470,150,hfr
+2020-02-04,jeff smith,26,ang,570,144,hfr
+2020-02-04,todd wetzel,15,clr,640,141,hfr
+2020-02-04,reskurtas west inc,19,ang,550,141,hfr
+2020-02-04,moeller ranch,80,mix,625,139.5,hfr
+2020-02-04,k & k ranch,14,clr,555,136,hfr
+2020-02-04,bart carter,21,brang,620,135,hfr
+2020-02-04,r.s. ranch,29,clr,610,134.5,hfr
+2020-02-04,scott oliver,16,ang,605,134,hfr
+2020-02-04,albers ranch,34,clr,765,128,hfr
+2020-02-04,mohammad abuokal,17,mix,720,127.5,hfr
+2020-02-04,red cliff ranch,6,clr,695,127.5,hfr
+2020-02-04,j open a partnership,21,ang,565,172,str
+2020-02-04,jeff smith,15,ang,585,167.5,str
+2020-02-04,todd wetzel,12,ang,640,163,str
+2020-02-04,chase & malone,12,ang,590,163,str
+2020-02-04,rayleene thompson,29,ang,585,162,str
+2020-02-04,bart carter,11,brang,545,160,str
+2020-02-04,reskurtas west inc,20,ang,625,156,str
+2020-02-04,r.s. ranch,25,clr,625,144,str
+2020-02-04,marilyn owen,9,clr,710,137.5,str
+2020-02-04,tommy goodrich,1,clr,1420,59,cow
+2020-02-04,jim & doris goodrich,1,clr,1265,56,cow
+2020-02-04,jeff smith,4,clr,1530,55.5,cow
+2020-02-04,dale mcclave,1,clr,1345,48,cow
+2020-02-04,frank coppa,1,clr,1100,42,cow
+2020-02-04,hunter uhland,2,clr,905,42,cow
+2020-02-04,hansen cattle inc,1,lim,2325,84,bull
+2020-02-04,boyd ranch llc,1,char,1650,79,bull
+2020-02-11,evan durham,8,ang,450,201,str
+2020-02-11,venacio beltran,9,lim,400,197.5,str
+2020-02-11,john george,17,ang,475,191,str
+2020-02-11,floyd myers,5,mix,480,189,str
+2020-02-11,scott wagner,8,clr,470,188,str
+2020-02-11,lost valley ranch,4,ang,460,183,str
+2020-02-11,kenneth hull,6,lim,490,179,str
+2020-02-11,hadley durham,10,ang,515,177,str
+2020-02-11,hal meredith,8,ang,475,168,hfr
+2020-02-11,david brown,3,clr,400,168,hfr
+2020-02-11,simpson & allen,6,mix,460,167,hfr
+2020-02-11,doug dillon,6,ang,460,165,hfr
+2020-02-11,john schoolland,12,mix,535,157,hfr
+2020-02-11,caleb duvall,3,ang,510,155,hfr
+2020-02-11,joe bill nunn,25,ang,545,160,hfr
+2020-02-11,wilma mosher,14,ang,545,160,hfr
+2020-02-11,roger meinzer,19,ang,565,151,hfr
+2020-02-11,venacio beltran,8,lim,565,146,hfr
+2020-02-11,nissen farms llc,6,ang,575,145,hfr
+2020-02-11,doug dillon,25,ang,565,144,hfr
+2020-02-11,hadley durham,14,ang,580,143,hfr
+2020-02-11,evan durham,24,ang,615,138,hfr
+2020-02-11,bill barnett,13,mix,630,134,hfr
+2020-02-11,david hamilton,75,char,715,130,hfr
+2020-02-11,john schoolland,10,mix,675,125,hfr
+2020-02-11,eric ellenberger,25,char,800,118,hfr
+2020-02-11,john george,35,ang,565,173,str
+2020-02-11,evan durham,41,ang,560,167.5,str
+2020-02-11,scott wagner,18,clr,560,162,str
+2020-02-11,john schoolland,5,mix,600,161,str
+2020-02-11,mike walter,5,ang,590,159,str
+2020-02-11,roger meinzer,11,ang,655,158,str
+2020-02-11,venacio beltran,6,lim,635,158,str
+2020-02-11,joe bill nunn,21,ang,625,158,str
+2020-02-11,nissen farms,30,ang,655,155.5,str
+2020-02-11,hadley durham,18,ang,670,152,str
+2020-02-11,bill barnett,10,mix,680,148,str
+2020-02-11,david hamilton,67,char,825,139,str
+2020-02-11,doug dillon,29,ang,810,135,str
+2020-02-11,hansen cattle,1,clr,1380,63,cow
+2020-02-11,j open a cattle,2,clr,1450,62.5,cow
+2020-02-11,davis ranch,8,clr,1180,61,cow
+2020-02-11,alvin russell,1,clr,1355,60,cow
+2020-02-11,jd livestock,2,clr,1310,60,cow
+2020-02-11,bruce hass,4,clr,1340,59,cow
+2020-02-11,martinez ranch,1,clr,1125,59,cow
+2020-02-11,dean reynolds,5,clr,1330,58,cow
+2020-02-11,tatum chase,1,clr,1300,58,cow
+2020-02-11,william rooks,1,clr,1240,57.5,cow
+2020-02-11,brett stone,1,clr,1385,55,cow
+2020-02-11,tim quinn,1,clr,1040,54,cow
+2020-02-11,kent johnston,4,clr,1380,53.5,cow
+2020-02-11,stirrup ranch,4,clr,1940,81.5,bull
+2020-02-11,fred mason,1,clr,1755,79,bull
+2020-02-11,bill barnett,1,clr,1670,79,bull
+2020-02-18,elk mountain cattle,11,mix,390,200,str
+2020-02-18,justin bennett,11,ang,390,200,str
+2020-02-18,dolores marincich,3,clr,370,195,str
+2020-02-18,chris kester,9,ang,460,190,str
+2020-02-18,spear w ranch,7,clr,425,188,str
+2020-02-18,justin malespini,4,clr,360,187.5,str
+2020-02-18,randy petrie,6,ang,495,184,str
+2020-02-18,bob gilley,6,clr,465,184,str
+2020-02-18,cloud crest ranch,9,ang,465,182,str
+2020-02-18,tyrel reed,13,clr,530,180.5,str
+2020-02-18,carlos garcia,6,clr,375,179,hfr
+2020-02-18,frank ghilarducci,4,ang,440,171,hfr
+2020-02-18,scott hansen,11,clr,570,150,hfr
+2020-02-18,spear w ranch,18,clr,605,147,hfr
+2020-02-18,bob beamon,13,mix,555,147,hfr
+2020-02-18,lester ranches,18,char,620,146.5,hfr
+2020-02-18,bruce hall,10,clr,565,145.5,hfr
+2020-02-18,frank ghilarducci,11,ang,620,144,hfr
+2020-02-18,lee crowther,17,clr,645,142.5,hfr
+2020-02-18,steve ferree,18,mix,595,141.5,hfr
+2020-02-18,randy petrie,32,ang,715,132,hfr
+2020-02-18,bar q ranch,23,clr,680,132,hfr
+2020-02-18,ricken farm & ranch,141,mix,740,129,hfr
+2020-02-18,ricken land & cattle,45,lim,800,126,hfr
+2020-02-18,bob beamon,7,mix,550,179,str
+2020-02-18,lester ranches inc,10,char,545,178.5,str
+2020-02-18,frank ghilarducci,32,ang,575,176,str
+2020-02-18,justin bennett,31,ang,595,173.5,str
+2020-02-18,spear w ranch,21,clr,550,173,str
+2020-02-18,connie shotton,12,clr,655,162,str
+2020-02-18,randy petrie,16,ang,660,159,str
+2020-02-18,steve ferree,9,mix,600,159,str
+2020-02-18,patrick landry,13,clr,660,151,str
+2020-02-18,larry damgaard,7,ang,705,140,str
+2020-02-18,jim schleining,10,ang,700,139.5,str
+2020-02-18,ricken land & cattle,88,lim,865,138.5,str
+2020-02-18,ricken farm & ranch,144,mix,790,137.85,str
+2020-02-18,tl bar ranch,62,mix,850,137,str
+2020-02-18,stavely ranch,37,ang,865,134.5,str
+2020-02-18,marvin price,1,clr,1385,65.5,cow
+2020-02-18,jim walter,2,clr,1225,65,cow
+2020-02-18,tate rohr,1,clr,1630,64,cow
+2020-02-18,dwight proctor,1,clr,1175,62.5,cow
+2020-02-18,brandon ferris,1,clr,1145,62,cow
+2020-02-18,ed king farms,1,clr,1365,61,cow
+2020-02-18,jack miller,1,clr,1150,60.5,cow
+2020-02-18,leachman cattle,1,clr,1275,60,cow
+2020-02-18,jeff smith,2,clr,1350,59,cow
+2020-02-18,michael cox,1,clr,1235,59,cow
+2020-02-18,monte richardson,5,clr,1115,59,cow
+2020-02-18,running creek ranch,1,lim,1945,85,bull
+2020-02-18,l cross ranch,6,clr,1870,85,bull
+2020-02-18,olson farm & ranch,1,clr,1950,81,bull
+2020-02-18,conrad albert,1,clr,1850,80,bull
+2020-02-18,reynolds ranch,2,clr,1515,80,bull
+2020-02-18,andrew gonzales,1,clr,1895,78,bull
+2020-02-25,josh weimer,7,clr,380,192.5,str
+2020-02-25,leroy mosher,9,clr,440,191,str
+2020-02-25,tammy mccann,4,clr,385,190,str
+2020-02-25,kelly bond & sons,4,clr,460,187,str
+2020-02-25,rex steven,19,clr,430,186.5,str
+2020-02-25,blue allen,3,clr,460,186,str
+2020-02-25,steve hopkins,4,clr,520,166,str
+2020-02-25,bates cattle co,5,clr,510,163,str
+2020-02-25,kirk & elizabeth noe,8,ang,505,154,hfr
+2020-02-25,rafter j cattle,18,ang,520,153.5,hfr
+2020-02-25,chase & malone,7,clr,500,150,hfr
+2020-02-25,leroy mosher,26,clr,545,156.5,hfr
+2020-02-25,kirk & elizabeth noe,18,ang,545,150,hfr
+2020-02-25,chase & malone,20,clr,605,145.5,hfr
+2020-02-25,kelly bond & sons,25,ang,615,145,hfr
+2020-02-25,hamilton ranch,28,char,560,145,hfr
+2020-02-25,tl cattle,5,ang,550,144,hfr
+2020-02-25,gary hall,8,clr,615,137.5,hfr
+2020-02-25,alex mestas,6,ang,630,137,hfr
+2020-02-25,thomas ruybal,10,clr,635,135,hfr
+2020-02-25,mark crane,12,mix,650,131,hfr
+2020-02-25,lazy v circle,97,clr,720,129.5,hfr
+2020-02-25,preston wood,21,clr,680,127.5,hfr
+2020-02-25,ron collins,15,clr,685,127,hfr
+2020-02-25,linda spady,6,mix,810,122.5,hfr
+2020-02-25,wayne hammel,7,clr,700,121,hfr
+2020-02-25,mike spady,15,mix,840,119.5,hfr
+2020-02-25,leroy mosher,29,clr,575,169,str
+2020-02-25,rafter j cattle,15,ang,555,167,str
+2020-02-25,alex mestas,5,ang,545,162,str
+2020-02-25,tammy mccann,3,clr,555,160,str
+2020-02-25,hamilton ranch,28,char,605,158,str
+2020-02-25,kelly bond & sons,61,ang,705,137.75,str
+2020-02-25,thomas ruybal,11,clr,645,153,str
+2020-02-25,ron collins,10,clr,655,147,str
+2020-02-25,larry damgaard,7,clr,640,147,str
+2020-02-25,tl cattle,7,ang,620,147,str
+2020-02-25,wayne hammel,4,clr,635,143,str
+2020-02-25,gary hall,5,clr,695,139,str
+2020-02-25,john shannon,21,ang,685,139,str
+2020-02-25,richard roybal,6,clr,730,135.5,str
+2020-02-25,preston wood,22,clr,690,134.75,str
+2020-02-25,mike spady,16,mix,775,130,str
+2020-02-25,linda spady,13,mix,830,128,str
+2020-02-25,mark crane,33,mix,935,121,str
+2020-02-25,bob bledsoe trust,2,clr,1260,61.5,cow
+2020-02-25,magnolia ranches,2,clr,1305,60,cow
+2020-02-25,everett groves,1,clr,1190,60,cow
+2020-02-25,bruce hass,3,clr,1350,59.5,cow
+2020-02-25,ron bates,6,clr,1140,59.5,cow
+2020-02-25,sand arroyo ranch inc,5,mix,1030,59,cow
+2020-02-25,randy howell,1,clr,1380,58,cow
+2020-02-25,dean goodrich,1,clr,1285,58,cow
+2020-02-25,tommy goodrich,1,clr,1325,55,cow
+2020-02-25,lynette mcwilliams,1,char,1090,54,cow
+2020-02-25,jim doak,1,clr,1070,51,cow
+2020-02-25,jim doak,1,clr,2075,82,bull
+2020-02-25,bob bledsoe trust,1,clr,1765,80.5,bull
+2020-02-25,tyler blain,1,clr,2035,80,bull
+2020-02-25,jeremy faucette,3,clr,1820,80,bull
+2020-02-25,ed morris,1,clr,1945,79.5,bull
+2020-02-25,jolly cattle company,3,clr,1840,79,bull
+2020-03-03,diamond d bar ranch,8,mix,420,197,str
+2020-03-03,jay himes,3,clr,435,192.5,str
+2020-03-03,v seven ranch,20,ang,410,179,hfr
+2020-03-03,janet weber,7,clr,425,174,hfr
+2020-03-03,m & g associates,17,ang,465,173,hfr
+2020-03-03,nortonville cattle,21,clr,440,172,hfr
+2020-03-03,reskurtas west inc,6,clr,500,170,str
+2020-03-03,dean reynolds,14,clr,425,170,hfr
+2020-03-03,wiley farms,8,clr,495,161.5,hfr
+2020-03-03,jim hribar,3,clr,510,147.5,hfr
+2020-03-03,wiley farms,12,clr,570,149.5,hfr
+2020-03-03,v seven ranch,49,ang,575,148,hfr
+2020-03-03,bert buhr,38,ang,580,147.5,hfr
+2020-03-03,reskurtas west inc,21,clr,545,147,hfr
+2020-03-03,m & g associates,15,ang,555,146,hfr
+2020-03-03,nortonville cattle,26,clr,625,143.5,hfr
+2020-03-03,springhill ranch,24,clr,600,142.5,hfr
+2020-03-03,brown brothers,38,ang,590,142,hfr
+2020-03-03,dean reynolds,14,clr,600,141,hfr
+2020-03-03,yoder ranches,20,clr,590,140.5,hfr
+2020-03-03,ankrum family,10,clr,630,140,hfr
+2020-03-03,di santi farms,17,clr,640,137,hfr
+2020-03-03,pargin ranch,18,clr,710,129,hfr
+2020-03-03,richard jensen,11,clr,805,117.5,hfr
+2020-03-03,reskurtas west inc,18,clr,590,158,str
+2020-03-03,janet weber,6,clr,555,157,str
+2020-03-03,jim hribar,4,clr,650,148,str
+2020-03-03,kerry brill,7,clr,725,130.5,str
+2020-03-03,richard jensen,8,mix,775,126,str
+2020-03-03,gray ranches,60,clr,820,124.5,str
+2020-03-03,david sanders,10,clr,825,124,str
+2020-03-03,jim goodrich,1,clr,1220,61.5,cow
+2020-03-03,brett balenseifen,8,clr,1375,59.5,cow
+2020-03-03,2b land & livestock,2,clr,1265,59.5,cow
+2020-03-03,hansen cattle,5,clr,1465,59,cow
+2020-03-03,curto family farms,1,clr,1075,59,cow
+2020-03-03,matt bush,3,mix,1140,58.5,cow
+2020-03-03,loren johnson,1,clr,1425,58,cow
+2020-03-03,everett groves,1,mot,1310,57,cow
+2020-03-03,daniel deforest,5,clr,1085,57,cow
+2020-03-03,a/g family farm,1,clr,1025,56,cow
+2020-03-03,oscar french,1,clr,1300,55,cow
+2020-03-03,tommy goodrich,1,lim,2400,87,bull
+2020-03-03,donald andreatta,1,clr,1875,79.5,bull
+2020-03-03,colin durham,1,clr,1975,79,bull
+2020-03-17,carey suto,8,clr,440,174,str
+2020-03-17,weston ranch,9,ang,490,171,str
+2020-03-17,round ranch,4,mix,415,171,str
+2020-03-17,jim sigler,3,lim,375,163,hfr
+2020-03-17,laning peterson,4,ang,500,161,str
+2020-03-17,potestio farms,3,clr,455,141,hfr
+2020-03-17,reskurtas west inc,12,ang,530,128,hfr
+2020-03-17,jim sigler,29,lim,565,139,hfr
+2020-03-17,reskurtas west inc,18,ang,555,135,hfr
+2020-03-17,carey suto,10,clr,560,132,hfr
+2020-03-17,monte sammons,5,ang,560,131,hfr
+2020-03-17,potestio farms,6,clr,565,130,hfr
+2020-03-17,round ranch,10,mix,600,125,hfr
+2020-03-17,moeller ranch,11,mix,765,100,hfr
+2020-03-17,monte sammons,9,ang,555,153.5,str
+2020-03-17,jimmy garwin,12,clr,555,150.5,str
+2020-03-17,round ranch,14,mix,555,148,str
+2020-03-17,potestio farms,5,clr,570,146,str
+2020-03-17,jim sigler,21,lim,555,146,str
+2020-03-17,laning peterson,3,ang,615,143,str
+2020-03-17,carey suto,6,clr,610,142,str
+2020-03-17,gray ranches,20,clr,675,120,str
+2020-03-17,p & l farms,14,clr,785,105,str
+2020-03-17,dean hall,1,clr,1330,64,cow
+2020-03-17,tommy goodrich,1,clr,1460,63,cow
+2020-03-17,chris downare,1,clr,1380,63,cow
+2020-03-17,marty neugebauer,1,clr,1280,63,cow
+2020-03-17,reynolds ranch,3,clr,1265,62.5,cow
+2020-03-17,bruce hass,3,clr,1305,59,cow
+2020-03-17,jose munoz,1,clr,1030,57.5,cow
+2020-03-17,ron collins,1,clr,1430,54,cow
+2020-03-17,mark james,1,clr,1240,53,cow
+2020-03-17,brent colvin,1,clr,990,53,cow
+2020-03-17,jim goodrich,1,clr,1355,52,cow
+2020-03-17,dorenkamp ranch,1,clr,2115,86,bull
+2020-03-17,brooks cattle co,1,clr,1795,81,bull
+2020-03-17,jeff jolly,1,clr,1610,81,bull
+2020-03-17,mike day,1,clr,1940,80,bull
+2020-03-24,kevin harris,3,clr,330,194,str
+2020-03-24,tracy white,2,ang,435,187.5,str
+2020-03-24,tw cattle,6,clr,385,184,str
+2020-03-24,valdez land & livestock,5,clr,510,170,str
+2020-03-24,keith hood,3,clr,470,167.5,bull
+2020-03-24,andrew mills,5,clr,500,165,bull
+2020-03-24,clayton deforest,3,mix,495,161,str
+2020-03-24,maxine wezel,5,clr,375,155,hfr
+2020-03-24,john bruna,5,mix,390,154,hfr
+2020-03-24,valdez land & livestock,3,mix,550,129,hfr
+2020-03-24,sammons sisters,9,ang,645,122,hfr
+2020-03-24,andrew mills,4,clr,585,121,hfr
+2020-03-24,keith hood,7,clr,570,120,hfr
+2020-03-24,arrow cattle,67,clr,740,113.5,hfr
+2020-03-24,everett jackson,56,ang,940,110.5,hfr
+2020-03-24,gary saddoris,10,ang,730,110.5,hfr
+2020-03-24,tracy white,7,ang,565,162,str
+2020-03-24,andrew mills,5,clr,560,154,bull
+2020-03-24,scott hansen,7,clr,635,152,str
+2020-03-24,arrow cattle,25,clr,750,129,str
+2020-03-24,glen stagner,70,ang,735,144.5,str
+2020-03-24,sammons sisters,6,ang,695,139,str
+2020-03-24,everett jackson,48,ang,855,116,str
+2020-03-24,unwin family ranch,1,clr,1235,74,cow
+2020-03-24,david adamic,1,clr,1270,72,cow
+2020-03-24,hansen cattle co,14,clr,1430,71,cow
+2020-03-24,dwayne fritzler,8,clr,1375,71,cow
+2020-03-24,james rook,21,mix,1325,69.5,cow
+2020-03-24,doug stone,3,clr,1320,68,cow
+2020-03-24,mark weirich,1,clr,1580,67,cow
+2020-03-24,don wood,1,clr,1495,67,cow
+2020-03-24,curto family farms,3,clr,1125,67,cow
+2020-03-24,ron collins,1,clr,900,59,cow
+2020-03-24,john dutro,1,clr,1230,58,cow
+2020-03-24,leif berg,1,clr,2085,94,bull
+2020-03-24,david adamic,2,clr,1875,93.5,bull
+2020-03-24,richard jensen,1,clr,2355,93,bull
+2020-03-24,kent johnston,3,clr,1840,91,bull
+2020-03-31,charlie crockett,16,ang,475,171,str
+2020-03-31,davis ranch inc,2,lim,530,160,str
+2020-03-31,lenna rauber,2,clr,305,150,str
+2020-03-31,mohammad abuokal,4,char,450,134,hfr
+2020-03-31,mohammad abuokal,11,char,590,120,hfr
+2020-03-31,wl cattle,10,clr,585,117.5,hfr
+2020-03-31,charlie crockett,5,ang,535,113,hfr
+2020-03-31,charlie crockett,2,ang,630,135,str
+2020-03-31,mohammad abuokal,3,clr,650,129,str
+2020-03-31,jack dixon,3,ang,740,117,str
+2020-03-31,unwin family ranch,1,clr,1235,74,cow
+2020-03-31,loyd patton,5,clr,1590,68.5,cow
+2020-03-31,devers ranch,5,char,1375,67.5,cow
+2020-03-31,dean goodrich,1,clr,1390,67,cow
+2020-03-31,jason boyer,1,clr,1415,66,cow
+2020-03-31,jim walter,5,clr,1470,65.5,cow
+2020-03-31,hansen cattle inc,8,mix,1510,64,cow
+2020-03-31,darrel dutro,1,clr,1505,63,cow
+2020-03-31,dixie boyer,1,clr,1315,63,cow
+2020-03-31,bruce lewis,1,clr,1390,61,cow
+2020-03-31,colbie bruna,1,clr,1470,60,cow
+2020-03-31,ziegler farm & ranch,5,clr,1345,60,cow
+2020-03-31,cody duvall,1,char,1735,59,cow
+2020-03-31,shelton livestock,9,clr,1300,59,cow
+2020-03-31,david adamic,3,mix,1305,58,cow
+2020-03-31,shane johnson,8,clr,1345,56,cow
+2020-03-31,keith bender,11,clr,1245,54,cow
+2020-03-31,john keller,1,clr,2375,81,bull
+2020-03-31,shane johnson,10,char,1905,80,bull
+2020-03-31,ed orth,1,clr,1795,79,bull
+2020-03-31,john marroney,1,clr,1975,76.5,bull
+2020-03-31,alfred becerra,1,clr,1765,76,bull
+2020-04-07,neil fletcher,21,ang,395,189,str
+2020-04-07,menegatti cattle,16,ang,440,183,str
+2020-04-07,doug howe,21,clr,430,183,str
+2020-04-07,jerry brown,11,clr,335,181,str
+2020-04-07,charlie barrett,12,mix,420,180,str
+2020-04-07,handsprings ranch,8,clr,425,176,str
+2020-04-07,mayhoffer & schlegel,12,ang,470,174,str
+2020-04-07,ricken farm & ranch,10,clr,505,169,str
+2020-04-07,smyer ranch,45,clr,520,166,str
+2020-04-07,moore land & cattle,12,ang,535,165,str
+2020-04-07,bob bamber,4,ang,530,164,str
+2020-04-07,stan krieger,21,ang,520,164,str
+2020-04-07,sheridan howe,30,clr,525,161,str
+2020-04-07,christine howe,18,clr,505,161,str
+2020-04-07,marvin rushton,40,clr,455,158.5,hfr
+2020-04-07,moore land & cattle,38,ang,500,149,hfr
+2020-04-07,rick davie,11,mix,525,146,hfr
+2020-04-07,miller ranch,10,clr,535,143,hfr
+2020-04-07,gayel alexander,6,mix,470,137,hfr
+2020-04-07,lloyd miller,66,clr,550,141,hfr
+2020-04-07,marvin rushton,71,clr,585,138.5,hfr
+2020-04-07,eric sporleder,18,ang,550,138,hfr
+2020-04-07,jim warner,10,ang,555,137,hfr
+2020-04-07,doug howe,77,clr,550,136,hfr
+2020-04-07,ricken farm & ranch,54,clr,570,135,hfr
+2020-04-07,sheridan howe,23,clr,560,131,hfr
+2020-04-07,bill kolb,59,clr,645,129.5,hfr
+2020-04-07,moore land & cattle,12,ang,600,128,hfr
+2020-04-07,rick davie,33,mix,640,124,hfr
+2020-04-07,jeff smith,14,ang,600,124,hfr
+2020-04-07,bob hronich,11,ang,685,121,hfr
+2020-04-07,smyer ranch,60,clr,650,121,hfr
+2020-04-07,bob barr,19,ang,650,115,hfr
+2020-04-07,gray ranches,29,clr,765,101,hfr
+2020-04-07,frank sciacca,17,mix,905,95,hfr
+2020-04-07,dwayne fritzler,10,ang,1025,92,hfr
+2020-04-07,john shannon,20,ang,730,143,hfr
+2020-04-07,srs red angus,20,ang,840,140.5,hfr
+2020-04-07,blair clavel,53,clr,655,135,hfr
+2020-04-07,shelton livestock,73,clr,740,133.5,hfr
+2020-04-07,ox cart ranch,36,clr,785,129,hfr
+2020-04-07,cole thompson,11,ang,755,128,hfr
+2020-04-07,rick davie,16,mix,565,159.5,str
+2020-04-07,neil fletcher,33,ang,550,159.5,str
+2020-04-07,lloyd miller,79,clr,575,157.5,str
+2020-04-07,smyer ranch,87,clr,605,154,str
+2020-04-07,mayhoffer & schlegel,36,ang,585,154,str
+2020-04-07,jeff smith,14,ang,575,153,str
+2020-04-07,limestone cattle,11,clr,565,153,str
+2020-04-07,handsprings ranch,62,clr,585,152,str
+2020-04-07,menegatti cattle,95,ang,605,151,str
+2020-04-07,moore land & cattle,24,ang,590,150,str
+2020-04-07,christine howe,49,clr,600,145,str
+2020-04-07,jim warner,11,clr,630,142.5,str
+2020-04-07,martin chavez,17,clr,650,132,str
+2020-04-07,bob hronich,15,clr,770,125.5,str
+2020-04-07,dwayne fritzler,10,ang,1025,103,str
+2020-04-14,trey jagers,4,clr,420,177.5,str
+2020-04-14,horse creek farms,5,clr,450,166,str
+2020-04-14,david stoltzfus,6,clr,395,159,str
+2020-04-14,franey ranch inc,16,ang,515,134.5,hfr
+2020-04-14,mike & keith doak,2,ang,475,131,hfr
+2020-04-14,franey ranch inc,25,ang,605,131,hfr
+2020-04-14,richman farms,9,char,585,130,hfr
+2020-04-14,horse creek farms,44,mix,570,128.5,hfr
+2020-04-14,trey jagers,24,mix,555,127,hfr
+2020-04-14,swift farms,5,clr,610,126,hfr
+2020-04-14,cody duvall,4,char,645,119,hfr
+2020-04-14,franey ranch inc,17,ang,555,162,str
+2020-04-14,horse creek farms,13,mix,535,161,str
+2020-04-14,trey jagers,9,clr,665,136,str
+2020-04-14,david stoltzfus,3,clr,820,105.5,str
+2020-04-14,tyler hainer,1,clr,1570,62.5,cow
+2020-04-14,chad ricken,1,clr,1720,61,cow
+2020-04-14,stan krieger,1,clr,1540,60,cow
+2020-04-14,solvangen farms,6,clr,1670,60,cow
+2020-04-14,round river livestock,1,clr,1060,56.5,cow
+2020-04-14,evan durham,1,clr,1380,55,cow
+2020-04-14,will ward,1,clr,1800,86,bull
+2020-04-14,billee sumpter,1,clr,1950,85,bull
+2020-04-14,lindholm farms,1,clr,1585,85,bull
+2020-04-14,lonnie jackson,1,clr,1795,82,bull
+2020-04-14,riemenschneider bros,1,clr,1920,81,bull
+2020-04-14,kent johnston,1,clr,2220,76,bull
+2020-04-21,o d espinoza,4,ang,530,182.5,str
+2020-04-21,dean jagers,40,mix,515,178.5,str
+2020-04-21,howard ranch,9,clr,480,177,str
+2020-04-21,horse creek ranch,6,ang,430,175,str
+2020-04-21,edmundson ranches,19,ang,440,149,hfr
+2020-04-21,alex mestas,3,clr,520,135,hfr
+2020-04-21,dean jagers,58,mix,550,139.5,hfr
+2020-04-21,horse creek farms,29,ang,565,131,hfr
+2020-04-21,gene yocam,5,ang,560,123,hfr
+2020-04-21,reskurtas west inc,14,beefmaster,575,122,hfr
+2020-04-21,brett balenseifen,4,clr,755,101,hfr
+2020-04-21,jarrod power,2,clr,760,100,hfr
+2020-04-21,edmundson ranches,4,ang,550,173,str
+2020-04-21,horse creek farms,16,ang,595,157.5,str
+2020-04-21,alex mestas,13,clr,600,155,str
+2020-04-21,dean jagers,27,mix,615,153,str
+2020-04-21,o d espinoza,12,ang,615,152.5,str
+2020-04-21,reskurtas west inc,12,ang,620,152,str
+2020-04-21,shirley saddoris,11,clr,710,131,str
+2020-04-21,jarrod power,2,clr,860,110,str
+2020-04-21,derrell shawcroft,5,clr,895,101,str
+2020-04-21,levi hansen,1,clr,1325,63.5,cow
+2020-04-21,bob barr,1,clr,1470,62,cow
+2020-04-21,hansen cattle inc,14,clr,1465,61.75,cow
+2020-04-21,sandra cordova,1,clr,1350,59.5,cow
+2020-04-21,rick davie,6,clr,1390,56.5,cow
+2020-04-21,boyd ranch,1,clr,1250,56.5,cow
+2020-04-21,butch faoro,1,clr,1370,56,cow
+2020-04-21,paul peterson,1,clr,1930,55.5,cow
+2020-04-21,don gomez,3,clr,1340,55,cow
+2020-04-21,lester bagwell,7,mix,1265,55,cow
+2020-04-21,jeff smith,1,clr,1460,54.5,cow
+2020-04-21,monte richardson,1,clr,1900,87,bull
+2020-04-21,bob peterson,1,clr,1765,86,bull
+2020-04-21,levi hansen,1,clr,2645,83.5,bull
+2020-04-21,clyde mccloy,1,clr,2230,83,bull
+2020-04-21,everett jackson,2,clr,1830,83,bull
+2020-04-21,unwin family ranch,1,clr,2265,80.5,bull
+2020-04-28,rim rock cattle,9,ang,470,170,str
+2020-04-28,kevin davis,9,clr,515,165,str
+2020-04-28,edgar ranches,2,ang,515,155,str
+2020-04-28,robert quintana,10,clr,485,139,hfr
+2020-04-28,cisneros cattle co,6,char,540,131,hfr
+2020-04-28,rim rock cattle,9,ang,580,126,hfr
+2020-04-28,alvin carter,3,clr,565,125,hfr
+2020-04-28,carlos wren,5,mix,560,125,hfr
+2020-04-28,lenna rauber,3,clr,565,117,hfr
+2020-04-28,welch cattle co,10,clr,650,112,hfr
+2020-04-28,rim rock cattle,10,ang,590,167.5,str
+2020-04-28,kevin davis,6,clr,570,162,str
+2020-04-28,carlos wren,4,clr,585,153,str
+2020-04-28,alvin carter,4,clr,620,138,str
+2020-04-28,robert bagwell,14,ang,730,127,str
+2020-04-28,larry don meier,1,clr,1130,58,cow
+2020-04-28,robert bagwell,2,clr,1440,57,cow
+2020-04-28,tommy goodrich,3,clr,1435,56,cow
+2020-04-28,hansen cattle inc,12,mix,1390,56,cow
+2020-04-28,corey fischbacher,6,clr,1215,55,cow
+2020-04-28,randy phillips,1,clr,1485,54,cow
+2020-04-28,janet weber,3,clr,1095,53,cow
+2020-04-28,david hamilton,8,char,1380,51.5,cow
+2020-04-28,jim mason,1,clr,1190,51,cow
+2020-04-28,lindholm farms,7,clr,1250,50,cow
+2020-04-28,innes cattle co,8,mix,1250,49.5,cow
+2020-04-28,alan carr,9,clr,1070,47,cow
+2020-04-28,vernon john proctor,2,clr,2275,83,bull
+2020-04-28,circle 23 ranch,1,clr,1425,83,bull
+2020-04-28,hansen cattle inc,4,clr,2280,81,bull
+2020-04-28,john forristall,1,clr,1915,80,bull
+2020-04-28,reynolds ranch,1,clr,1810,77,bull
+2020-05-05,gilbert groves,7,clr,320,197,str
+2020-05-05,campwood cattle,13,ang,450,180,str
+2020-05-05,spear p cattle,5,ang,420,178,str
+2020-05-05,steve allard,3,clr,390,173,str
+2020-05-05,castle ranch,23,clr,505,171,str
+2020-05-05,keith & jessica bender,18,clr,490,170.5,str
+2020-05-05,bill wilcox,4,clr,450,170,str
+2020-05-05,nunn ranches,35,ang,490,168.5,str
+2020-05-05,platt cattle co,18,ang,490,165.5,str
+2020-05-05,rocking man ranch,7,clr,430,165,str
+2020-05-05,stowe ranch,24,clr,460,161,str
+2020-05-05,chase rushton,22,ang,535,157,str
+2020-05-05,palmer brothers,22,ang,465,146,hfr
+2020-05-05,cloud crest ranch,11,clr,435,142,hfr
+2020-05-05,rafter j cattle,13,ang,500,141,hfr
+2020-05-05,pat shannon,14,ang,715,143,hfr
+2020-05-05,glen stagner,23,ang,710,143,hfr
+2020-05-05,rafter j cattle,24,ang,590,138,hfr
+2020-05-05,diamond hitch cattle,14,ang,705,137,hfr
+2020-05-05,gilbert groves,42,clr,570,137,hfr
+2020-05-05,palmer brothers,52,ang,560,137,hfr
+2020-05-05,spear p cattle,48,ang,600,135,hfr
+2020-05-05,joe schultheis,17,ang,560,134,hfr
+2020-05-05,nunn ranches,27,ang,560,134,hfr
+2020-05-05,keith & jessica bender,25,clr,550,132,hfr
+2020-05-05,j open a partnership,45,clr,765,131,hfr
+2020-05-05,spann ranches,14,clr,570,131,hfr
+2020-05-05,jeff smith,14,ang,545,129,hfr
+2020-05-05,tracy kester,11,lim,590,127,hfr
+2020-05-05,harrington ranch,41,clr,695,126.5,hfr
+2020-05-05,dustin turpin,11,ang,640,125,hfr
+2020-05-05,platt cattle co,18,ang,550,125,hfr
+2020-05-05,ron collins,12,clr,640,123,hfr
+2020-05-05,chase rushton,11,ang,650,119.5,hfr
+2020-05-05,bill hatcher,18,clr,655,118.5,hfr
+2020-05-05,tony hass,8,clr,650,118,hfr
+2020-05-05,leroy teem,10,ang,725,108,hfr
+2020-05-05,campion ranch,10,ang,835,106.5,hfr
+2020-05-05,2 m land & cattle,18,ang,745,105.5,hfr
+2020-05-05,tony hass,7,clr,550,170,str
+2020-05-05,rocking man ranch,10,clr,545,164,str
+2020-05-05,joe schultheis,14,ang,550,161,str
+2020-05-05,spear p cattle,22,ang,565,158,str
+2020-05-05,dustin turpin,11,ang,560,157,str
+2020-05-05,nunn ranches,18,ang,580,156.5,str
+2020-05-05,platt cattle co,16,ang,570,156,str
+2020-05-05,keith & jessica bender,47,clr,580,155.5,str
+2020-05-05,rafter j cattle,26,ang,565,153,str
+2020-05-05,ron collins,9,clr,560,152,str
+2020-05-05,stowe ranch,43,clr,540,149,str
+2020-05-05,parker cattle co,53,clr,625,146,str
+2020-05-05,gilbert groves,44,clr,615,145,str
+2020-05-05,faron edens,24,clr,590,143.5,str
+2020-05-05,chase & malone,8,ang,630,142,str
+2020-05-05,chase rushton,23,ang,635,141,str
+2020-05-05,keith packard,29,ang,660,138,str
+2020-05-05,castle ranch,26,clr,615,138,str
+2020-05-05,tracy kester,13,lim,675,133,str
+2020-05-05,j open a partnership,7,clr,685,132,str
+2020-05-05,bill hatcher,22,clr,705,125.5,str
+2020-05-05,terry swanson,1,clr,1245,61.5,cow
+2020-05-05,steven payne,3,mix,1485,60,cow
+2020-05-05,kayo armentrout,1,mot,1380,60,cow
+2020-05-05,hansen cattle inc,8,clr,1305,60,cow
+2020-05-05,gary saddoris,2,clr,1205,60,cow
+2020-05-05,lonnie jackson,2,clr,1230,59,cow
+2020-05-05,dean goodrich,1,clr,1480,58,cow
+2020-05-05,roger meinzer,1,clr,1355,58,cow
+2020-05-05,red iron ranch,1,clr,1700,56,cow
+2020-05-05,reflected r ranch,1,clr,1450,56,cow
+2020-05-05,feemster ranch,7,ang,1365,54,cow
+2020-05-05,clayton morlan,8,mix,1080,54,cow
+2020-05-05,collins ranch,1,clr,1330,52,cow
+2020-05-05,dean goodrich,1,clr,2130,92,bull
+2020-05-05,terry swanson,1,clr,1990,89,bull
+2020-05-05,platt ranch,1,clr,1960,89,bull
+2020-05-05,ralph ogden,1,clr,1870,88,bull
+2020-05-05,will ward,1,clr,1955,85,bull
+2020-05-05,rod brown,1,clr,1960,84,bull
+2020-05-12,shelton livestock,4,clr,525,183,str
+2020-05-12,elk mountain cattle,11,mix,495,177.5,str
+2020-05-12,lonnie haught,10,clr,535,171,str
+2020-05-12,gilbert groves,3,ang,450,171,str
+2020-05-12,dale gerstberger,5,clr,360,171,str
+2020-05-12,dill cattle co,4,clr,505,163,str
+2020-05-12,randall weskin,8,clr,470,153,str
+2020-05-12,edgar ranches,3,ang,500,129,hfr
+2020-05-12,mustang ranch,6,ang,740,137,hfr
+2020-05-12,joanne goodrich,7,ang,670,130,hfr
+2020-05-12,edgar ranches,13,ang,590,130,hfr
+2020-05-12,monte sammons,82,ang,665,126,hfr
+2020-05-12,gilbert groves,18,ang,565,125,hfr
+2020-05-12,abe benavidez,5,ang,655,121,hfr
+2020-05-12,shelton livestock,23,clr,730,112,hfr
+2020-05-12,greg hartman,8,mix,670,112,hfr
+2020-05-12,stone ridge farms,18,clr,700,110,hfr
+2020-05-12,tom verquer,4,clr,890,103,hfr
+2020-05-12,edgar ranches,9,ang,560,167,str
+2020-05-12,kraft ranch,18,ang,560,152,str
+2020-05-12,gilbert groves,16,ang,570,149,str
+2020-05-12,shelton livestock,8,clr,625,147,str
+2020-05-12,lonnie haught,29,clr,620,146.5,str
+2020-05-12,dill cattle co,2,clr,595,141,str
+2020-05-12,abe benavidez,4,clr,710,126,str
+2020-05-12,thomas mcneely,7,clr,825,121,str
+2020-05-12,baggs farms,15,ang,795,120,str
+2020-05-12,stone ridge farms,34,clr,790,118.25,str
+2020-05-12,jeff huntoon,1,clr,1630,65,cow
+2020-05-12,bruce hass,1,clr,1465,65,cow
+2020-05-12,ron collins,1,clr,1430,62,cow
+2020-05-12,roger meinzer,1,clr,1540,61.5,cow
+2020-05-12,ray sikes,1,clr,1670,61,cow
+2020-05-12,austin huntoon,1,clr,1440,60.5,cow
+2020-05-12,bob watkins,11,clr,1450,60.25,cow
+2020-05-12,kenneth schweizer,1,clr,1445,60,cow
+2020-05-12,yocam ranch,3,clr,1435,58.5,cow
+2020-05-12,dustin wallace,1,mot,1395,57,cow
+2020-05-12,hansen cattle inc,11,mix,1300,54.5,cow
+2020-05-12,fred bregar,7,clr,1290,54,cow
+2020-05-12,wineinger-davis ranch,1,clr,2110,92,bull
+2020-05-12,bob watkins,1,clr,2005,92,bull
+2020-05-12,tate watkins,4,clr,1865,84.5,bull
+2020-05-12,louden cattle co,2,ang,1905,84,bull
+2020-05-12,todd rose,1,clr,1960,82,bull
+2020-05-12,kelly bader,3,clr,2125,78,bull
+2020-05-19,louis schmidt,13,ang,485,168,str
+2020-05-19,marrujo corp,8,lim,430,159,str
+2020-05-19,gayel alexander,4,mix,520,151,str
+2020-05-19,tim & lori lovato,5,mix,510,150,str
+2020-05-19,ridley farm & ranch,19,clr,440,139,hfr
+2020-05-19,shawn thomas,4,clr,525,132,hfr
+2020-05-19,wood cattle,18,clr,560,132,hfr
+2020-05-19,ridley farm & ranch,29,clr,550,131.5,hfr
+2020-05-19,tim & lori lovato,11,mix,575,131,hfr
+2020-05-19,robert quintana,5,clr,565,131,hfr
+2020-05-19,crestina martinez,5,clr,575,129.5,hfr
+2020-05-19,louis schmidt,3,ang,585,129,hfr
+2020-05-19,marrujo corp,10,lim,550,129,hfr
+2020-05-19,tate & tally watkins,14,ang,735,121.5,hfr
+2020-05-19,lane gooden,7,ang,815,112,hfr
+2020-05-19,marrujo corp,15,lim,550,163,str
+2020-05-19,shawn thomas,13,clr,550,154,str
+2020-05-19,louis schmidt,23,ang,570,151.5,str
+2020-05-19,robert quintana,10,clr,585,145.5,str
+2020-05-19,wood cattle,30,clr,625,145,str
+2020-05-19,scott lorenz,3,clr,670,130,str
+2020-05-19,norman hopkins,10,clr,740,122,str
+2020-05-19,ridley farm & ranch,5,ang,815,118.5,str
+2020-05-19,john marroney,3,clr,860,113,str
+2020-05-19,john marroney,1,clr,1905,65,cow
+2020-05-19,wolcott enterprises,2,clr,1530,62.75,cow
+2020-05-19,berryman ranch llc,5,clr,1505,62.75,cow
+2020-05-19,san jose ranch,6,clr,1120,61,cow
+2020-05-19,hansen cattle inc,16,mix,1650,60.5,cow
+2020-05-19,ron peters,1,clr,1525,60.5,cow
+2020-05-19,may farms,1,clr,1795,60,cow
+2020-05-19,evan durham,1,clr,1545,60,cow
+2020-05-19,ziegler farm & ranch,3,clr,1525,59,cow
+2020-05-19,gary mestas,1,clr,1520,59,cow
+2020-05-19,terry swanson,8,clr,1325,59,cow
+2020-05-19,larry mapes,1,clr,1290,59,cow
+2020-05-19,chad hawkins,1,clr,1355,58,cow
+2020-05-19,chris kester,5,clr,1285,58,cow
+2020-05-19,larry martinez,1,clr,1250,58,cow
+2020-05-19,ben ferree,11,clr,1360,57.5,cow
+2020-05-19,monte downare,6,mix,1230,57.5,cow
+2020-05-19,dave kaess,5,clr,1445,57,cow
+2020-05-19,mccloy cattle co,1,clr,1355,56,cow
+2020-05-19,chris downare,1,clr,1490,55,cow
+2020-05-19,breen enterprises,2,clr,1190,55,cow
+2020-05-19,barry morris,1,clr,2360,91.5,bull
+2020-05-19,scott crawford,1,clr,2305,91,bull
+2020-05-19,matt bush,1,clr,1895,91,bull
+2020-05-19,loyd patton,1,clr,1960,90,bull
+2020-05-19,tim & lori lovato,1,clr,1800,87,bull
+2020-05-19,robert anderson,1,brwn,2305,86,bull
+2020-05-19,monte innes,2,clr,1980,86,bull
+2020-05-19,mohammad abuokal,1,clr,1850,84,bull
+2020-05-19,kris hasser,1,clr,2055,83.5,bull
+2020-05-26,hansen cattle inc,3,clr,310,161,str
+2020-05-26,watts ranch,7,clr,440,153,str
+2020-05-26,flying u ranch,2,clr,530,152.5,str
+2020-05-26,slash ranch,3,clr,495,148,str
+2020-05-26,circle 23 ranch,7,clr,540,147,str
+2020-05-26,monte sammons,29,clr,655,132,hfr
+2020-05-26,circle 23 ranch,7,clr,575,126,hfr
+2020-05-26,steve ferree,10,clr,680,125,hfr
+2020-05-26,fain ranch,3,mix,575,125,hfr
+2020-05-26,flying u ranch,12,clr,610,123,hfr
+2020-05-26,ladder cattle co,16,clr,770,121,hfr
+2020-05-26,gregory ranch,5,clr,550,146,str
+2020-05-26,flying u ranch,7,clr,600,145,str
+2020-05-26,red creek ranch,9,clr,640,137,str
+2020-05-26,will ward,3,clr,670,132,str
+2020-05-26,david vucetich,3,mixed,740,131,str
+2020-05-26,steve ferree,3,clr,705,130,str
+2020-05-26,watts ranch,13,clr,860,117,str
+2020-05-26,jt schalla,11,mix,1390,64.75,cow
+2020-05-26,dustin wallace,1,clr,1525,61.5,cow
+2020-05-26,hansen cattle inc,8,mix,1460,60.5,cow
+2020-05-26,bar nothing,4,clr,1165,60,cow
+2020-05-26,dustin matthew,2,clr,1495,60,cow
+2020-05-26,david hamilton,7,char,1390,59.5,cow
+2020-05-26,idi inc,4,clr,1375,59,cow
+2020-05-26,bruce hass,3,clr,1355,59,cow
+2020-05-26,edmundson ranch,7,clr,1195,59,cow
+2020-05-26,chad hawkins,3,clr,1225,58,cow
+2020-05-26,keith thelen,5,mix,1430,57,cow
+2020-05-26,harold anderson,5,mix,1305,55,cow
+2020-05-26,ricken land & cattle,2,lim,2070,93.5,bull
+2020-05-26,george torres,1,clr,1845,92,bull
+2020-05-26,rex davis,1,clr,2550,90.5,bull
+2020-06-02,david hamilton,2,char,210,205,str
+2020-06-02,james hill,2,ang,300,175,str
+2020-06-02,james keen,4,clr,405,165,str
+2020-06-02,jimmy brown,5,ang strs,375,163,bull
+2020-06-02,shirley saddoris,13,ang,450,159,str
+2020-06-02,peak cattle co,6,clr,470,153,str
+2020-06-02,wade yoder,2,clr,520,150,str
+2020-06-02,kerry campbell,1,clr,360,142.5,hfr
+2020-06-02,frances pantano,2,char,505,135,hfr
+2020-06-02,round ranch,4,mix,520,129,hfr
+2020-06-02,reverse rocking r,3,ang,520,125,hfr
+2020-06-02,reverse rocking r,3,ang,610,129,hfr
+2020-06-02,kerry campbell,1,clr,565,127,hfr
+2020-06-02,shirley saddoris,2,ang,545,127,hfr
+2020-06-02,jimmy brown,6,ang,625,126,hfr
+2020-06-02,ffr cattle,3,clr,650,119,hfr
+2020-06-02,anthony tamburelli,4,clr,620,117.5,hfr
+2020-06-02,jimmy brown,9,ang,565,153.5,str
+2020-06-02,shirley saddoris,2,ang,545,149,str
+2020-06-02,round ranch,4,mix,695,135,str
+2020-06-02,wls ranch,3,clr,595,133,str
+2020-06-02,perry shibbelhut,5,clr,745,129,str
+2020-06-02,andreatta ranch,3,ang,720,127.5,str
+2020-06-02,lane gooden,3,clr,865,117.5,str
+2020-06-02,sandoval l & c,2,clr,905,112.5,str
+2020-06-02,lawrence brase,1,clr,1615,68,cow
+2020-06-02,sandoval l & c,15,clr,1405,66,cow
+2020-06-02,roberts ranch,19,clr,1455,65.25,cow
+2020-06-02,marty neugebauer,3,clr,1440,65,cow
+2020-06-02,bar nothing ranches,1,clr,1330,65,cow
+2020-06-02,evan durham,1,clr,1505,64.5,cow
+2020-06-02,shane johnson,8,mix,1485,64.5,cow
+2020-06-02,chet baker,3,clr,1440,64.5,cow
+2020-06-02,carolyn frick,4,mix,1455,63.5,cow
+2020-06-02,marlan bradley,3,clr,1435,63.5,cow
+2020-06-02,elk mountain cattle,16,mix,1290,63.5,cow
+2020-06-02,melissa bradley,2,clr,1540,62.5,cow
+2020-06-02,ralph berry,7,clr,1190,59.5,cow
+2020-06-02,calvin baker,1,clr,1240,59,cow
+2020-06-02,ed gyurman,6,mix,1460,58,cow
+2020-06-02,jimmy brown,6,mix,1195,57,cow
+2020-06-02,lester ranches inc,3,char,2030,88,bull
+2020-06-02,j.t. schalla,1,clr,1820,88,bull
+2020-06-02,curtis schroder,1,clr,1720,87,bull
+2020-06-02,brock canty,1,clr,1915,86,bull
+2020-06-02,david brown,1,clr,1980,85,bull
+2020-06-02,olson farm & ranch,1,clr,1755,82.5,bull
+2020-06-02,platt ranch inc,1,clr,1600,82.5,bull
+2020-06-02,clay hasser,1,clr,2275,82,bull
+2020-06-09,mike ciganovich,2,ang,385,155,str
+2020-06-09,trampe ranches,10,ang,460,136,hfr
+2020-06-09,adams land & livestock,2,ang,410,128,hfr
+2020-06-09,mike ciganovich,4,ang,560,132,hfr
+2020-06-09,monte sammons,3,ang,565,130,hfr
+2020-06-09,twin peaks ranch,21,mix,635,128.5,hfr
+2020-06-09,trampe ranches,8,ang,645,128,hfr
+2020-06-09,d & j farms,8,clr,615,127.5,hfr
+2020-06-09,gordon hollowell,15,ang,585,126.5,hfr
+2020-06-09,edgar ranches,11,ang,740,120,hfr
+2020-06-09,mike ciganovich,11,ang,605,149,str
+2020-06-09,travis huff,12,ang,610,141,str
+2020-06-09,twin peaks ranch,12,mix,665,138.5,str
+2020-06-09,adams land & livestock,3,ang,560,138,str
+2020-06-09,fernando salazar,7,ang,745,128,str
+2020-06-09,withers cattle co,4,clr,795,126.5,str
+2020-06-09,norris patton,2,clr,1400,72,cow
+2020-06-09,rudy cordova,1,clr,1475,69,cow
+2020-06-09,tim quinn,1,clr,1335,69,cow
+2020-06-09,robert donley,5,clr,1315,65,cow
+2020-06-09,trampe ranches,7,clr,1295,63.5,cow
+2020-06-09,warren mcdonald,3,clr,1520,63,cow
+2020-06-09,jeremy cordova,1,clr,1420,63,cow
+2020-06-09,barlow & sons,1,clr,1270,63,cow
+2020-06-09,stan white,8,clr,1290,60.75,cow
+2020-06-09,doherty ranches,11,mix,1240,60.5,cow
+2020-06-09,calvin baker,3,clr,1330,59,cow
+2020-06-09,hutches cattle,3,clr,1275,59,cow
+2020-06-09,jeb brown,1,clr,1230,58,cow
+2020-06-09,leland corn,1,clr,1220,57,cow
+2020-06-09,gordon hollowell,1,clr,1245,56.5,cow
+2020-06-09,norris patton,1,clr,2160,102,bull
+2020-06-09,brett balenseifen,1,clr,2260,97,bull
+2020-06-09,robert donley,1,clr,2325,93,bull
+2020-06-09,sharri smith,1,clr,1665,91.5,bull
+2020-06-09,donna couch,1,clr,1925,90,bull
+2020-06-09,mike occhiato,1,clr,1875,90,bull
+2020-06-09,clint hill,1,clr,1845,85,bull
+2020-06-16,spear p cattle,31,clr,530,164,str
+2020-06-16,gilbert groves,5,clr,420,158,str
+2020-06-16,david hamilton,3,char,455,136,hfr
+2020-06-16,round ranch,4,mix,495,131,hfr
+2020-06-16,fling u ranch,3,clr,485,127,hfr
+2020-06-16,may farms,11,lim,570,131,hfr
+2020-06-16,cooper moore,4,clr,570,130,hfr
+2020-06-16,alvin russell,4,clr,590,129,hfr
+2020-06-16,flying u ranch,7,clr,565,126,hfr
+2020-06-16,round ranch,9,mix,585,125,hfr
+2020-06-16,dave gourdin,4,clr,545,125,hfr
+2020-06-16,david hamilton,7,char,605,123,hfr
+2020-06-16,spear p cattle,43,clr,755,121.75,hfr
+2020-06-16,shane truby,12,clr,645,121,hfr
+2020-06-16,jt schalla,33,clr,785,119.75,hfr
+2020-06-16,round ranch,2,mix,555,156,str
+2020-06-16,spear p cattle,23,clr,595,154.5,str
+2020-06-16,david hamilton,8,char,565,150.5,str
+2020-06-16,gilbert groves,5,clr,565,145,str
+2020-06-16,shane truby,13,clr,610,140.5,str
+2020-06-16,cooper moore,5,ang,695,139,str
+2020-06-16,flying u ranch,14,clr,660,129.5,str
+2020-06-16,peak farms llc,11,mix,770,126.5,str
+2020-06-16,tom bledsoe,1,clr,1700,65.5,cow
+2020-06-16,bledsoe ranch,7,mix,1555,64.5,cow
+2020-06-16,chris farthing,1,clr,1460,64.5,cow
+2020-06-16,wayne wright,1,clr,1570,64,cow
+2020-06-16,di santi farms,9,clr,1370,64,cow
+2020-06-16,cheyenne sprouse,5,clr,1450,63.5,cow
+2020-06-16,robert canda,5,clr,1465,63.25,cow
+2020-06-16,bert buhr,3,ang,1320,61,cow
+2020-06-16,thatcher l & c,7,clr,1225,60,cow
+2020-06-16,mike rosengrants,3,mix,1515,59.5,cow
+2020-06-16,kevin davis,10,clr,1200,58.5,cow
+2020-06-16,hanna ranches,1,clr,1145,58.5,cow
+2020-06-16,gary hall,3,clr,1310,58,cow
+2020-06-16,barry morris,1,clr,2145,96.5,bull
+2020-06-16,robert canda,1,clr,1680,94,bull
+2020-06-16,john doherty,1,clr,2280,93,bull
+2020-06-16,edmundson ranches,1,clr,1890,90,bull
+2020-06-16,jimmy brown,1,clr,2330,89.25,bull
+2020-06-16,eli hronich,1,clr,2075,89,bull
+2020-06-16,john vallejos,1,clr,2025,88.5,bull
+2020-06-16,tom bledsoe,1,clr,1895,87.5,bull
+2020-06-23,peak farms,8,mix,610,141.5,str
+2020-06-23,lazy u farms,21,clrclr,670,136.5,str
+2020-06-23,mcknight ranch,2,mix,600,136,str
+2020-06-23,herman wooten,4,clr,755,129.5,str
+2020-06-23,steve ferree,1,clr,1410,69,cow
+2020-06-23,peak farms,2,clr,1325,67.5,cow
+2020-06-23,chris matthew,14,clr,1550,66.75,cow
+2020-06-23,ron kurtz,1,char,1480,66.5,cow
+2020-06-23,travis terrill,1,clr,1395,66,cow
+2020-06-23,al garcia,3,clr,1620,64,cow
+2020-06-30,judd ranch,4,clr,535,146,str
+2020-06-30,travis huff,12,clr,605,130.5,hfr
+2020-06-30,rafter 4 ranch,12,ang,610,129,hfr
+2020-06-30,jim warner,5,ang,585,129,hfr
+2020-06-30,paul andreatta,2,clr,550,125,hfr
+2020-06-30,kenneth hull,2,mix,610,124,hfr
+2020-06-30,mark richardson,12,clr,620,118,hfr
+2020-06-30,donald mcneely,10,ang,765,114,hfr
+2020-06-30,everett jackson,8,ang,810,111,hfr
+2020-06-30,pride cattle,4,clr,535,146,str
+2020-06-30,mark richardson,1,clr,580,142,str
+2020-06-30,kenneth hull,3,mix,660,130,str
+2020-06-30,js ranch,155,clr,830,129.25,str
+2020-06-30,kim cooley,2,clr,1395,70,cow
+2020-06-30,bob bledsoe,2,clr,1480,67.5,cow
+2020-06-30,ty jackson,1,clr,1100,67.5,cow
+2020-06-30,vance cole,1,clr,1195,66,cow
+2020-06-30,collins ranch,5,ang,1190,66,cow
+2020-06-30,gerald knapp,4,clr,1545,65,cow
+2020-06-30,rod cole,1,clr,1045,64,cow
+2020-06-30,noah musick,8,clr,1350,63.25,cow
+2020-06-30,spear p cattle,16,clr,1055,61,cow
+2020-06-30,fred bregar,16,clr,1225,60.75,cow
+2020-06-30,r & d andreatta,15,clr,1395,60,cow
+2020-06-30,lester bagwell,2,mix,1185,60,cow
+2020-06-30,jerry palmer,6,clr,1305,58,cow
+2020-06-30,brandon salapich,1,char,1865,103,bull
+2020-06-30,monte & deb smith,1,ang,2145,100,bull
+2020-06-30,steve payne,1,clr,2135,99,bull
+2020-06-30,tony vick,1,clr,1940,98,bull
+2020-06-30,mark torres,1,clr,1865,98,bull
+2020-06-30,bob watkins,1,clr,2060,96,bull
+2020-06-30,kelly bader,3,ang,1975,94,bull
+2020-06-30,paul blasi,5,clr,2035,93,bull
+2020-06-30,kim cooley,1,clr,1705,91.5,bull
+2020-06-30,b.a.r. corp,1,clr,1710,90.5,bull
+2020-07-07,larry mapes,1,ang,330,165,str
+2020-07-07,swish cattle co,4,clr,375,154,str
+2020-07-07,hamm ranch,11,ang,430,152,str
+2020-07-07,donald cisneros,1,char,380,148,hfr
+2020-07-07,red cliff ranch,2,clr,445,144,hfr
+2020-07-07,walter nash,5,ang,430,144,str
+2020-07-07,crum land & cattle,5,clr,530,140,str
+2020-07-07,red cliff ranch,3,clr,570,129,hfr
+2020-07-07,brown & sons,1,clr,625,119,hfr
+2020-07-07,william thurston,5,ang,705,114,hfr
+2020-07-07,david adamic,5,ang,605,138,str
+2020-07-07,jim martinez,4,clrclr,525,135,str
+2020-07-07,jeff larson,5,ang,755,127.5,str
+2020-07-07,william thurston,4,ang,705,125,str
+2020-07-07,tony vick,4,ang,710,130,str
+2020-07-07,ponderosa ranch,14,clr,820,124,str
+2020-07-07,norris patton,1,clr,1495,67.5,cow
+2020-07-07,john ratkovich,1,clr,1660,67,cow
+2020-07-07,rim rock cattle,1,clr,1650,66,cow
+2020-07-07,curtis schroder,1,clr,1640,65,cow
+2020-07-07,ralph berry,1,clr,1375,65,cow
+2020-07-07,william curtis,1,clr,1335,65,cow
+2020-07-07,reynolds ranch,2,clr,1450,64.5,cow
+2020-07-07,wilma mosher,7,clr,1480,64,cow
+2020-07-07,tony vick,21,clr,1430,64,cow
+2020-07-07,cha lee,1,clr,1305,64,cow
+2020-07-07,joann marchand,2,clr,1325,63,cow
+2020-07-07,stirrup ranch,6,mix,1410,61.5,cow
+2020-07-07,red cliff ranch,5,clr,1120,60.5,cow
+2020-07-07,dave kaess,1,clr,1120,59,cow
+2020-07-07,idi ranch,10,clr,1160,56.5,cow
+2020-07-07,tanya lovato,1,clr,1895,100,bull
+2020-07-07,garrett horning,1,spot,2170,95,bull
+2020-07-07,lester ranches,1,char,1625,93.5,bull
+2020-07-07,joann marchand,1,clr,1855,92,bull
+2020-07-07,terry brown l.t.,1,clr,1890,89,bull
+2020-07-07,dillan kelley,1,clr,1800,88,bull
+2020-07-07,welch cattle co,1,clr,1630,88,bull
+2020-07-07,kevin hall,1,clr,1945,87.5,bull
+2020-07-14,sandoval l & c,3,ang,390,191,str
+2020-07-14,gary schafer,2,ang,420,181,str
+2020-07-14,greenhorn mountain,3,clr,450,156,str
+2020-07-14,boyd ranch,6,char,500,155,str
+2020-07-14,jose munoz,4,ang,485,139,hfr
+2020-07-14,johnny espinoza,2,clr,445,139,hfr
+2020-07-14,boyd ranch,13,char,540,137,hfr
+2020-07-14,may farms,12,lim,520,132,hfr
+2020-07-14,wayne donley,2,clr,635,120,hfr
+2020-07-14,stan white,49,ang,820,119.5,hfr
+2020-07-14,bob barr,5,clr,675,118,hfr
+2020-07-14,chad wright,3,char,680,117,hfr
+2020-07-14,j.t. schalla,17,clr,785,116.5,hfr
+2020-07-14,jose munoz,3,ang,675,116,hfr
+2020-07-14,boyd ranch,9,ang,615,150.5,str
+2020-07-14,may farms,19,lim,580,146,bull
+2020-07-14,rex daniels,13,clr,565,141,str
+2020-07-14,jose munoz,5,ang,735,132,str
+2020-07-14,tony henry,2,clr,790,127,str
+2020-07-14,bob barr,7,clr,790,123,str
+2020-07-21,clint anderson,1,clr,335,171,str
+2020-07-21,schroder red angus,1,clr,360,170,str
+2020-07-21,davis & webster,14,ang,500,166.5,str
+2020-07-21,don gomez,4,clr,540,156,str
+2020-07-21,davis & webster,6,ang,625,136.5,hfr
+2020-07-21,charles reed,4,char,625,135.5,hfr
+2020-07-21,davis & webster,4,ang,635,147,str
+2020-07-21,swisher cattle,3,clr,595,142,str
+2020-07-21,howard robertson,5,clr,740,131.5,str
+2020-07-21,shelton livestock,1,clr,1315,64.5,cow
+2020-07-21,dick louden,3,clr,1310,64.5,cow
+2020-07-21,mex & sons,10,clr,1385,64.25,cow
+2020-07-21,jeff belveal,3,clr,1420,63.5,cow
+2020-07-21,carolyn frick,5,clr,1400,63.5,cow
+2020-07-21,mike occhiato,1,char,1150,63.5,cow
+2020-07-21,edmundson ranch,15,mix,1135,63,cow
+2020-07-21,clint anderson,6,mix,1125,62,cow
+2020-07-21,barrett sikes,8,clr,1510,60.5,cow
+2020-07-21,louis james,3,clr,1235,60.5,cow
+2020-07-21,chad ricken,1,clr,2320,89,bull
+2020-07-21,campion ranch,1,clr,1970,88.5,bull
+2020-07-21,edmundson ranch,1,clr,1950,88,bull
+2020-07-21,mex & sons,1,clr,1590,87,bull
+2020-07-21,chamberlain ranch,1,clr,1650,86,bull
+2020-07-28,adams land & livestock,18,clr,335,210,str
+2020-07-28,jimmy collins,4,mix,375,180,str
+2020-07-28,poestio farms,10,clr,395,170,bull
+2020-07-28,brooks cattle,8,ang,415,163.5,hfr
+2020-07-28,pete sinclair,5,clr,510,160,str
+2020-07-28,greg kruthaupt,6,mix,485,149.5,hfr
+2020-07-28,j c gilleland,6,clr,540,139.75,hfr
+2020-07-28,pete sinclair,4,clr,565,134.5,hfr
+2020-07-28,carson kravig,2,ang,720,124,hfr
+2020-07-28,lopez cattle,4,mix,600,145,str
+2020-07-28,sandoval l & c,5,clr,795,134.5,str
+2020-07-28,keyes rito oso,3,clr,785,127,str
+2020-07-28,barry koch,1,clr,1515,72.5,cow
+2020-07-28,edgar ranches,1,clr,1450,72,cow
+2020-07-28,jack gilleland,1,clr,1555,71,cow
+2020-07-28,leonard cattle co,15,clr,1370,71,cow
+2020-07-28,marc hollenbaugh,2,clr,1365,69,cow
+2020-07-28,bruce hass,3,clr,1325,68.5,cow
+2020-07-28,ben ferree,1,clr,1340,67,cow
+2020-07-28,collins ranch,7,clr,1160,67,cow
+2020-07-28,clint mundell,6,clr,1460,66,cow
+2020-07-28,myron sams,1,clr,1270,64,cow
+2020-07-28,barlow & sons,6,clr,1125,56,cow
+2020-07-28,terry brown,1,clr,1830,97,bull
+2020-07-28,m & m lopez,1,clr,1670,97,bull
+2020-07-28,russell groves,2,clr,2000,95,bull
+2020-07-28,don schulz,1,clr,1955,95,bull
+2020-07-28,tony vick,1,clr,1680,95,bull
+2020-07-28,sandoval l & c,1,clr,1975,91,bull
+2020-07-28,franey ranch,3,clr,1635,91,bull
+2020-08-04,jd livestock,3,clr,355,174,str
+2020-08-04,daniel merewether,3,clr,380,172,bull
+2020-08-04,darin serfoss,3,clr,485,157,str
+2020-08-04,william ogden,3,clr,525,155,str
+2020-08-04,david hamilton,2,clr,415,148,hfr
+2020-08-04,james brenner,2,clr,450,142,hfr
+2020-08-04,paul garrett,2,clr,505,135,hfr
+2020-08-04,round ranch,9,mix,580,135.5,hfr
+2020-08-04,richardson ranch,10,clr,545,129,hfr
+2020-08-04,walter bland,3,clr,610,127,hfr
+2020-08-04,b & w livestock,3,clr,740,125,hfr
+2020-08-04,richardson ranch,9,clr,565,156,str
+2020-08-04,round ranch,6,mix,615,149.5,str
+2020-08-04,equity investments,9,clr,725,149,str
+2020-08-04,franey ranch,5,mix,690,147,str
+2020-08-04,deborah miller,10,clr,780,143,str
+2020-08-04,diamond m king ranch,68,mix,625,141,str
+2020-08-04,keyes rito oso,6,clr,785,132,str
+2020-08-04,vicki graves,1,clr,1400,77,cow
+2020-08-04,rush creek l & c,1,clr,1225,77,cow
+2020-08-04,david hamilton,6,mix,1395,75,cow
+2020-08-04,gary saddoris,1,clr,1295,75,cow
+2020-08-04,albino morales,1,clr,1525,74,cow
+2020-08-04,howard sumpter,1,clr,1485,74,cow
+2020-08-04,j open a partnership,1,clr,1350,74,cow
+2020-08-04,reskurtas west,7,mix,1345,74,cow
+2020-08-04,janet weber,1,mot,1410,69.5,cow
+2020-08-04,ralph berry,2,clr,1345,69,cow
+2020-08-04,ross davis,1,char,1020,68,cow
+2020-08-04,alex lasater,3,clr,1125,67,cow
+2020-08-04,kendall curtis,2,clr,1100,67,cow
+2020-08-04,yoder ranches,9,mix,1125,63.5,cow
+2020-08-04,sam trotter,1,char,2055,109,bull
+2020-08-04,richard sumpter,1,clr,2180,105,bull
+2020-08-04,kim ramsey,1,clr,1765,105,bull
+2020-08-04,ryan davis,1,clr,1765,104.5,bull
+2020-08-04,hal meredith,1,clr,1900,104,bull
+2020-08-04,larry minkler,1,clr,1990,101,bull
+2020-08-04,ty weber,1,clr,1735,101,bull
+2020-08-04,chris matthew,1,char,1440,101,bull
+2020-08-04,brett balenseifen,1,clr,1755,97.5,bull
+2020-08-04,lacy paull,1,mot,2335,96,bull
+2020-08-04,alan carr,1,clr,1740,92.5,bull
+2020-08-04,brooks cattle llc,1,clr,1725,92.5,bull
+2020-08-04,kenny burk,1,clr,1775,92,bull
+2020-08-11,john philpy,4,clr,385,176,str
+2020-08-11,nunn ranches,6,ang,510,169,str
+2020-08-11,devers ranch,16,ang char,545,166.5,str
+2020-08-11,m & m lucero,2,clr,450,165,str
+2020-08-11,j.d. farms,6,clr,515,164,str
+2020-08-11,russell shrout,2,clr,430,159,str
+2020-08-11,nunn ranches,21,ang,570,136.5,hfr
+2020-08-11,robert trujillo,2,clr,630,129,hfr
+2020-08-11,nunn ranches,17,ang,610,154.5,str
+2020-08-11,devers ranch,5,ang char,610,153,str
+2020-08-11,rafter 4,14,clr,690,147,str
+2020-08-11,gerald schmitt,19,ang,810,134.75,str
+2020-08-11,kent johnston,3,ang ang,695,142,str
+2020-08-11,clyde chess,2,char,1435,68,cow
+2020-08-11,marty neugebauer,1,clr,1220,66,cow
+2020-08-11,devers ranch,4,mix,1260,65,cow
+2020-08-11,bill larson,1,clr,1250,65,cow
+2020-08-11,jay himes,1,clr,1180,65,cow
+2020-08-11,keith & serenity lewis,4,clr,1545,64,cow
+2020-08-11,gary saddoris,1,clr,1235,64,cow
+2020-08-11,mountain view ranch,1,clr,1200,61,cow
+2020-08-11,platt ranch,3,clr,1360,60.5,cow
+2020-08-11,fred bregar,1,clr,1535,59,cow
+2020-08-11,janet weber,5,clr,1175,59,cow
+2020-08-11,bruce hass,4,clr,1260,58,cow
+2020-08-11,edmundson ranches,1,clr,1225,58,cow
+2020-08-11,rick markus,7,clr,1235,56.5,cow
+2020-08-11,joey menegatti,11,mix,1165,54,cow
+2020-08-11,gale haynes,1,clr,1225,99,bull
+2020-08-11,edmundson ranches,1,clr,2040,95,bull
+2020-08-11,gerald norton,1,clr,2035,92.5,bull
+2020-08-11,larry dent,1,clr,1735,91.5,bull
+2020-08-11,gary saddoris,1,clr,1995,90,bull
+2020-08-11,d & d farms,1,clr,1945,90,bull
+2020-08-11,alex lasater,1,clr,1720,90,bull
+2020-08-11,louden cattle co,4,clr,1700,87,bull
+2020-08-11,joe amato,1,clr,2060,86,bull
+2020-08-11,henry brown,1,clr,1725,86,bull
+2020-08-11,lonnie davis,1,clr,2205,85.5,bull
+2020-08-18,anthony greenbank,6,clr,390,187.5,str
+2020-08-18,bill barnett,5,mix,405,175,str
+2020-08-18,wayne coble,2,clr,500,152,str
+2020-08-18,steve latham,7,clr,530,138,hfr
+2020-08-18,anthony greenbank,6,clr,550,137,hfr
+2020-08-18,jean ramstetter,3,clr,720,133,hfr
+2020-08-18,bill barnett,5,mix,575,131,hfr
+2020-08-18,clinton huffaker,8,mix,680,128.5,hfr
+2020-08-18,jack gilleland,40,clr,980,114,hfr
+2020-08-18,anderson & sallee,143,clr,705,151.5,str
+2020-08-18,clinton huffaker,9,mix,605,151.5,str
+2020-08-18,bill barnett,6,mix,585,147,str
+2020-08-18,parker ranch,63,clr,835,142.35,str
+2020-08-18,jean ramstetter,6,clr,975,130.5,str
+2020-08-18,frank bates,1,clr,1395,68.5,cow
+2020-08-18,wade kruetzer,1,clr,1705,68,cow
+2020-08-18,wayne coble,1,clr,1290,68,cow
+2020-08-18,bill barnett,5,clr,1330,66.5,cow
+2020-08-18,robert bledsoe,6,clr,1515,65,str
+2020-08-18,keith bender,1,mot,1320,65,cow
+2020-08-18,clyde chess,12,char,1465,64,cow
+2020-08-18,jim walter,1,clr,1270,63,cow
+2020-08-18,david morgan,7,clr,1335,62.75,cow
+2020-08-18,ty weber,3,clr,1295,59.5,cow
+2020-08-18,gary hall,1,clr,1760,88.5,bull
+2020-08-18,jeff huntoon,1,clr,1685,88,bull
+2020-08-18,rorick & reid,2,clr,1950,86.5,bull
+2020-08-18,john marroney,1,clr,1945,86.5,bull
+2020-08-18,austin huntoon,1,clr,2195,86,bull
+2020-08-18,alan carr,1,clr,1595,82,bull
+2020-08-25,james hull,1,clr,265,218,str
+2020-08-25,tye jackson,2,ang,310,217,str
+2020-08-25,gerald schmitt,10,clr,315,213,str
+2020-08-25,fisher ranch,7,ang,360,205,str
+2020-08-25,james rook,4,clr,250,204,hfr
+2020-08-25,jt & amber schalla,5,ang,435,180,str
+2020-08-25,kevin harris,3,clr,405,178,str
+2020-08-25,april yoxey,3,clr,430,177.5,str
+2020-08-25,john ratkovich,9,ang,520,141,hfr
+2020-08-25,quentin marburger,3,clr,585,140,hfr
+2020-08-25,jeff belveal,16,ang,590,139,hfr
+2020-08-25,butch faoro,6,ang,605,134,hfr
+2020-08-25,andrew jones,4,clr,565,133,hfr
+2020-08-25,fred melgoza,6,clr,610,127.5,hfr
+2020-08-25,welch cattle co,8,clr,860,127,hfr
+2020-08-25,snyder ranches,7,clr,785,127,hfr
+2020-08-25,wls cattle,6,clr,690,124,hfr
+2020-08-25,john ratkovich,7,ang,540,158,str
+2020-08-25,quentin marburger,6,clr,605,156,str
+2020-08-25,fred melgoza,3,clr,605,155.5,str
+2020-08-25,butch faoro,8,ang,605,143,str
+2020-08-25,jennie adrian,14,ang,855,141,str
+2020-09-01,krc cattle co,2,clr,335,196,NA
+2020-09-01,vanier land company,10,clr ang,385,191,str
+2020-09-01,veach land,5,mix,445,167,str
+2020-09-01,withers cattle co,16,ang,370,155.5,hfr
+2020-09-01,darin serfoss,2,ang,470,141,hfr
+2020-09-01,lawrence indgjer,6,clr,505,139,hfr
+2020-09-01,spear p cattle co,14,clr,555,137.5,hfr
+2020-09-01,veach land,12,mix,565,136,hfr
+2020-09-01,kenneth hull,7,char,675,126.5,hfr
+2020-09-01,william spitz,12,mix,720,123.5,hfr
+2020-09-01,william bledsoe,7,clr,750,120,hfr
+2020-09-01,louden cattle co,11,ang,785,119,hfr
+2020-09-01,garrett wertz,4,clr,805,118,hfr
+2020-09-01,spear p cattle co,3,clr,575,151,str
+2020-09-01,lawrence indgjer,4,char,580,148,str
+2020-09-01,veach land,19,mix,585,147.5,str
+2020-09-01,clint anderson,12,clr,635,145.5,str
+2020-09-01,j.f. hawkins jr,11,ang,705,144.25,str
+2020-09-01,philip jensen,8,clr,635,143.5,str
+2020-09-01,william spitz,10,mix,715,143.25,str
+2020-09-01,kenneth hull,7,char,695,139.5,str
+2020-09-01,tony sorensen,14,clr,855,137,str
+2020-09-01,vertovec & noble,5,clr,1460,68,cow
+2020-09-01,twisted arrow cattle,1,clr,1535,67.5,cow
+2020-09-01,bledsoe brothers,10,clr,1365,67.5,cow
+2020-09-01,everett jackson,6,clr,1240,66,cow
+2020-09-01,carlos salazar,6,clr,1355,65.5,cow
+2020-09-01,frances larrew,1,clr,1420,65,cow
+2020-09-01,jack sikes estate,1,clr,1350,64,cow
+2020-09-01,adam atwood,1,clr,1535,63,cow
+2020-09-01,kelby bond,8,clr,1185,56,cow
+2020-09-01,dustin wallace,1,clr,2175,93.5,bull
+2020-09-01,wade collins,1,clr,1855,90.5,bull
+2020-09-01,william barnett,1,clr,1885,89,bull
+2020-09-01,howard sumpter,1,clr,2250,86.5,bull
+2020-09-01,charles hijar,1,clr,1740,85,bull
+2020-09-01,adam atwood,1,clr,1895,84.5,bull
+2020-09-08,gary fillmore,8,mix,310,198,str
+2020-09-08,fisher ranch,10,ang,380,196.5,str
+2020-09-08,charles crockett,13,ang,275,191,str
+2020-09-08,andrew jones,2,clr,360,190,str
+2020-09-08,matt kelley,3,clr,355,190,str
+2020-09-08,breen enterprises,19,clr,405,188,str
+2020-09-08,denise kennedy,3,ang,390,186,str
+2020-09-08,dave stroh,22,char,375,180,str
+2020-09-08,bijou creek ranch,18,ang,500,169,str
+2020-09-08,clint anderson,2,clr,605,129,hfr
+2020-09-08,richards ranch,10,clr,615,126,hfr
+2020-09-08,book land & cattle,9,clr,635,124.5,hfr
+2020-09-08,fisher ranch,41,ang,565,158.5,str
+2020-09-08,charles palmer,5,ang,565,150,str
+2020-09-08,breen enterprises,23,clr,560,150,str
+2020-09-08,dennis nazelrod,6,clr,620,139,str
+2020-09-08,william venn,7,clr,665,137,str
+2020-09-08,patrick berry,3,clr,645,136,str
+2020-09-08,brett wilson,1,clr,1560,67.5,cow
+2020-09-08,bijou creek ranch,1,clr,1490,64,cow
+2020-09-08,donald jones,1,clr,1270,62,cow
+2020-09-08,breen enterprises,10,clr,1385,61,cow
+2020-09-08,gary wollert,1,clr,1420,59.5,cow
+2020-09-08,landon berry,1,clr,1475,59,cow
+2020-09-08,virginia green,5,mix,1395,57.5,cow
+2020-09-08,gary fillmore,10,mix,1130,56.75,cow
+2020-09-08,rising double r ranch,7,clr,1200,56,cow
+2020-09-08,gary mestas,8,clr,1160,56,cow
+2020-09-08,david hamilton,1,clr,2005,92,bull
+2020-09-08,dick louden,1,clr,1960,90,bull
+2020-09-08,darrel nimmo,1,clr,1495,89,bull
+2020-09-08,rodney cole,1,clr,1600,85,bull
+2020-09-08,bar nothing ranches,1,clr,1775,84,bull
+2020-09-08,clyde mccloy,2,clr,1850,83.5,bull
+2020-09-08,gary fillmore,8,mix,310,198,str
+2020-09-08,fisher ranch,10,ang,380,196.5,str
+2020-09-08,charles crockett,13,ang,275,191,str
+2020-09-08,andrew jones,2,clr,360,190,str
+2020-09-08,matt kelley,3,clr,355,190,str
+2020-09-08,breen enterprises,19,clr,405,188,str
+2020-09-08,denise kennedy,3,ang,390,186,str
+2020-09-08,dave stroh,22,char,375,180,str
+2020-09-08,bijou creek ranch,18,ang,500,169,str
+2020-09-08,clint anderson,2,clr,605,129,hfr
+2020-09-08,richards ranch,10,clr,615,126,hfr
+2020-09-08,book land & cattle,9,clr,635,124.5,hfr
+2020-09-08,fisher ranch,41,ang,565,158.5,str
+2020-09-08,charles palmer,5,ang,565,150,str
+2020-09-08,breen enterprises,23,clr,560,150,str
+2020-09-08,dennis nazelrod,6,clr,620,139,str
+2020-09-08,william venn,7,clr,665,137,str
+2020-09-08,patrick berry,3,clr,645,136,str
+2020-09-08,brett wilson,1,clr,1560,67.5,cow
+2020-09-08,bijou creek ranch,1,clr,1490,64,cow
+2020-09-08,donald jones,1,clr,1270,62,cow
+2020-09-08,breen enterprises,10,clr,1385,61,cow
+2020-09-08,gary wollert,1,clr,1420,59.5,cow
+2020-09-08,landon berry,1,clr,1475,59,cow
+2020-09-08,virginia green,5,mix,1395,57.5,cow
+2020-09-08,gary fillmore,10,mix,1130,56.75,cow
+2020-09-08,rising double r ranch,7,clr,1200,56,cow
+2020-09-08,gary mestas,8,clr,1160,56,cow
+2020-09-08,david hamilton,1,clr,2005,92,bull
+2020-09-08,dick louden,1,clr,1960,90,bull
+2020-09-08,darrel nimmo,1,clr,1495,89,bull
+2020-09-08,rodney cole,1,clr,1600,85,bull
+2020-09-08,bar nothing ranches,1,clr,1775,84,bull
+2020-09-08,clyde mccloy,2,clr,1850,83.5,bull
+2020-09-15,tony hass,4,clr,330,213,str
+2020-09-15,palmer brothers,21,ang,325,205,str
+2020-09-15,dusty eikenberg,3,ang,300,205,str
+2020-09-15,steve norris,4,ang,340,199,str
+2020-09-15,jared depriest,6,clr,385,198,str
+2020-09-15,ron bates,12,ang,350,193,str
+2020-09-15,m & m lopez,20,clr,420,190,str
+2020-09-15,james jolly,2,clr,420,187,str
+2020-09-15,chad wright,12,clr,435,185,str
+2020-09-15,wayne donley,4,clr,435,180,str
+2020-09-15,vanier land company,10,ang,455,177,str
+2020-09-15,norris patton,14,mix,500,159,str
+2020-09-15,thomas gilley,9,clr,520,157.5,str
+2020-09-15,gary tatsch,5,clr,430,154,hfr
+2020-09-15,edgar ranches,3,ang,465,150,hfr
+2020-09-15,kevin harris,11,char,460,145,hfr
+2020-09-15,sam ramirez,8,lim,485,139,hfr
+2020-09-15,silva farm & ranch,6,clr,475,135.5,hfr
+2020-09-15,steve norris,45,ang,540,135.5,hfr
+2020-09-15,russell groves,14,ang,640,133,hfr
+2020-09-15,john vallejos,10,clr,535,133,hfr
+2020-09-15,gary tatsch,9,clr,570,132,hfr
+2020-09-15,sam ramirez,8,lim,575,131.5,hfr
+2020-09-15,silva farm & ranch,15,clr,545,129.5,hfr
+2020-09-15,tony hass,24,clr,595,128.5,hfr
+2020-09-15,franey ranch,11,ang,765,126.5,hfr
+2020-09-15,charles mock,8,ang,730,126,hfr
+2020-09-15,norris patton,15,mix,590,124,hfr
+2020-09-15,john vallejos,9,clr,560,152.5,str
+2020-09-15,tony hass,6,clr,550,153,str
+2020-09-15,james jolly,4,clr,550,152,str
+2020-09-15,steve norris,44,ang,585,144.5,str
+2020-09-15,silva farm & ranch,16,clr,595,143,str
+2020-09-15,norris patton,16,mix,600,141.5,str
+2020-09-15,jeff johnson,4,clr,625,140,str
+2020-09-15,russell groves,12,ang,710,136.5,str
+2020-09-15,franey ranch,2,ang,745,136,str
+2020-09-22,welmarc ranch,3,clr,220,220,str
+2020-09-22,baros & martinez,6,clr,260,215,str
+2020-09-22,cooper moore,18,ang,345,210,str
+2020-09-22,marc mckinley,21,clr,325,209,str
+2020-09-22,windsplitter ranch,6,ang,320,209,str
+2020-09-22,matt kelley,5,clr,300,202.5,str
+2020-09-22,carlene mosher,29,ang,415,187.5,str
+2020-09-22,bruce lewis,8,clr,415,181,str
+2020-09-22,randy vigil,15,clr,425,173,str
+2020-09-22,judy whittemore,13,ang,450,169,str
+2020-09-22,sharri smith,13,ang,450,165,str
+2020-09-22,chris velasquez,16,clr,535,155,str
+2020-09-22,gilbert tafoya,12,clr,490,155,str
+2020-09-22,charles crockett,22,ang,515,152.5,str
+2020-09-22,shane & sage faulkner,25,clr,520,150.5,str
+2020-09-22,spear p cattle co,25,clr,525,136,hfr
+2020-09-22,robert ortega,10,clr,480,136,hfr
+2020-09-22,wade sumpter,39,clr,625,139,hfr
+2020-09-22,nunn ranches,30,clr,585,137.75,hfr
+2020-09-22,spear p cattle,17,clr,670,136.25,hfr
+2020-09-22,gunter cattle co,16,clr,575,135,hfr
+2020-09-22,tate rusk,6,ang,820,133.5,hfr
+2020-09-22,gary & karen hall,6,ang,640,133,hfr
+2020-09-22,tommy goodrich,50,lim,605,133,hfr
+2020-09-22,george pigg,9,clr,660,132.5,hfr
+2020-09-22,jerry norton,28,clr,690,131.5,hfr
+2020-09-22,cooper moore,19,ang,565,131,hfr
+2020-09-22,chamberlain ranch,28,clr,740,130.25,hfr
+2020-09-22,travecere ranch,25,clr,820,130,hfr
+2020-09-22,seal pharmacy,11,char,700,128.5,hfr
+2020-09-22,jim day,13,ang,890,120.5,hfr
+2020-09-22,huffaker ranches,9,gel,915,119.5,hfr
+2020-09-22,cs ranch,18,clr,880,119.5,hfr
+2020-09-22,lazy v cattle co,25,ang,975,114.5,hfr
+2020-09-22,reinhardt ranch,14,ang,980,109,hfr
+2020-09-22,spear p cattle,13,clr,545,156.5,str
+2020-09-22,nunn ranches,49,clr,640,148,str
+2020-09-22,gunter cattle co,19,clr,640,147.5,str
+2020-09-22,cooper moore,35,ang,560,147.5,str
+2020-09-22,tommy goodrich,26,lim,560,145.5,str
+2020-09-22,george pigg,8,clr,630,144.5,str
+2020-09-22,reed & gregg,10,clr,700,144,str
+2020-09-22,bill kolb,47,clr,895,143.1,str
+2020-09-22,seal cattle ranch,51,char,820,143,str
+2020-09-22,gary & karen hall,13,ang,645,142,str
+2020-09-22,chris velasquez,33,clr,630,142,str
+2020-09-22,brandon reystead,8,ang,860,140.5,str
+2020-09-22,rylee sallee,32,ang,840,139.5,str
+2020-09-22,judy whittemore,22,ang,630,139,str
+2020-09-22,reinhardt ranch,20,ang,830,137.5,str
+2020-09-22,jim & sammi mason,23,clr,870,135.1,str
+2020-09-22,equity investements,23,brang,835,135,str
+2020-09-22,j.s. ranch,27,clr,980,125.5,str
+2020-09-29,joette schalla,5,clr,360,207,str
+2020-09-29,book land & cattle,9,mix,390,195,str
+2020-09-29,ankrum family ranch,9,ang,395,188,str
+2020-09-29,brandon & lori elam,4,ang,410,186,str
+2020-09-29,fidel florez,4,clr,385,185,str
+2020-09-29,bill duzenack,11,ang,415,180,str
+2020-09-29,james martinez,6,clr,410,180,str
+2020-09-29,louis schmidt,7,clr,310,175,hfr
+2020-09-29,duane stoker,6,ang,455,170,str
+2020-09-29,cora gomez,10,clr,435,169,str
+2020-09-29,janet weber,17,ang,450,167,str
+2020-09-29,jld partnership,10,ang,460,165,str
+2020-09-29,m & m lopez,29,clr,470,161.5,str
+2020-09-29,bill taylor,10,clr,465,161.5,str
+2020-09-29,orme ranch inc,9,clr,355,161,hfr
+2020-09-29,randy schofield,19,clr,475,157.5,str
+2020-09-29,nick & danielle knapp,9,clr,505,155,str
+2020-09-29,jessica mosher,18,ang,495,155,str
+2020-09-29,alvin russell,11,mix,515,154,str
+2020-09-29,jerry norton,19,ang,520,152,str
+2020-09-29,nunn ranches,80,ang,460,148,hfr
+2020-09-29,larry hooper,11,clr,535,136,hfr
+2020-09-29,devers ranch,15,clr,580,136.5,hfr
+2020-09-29,nunn ranches,10,ang,545,136,hfr
+2020-09-29,larry hooper,16,clr,665,134.5,hfr
+2020-09-29,dean goodrich,27,ang,635,134,hfr
+2020-09-29,jason & vicki jackson,17,ang,555,133.5,hfr
+2020-09-29,abel benavidez,12,clr,630,133,hfr
+2020-09-29,sumpter brothers,17,ang,630,133,hfr
+2020-09-29,jerry norton,29,ang,615,132.75,hfr
+2020-09-29,gary & kathy hill,11,ang,590,131.5,hfr
+2020-09-29,nick & danielle knapp,19,clr,595,131,hfr
+2020-09-29,patton ranch,19,clr,690,130,hfr
+2020-09-29,fidel florez,18,clr,550,129.5,hfr
+2020-09-29,ethan crockett,13,clr,565,129,hfr
+2020-09-29,georgia kuykendall,10,lim,560,129,hfr
+2020-09-29,jack jolly,6,clr,695,127,hfr
+2020-09-29,bill kolb,12,mix,890,121.5,hfr
+2020-09-29,larry hooper,11,clr,550,155.5,str
+2020-09-29,devers ranch,8,clr,565,155,str
+2020-09-29,sharon roybal,8,clr,555,152.5,str
+2020-09-29,nunn ranches,10,ang,600,152,str
+2020-09-29,jason & vicki jackson,36,ang,555,152,str
+2020-09-29,cora gomez,16,clr,550,149,str
+2020-09-29,dean goodrich,36,ang,630,145.5,str
+2020-09-29,bruce lewis,26,clr,550,145,str
+2020-09-29,duane stoker,15,ang,575,144.5,str
+2020-09-29,alvin russell,39,mix,570,144.25,str
+2020-09-29,justin souders,7,ang,645,144,str
+2020-09-29,bill taylor,21,clr,565,143.5,str
+2020-09-29,fidel florez,21,clr,585,143,str
+2020-09-29,ankrum family ranch,30,ang,650,142,str
+2020-09-29,jerry norton,43,ang,620,139.5,str
+2020-09-29,nick & danielle knapp,33,clr,610,139.5,str
+2020-09-29,georgia kuykendall,11,lim,625,138.5,str
+2020-09-29,jack jolly,7,ang,620,138.5,str
+2020-09-29,sumpter brothers,23,ang,720,137,str
+2020-09-29,a slash cattle co,31,clr,800,135.75,str
+2020-09-29,patton ranch,16,clr,740,135.5,str
+2020-10-06,wollert brothers,5,clr,240,200,str
+2020-10-06,james brothers,8,clr,340,190,str
+2020-10-06,velasquez ranch,7,clr,390,185,str
+2020-10-06,joe bill nunn,40,ang,455,181,str
+2020-10-06,bradley cattle co,9,ang,420,180,str
+2020-10-06,withers cattle co,10,ang,420,180,str
+2020-10-06,ronald ulibarri,6,clr,425,174,str
+2020-10-06,dmi capital,17,clr,440,168,str
+2020-10-06,geiger ranch,14,clr,470,167,str
+2020-10-06,kevin davis,16,ang,460,164,str
+2020-10-06,j.t. schalla,43,ang,490,159.5,str
+2020-10-06,crowder ranch,10,ang,530,159,str
+2020-10-06,randy phillips,10,ang,535,158,str
+2020-10-06,jesus moreno,10,clr,510,158,str
+2020-10-06,durham brothers,18,clr,520,157,str
+2020-10-06,yoder brothers,20,clr,520,157,str
+2020-10-06,gayel alexander,14,mix,505,157,str
+2020-10-06,david adamic,9,mix,515,156,str
+2020-10-06,ryan bond,12,ang,525,155,str
+2020-10-06,don cole jr,12,ang,505,153,str
+2020-10-06,bob eichman,20,clr,535,152.5,str
+2020-10-06,jim damgaard,8,ang,450,145,hfr
+2020-10-06,durham brothers,12,clr,555,130.5,hfr
+2020-10-06,dean dickerson,13,clr,540,130.5,hfr
+2020-10-06,bradley cattle co,40,ang,610,130,hfr
+2020-10-06,j.t. schalla,33,ang,570,130,hfr
+2020-10-06,yoder brothers,11,clr,560,129,hfr
+2020-10-06,randy phillips,15,ang,550,129,hfr
+2020-10-06,greg peterson,25,mix,685,127.5,hfr
+2020-10-06,jimmy brown,9,clr,745,126.5,hfr
+2020-10-06,dalton davis,27,ang,680,126,hfr
+2020-10-06,steve jarmon,10,clr,760,125.5,hfr
+2020-10-06,scott hughes,25,clr,670,125.25,hfr
+2020-10-06,bar nothing ranch,6,choice ang,925,116,hfr
+2020-10-06,bradley cattle co,37,ang,550,153.5,str
+2020-10-06,joseph pope,10,ang,560,147,str
+2020-10-06,dean dickerson,11,clr,570,145.5,str
+2020-10-06,durham brothers,27,clr,610,143.25,str
+2020-10-06,snure brothers,20,char,625,143,str
+2020-10-06,gino lewis,9,char,640,142,str
+2020-10-06,crowder ranch,51,ang,630,141.75,str
+2020-10-06,yoder brothers,13,clr,605,141,str
+2020-10-06,j.t. schalla,38,ang,595,140.5,str
+2020-10-06,ronald ulibarri,16,clr,590,140.5,str
+2020-10-06,greg peterson,68,mix,805,138.75,str
+2020-10-06,tommy laney,34,mix,720,135,str
+2020-10-06,dalton davis,28,ang,735,133,str
+2020-10-06,carlton brown,7,clr,715,131.5,str
+2020-10-06,paul peterson,10,mix,975,118,str
 2020-11-24,field land & cattle,8,clr,355,189,str
 2020-11-24,emily cornell,7,clr,450,165,str
 2020-11-24,rafter 4 ranch,24,ang,495,164.5,str
-2020-11-24,rafter 4 ranch,15,ang,455,141,hfr
 2020-11-24,norman zwicker,8,ang,490,160,str
 2020-11-24,gilbert groves,23,ang,515,159,str
-2020-11-24,gilbert groves,15,ang,485,136,hfr
 2020-11-24,ronald zamora,5,clr,355,159,hfr
 2020-11-24,denny larsen,17,clr,360,153,hfr
 2020-11-24,rafter 4 ranch,37,ang,545,134,hfr
@@ -445,7 +2246,6 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-11-24,pfeifer & jensen,19,clr,975,119,hfr
 2020-11-24,emily cornell,21,ang,540,156.5,str
 2020-11-24,colby thrall,25,clr,555,154,str
-2020-11-24,colby thrall,13,clr,680,134,str
 2020-11-24,rafter 4 ranch,40,ang,595,147.5,str
 2020-11-24,leslie schnaufer,13,clr,580,144,str
 2020-11-24,norman zwicker,9,ang,650,130,str
@@ -470,30 +2270,17 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-11-24,trampe ranches,3,clr,2025,80,bull
 2020-11-24,jeff huntoon,1,clr,2215,78,bull
 2020-12-01,clock land & cattle,6,ang,360,210,str
-2020-12-01,clock land & cattle,13,ang,450,179,str
-2020-12-01,clock land & cattle,32,ang,515,144,hfr
 2020-12-01,reynolds ranch,7,mix,370,203,str
-2020-12-01,reynolds ranch,13,mix,400,167.5,hfr
-2020-12-01,reynolds ranch,24,mix,495,142,hfr
 2020-12-01,diana tixier,10,clr,375,201,str
-2020-12-01,diana tixier,62,clr,485,180,str
-2020-12-01,diana tixier,42,clr,455,150.5,hfr
-2020-12-01,diana tixier,41,clr,520,143,hfr
 2020-12-01,tracy kester,17,lim,405,197,str
-2020-12-01,tracy kester,76,lim,490,173,str
-2020-12-01,tracy kester,100,lim,460,154,hfr
-2020-12-01,tracy kester,100,lim,540,138.5,hfr
 2020-12-01,stirrup ranch,19,clr,410,188,str
-2020-12-01,stirrup ranch,61,clr,480,178.5,str
 2020-12-01,vader cloverleaf ranch,10,ang,390,185,str
 2020-12-01,sam webster,10,clr,485,171,str
 2020-12-01,william spitz,16,clr,480,169,str
-2020-12-01,william spitz,18,clr,490,144,hfr
 2020-12-01,keith thelen,11,clr,515,168,str
 2020-12-01,plug hat ranch,16,clr,490,168,str
 2020-12-01,corpus gallegos ranch,10,mix,470,167,str
 2020-12-01,jeremy & tarah redshaw,25,ang,535,166,str
-2020-12-01,jeremy & tarah redshaw,24,ang,525,142.5,hfr
 2020-12-01,chet adams,13,mix,505,146,hfr
 2020-12-01,garth perry,18,clr,515,146,hfr
 2020-12-01,hittson land & cattle,20,ang,540,143,hfr
@@ -510,7 +2297,6 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-01,garth perry,26,clr,640,135,hfr
 2020-12-01,jim & greg higel,38,mix,585,135,hfr
 2020-12-01,keith thelen,16,clr,560,135,hfr
-2020-12-01,keith thelen,12,clr,680,125,hfr
 2020-12-01,william spitz,18,clr,595,134,hfr
 2020-12-01,reynolds ranch,20,lim,615,132,hfr
 2020-12-01,jim & sarah walter,55,mix,840,131,hfr
@@ -521,11 +2307,9 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-01,frank ghilarducci,11,char,670,128,hfr
 2020-12-01,adrian ranch,22,ang,630,128,hfr
 2020-12-01,charles stavely,29,ang,545,167.5,str
-2020-12-01,charles stavely,31,ang,600,151,str
 2020-12-01,diana tixier,32,clr,570,163,str
 2020-12-01,stirrup ranch,72,clr,555,163,str
 2020-12-01,clock land & cattle,43,ang,550,158.5,str
-2020-12-01,clock land & cattle,38,ang,645,142.5,str
 2020-12-01,tony valdez,13,clr,555,157.5,str
 2020-12-01,chris downare,10,lim,555,156.5,str
 2020-12-01,reynolds ranch,14,lim,550,155,str
@@ -533,14 +2317,10 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-01,corpus gallegos ranch,27,mix,575,153.5,str
 2020-12-01,dustin tixier,19,clr,605,153,str
 2020-12-01,rex hiner,10,mix,615,152,str
-2020-12-01,rex hiner,51,mix,921,139,str
-2020-12-01,rex hiner,47,mix,830,138,str
 2020-12-01,moeller ranch,40,ang,545,151.5,str
 2020-12-01,hittson land & cattle,23,ang,625,151,str
 2020-12-01,dave kaess,51,ang,675,150.5,str
-2020-12-01,dave kaess,58,ang,770,141,str
 2020-12-01,ronnie & karen roberts,37,ang,685,150,str
-2020-12-01,ronnie & karen roberts,33,ang,765,142.5,str
 2020-12-01,brandon oliver,32,ang,605,150,str
 2020-12-01,adrian ranch,12,ang,595,150,str
 2020-12-01,forst & fury,19,ang,615,149,str
@@ -548,40 +2328,24 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-01,a & j tamburelli,18,ang,680,147,str
 2020-12-01,caleb duvall,15,ang,600,146.5,str
 2020-12-01,jim & greg higel,35,mix,640,140,str
-2020-12-01,jim & greg higel,28,mix,760,131,str
 2020-12-01,willy faris,11,mix,775,138,str
 2020-12-01,jeremy & tarah redshaw,43,ang,695,137,str
 2020-12-01,keith thelen,15,clr,675,136,str
 2020-12-01,jim & sarah walter,58,mix,925,131.25,str
 2020-12-08,valley view ranch,13,ang,390,203,str
-2020-12-08,valley view ranch,30,ang,465,186,str
-2020-12-08,valley view ranch,32,ang,535,172,str
-2020-12-08,valley view ranch,23,ang,455,164,hfr
 2020-12-08,hasser ranch inc,17,mix,400,198,str
-2020-12-08,hasser ranch inc,43,mix,540,173,str
-2020-12-08,hasser ranch inc,56,mix,505,152.5,hfr
 2020-12-08,peeler land & livestock,88,ang,445,185,str
-2020-12-08,peeler land & livestock,12,ang,310,167,hfr
-2020-12-08,peeler land & livestock,44,ang,400,151,hfr
 2020-12-08,clock land corp,15,mix,485,179,str
 2020-12-08,dave adams,14,mix,495,175,str
-2020-12-08,dave adams,64,mix,585,151.5,str
 2020-12-08,steven reed,29,mix,515,174,str
-2020-12-08,steven reed,41,mix,475,152,hfr
 2020-12-08,stirrup ranch,42,clr,495,170,str
-2020-12-08,stirrup ranch,31,clr,370,151,hfr
-2020-12-08,stirrup ranch,67,clr,465,150,hfr
 2020-12-08,spear p cattle,19,clr,520,166,str
-2020-12-08,spear p cattle,11,clr,395,167,hfr
-2020-12-08,spear p cattle,20,clr,510,147,hfr
 2020-12-08,chris kester,12,ang,540,166,str
 2020-12-08,wineinger davis,44,ang,535,163.5,str
 2020-12-08,a t cross cattle,9,clr,470,154,hfr
 2020-12-08,eleven v ranch,37,clr,495,150,hfr
-2020-12-08,eleven v ranch,35,clr,615,145,hfr
 2020-12-08,dorenkamp ranch,55,ang,530,144,hfr
 2020-12-08,estancia valley cattle,42,clr,540,149.5,hfr
-2020-12-08,estancia valley cattle,49,clr,620,144,hfr
 2020-12-08,eleven v ranch,30,clr,575,148,hfr
 2020-12-08,valley view ranch,70,ang,550,145.5,hfr
 2020-12-08,steven guerrieri,53,clr,565,145,hfr
@@ -591,18 +2355,14 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-08,dorenkamp ranch,90,ang,565,140,hfr
 2020-12-08,chris kester,18,ang,565,140,hfr
 2020-12-08,timberline cattle inc,56,ang,625,139.5,hfr
-2020-12-08,timberline cattle inc,190,ang,715,130.6,hfr
 2020-12-08,clock land corp,82,mix,580,137.5,hfr
-2020-12-08,clock land corp,94,mix,660,128.5,hfr
 2020-12-08,alvin & deanna russell,68,mix,665,137,hfr
 2020-12-08,jessie bagwell,60,clr,630,137,hfr
 2020-12-08,dustin & brooke mathew,25,clr,820,136,hfr
 2020-12-08,kevin hronich,22,ang,645,132.5,hfr
 2020-12-08,brian quinlan,28,ang,650,131,hfr
 2020-12-08,hansen cattle,89,mix,765,130,hfr
-2020-12-08,hansen cattle,121,mix,860,128,hfr
 2020-12-08,chris & malinda matthew,98,char,765,130,hfr
-2020-12-08,chris & malinda matthew,98,char,845,129.5,hfr
 2020-12-08,jim hanratty,74,clr,655,130,hfr
 2020-12-08,harvey cundiff,11,ang,655,130,hfr
 2020-12-08,chad & heidi ricken,47,mix,820,129.75,hfr
@@ -611,68 +2371,44 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-08,darby makloski,26,ang,695,126,hfr
 2020-12-08,marvin schlegel,28,clr,745,125.75,hfr
 2020-12-08,welch cattle co,17,ang,545,169,str
-2020-12-08,welch cattle co,54,ang,610,152.5,str
-2020-12-08,welch cattle co,39,ang,695,143.5,str
 2020-12-08,valley view ranch,92,ang,590,165.5,str
-2020-12-08,valley view ranch,122,ang,665,154.5,str
 2020-12-08,estancia valley cattle,45,clr,590,165,str
-2020-12-08,estancia valley cattle,38,clr,675,147,str
 2020-12-08,brenda mcwright,10,clr,615,158,str
 2020-12-08,steven reed,50,mix,600,157.5,str
 2020-12-08,hasser ranch,76,mix,630,156.5,str
 2020-12-08,idi ranch,41,ang,630,156,str
 2020-12-08,neil mcdonald,24,clr,640,153.5,str
 2020-12-08,clock land corp,36,mix,570,153,str
-2020-12-08,clock land corp,82,mix,635,146,str
 2020-12-08,brian quinlan,65,ang,655,150.5,str
-2020-12-08,brian quinlan,48,ang,740,143,str
 2020-12-08,preston wood,33,clr,635,150,str
 2020-12-08,chris kester,44,ang,625,150,str
-2020-12-08,chris kester,41,ang,735,141.5,str
 2020-12-08,david mccaw,24,clr,670,148.5,str
 2020-12-08,jim hanratty,116,clr,700,145,str
 2020-12-08,alvin & matt carter,40,ang,705,144,str
 2020-12-08,timberline cattle inc,77,ang,720,140.25,str
-2020-12-08,timberline cattle inc,209,ang,795,135,str
-2020-12-08,timberline cattle inc,121,ang,895,133.5,str
 2020-12-08,kevin hronich,21,ang,745,138.5,str
 2020-12-08,hansen cattle,100,mix,805,138,str
-2020-12-08,hansen cattle,117,mix,935,131.75,str
 2020-12-08,chris & malinda matthew,93,char,905,135,str
-2020-12-08,chris & malinda matthew,89,char,850,134.75,str
 2020-12-08,dustin & brooke mathew,21,clr,850,134,str
 2020-12-08,levi hansen,36,mix,890,132.25,str
 2020-12-08,ricken land & cattle,54,mix,975,127,str
 2020-12-15,montana canterbury,6,ang,345,215,str
-2020-12-15,montana canterbury,5,ang,375,164,hfr
 2020-12-15,paul peterson,4,clr,290,212,str
-2020-12-15,paul peterson,6,clr,415,186,str
-2020-12-15,paul peterson,7,clr,385,158,hfr
 2020-12-15,willett cattle,5,ang,380,202,str
 2020-12-15,lester yoder,17,clr,390,201,str
-2020-12-15,lester yoder,38,clr,500,181,str
-2020-12-15,lester yoder,21,clr,375,171,hfr
-2020-12-15,lester yoder,42,clr,475,161.5,hfr
 2020-12-15,reyms ranch,5,clr,375,200,str
 2020-12-15,chavez ranch,14,clr,385,191,str
-2020-12-15,chavez ranch,15,clr,490,160,str
 2020-12-15,jim warner,15,clr,435,187,str
-2020-12-15,jim warner,10,clr,385,161,hfr
-2020-12-15,jim warner,9,clr,465,150,hfr
 2020-12-15,nortonville cattle,22,clr,470,183,str
-2020-12-15,nortonville cattle,16,clr,440,158,hfr
-2020-12-15,nortonville cattle,30,clr,515,149,hfr
 2020-12-15,ben doherty,7,clr,485,176,str
 2020-12-15,jason cole,8,clr,535,172,str
 2020-12-15,lloyd reynolds,40,clr,535,168,str
-2020-12-15,lloyd reynolds,42,clr,495,153,hfr
 2020-12-15,leif berg,12,clr,535,166,str
 2020-12-15,phil thomas,9,char,500,153,hfr
 2020-12-15,joanne goodrich,10,ang,505,148.5,hfr
 2020-12-15,jerry gallegos,12,clr,485,145,hfr
 2020-12-15,joeanne goodrich,32,ang,550,147,hfr
 2020-12-15,rafter j ranch,9,mix,605,145,hfr
-2020-12-15,rafter j ranch,24,mix,660,131.5,hfr
 2020-12-15,nortonville cattle,30,clr,565,144.5,hfr
 2020-12-15,lester yoder,42,clr,595,144,hfr
 2020-12-15,justin emick,14,clr,565,144,hfr
@@ -681,7 +2417,6 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-15,tri lazy w ranch,20,clr,555,139,hfr
 2020-12-15,john moore,23,clr,600,132,hfr
 2020-12-15,caldon cattle co,62,clr,680,131,hfr
-2020-12-15,caldon cattle co,37,clr,795,121,hfr
 2020-12-15,roger kuchan,27,clr,600,131,hfr
 2020-12-15,t l bar ranch,47,clr,795,130,hfr
 2020-12-15,sleeping indian ranch,37,clr,695,130,hfr
@@ -689,35 +2424,22 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-15,ken hull,9,char,595,128,hfr
 2020-12-15,sam vance,20,clr,705,125,hfr
 2020-12-15,nortonville cattle,51,clr,565,168,str
-2020-12-15,nortonville cattle,73,clr,645,155.5,str
-2020-12-15,nortonville cattle,16,clr,810,136.5,str
 2020-12-15,lloyd reynolds,19,clr,545,168,str
-2020-12-15,lloyd reynolds,48,clr,615,159.25,str
-2020-12-15,lloyd reynolds,21,clr,770,142.75,str
 2020-12-15,justin emick,15,clr,545,166,str
 2020-12-15,willett cattle,21,clr,560,164.5,str
-2020-12-15,willett cattle,70,clr,660,154.6,str
-2020-12-15,willett cattle,66,clr,735,141.75,str
 2020-12-15,john moore,22,clr,570,164,str
 2020-12-15,robert middlemist,29,clr,560,161.5,str
-2020-12-15,robert middlemist,24,clr,655,149,str
 2020-12-15,rafter j ranch,27,mix,605,160,str
-2020-12-15,rafter j ranch,21,mix,715,146,str
 2020-12-15,kent johnston,22,clr,590,153.5,str
 2020-12-15,leif berg,23,clr,645,153,str
 2020-12-15,jack bamber,16,ang,625,149,str
-2020-12-15,jack bamber,8,ang,765,140,str
 2020-12-15,smith land & ranch,25,clr,685,145.25,str
 2020-12-15,caldon cattle co,32,ang,685,144.5,str
-2020-12-15,caldon cattle co,104,ang,815,133.5,str
-2020-12-15,caldon cattle co,59,ang,895,133.85,str
 2020-12-15,bryce smith,19,ang,715,144,str
 2020-12-15,jason cole,26,clr,700,142.5,str
 2020-12-15,sam vance,33,clr,700,142,str
 2020-12-15,pargin ranch,73,ang,790,138.5,str
-2020-12-15,pargin ranch,60,ang,865,137.25,str
 2020-12-15,t l bar ranch,78,mix,795,133.5,str
-2020-12-15,t l bar ranch,28,mix,880,131.25,str
 2020-12-15,meadow ranch,12,mix,1275,59.5,cow
 2020-12-15,louis martin,2,clr,1310,57.5,cow
 2020-12-15,cody peterson,1,clr,1480,57,cow
@@ -734,23 +2456,15 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-15,montana canterbury,1,clr,1585,83,bull
 2020-12-15,kerri higgs,1,clr,2205,81,bull
 2020-12-22,doug taylor,7,ang,335,217,str
-2020-12-22,doug taylor,10,ang,445,194,str
-2020-12-22,doug taylor,2,ang,470,143,hfr
 2020-12-22,ben doherty,4,clr,370,212,str
-2020-12-22,ben doherty,13,clr,475,152,hfr
-2020-12-22,ben doherty,37,clr,515,143,hfr
 2020-12-22,lupe young,5,char,410,198,str
-2020-12-22,lupe young,5,char,460,145,hfr
 2020-12-22,joann pacheco,2,clr,390,198,str
 2020-12-22,clay johnson,2,lim,440,192.5,str
 2020-12-22,valdez land & livestock,12,clr,525,163,str
-2020-12-22,valdez land & livestock,13,clr,520,140,hfr
 2020-12-22,thomas gilley,5,clr,360,163,hfr
 2020-12-22,ron collins,2,clr,315,162.5,hfr
 2020-12-22,chad johnson,4,clr,470,161,str
 2020-12-22,jacob friesen,4,clr,325,158,hfr
-2020-12-22,jacob friesen,7,clr,400,151,hfr
-2020-12-22,jacob friesen,14,clr,520,145,hfr
 2020-12-22,ben doherty,35,clr,580,143,hfr
 2020-12-22,clay johnson,14,lim,580,140,hfr
 2020-12-22,lupe young,13,char,550,140,hfr
@@ -758,9 +2472,7 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-22,dick louden,11,ang,635,125,hfr
 2020-12-22,david emick,10,ang,685,123,hfr
 2020-12-22,stacy bishop,9,ang,580,155,str
-2020-12-22,stacy bishop,16,ang,680,140.5,str
 2020-12-22,lupe young,27,char,590,152.5,str
-2020-12-22,lupe young,22,char,680,141,str
 2020-12-22,randall hund,14,char,590,152,str
 2020-12-22,clay johnson,12,lim,675,137.5,str
 2020-12-22,dick louden,4,clr,1415,58,cow
@@ -779,14 +2491,8 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-22,monte richardson,3,clr,1055,51,cow
 2020-12-22,curtis bailey,1,clr,1735,80,bull
 2020-12-29,rocking c ranch,37,clr,400,201,str
-2020-12-29,rocking c ranch,41,clr,470,182,str
-2020-12-29,rocking c ranch,45,clr,535,168,str
 2020-12-29,travis thomas,3,clr,335,201,str
-2020-12-29,travis thomas,6,clr,470,170,str
-2020-12-29,travis thomas,3,clr,340,161,hfr
 2020-12-29,steve uhland,3,ang,460,176.5,str
-2020-12-29,steve uhland,8,ang,456,144,hfr
-2020-12-29,steve uhland,22,ang,535,138,hfr
 2020-12-29,travis terrill,2,clr,490,168,str
 2020-12-29,c f pacheco,7,clr,465,140,hfr
 2020-12-29,rowdy wood,3,clr,505,137,hfr
@@ -795,68 +2501,41 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2020-12-29,moises acosta,10,char,665,124,hfr
 2020-12-29,steve uhland,31,ang,550,159,str
 2020-12-29,c f pacheco,9,clr,545,159,str
-2020-12-29,c f pacheco,19,clr,680,136.5,str
 2020-12-29,moises acosta,11,clr,560,155,str
-2020-12-29,moises acosta,11,char,735,131,str
 2020-12-29,rocking c cattle,20,clr,640,143.5,str
 2020-12-29,monte sammons,1,clr,1465,57,cow
-2020-12-29,monte sammons,1,clr,1190,56.5,cow
-2020-12-29,monte sammons,4,mix,1165,54,cow
 2020-12-29,s & r farms,1,clr,1310,56,cow
-2020-12-29,s & r farms,2,clr,1120,45,cow
 2020-12-29,spear w ranch,3,clr,1055,47,cow
 2021-01-05,old agency ranch,6,ang,340,221,str
 2021-01-05,glen davis,6,clr,360,220,str
-2021-01-05,glen davis,43,clr,450,187,str
-2021-01-05,glen davis,26,clr,540,170,str
-2021-01-05,glen davis,21,clr,510,149,hfr
 2021-01-05,twisted arrow cattle,6,clr,335,217,str
 2021-01-05,brock canty,11,ang,420,201,str
-2021-01-05,brock canty,14,ang,480,178,str
-2021-01-05,brock canty,17,ang,395,164,hfr
-2021-01-05,brock canty,18,ang,485,157,hfr
 2021-01-05,duane dahl,9,clr,440,192,str
-2021-01-05,duane dahl,8,clr,435,166.5,hfr
 2021-01-05,max deherrera,10,lim,440,192,str
-2021-01-05,max deherrera,11,lim,420,156,hfr
 2021-01-05,joe schultheis,8,clr,440,192,str
-2021-01-05,joe schultheis,7,clr,515,153,hfr
 2021-01-05,fred bregar,10,ang,470,189,str
-2021-01-05,fred bregar,23,ang,540,181,str
-2021-01-05,fred bregar,9,ang,435,165,hfr
-2021-01-05,fred bregar,13,ang,520,156,hfr
 2021-01-05,boyd ranch,13,char,440,187.5,str
 2021-01-05,hollis vaughn,8,clr,520,186,str
-2021-01-05,hollis vaughn,39,clr,485,155,hfr
 2021-01-05,russ treadwell,18,ang,540,178,str
-2021-01-05,russ treadwell,18,ang,465,158,hfr
 2021-01-05,kurt lofdahl,10,ang,465,178,str
-2021-01-05,kurt lofdahl,16,ang,540,165,str
-2021-01-05,kurt lofdahl,13,ang,510,149,hfr
 2021-01-05,don andreatta,21,gel,515,176,str
-2021-01-05,don andreatta,34,gel,530,152,str
 2021-01-05,dustin wallace,17,clr,495,172,str
-2021-01-05,dustin wallace,16,clr,450,156,hfr
 2021-01-05,scotty cox,21,clr,530,171,str
 2021-01-05,ron collins,15,ang,520,171,str
 2021-01-05,brent & larry fillmore,8,mix,430,167,hfr
-2021-01-05,brent & larry fillmore,29,mix,520,153,hfr
 2021-01-05,blair clavel,33,clr,515,157,hfr
 2021-01-05,cheyenne sprouse,10,clr,505,155,hfr
 2021-01-05,dan selzer,17,ang,535,152,hfr
 2021-01-05,lavern hart,18,clr,550,150.5,hfr
 2021-01-05,hollis vaughn,39,clr,570,148,hfr
-2021-01-05,hollis vaughn,48,clr,635,138,hfr
 2021-01-05,blair clavel,41,clr,575,147,hfr
 2021-01-05,brent & larry fillmore,45,mix,590,146,hfr
 2021-01-05,willett cattle,24,clr,550,145,hfr
-2021-01-05,willett cattle,30,clr,625,136,hfr
 2021-01-05,cheyenne sprouse,13,clr,605,144,hfr
 2021-01-05,russ treadwell,25,ang,555,142,hfr
 2021-01-05,don andreatta,25,gel,590,141,hfr
 2021-01-05,travis smith,9,ang,625,140,hfr
 2021-01-05,ronnie & karen roberts,22,ang,615,140,hfr
-2021-01-05,ronnie & karen roberts,28,ang,665,135,hfr
 2021-01-05,duane dahl,10,clr,605,137,hfr
 2021-01-05,ron collins,21,ang,570,137,hfr
 2021-01-05,moeller ranch,41,mix,650,136,hfr
@@ -865,36 +2544,83 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2021-01-05,richardson cattle co,27,ang,700,130,hfr
 2021-01-05,stacey sober,24,ang,650,130,hfr
 2021-01-05,jason crane,50,ang,695,129,hfr
-2021-01-05,jason crane,21,ang,765,125.5,hfr
 2021-01-05,richard dickerson,32,gel,645,128.5,hfr
 2021-01-05,jerry palmer,22,ang,690,127,hfr
 2021-01-05,lindholm farms,10,ang,675,126.5,hfr
-2021-01-05,lindholm farms,37,ang,805,125.5,hfr
 2021-01-05,lee welch,12,clr,830,118,hfr
 2021-01-05,don andreatta,37,gel,605,167,str
-2021-01-05,don andreatta,36,gel,670,147,str
 2021-01-05,cheyenne sprouse,20,clr,560,165,str
-2021-01-05,cheyenne sprouse,22,clr,680,138,str
 2021-01-05,joe schultheis,19,clr,590,162,str
 2021-01-05,hollis vaughn,45,clr,610,159,str
-2021-01-05,hollis vaughn,74,clr,685,144.75,str
-2021-01-05,hollis vaughn,36,clr,765,135,str
 2021-01-05,ronnie & karen roberts,24,ang,595,158,str
 2021-01-05,max deherrera,17,lim,575,154,str
 2021-01-05,russ treadwell,21,ang,605,153,str
 2021-01-05,brown brothers,33,ang,645,150,str
-2021-01-05,brown brothers,50,ang,725,145.75,str
-2021-01-05,brown brothers,9,ang,815,132.5,str
 2021-01-05,stacey sober,12,ang,650,145,str
-2021-01-05,stacey sober,45,ang,745,142,str
 2021-01-05,moeller ranch,47,clr,670,143.5,str
-2021-01-05,moeller ranch,53,clr,735,136.5,str
 2021-01-05,richardson cattle co,36,ang,715,137,str
 2021-01-05,lindholm farms,14,ang,760,136,str
-2021-01-05,lindholm farms,26,ang,885,130,str
 2021-01-05,jerry palmer,20,ang,700,136,str
 2021-01-05,jason crane,23,ang,690,136,str
-2021-01-05,jason crane,24,ang,765,125.5,str
+2021-01-05,zach & quayde thompson,14,ang,690,134,str
+2021-01-05,mohammad abuokal,20,char,890,128,str
+2021-01-05,ricken land & cattle,50,lim,930,127,str
+2021-01-05,old agency ranch,6,ang,340,221,str
+2021-01-05,glen davis,6,clr,360,220,str
+2021-01-05,twisted arrow cattle,6,clr,335,217,str
+2021-01-05,brock canty,11,ang,420,201,str
+2021-01-05,duane dahl,9,clr,440,192,str
+2021-01-05,max deherrera,10,lim,440,192,str
+2021-01-05,joe schultheis,8,clr,440,192,str
+2021-01-05,fred bregar,10,ang,470,189,str
+2021-01-05,boyd ranch,13,char,440,187.5,str
+2021-01-05,hollis vaughn,8,clr,520,186,str
+2021-01-05,russ treadwell,18,ang,540,178,str
+2021-01-05,kurt lofdahl,10,ang,465,178,str
+2021-01-05,don andreatta,21,gel,515,176,str
+2021-01-05,dustin wallace,17,clr,495,172,str
+2021-01-05,scotty cox,21,clr,530,171,str
+2021-01-05,ron collins,15,ang,520,171,str
+2021-01-05,brent & larry fillmore,8,mix,430,167,hfr
+2021-01-05,blair clavel,33,clr,515,157,hfr
+2021-01-05,cheyenne sprouse,10,clr,505,155,hfr
+2021-01-05,dan selzer,17,ang,535,152,hfr
+2021-01-05,lavern hart,18,clr,550,150.5,hfr
+2021-01-05,hollis vaughn,39,clr,570,148,hfr
+2021-01-05,blair clavel,41,clr,575,147,hfr
+2021-01-05,brent & larry fillmore,45,mix,590,146,hfr
+2021-01-05,willett cattle,24,clr,550,145,hfr
+2021-01-05,cheyenne sprouse,13,clr,605,144,hfr
+2021-01-05,russ treadwell,25,ang,555,142,hfr
+2021-01-05,don andreatta,25,gel,590,141,hfr
+2021-01-05,travis smith,9,ang,625,140,hfr
+2021-01-05,ronnie & karen roberts,22,ang,615,140,hfr
+2021-01-05,duane dahl,10,clr,605,137,hfr
+2021-01-05,ron collins,21,ang,570,137,hfr
+2021-01-05,moeller ranch,41,mix,650,136,hfr
+2021-01-05,platt ranch,13,clr,615,135,hfr
+2021-01-05,clint schurr,11,mix,635,134,hfr
+2021-01-05,richardson cattle co,27,ang,700,130,hfr
+2021-01-05,stacey sober,24,ang,650,130,hfr
+2021-01-05,jason crane,50,ang,695,129,hfr
+2021-01-05,richard dickerson,32,gel,645,128.5,hfr
+2021-01-05,jerry palmer,22,ang,690,127,hfr
+2021-01-05,lindholm farms,10,ang,675,126.5,hfr
+2021-01-05,lee welch,12,clr,830,118,hfr
+2021-01-05,don andreatta,37,gel,605,167,str
+2021-01-05,cheyenne sprouse,20,clr,560,165,str
+2021-01-05,joe schultheis,19,clr,590,162,str
+2021-01-05,hollis vaughn,45,clr,610,159,str
+2021-01-05,ronnie & karen roberts,24,ang,595,158,str
+2021-01-05,max deherrera,17,lim,575,154,str
+2021-01-05,russ treadwell,21,ang,605,153,str
+2021-01-05,brown brothers,33,ang,645,150,str
+2021-01-05,stacey sober,12,ang,650,145,str
+2021-01-05,moeller ranch,47,clr,670,143.5,str
+2021-01-05,richardson cattle co,36,ang,715,137,str
+2021-01-05,lindholm farms,14,ang,760,136,str
+2021-01-05,jerry palmer,20,ang,700,136,str
+2021-01-05,jason crane,23,ang,690,136,str
 2021-01-05,zach & quayde thompson,14,ang,690,134,str
 2021-01-05,mohammad abuokal,20,char,890,128,str
 2021-01-05,ricken land & cattle,50,lim,930,127,str
@@ -970,64 +2696,64 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2021-01-12,flying horse ranch,42,clr,825,127.25,str
 2021-01-12,chad & heidi ricken,53,mix,875,126.5,str
 2021-01-12,jim walter,81,clr,885,125,str
-2021-01-20,elk mountain cattle,21,clr,340,222,str
-2021-01-20,charles & david stavely,12,ang,370,221,str
-2021-01-20,lloyd & dean reynolds,10,ang,395,204,str
-2021-01-20,cloud crest ranch,11,ang,405,202,str
-2021-01-20,kyle barnett,11,clr,430,195.5,str
-2021-01-20,nortonville cattle,11,clr,425,195,str
-2021-01-20,john & elizabeth budd,14,clr,430,193,str
-2021-01-20,jl cattle,35,clr,455,180,str
-2021-01-20,danny higgins,33,mix,465,174,str
-2021-01-20,wade & wilma mosher,11,clr,505,171,str
-2021-01-20,moore land & cattle,39,ang,495,168.5,str
-2021-01-20,keenan anderson,17,clr,485,165,str
-2021-01-20,david jones,24,clr,490,164,str
-2021-01-20,bob beamon,17,clr,540,160,str
-2021-01-20,bert & vickie buhr,14,ang,525,160,str
-2021-01-20,cheyenne ward,13,clr,425,159,hfr
-2021-01-20,d & j proctor,28,ang,515,151.5,hfr
-2021-01-20,ziegler farm & ranch,20,clr,490,150,hfr
-2021-01-20,bert & vickie buhr,53,ang,555,140,hfr
-2021-01-20,wade & wilma mosher,48,clr,580,138,hfr
-2021-01-20,tony whittle,18,ang,555,137,hfr
-2021-01-20,bob beamon,25,clr,560,136.5,hfr
-2021-01-20,kyle barnett,36,clr,590,133.5,hfr
-2021-01-20,ziegler farm & ranch,76,clr,685,132.75,hfr
-2021-01-20,tom dole,22,clr,625,131,hfr
-2021-01-20,brock canty,30,ang,700,129.6,hfr
-2021-01-20,derrell shawcroft,31,clr,580,129,hfr
-2021-01-20,kris hasser,20,clr,630,128.25,hfr
-2021-01-20,dwight proctor,56,ang,635,128.1,hfr
-2021-01-20,vernon john proctor,27,ang,710,128,hfr
-2021-01-20,shawn torkelson,21,char,675,128,hfr
-2021-01-20,bryan brunelli,22,lim,620,128,hfr
-2021-01-20,don larsen,25,clr,735,126,hfr
-2021-01-20,lonnie haught,22,clr,680,125,hfr
-2021-01-20,larry hooper,25,clr,770,124.85,hfr
-2021-01-20,austin huntoon,16,clr,785,124,hfr
-2021-01-20,john beaty,14,ang,750,124,hfr
-2021-01-20,ron peters,16,clr,770,123.75,hfr
-2021-01-20,steve payne,25,clr,830,120.5,hfr
-2021-01-20,dwight proctor,40,ang,570,160.5,str
-2021-01-20,jl cattle co,38,clr,550,159.5,str
-2021-01-20,kyle barnett,19,clr,565,159,str
-2021-01-20,bob barr,24,ang,545,158,str
-2021-01-20,vernon john proctor,20,ang,565,154.5,str
-2021-01-20,ziegler farm & ranch,16,clr,575,153,str
-2021-01-20,kris hasser,23,clr,600,152,str
-2021-01-20,rancho largo cattle,21,char,570,151,str
-2021-01-20,marc mckinley,23,clr,595,150.5,str
-2021-01-20,brock canty,31,ang,615,150,str
-2021-01-20,snyder ranch,24,clr,605,151,str
-2021-01-20,bob beamon,23,clr,635,143.5,str
-2021-01-20,tony whittle,19,ang,695,140.5,str
-2021-01-20,don larsen,38,clr,690,138.75,str
-2021-01-20,faron edens,20,clr,665,136.75,str
-2021-01-20,jack miller,18,clr,675,136,str
-2021-01-20,steve payne,47,clr,900,125.5,str
-2021-01-20,austin huntoon,16,clr,895,125,str
-2021-01-20,john beaty,24,ang,875,125,str
+2021-01-19,elk mountain cattle,21,clr,340,222,str
+2021-01-19,charles & david stavely,12,ang,370,221,str
+2021-01-19,lloyd & dean reynolds,10,ang,395,204,str
+2021-01-19,cloud crest ranch,11,ang,405,202,str
+2021-01-19,kyle barnett,11,clr,430,195.5,str
+2021-01-19,nortonville cattle,11,clr,425,195,str
+2021-01-19,john & elizabeth budd,14,clr,430,193,str
+2021-01-19,jl cattle,35,clr,455,180,str
+2021-01-19,danny higgins,33,mix,465,174,str
+2021-01-19,wade & wilma mosher,11,clr,505,171,str
+2021-01-19,moore land & cattle,39,ang,495,168.5,str
+2021-01-19,keenan anderson,17,clr,485,165,str
+2021-01-19,david jones,24,clr,490,164,str
+2021-01-19,bob beamon,17,clr,540,160,str
+2021-01-19,bert & vickie buhr,14,ang,525,160,str
+2021-01-19,cheyenne ward,13,clr,425,159,hfr
+2021-01-19,d & j proctor,28,ang,515,151.5,hfr
+2021-01-19,ziegler farm & ranch,20,clr,490,150,hfr
+2021-01-19,bert & vickie buhr,53,ang,555,140,hfr
+2021-01-19,wade & wilma mosher,48,clr,580,138,hfr
+2021-01-19,tony whittle,18,ang,555,137,hfr
+2021-01-19,bob beamon,25,clr,560,136.5,hfr
+2021-01-19,kyle barnett,36,clr,590,133.5,hfr
+2021-01-19,ziegler farm & ranch,76,clr,685,132.75,hfr
+2021-01-19,tom dole,22,clr,625,131,hfr
+2021-01-19,brock canty,30,ang,700,129.6,hfr
+2021-01-19,derrell shawcroft,31,clr,580,129,hfr
+2021-01-19,kris hasser,20,clr,630,128.25,hfr
+2021-01-19,dwight proctor,56,ang,635,128.1,hfr
+2021-01-19,vernon john proctor,27,ang,710,128,hfr
+2021-01-19,shawn torkelson,21,char,675,128,hfr
+2021-01-19,bryan brunelli,22,lim,620,128,hfr
+2021-01-19,don larsen,25,clr,735,126,hfr
+2021-01-19,lonnie haught,22,clr,680,125,hfr
+2021-01-19,larry hooper,25,clr,770,124.85,hfr
+2021-01-19,austin huntoon,16,clr,785,124,hfr
+2021-01-19,john beaty,14,ang,750,124,hfr
+2021-01-19,ron peters,16,clr,770,123.75,hfr
+2021-01-19,steve payne,25,clr,830,120.5,hfr
+2021-01-19,dwight proctor,40,ang,570,160.5,str
+2021-01-19,jl cattle co,38,clr,550,159.5,str
+2021-01-19,kyle barnett,19,clr,565,159,str
+2021-01-19,bob barr,24,ang,545,158,str
+2021-01-19,vernon john proctor,20,ang,565,154.5,str
+2021-01-19,ziegler farm & ranch,16,clr,575,153,str
+2021-01-19,kris hasser,23,clr,600,152,str
+2021-01-19,rancho largo cattle,21,char,570,151,str
+2021-01-19,marc mckinley,23,clr,595,150.5,str
+2021-01-19,brock canty,31,ang,615,150,str
+2021-01-19,snyder ranch,24,clr,605,151,str
+2021-01-19,bob beamon,23,clr,635,143.5,str
+2021-01-19,tony whittle,19,ang,695,140.5,str
+2021-01-19,don larsen,38,clr,690,138.75,str
+2021-01-19,faron edens,20,clr,665,136.75,str
+2021-01-19,jack miller,18,clr,675,136,str
+2021-01-19,steve payne,47,clr,900,125.5,str
+2021-01-19,austin huntoon,16,clr,895,125,str
+2021-01-19,john beaty,24,ang,875,125,str
 2021-01-26,larry hooper,11,clr,395,198,str
 2021-01-26,buddy adamic,3,ang,355,196,str
 2021-01-26,russell elliott,4,mix,385,195,str
@@ -1198,67 +2924,850 @@ Date,Buyer,Quantity,Type,Weight,Price,Reprod
 2021-02-16,jack hamilton,5,clr,1210,66,cow
 2021-02-16,peak farms,3,clr,1985,94,bull
 2021-02-16,johnny mestas,1,clr,1945,93.5,bull
-3-09-2021,b.w. ranch,32,red & rwf str,230,222
-3-09-2021,thatcher land & cattle,11,angus str,395,217.5
-3-09-2021,clarence balser,18,black str,375,215.5
-3-09-2021,j bar s,65,black str,430,207.5
-3-09-2021,oak ranch,22,black str,420,206.5
-3-09-2021,bob bledsoe,10,angus str,425,205
-3-09-2021,menegatti cattle,16,mix str,430,203
-3-09-2021,wade sumpter,60,black str,475,199
-3-09-2021,wineinger-davis ranch,32,angus str,515,194.75
-3-09-2021,joe bill nunn,19,black str,470,193
-3-09-2021,cisneros cattle co,13,lim x str,500,190
-3-09-2021,reed cattle co,12,black str,505,187
-3-09-2021,noel & becky sporrer,9,char str,520,185
-3-09-2021,erik melgoza,11,ang-lim x str,525,184
-3-09-2021,welmarc ranch,12,black str,545,180
-3-09-2021,jeff smith,15,black str,530,179
-3-09-2021,dan borrego,17,black hfr,490,160
-3-09-2021,marty marrujo,19,black & red hfr,485,158
-3-09-2021,paul hicks,12,black hfr,470,158
-3-09-2021,wineinger-davis ranch,88,angus hfr,545,159
-3-09-2021,noel & becky sporrer,19,char hfr,560,157
-3-09-2021,russell elliott,15,red angus hfr,555,155
-3-09-2021,bill kolb,28,black hfr,560,154.5
-3-09-2021,richards cattle co,56,black hfr,545,152
-3-09-2021,roberts ranch,29,angus hfr,600,151
-3-09-2021,richard elliott,66,balancer hfr,585,150.25
-3-09-2021,dan borrego,24,black hfr,565,147
-3-09-2021,jeff smith,10,black hfr,615,146.5
-3-09-2021,j bar s,20,black hfr,640,145
-3-09-2021,joe bill nunn,22,black hfr,620,143.5
-3-09-2021,welmarc ranch,36,black hfr,580,143
-3-09-2021,jim sigler,26,red & rwf hfr,635,139
-3-09-2021,nathan & bailey knapp,40,angus hfr,625,136
-3-09-2021,clavel ranch,51,black & bwf hfr,645,135.75
-3-09-2021,jim doak,44,black & red hfr,635,135
-3-09-2021,menegatti cattle,74,mix hfr,615,135
-3-09-2021,mike spady,85,mix hfr,675,133
-3-09-2021,paul hicks,22,black hfr,690,132
-3-09-2021,dave kaess,24,black hfr,730,128.5
-3-09-2021,ed king,14,black & bwf hfr,790,127.5
-3-09-2021,arrow cattle,26,sim-angus hfr,755,127.5
-3-09-2021,bob lampe,50,mix hfr,795,126
-3-09-2021,ricken land & cattle,38,lim x hfr,775,126
-3-09-2021,joe bill nunn,33,angus str,540,186
-3-09-2021,bill kolb,41,black str,545,184
-3-09-2021,edmundson ranches,137,sim-angus str,555,178
-3-09-2021,j bar s,59,black str,580,173
-3-09-2021,reed cattle co,195,char-ang x str,575,171
-3-09-2021,roberts ranch,14,angus str,580,170
-3-09-2021,wineinger-davis ranch,30,angus str,595,169
-3-09-2021,mike spady,36,mix str,585,164
-3-09-2021,joe bill nunn,25,black str,605,161
-3-09-2021,noel & becky sporrer,20,char str,615,159.5
-3-09-2021,richard elliott,24,balancer str,610,159
-3-09-2021,menegatti cattle co,114,mix str,625,157.5
-3-09-2021,jeff smith,20,black str,615,156.5
-3-09-2021,nathan & bailey knapp,19,angus str,725,143
-3-09-2021,jim sigler,41,red & rwf str,705,142
-3-09-2021,jim doak,32,black & red str,730,137.5
-3-09-2021,marty marrujo,11,black & red str,790,134
-3-09-2021,arrow cattle,42,sim-angus str,835,132.25
-3-09-2021,bob lampe,38,black str,810,130.5
-3-09-2021,ricken land & cattle,51,lim x str,855,129.5
-3-09-2021,wallace farm & ranch,41,angus x str,845,129
+2021-03-09,b.w. ranch,32,clr,230,222,str
+2021-03-09,thatcher land & cattle,11,ang,395,217.5,str
+2021-03-09,clarence balser,18,clr,375,215.5,str
+2021-03-09,j bar s,65,clr,430,207.5,str
+2021-03-09,oak ranch,22,clr,420,206.5,str
+2021-03-09,bob bledsoe,10,ang,425,205,str
+2021-03-09,menegatti cattle,16,mix,430,203,str
+2021-03-09,wade sumpter,60,clr,475,199,str
+2021-03-09,wineinger-davis ranch,32,ang,515,194.75,str
+2021-03-09,joe bill nunn,19,clr,470,193,str
+2021-03-09,cisneros cattle co,13,lim,500,190,str
+2021-03-09,reed cattle co,12,clr,505,187,str
+2021-03-09,noel & becky sporrer,9,char,520,185,str
+2021-03-09,erik melgoza,11,mix,525,184,str
+2021-03-09,welmarc ranch,12,clr,545,180,str
+2021-03-09,jeff smith,15,clr,530,179,str
+2021-03-09,dan borrego,17,clr,490,160,hfr
+2021-03-09,marty marrujo,19,clr,485,158,hfr
+2021-03-09,paul hicks,12,clr,470,158,hfr
+2021-03-09,wineinger-davis ranch,88,ang,545,159,hfr
+2021-03-09,noel & becky sporrer,19,char,560,157,hfr
+2021-03-09,russell elliott,15,ang,555,155,hfr
+2021-03-09,bill kolb,28,clr,560,154.5,hfr
+2021-03-09,richards cattle co,56,clr,545,152,hfr
+2021-03-09,roberts ranch,29,ang,600,151,hfr
+2021-03-09,richard elliott,66,mix,585,150.25,hfr
+2021-03-09,dan borrego,24,clr,565,147,hfr
+2021-03-09,jeff smith,10,clr,615,146.5,hfr
+2021-03-09,j bar s,20,clr,640,145,hfr
+2021-03-09,joe bill nunn,22,clr,620,143.5,hfr
+2021-03-09,welmarc ranch,36,clr,580,143,hfr
+2021-03-09,jim sigler,26,clr,635,139,hfr
+2021-03-09,nathan & bailey knapp,40,ang,625,136,hfr
+2021-03-09,clavel ranch,51,clr,645,135.75,hfr
+2021-03-09,jim doak,44,clr,635,135,hfr
+2021-03-09,menegatti cattle,74,mix,615,135,hfr
+2021-03-09,mike spady,85,mix,675,133,hfr
+2021-03-09,paul hicks,22,clr,690,132,hfr
+2021-03-09,dave kaess,24,clr,730,128.5,hfr
+2021-03-09,ed king,14,clr,790,127.5,hfr
+2021-03-09,arrow cattle,26,ang,755,127.5,hfr
+2021-03-09,bob lampe,50,mix,795,126,hfr
+2021-03-09,ricken land & cattle,38,lim,775,126,hfr
+2021-03-09,joe bill nunn,33,ang,540,186,str
+2021-03-09,bill kolb,41,clr,545,184,str
+2021-03-09,edmundson ranches,137,ang,555,178,str
+2021-03-09,j bar s,59,clr,580,173,str
+2021-03-09,reed cattle co,195,mix,575,171,str
+2021-03-09,roberts ranch,14,ang,580,170,str
+2021-03-09,wineinger-davis ranch,30,ang,595,169,str
+2021-03-09,mike spady,36,mix,585,164,str
+2021-03-09,joe bill nunn,25,clr,605,161,str
+2021-03-09,noel & becky sporrer,20,char,615,159.5,str
+2021-03-09,richard elliott,24,mix,610,159,str
+2021-03-09,menegatti cattle co,114,mix,625,157.5,str
+2021-03-09,jeff smith,20,clr,615,156.5,str
+2021-03-09,nathan & bailey knapp,19,ang,725,143,str
+2021-03-09,jim sigler,41,clr,705,142,str
+2021-03-09,jim doak,32,clr,730,137.5,str
+2021-03-09,marty marrujo,11,clr,790,134,str
+2021-03-09,arrow cattle,42,ang,835,132.25,str
+2021-03-09,bob lampe,38,clr,810,130.5,str
+2021-03-09,ricken land & cattle,51,lim,855,129.5,str
+2021-03-09,wallace farm & ranch,41,ang,845,129,str
+NA,cora gomez,3,clr,390,192.5,str
+NA,mcendree cattle,9,mix,370,190,str
+NA,george family ranch,14,clr,340,190,str
+NA,dorenkamp ranch,11,ang,405,189.5,str
+NA,clint wagner,8,ang,440,188,str
+NA,alfred newkirk,15,ang,465,182.5,str
+NA,elizabeth budd,9,ang,415,182,str
+NA,ankrum family ranch,21,mix,470,181,str
+NA,jim lofdahl,7,ang,460,180,str
+NA,vanier land company,12,ang,485,174,str
+NA,milhon cattle,14,ang,465,173,str
+NA,don jones,24,ang,485,172,str
+NA,carlene mosher,29,ang,500,166,str
+NA,g l bagwell & sons,49,ang,530,157,str
+NA,s l ranch,24,ang,525,153.5,str
+NA,windsplitter ranch,26,clr,405,148,hfr
+NA,steve johnson,14,lim,540,152,str
+NA,russell hoy,11,clr,540,150,str
+NA,tony schmitz,20,clr,540,148,str
+NA,bradley cattle co,8,clr,485,142.5,hfr
+NA,doug bagwell,8,ang,475,137,hfr
+NA,seal ranch,22,char,750,137.5,hfr
+NA,dylan pepper,15,clr,660,136,hfr
+NA,jim lofdahl,39,ang,600,135.5,hfr
+NA,paloma cattle co,15,clr,800,134,hfr
+NA,a t cross cattle,19,clr,655,134,hfr
+NA,reno &  day,11,clr,605,134,hfr
+NA,jeremy faucette,75,clr,945,133.75,hfr
+NA,nelson taylor,24,mix,550,133.5,hfr
+NA,schubert ranches,31,ang,545,133.5,hfr
+NA,sugarite canyon ranch,17,ang,640,133,hfr
+NA,bradley cattle co,26,clr,680,131.5,hfr
+NA,loyd & norris patton,13,lim,575,130.5,hfr
+NA,ronald ulibarri,26,clr,645,130.5,hfr
+NA,g l bagwell & sons,42,ang,565,130.5,hfr
+NA,lance bray,8,clr,875,130,hfr
+NA,mark hund,5,clr,765,130,hfr
+NA,red iron ranch,60,ang,650,130,hfr
+NA,ankrum family ranch,17,mix,590,130,hfr
+NA,middle fork ranch,29,clr,585,129.5,hfr
+NA,winslett ranch,49,ang,560,129.5,hfr
+NA,monte sammons,10,ang,920,128.5,hfr
+NA,myron baker,9,clr,550,128,hfr
+NA,jason gartrell,15,clr,615,127.5,hfr
+NA,vanier land company,43,ang,585,127.5,hfr
+NA,quinten leplatt,12,mix,610,127,hfr
+NA,jimmy johnson,17,ang,665,126.5,hfr
+NA,palmer brothers,10,ang,625,126,hfr
+NA,jesse & sharri smith,17,ang,555,152.5,str
+NA,berryman ranch llc,13,clr,645,150,str
+NA,john arrington,11,clr,725,149,str
+NA,mike hollenbeck,23,ang,575,148.5,str
+NA,nelson taylor,31,mix,565,147.5,str
+NA,a t cross cattle,33,clr,750,147,str
+NA,schubert ranches,32,ang,665,147,str
+NA,alvin russell,31,mix,590,147,str
+NA,carlene mosher,58,ang,575,147,str
+NA,mark ensz,47,clr,580,146.5,str
+NA,darrel dutro,37,ang,595,146,str
+NA,diamond m king ranch,25,clr,665,145.5,str
+NA,sugarite canyon ranch,11,ang,625,145.5,str
+NA,g l bagwell & sons,92,ang,605,145.5,str
+NA,vanier land company,35,ang,595,145,str
+NA,akrum family ranch,21,mix,675,144,str
+NA,palmer brothers llc,21,ang,670,143.5,str
+NA,s l ranch,38,ang,610,143.5,str
+NA,jim lofdahl,57,ang,665,142,str
+NA,mason ranch,29,mix,815,140.5,str
+NA,red iron ranch,59,ang,660,140.5,str
+NA,doug bagwell,34,ang,715,140,str
+NA,loyd & norris patton,31,lim,655,139.5,str
+NA,benny aja,14,clr,375,195,str
+NA,miles mckinley,4,ang,340,195,str
+NA,clay & earl reist,16,ang,410,192,str
+NA,jonathan & matt bush,15,mix,400,189,str
+NA,chacon family ranch,10,ang,410,187,str
+NA,bar 17 cattle,8,ang,420,186,str
+NA,carol root,14,ang,415,184,str
+NA,meadow ranch,52,ang,415,182,str
+NA,cc karval cattle,21,char,420,181,str
+NA,russell elliott,18,ang,395,181,str
+NA,dillon thomas,12,clr,460,179,str
+NA,eddie jeffers,35,ang,510,129.5,hfr
+NA,dixon sandoval,17,ang,515,155,str
+NA,eby cattle,66,ang,500,153,str
+NA,olson farms & ranch,16,ang,510,150,str
+NA,joe & clay mayo,12,ang,505,150,str
+NA,greg kruthaupt,24,ang,440,147,hfr
+NA,hans hasser,27,ang,535,129.5,hfr
+NA,jim goodrich,11,mix,505,131.5,hfr
+NA,duane stoker,10,ang,500,130,hfr
+NA,steven smith,21,char,760,135.5,hfr
+NA,dan ingalls,23,clr,845,135.25,hfr
+NA,tom kuykendall,13,char,730,134.5,hfr
+NA,chacon family ranch,14,ang,875,133.5,hfr
+NA,gordon steves,21,ang,635,132,hfr
+NA,marty marrujo,15,clr,675,131,hfr
+NA,cn ranch,15,ang,690,129,hfr
+NA,larry copeland,25,mix,665,128,hfr
+NA,gilbert groves,13,ang,600,128,hfr
+NA,cc karval cattle co,12,char,600,127,hfr
+NA,tommy goodrich,30,lim,590,126.5,hfr
+NA,joe & clay mayo,48,ang,640,126,hfr
+NA,chad & dawn rodarmel,47,ang,620,125.75,hfr
+NA,hans hasser,26,ang,630,125,hfr
+NA,jim goodrich,16,mix,695,124.5,hfr
+NA,steve zettlemoyer,16,clr,715,123.5,hfr
+NA,delton eikenberg,19,clr,725,122.5,hfr
+NA,eli hronich,40,ang,655,122.5,hfr
+NA,kevin & trent hall,21,ang,620,122,hfr
+NA,jim foxhoven,26,irish clr,595,122,hfr
+NA,donald johns,17,ang,570,152.5,str
+NA,rex hiner,58,mix,865,146.75,str
+NA,howard robertson,36,ang,565,146,str
+NA,tom kuykendall,20,char,760,145,str
+NA,steven smith,13,char,690,145,str
+NA,gordon steves,35,ang,720,142.5,str
+NA,eddie jeffers,43,ang,565,142.5,str
+NA,marty marrujo,17,clr,615,140.5,str
+NA,chacon family ranch,32,ang,565,140.5,str
+NA,chad & dawn rodarmel,25,ang,545,140.5,str
+NA,larry copeland,25,mix,700,140,str
+NA,jej farms,9,mix,555,140,str
+NA,olson farms & ranch,57,ang,615,139,str
+NA,satterly gulch ranch,10,clr,885,138,str
+NA,joe & clay mayo,44,ang,655,138,str
+NA,buddy taylor,57,clr,640,137.5,str
+NA,dixon sandoval,38,ang,585,137.5,str
+NA,hans hasser,39,ang,685,136.75,str
+NA,jim goodrich,32,mix,735,136,str
+NA,tommy goodrich,22,lim,650,136,str
+NA,full draw outfitters,16,ang,635,136,str
+NA,clay & earl reist,32,ang,700,135.5,str
+NA,dillon thomas,27,clr,630,135.5,str
+NA,duane stoker,24,ang,660,135,str
+NA,double c ranch,29,clr,660,135,str
+NA,jim foxhoven,15,irish clr,675,134.5,str
+NA,jonathan & matt bush,26,mix,705,134,str
+NA,delton eikenberg,29,clr,730,133.5,str
+NA,steve zettlemoyer,33,clr,725,133.5,str
+NA,ryan orndoff,16,ang,755,132.5,str
+NA,gilbert groves,17,ang,665,132,str
+NA,triple c farms,12,clr,700,131,str
+NA,eli hronich,46,ang,700,130.5,str
+NA,steve norris,7,ang,325,200,str
+NA,crowther ranch,13,mix,330,193,str
+NA,elk mountain cattle,30,ang,370,191,str
+NA,redden ranches,9,ang,420,187,str
+NA,marc mckinley,16,ang,345,187,str
+NA,meadow ranch,21,clr,450,180,str
+NA,red canyon ranch,6,clr,435,180,str
+NA,clough cattle,10,ang,355,180,hfr
+NA,george family ranch,29,ang,430,177,str
+NA,karney kattle kompany,20,ang,460,176,str
+NA,buddy elze,22,ang,395,176,str
+NA,rim rock cattle,27,ang,500,166,str
+NA,fuyu farms,17,ang,485,166,str
+NA,corey fischbacher,21,ang,515,161,str
+NA,wade mosher,21,ang,535,155,str
+NA,floyd myers,11,char,505,155,str
+NA,hal meredith,27,ang,520,151,str
+NA,wes & marcie lewis,47,ang,515,142,hfr
+NA,monte richardson,33,clr maine,530,141,hfr
+NA,dave poss,21,clr,540,137.5,hfr
+NA,rick howieson,26,ang,520,137.5,hfr
+NA,clough cattle,101,ang,565,144,hfr
+NA,steve norris,71,ang,555,143,hfr
+NA,cooper moore,24,ang,570,142.5,hfr
+NA,meadow ranch,53,clr,555,142,hfr
+NA,tony hass,25,clr,555,140.5,hfr
+NA,gilbert groves,19,ang,560,140,hfr
+NA,james harkins,38,clr,575,139.5,hfr
+NA,long & stone,17,ang,560,137,hfr
+NA,monte richardson,26,clr maine,600,136,hfr
+NA,xl ranch,18,clr,730,135,hfr
+NA,joe & tim schmitt,47,ang,595,134,hfr
+NA,floyd myers,29,char,595,133,hfr
+NA,faucette land & cattle,10,mix,830,131.5,hfr
+NA,jack gilleland,21,clr,815,131.5,hfr
+NA,idi ranch,23,ang,695,131,hfr
+NA,dean goodrich,40,ang,670,131,hfr
+NA,bob webb,22,ang,625,129.5,hfr
+NA,devers ranch,24,ang char,680,127,hfr
+NA,shawn thomas,36,clr,600,127,hfr
+NA,red canyon ranch,35,clr,595,127,hfr
+NA,steve norris,59,ang,570,162.5,str
+NA,clough cattle,103,ang,590,155,str
+NA,fuyu farms,26,ang,560,153.5,str
+NA,corey fishbacher,46,ang,595,152,str
+NA,meadow ranch,97,clr,595,151,str
+NA,rick howieson,25,ang,575,151,str
+NA,rim rock cattle,38,ang,595,149.5,str
+NA,crowther ranch,67,mix,580,149.5,str
+NA,tony hass,28,clr,690,149,str
+NA,long & stone,15,ang,660,148.5,str
+NA,shawn thomas,31,clr,610,148.5,str
+NA,cooper moore,21,ang,590,148,str
+NA,buddy elze,43,ang,585,148,str
+NA,karney kattle kompany,41,ang,610,146,str
+NA,monte richardson,40,clr maine,590,146,str
+NA,gilbert groves,34,ang,655,145.5,str
+NA,wade mosher,45,ang,605,144.25,str
+NA,devers ranch,53,ang char,730,144,str
+NA,jack hawkins,20,ang,720,143,str
+NA,idi ranch,16,ang,725,141,str
+NA,harry brown,8,clr,820,140.5,str
+NA,chris willhelm,30,clr,690,138.5,str
+NA,floyd myers,25,char,620,138.5,str
+NA,hal meredith,34,ang,610,138.5,str
+NA,warren mcdonald,36,ang,700,137,str
+NA,john schoolland,10,mix,930,134.5,str
+NA,jack gilleland,14,clr,890,134,str
+NA,bob webb,21,ang,705,133,str
+NA,red canyon ranch,24,clr,675,130,str
+NA,charles muncy,33,ang,325,202.5,str
+NA,double heart ranch,7,ang,365,196,str
+NA,kennon decker,11,mix,325,193,str
+NA,palmer brothers,16,ang,370,192,str
+NA,cooper moore,16,ang,405,186,str
+NA,cienega cattle company,25,ang,435,181,str
+NA,pat mcconnell,12,ang,435,181,str
+NA,stirrup ranch,21,ang,415,178,str
+NA,lance smart,15,ang,480,172,str
+NA,steve norris,25,ang,470,169,str
+NA,phil treadwell,33,ang,515,168,str
+NA,jagers farms,42,mix,515,166,str
+NA,stan white,22,ang,510,166,str
+NA,mac garcia,10,lim,530,159,str
+NA,mark & mike weirich,15,clr,530,158,str
+NA,rising double r ranch,13,ang,535,156,str
+NA,alfred becerra,13,clr,510,156,str
+NA,innes cattle co,95,clr,510,155,str
+NA,max vezzani,14,clr,525,154,str
+NA,john davis,27,ang,455,153,hfr
+NA,bob barber,12,clr,475,152,hfr
+NA,ron wait,24,ang,530,150,hfr
+NA,gerald cisneros,18,clr,520,149,hfr
+NA,ron wait,24,ang,645,139.5,hfr
+NA,merle shalberg,31,clr,575,139,hfr
+NA,jagers farms,123,mix,570,139,hfr
+NA,rising double r ranch,9,ang,550,139,hfr
+NA,cooper moore,14,ang,610,138.5,hfr
+NA,jack dixon,28,ang,550,138,hfr
+NA,rainbow ranch,20,clr,575,137.75,hfr
+NA,stan white,29,ang,620,137,hfr
+NA,steve norris,46,ang,595,137,hfr
+NA,brandon salapich,31,clr,615,136.5,hfr
+NA,idi ranch,72,ang,670,136,hfr
+NA,huffaker ranches,28,gel,645,136,hfr
+NA,rod cole,33,clr,605,136,hfr
+NA,phil treadwell,12,ang,910,135.5,hfr
+NA,bowen & davis,29,clr,575,135,hfr
+NA,darby makloski,28,ang,665,134.5,hfr
+NA,sandoval land & cattle,28,clr,640,134,hfr
+NA,kay miller,24,ang,660,133.5,hfr
+NA,ralph berry,31,ang,595,133,hfr
+NA,a slash cattle,43,mix,755,132,hfr
+NA,reflected r ranch,19,clr,985,131.25,hfr
+NA,trampe ranches,31,ang,1030,130.25,hfr
+NA,kenny tredwell,23,clr,560,158,str
+NA,merle shalberg,27,clr,570,157.5,str
+NA,stan white,69,ang,585,157,str
+NA,steve norris,33,ang,565,157,str
+NA,phil treadwell,31,clr,580,155,str
+NA,tim schmitt,40,ang,580,155,str
+NA,ralph berry,27,ang,555,154,str
+NA,jagers farms,123,mix,575,154,str
+NA,huffaker ranches,53,gel,675,152,str
+NA,cooper moore,24,ang,600,151,str
+NA,pat mcconnell,31,ang,570,151,str
+NA,double heart ranch,58,ang,590,150.5,str
+NA,jack dixon,21,ang,595,150,str
+NA,round ranch,14,mix,700,149,str
+NA,mark & mike weirich,73,ang,670,149,str
+NA,clarence kendall,11,char,610,149,str
+NA,innes cattle co,63,clr,590,149,str
+NA,john davis,21,ang,590,149,str
+NA,idi ranch,94,ang,700,148,str
+NA,darby makloski,36,ang,685,148,str
+NA,sterling whitaker,14,clr,635,147,str
+NA,bowen & davis,22,clr,605,146.5,str
+NA,sandoval land & cattle,17,ang,645,146,str
+NA,jason jackson,19,ang,630,145.5,str
+NA,leif berg,24,clr,740,144,str
+NA,kay miller,21,ang,695,142.5,str
+NA,jim wood,12,clr,745,142,str
+NA,jim hribar,11,clr,765,141.5,str
+NA,aaron atwood,19,clr,730,140,str
+NA,a slash cattle,14,mix,805,138.5,str
+NA,clarence kendall,11,char,880,137,str
+NA,round ranch,12,clr,810,137,str
+NA,eleven v ranch,25,clr,375,191,str
+NA,kevin davis,7,clr,405,190,str
+NA,donnell & harrington,11,clr,395,190,str
+NA,rose ranch,15,ang,405,189,str
+NA,ronnie ward,29,ang,400,180,str
+NA,gould ranch,89,clr,400,175,str
+NA,william spitz,19,ang,450,172.5,str
+NA,jerry gallegos,10,clr,460,171,str
+NA,esty ranch,37,ang,455,171,str
+NA,reynolds ranch,15,lim,485,164,str
+NA,clock land & cattle,63,lim,515,161.5,str
+NA,jeff blanks,18,clr,515,161,str
+NA,doug hasser,36,ang,525,160,str
+NA,gordon hollowell,22,clr,515,157,str
+NA,jeremy redshaw,29,ang,640,154.5,str
+NA,xx cattle co,25,mix,495,149,hfr
+NA,springhill ranch,21,clr,540,141,hfr
+NA,bill hatcher,18,clr,530,141,hfr
+NA,doug taylor,22,mix,515,141,hfr
+NA,lonnie jackson,29,clr,510,141,hfr
+NA,tom shiro,14,clr,540,140,hfr
+NA,billie adams,12,ang,520,136,hfr
+NA,waldroup ranch,78,ang,590,151,hfr
+NA,joe bill nunn,54,ang,630,142.5,hfr
+NA,idi ranch,10,clr,960,141.5,hfr
+NA,clock land & cattle,91,lim,550,141.5,hfr
+NA,alan olomon,18,ang,565,141,hfr
+NA,jeff blanks,30,clr,575,140.5,hfr
+NA,jim walter,27,gel,895,140,hfr
+NA,eleven v ranch,21,clr,595,140,hfr
+NA,kelly goetsch,30,clr,1000,139.5,hfr
+NA,oak tree land & cattle,23,gel,630,139.5,hfr
+NA,joe & tess menegatti,31,ang,580,139,hfr
+NA,twin peaks ranch,35,mix,560,138.5,hfr
+NA,jim & patsy howard,12,ang,600,137.5,hfr
+NA,charlie crockett,28,clr,645,138,hfr
+NA,davis ranch inc,24,lim,580,137.5,hfr
+NA,phil treadwell,11,clr,955,137,hfr
+NA,matt bjorum,11,clr,650,136.5,hfr
+NA,mustang ranch,16,ang,600,136.5,hfr
+NA,ralph berry,43,ang,595,136.5,hfr
+NA,boyd ranch,14,char,670,134.5,hfr
+NA,jason barnard,19,mix,860,134,hfr
+NA,travis smith,10,ang,690,130.5,hfr
+NA,perry barnes,30,ang,685,130,hfr
+NA,judy whittemore,23,mix,620,129,hfr
+NA,eleven v ranch,50,clr,580,158.5,str
+NA,bill& kathy hatcher,12,clr,560,157.5,str
+NA,ralph berry,33,ang,565,157,str
+NA,kevin davis,17,clr,560,156,str
+NA,joe & tess menegatti,18,ang,580,155,str
+NA,jerry gallegos,27,clr,575,155,str
+NA,esty ranch,53,ang,545,155,str
+NA,clock land & cattle,118,lim,600,154.5,str
+NA,phil treadwell,24,ang,610,153.5,str
+NA,joe bill nunn,23,ang,620,153,str
+NA,lonnie jackson,25,clr,565,153,str
+NA,jeff blanks,23,clr,600,152.5,str
+NA,alan olomon,15,ang,580,152,str
+NA,twin peaks ranch,20,mix,570,152,str
+NA,bob peterson,19,ang,610,151,str
+NA,doug hasser,95,ang,610,150,str
+NA,chet baker,27,mix,585,145.5,str
+NA,jim walter,26,gel,960,144,str
+NA,mike smotherman,26,ang,670,144,str
+NA,jim & patsy howard,17,ang,625,143.5,str
+NA,perry barnes,45,ang,775,143,str
+NA,jeff & sammi menegatti,16,char,670,143,str
+NA,jeremy redshaw,33,ang,670,143,str
+NA,davis ranch inc,22,lim,650,143,str
+NA,judy whittemore,25,mix,645,142.5,str
+NA,charlie crockett,45,clr,695,141.5,str
+NA,jason barnard,14,mix,805,141,str
+NA,oak tree land & cattle,18,gel,785,140,str
+NA,boyd ranch,26,char,700,140,str
+NA,rebecca callaway,46,ang,685,138,str
+NA,jeff ellis,5,brang,420,168,str
+NA,kelly sowards ranch,3,clr,415,167,str
+NA,dolores marincich,5,clr,290,162.5,hfr
+NA,william ranch,6,lim,310,156,hfr
+NA,kent marlatt,3,lim,480,154,str
+NA,james grisenti,2,clr,375,152,hfr
+NA,wade kruetzer,7,clr,340,150,hfr
+NA,martin lopez,18,clr,505,146,str
+NA,pat mcconnell,4,clr,470,140,hfr
+NA,mcknight cross ranch,4,mix,605,132.5,hfr
+NA,martin lopez,31,clr,560,132,hfr
+NA,kent marlatt,13,lim,595,131,hfr
+NA,peak view ranch,12,shorthorn,550,130,hfr
+NA,edwin lobato,3,clr,580,128.5,hfr
+NA,cotopaxi cattle co,10,clr,570,128,hfr
+NA,adrian daugaard,9,clr,545,128,hfr
+NA,carlos benavidez,6,clr,635,127,hfr
+NA,mitch armstrong,6,clr,635,125,hfr
+NA,peak veiw ranch,3,shorthorn,590,140,str
+NA,kent marlatt,18,lim,620,138.5,str
+NA,mcknight cross ranch,33,clr,670,138,str
+NA,louis schmidt,16,ang,745,137,str
+NA,james grisenti,4,clr,565,136,str
+NA,mitch armstrong,10,clr,665,135,str
+NA,cotopaxi cattle co,9,clr,600,134,str
+NA,curtis schroder,6,clr,1580,66.5,cow
+NA,cienega cattle,1,clr,1245,65,cow
+NA,navajo nation,1,clr,1695,62,cow
+NA,hanna ranches,1,clr,1385,61,cow
+NA,clay hasser,1,clr,1220,61,cow
+NA,sam webster,1,clr,1450,60,cow
+NA,bruce lewis,1,clr,1380,58,cow
+NA,jerimiah wells,1,clr,1630,57,cow
+NA,trampe ranches,15,clr,1190,56.75,cow
+NA,seal pharmacy,7,char,1120,55.5,cow
+NA,scott crawford,3,clr,1365,54,cow
+NA,edmundson ranches,1,clr,1250,54,cow
+NA,david mendenhall,5,brwn,1125,53.5,cow
+NA,wade kruetzer,9,clr,1080,52,cow
+NA,jd schier,9,clr,1135,51.5,cow
+NA,jerry palmer,1,clr,1270,51,cow
+NA,clay reist,8,mix,1155,49,cow
+NA,kz ranch,1,clr,2050,87,bull
+NA,david morgan,1,clr,1650,84,bull
+NA,xx cattle co,6,clr,1975,83.75,bull
+NA,trampe ranches,1,char,1885,82.5,bull
+NA,smith ranch,1,clr,1560,82.5,bull
+NA,matilda mestas,1,clr,2015,81,bull
+NA,handsprings ranch,1,clr,1725,78.5,bull
+NA,joe bill nunn,23,ang,395,212,str
+NA,john thatcher,12,ang,380,202.5,str
+NA,jim doak,18,ang,425,201,str
+NA,duvall land & cattle,42,ang,460,192.5,str
+NA,riemenschneider bros,35,ang,470,189,str
+NA,martille faatz,21,ang,440,189,str
+NA,black pennington,15,ang,465,188,str
+NA,duvall ranches,18,ang,465,185,str
+NA,nortonville cattle,32,ang,510,181,str
+NA,glen davis,25,ang,520,180,str
+NA,bob bledsoe,39,ang,500,180,str
+NA,jack reynolds,10,clr,495,180,str
+NA,j bar s ranch,38,clr,465,179,hfr
+NA,jack crowder,24,clr,415,178,hfr
+NA,cody duvall,26,ang,510,177.5,str
+NA,cade sallee,21,clr,510,176,str
+NA,dillon thomas,10,ang,505,175,str
+NA,anthony greenbank,21,mix,435,175,hfr
+NA,wineinger-davis ranch,59,ang,495,161,hfr
+NA,daniel borrego,32,ang,500,155.5,hfr
+NA,john george,23,mix,525,155,hfr
+NA,martille faatz,43,ang,525,154,hfr
+NA,rancho largo,20,char,565,154,hfr
+NA,j bar s ranch,115,clr,590,153,hfr
+NA,daniel borrego,31,ang,565,149.5,hfr
+NA,wineinger-davis ranch,67,ang,565,147,hfr
+NA,richard elliott,19,mix,540,146,hfr
+NA,john george,29,mix,590,144,hfr
+NA,jack crowder,31,clr,580,144,hfr
+NA,boyd ranch,15,char,575,141.5,hfr
+NA,riemenschneider bros,48,ang,650,140,hfr
+NA,wallace farm & ranch,37,ang,605,140,hfr
+NA,martille faatz,36,ang,620,139,hfr
+NA,jack reynolds,24,clr,620,138.5,hfr
+NA,jim doak,36,ang,615,136.5,hfr
+NA,bob lampe,23,clr,660,136,hfr
+NA,cody duvall,20,ang,630,135,hfr
+NA,mike spady,86,clr,655,131.5,hfr
+NA,knapp & grasmick,13,ang,700,130,hfr
+NA,zach kopasz,72,ang,705,125.85,hfr
+NA,bell construction,13,clr,730,121.5,hfr
+NA,gordanier ranch,62,stabilizer,720,120,hfr
+NA,j bar s ranch,102,clr,550,193.25,str
+NA,edmundson ranches,38,ang,560,184,str
+NA,joe bill nunn,51,ang,580,171,str
+NA,wineinger-davis ranch,33,ang,550,169,str
+NA,martille faatz,37,ang,540,169,str
+NA,knapp & grasmick,12,ang,565,166,str
+NA,dean reynolds,52,clr,550,166,str
+NA,riemenschneider bros,72,ang,580,164.5,str
+NA,richard elliott,48,mix,630,161.75,str
+NA,jack reynolds,57,clr,625,161,str
+NA,glen davis,39,ang,605,156,str
+NA,dan borrego,25,ang,580,155,str
+NA,bob barr,37,ang,610,148,str
+NA,nortonville cattle,62,ang,675,147,str
+NA,mike spady,76,clr,640,147,str
+NA,bill kolb,35,clr,670,146.5,str
+NA,wallace farm & ranch,35,ang,710,146,str
+NA,lloyd reynolds,88,ang,700,145.5,str
+NA,dave kaess,13,ang,695,143,str
+NA,bob lampe,23,clr,735,138,str
+NA,gary fillmore,17,ang,710,137,str
+NA,ed king,27,clr,810,124.5,str
+NA,dwight proctor,46,ang,950,119.25,str
+NA,dean maverick ranch,18,clr,430,179,str
+NA,mcendree cattle,10,mix,430,174,str
+NA,matt clough,15,ang,465,172,str
+NA,jose munoz,15,ang,435,170,str
+NA,ronnie ward,17,clr,425,168,str
+NA,jd schier,30,ang,410,168,str
+NA,donnell & harrington,13,ang,345,167.5,hfr
+NA,dixon sandoval,13,ang,485,162.5,str
+NA,tim schmitt,18,clr,455,161,str
+NA,nelson taylor,16,mix,460,157.5,str
+NA,howard robertson,24,ang,460,156,str
+NA,flying u ranch,23,clr,505,151,str
+NA,menegatti cattle,59,mix,490,151,str
+NA,dorenkamp ranch,25,ang,505,147.5,str
+NA,davey family ranch,23,clr,500,147,str
+NA,dan & becky doherty,12,ang,445,145,hfr
+NA,dutro ranch,24,ang,525,142,str
+NA,pat mcconnell,34,ang,535,140.5,str
+NA,seal pharmacy,30,char,410,140.5,hfr
+NA,colleen jackson,11,mix,440,139,hfr
+NA,lane elliott,79,mix,500,138,str
+NA,raymond loretto dvm,14,mix,455,133,hfr
+NA,kyle & tammy wezel,32,ang,530,129,hfr
+NA,steven smith,11,clr,535,128,hfr
+NA,joe mayo,15,ang,540,126.5,hfr
+NA,jack dixon ranch,22,ang,525,125,hfr
+NA,steve rzepka,44,clr,515,125,hfr
+NA,menegatti cattle,15,mix,615,128,hfr
+NA,william hatcher,16,clr,550,126.5,hfr
+NA,matt clough,68,ang,545,126.5,hfr
+NA,kuykendall ranches,11,char,775,126,hfr
+NA,steven smith,15,clr,675,126,hfr
+NA,jose munoz,19,ang,585,126,hfr
+NA,mike occhiato,18,clr,650,125,hfr
+NA,rick howieson,45,clr,555,124.5,hfr
+NA,john arrington,12,clr,640,124,hfr
+NA,joe mayo,41,ang,615,124,hfr
+NA,seal pharmacy,80,char,580,124,hfr
+NA,schubert ranches,57,ang,625,123.5,hfr
+NA,kevin hall,16,ang,545,122,hfr
+NA,tony hass,21,clr,655,121.5,hfr
+NA,hans hasser,24,ang,610,119.5,hfr
+NA,lewis fillmore,25,mix,655,119,hfr
+NA,kimberlee schmitz,29,ang,555,141.5,str
+NA,menegatti cattle,77,mix,550,138,str
+NA,matt clough,72,ang,550,138,str
+NA,joe mayo,57,ang,625,136.5,str
+NA,steven smith,12,clr,620,136.5,str
+NA,william hatcher,19,clr,640,135,str
+NA,nelson taylor,28,mix,635,135,str
+NA,schubert ranches,24,clr,595,135,str
+NA,kyle & tammy wezel,36,clr,560,135,str
+NA,jerry palmer,28,ang,655,134,str
+NA,howard robertson,17,ang,585,134,str
+NA,rick howieson,48,clr,585,133.5,str
+NA,mike occhiato,21,clr,740,133,str
+NA,kevin hall,21,ang,570,133,str
+NA,tommy culler,21,mix,640,132.5,str
+NA,roger & pat schalla,32,clr,605,132.5,str
+NA,tony hass,11,clr,635,132.5,str
+NA,dorenkamp ranches,91,ang,560,132,str
+NA,jeremy cordova,27,ang,560,132,str
+NA,kuykendall ranches,16,char,735,131.5,str
+NA,berryman angus ranch,19,ang,710,131,str
+NA,hans hasser,21,ang,700,130,str
+NA,everett jackson,26,ang,640,129,str
+NA,lewis fillmore,36,mix,705,124,str
+NA,rising double r ranch,4,ang,330,183,str
+NA,godfrey & johnson,18,clr,400,181,str
+NA,earl & clay reist,19,ang,390,181,str
+NA,paul peterson,7,clr,445,176,str
+NA,jonathan & matt bush,10,mix,395,171,str
+NA,l & m bagwell,13,clr,380,171,str
+NA,mike smotherman,8,ang,500,157.5,str
+NA,twin peaks ranch,28,char,465,155,str
+NA,dan & becky doherty,16,ang,395,154,hfr
+NA,hal meredith,43,ang,505,150,str
+NA,kylie & kody ruzanski,12,char,475,148,str
+NA,bob peterson,21,ang,535,127.5,hfr
+NA,bobby eichman,20,clr,530,127,hfr
+NA,paul peterson,38,clr,560,130,hfr
+NA,earl & clay reist,45,ang,575,128.25,hfr
+NA,twin peaks ranch,63,char,575,126.5,hfr
+NA,godfrey & johnson,32,clr,555,125.5,hfr
+NA,wes lewis,50,ang,565,125,hfr
+NA,dave poss,19,clr,545,125,hfr
+NA,floyd myers,24,char,560,123,hfr
+NA,m & g associates,34,ang,590,122,hfr
+NA,north fork ranch,11,clr,680,121,hfr
+NA,trampe ranches,44,ang,955,120,hfr
+NA,bill luther ranch,29,clr,705,120,hfr
+NA,l & m bagwell,38,clr,570,120,hfr
+NA,spann ranch,20,clr,970,119.5,hfr
+NA,paul peterson,41,clr,550,150.5,str
+NA,cam & jennifer keeler,12,ang,545,148,str
+NA,dean maverick ranch,6,ang,560,147,str
+NA,justin osborne,12,ang,550,144,str
+NA,twin peaks ranch,58,char,575,141,str
+NA,l & m bagwell,49,clr,590,138,str
+NA,rising double r ranch,17,ang,590,137,str
+NA,ryan orndoff,15,clr,615,135.5,str
+NA,floyd myers,21,char,605,134,str
+NA,earl & clay reist,35,ang,610,133.5,str
+NA,jeff belveal,15,ang,745,132,str
+NA,sam crowther,18,clr,610,131,str
+NA,mike smotherman,16,ang,605,131,str
+NA,bill luther ranch,15,clr,613,130.5,str
+NA,hal meredith,47,ang,610,130.25,str
+NA,4g mountain angus,14,ang,655,130,str
+NA,jonathan & matt bush,74,mix,615,130,str
+NA,m & g associates,30,ang,610,130,str
+NA,jej farms,14,clr,745,121.5,str
+NA,elk mountain cattle,37,clr,400,197.5,str
+NA,abrams loapân ranch,16,mix,345,189,str
+NA,hawkins ranch,14,ang,435,186,str
+NA,will ward,8,clr,330,181,hfr
+NA,g l bagwell,23,ang,470,173.5,str
+NA,a quarter circle ranch,14,ang,390,170,hfr
+NA,russell groves,25,ang,475,169,str
+NA,kay miller,12,ang,480,168,str
+NA,jay handle,17,clr,505,165,str
+NA,dillon thomas,15,clr,505,164.5,str
+NA,twin peaks ranch,25,char,515,161.5,str
+NA,taramarcaz ranch,12,mix,395,161,hfr
+NA,rutherford brothers,19,ang,505,157.5,str
+NA,cienega cattle co,23,ang,530,156.5,str
+NA,monte innes,114,clr,510,155,str
+NA,chad & jerry cochran,19,mix,470,149,hfr
+NA,buddy taylor,21,ang,535,139,hfr
+NA,vaughn johnson,20,clr,555,137.5,hfr
+NA,jeff menegatti,18,char,615,133.5,hfr
+NA,twin peaks ranch,77,char,575,132.5,hfr
+NA,cienega cattle co,29,ang,580,132,hfr
+NA,kevin davis,19,ang,565,130,hfr
+NA,g l bagwell,39,ang,575,129,hfr
+NA,red canyon ranch,39,lim,560,129,hfr
+NA,zach blacksten,21,ang,670,128.5,hfr
+NA,faucette l & c,31,clr,805,125.5,hfr
+NA,s l ranch,30,ang,625,125.5,hfr
+NA,walter & pepper,13,clr,610,124.5,hfr
+NA,larry copeland,23,mix,665,124,hfr
+NA,bob webb,26,ang,575,123,hfr
+NA,dan borrego,25,ang,565,152.5,str
+NA,hawkins ranch,28,ang,555,150,str
+NA,buddy taylor,21,ang,570,147.5,str
+NA,kevin davis,30,ang,570,146.5,str
+NA,twin peaks ranch,87,char,595,146,str
+NA,bart & mccarroll,24,ang,595,142.5,str
+NA,jeff menegatti,16,char,620,141.5,str
+NA,wilma mosher,41,ang,600,141.5,str
+NA,wade mosher,37,ang,595,141.5,str
+NA,s l ranch,36,ang,625,140.5,str
+NA,rutherford brothers,17,ang,645,140,str
+NA,larry copeland,23,mix,710,138,str
+NA,bob webb,30,ang,620,136,str
+NA,red canyon ranch,34,lim,620,135,str
+NA,kay miller,25,ang,620,135,str
+NA,zach blacksten,17,ang,720,134,str
+NA,g l bagwell,35,ang,655,133,str
+NA,pepper & walter,20,clr,685,132,str
+NA,full draw outfitters,23,mix,665,131,str
+NA,bar 19 trust,15,mix,710,127,str
+NA,crowther ranch,22,mix,340,200,str
+NA,hutcherson ranch,13,clr,395,195,str
+NA,denny larsen,14,clr,395,195,str
+NA,edwards ranch,26,mix,425,190,str
+NA,will ward,15,clr,400,194,str
+NA,kennon decker,27,clr,395,187,str
+NA,buddy elze,24,ang,440,186,str
+NA,ox cart ranch,31,clr,455,184,str
+NA,fuyu farms,17,ang,445,184,str
+NA,weirich brothers,13,ang,485,176,str
+NA,bledsoe brothers,17,ang,465,171,str
+NA,dean jagers,23,clr,505,170,str
+NA,spear p ranch,11,mix,505,163,str
+NA,monte richardson,18,clr,475,156,hfr
+NA,eleven v ranch,11,clr,440,156,hfr
+NA,corey fischbacher,28,clr,440,155,hfr
+NA,leonard cattle co,17,clr,480,148,hfr
+NA,greg shalberg,25,clr,545,141,hfr
+NA,weirich brothers,51,ang,590,140,hfr
+NA,dean jagers,116,clr,545,139.75,hfr
+NA,jake & gale tempel,20,ang,605,136.5,hfr
+NA,willy faris,20,mix,675,136,hfr
+NA,leonard cattle co,36,clr,615,135.5,hfr
+NA,spear p ranch,19,mix,600,135.5,hfr
+NA,olson farms,29,ang,570,135.5,hfr
+NA,ramon zamora,11,ang,600,135,hfr
+NA,monte richardson,28,clr,570,135,hfr
+NA,ox cart ranch,51,clr,560,135,hfr
+NA,jim & anne russell,13,clr,560,135,hfr
+NA,davis & bowen,37,clr,550,135,hfr
+NA,dylan emick,40,ang,555,134.5,hfr
+NA,denny larsen,16,clr,565,134,hfr
+NA,cole kirksey,21,clr,570,133,hfr
+NA,will ward,28,clr,550,132.5,hfr
+NA,eleven v ranch,31,clr,615,130.5,hfr
+NA,perry barnes,19,ang,680,130,hfr
+NA,jim goodrich,32,lim,645,129,hfr
+NA,becky callaway,33,ang,650,126,hfr
+NA,jim hribar,15,clr,710,124,hfr
+NA,leonard cattle co,55,clr,570,158.25,str
+NA,weirich brothers,49,ang,555,157,str
+NA,karney kattle kompany,25,clr,555,156,str
+NA,greg shalberg,13,clr,550,156,str
+NA,olson farms,23,ang,585,153,str
+NA,dean jagers,106,clr,600,152.5,str
+NA,carol root,27,ang,580,151,str
+NA,hutcherson ranch,61,clr,595,148.5,str
+NA,monte richardson,36,clr,615,147.5,str
+NA,bob canda,38,ang,600,147.5,str
+NA,dylan emick,26,ang,660,145.5,str
+NA,steve johnson,40,lim,630,145,str
+NA,davis & bowen,25,clr,655,144.25,str
+NA,spear p ranch,25,mix,625,143,str
+NA,jim & anne russell,26,clr,690,139,str
+NA,jake & gale tempel,37,ang,685,137.5,str
+NA,perry barnes,25,ang,675,137,str
+NA,jim goodrich,28,lim,725,133,str
+NA,becky callaway,17,ang,725,131,str
+NA,randy porco,10,char,725,131,str
+NA,gould ranch,39,clr,305,202,str
+NA,mac garcia,7,lim,360,196,str
+NA,ty & dennis crowther,27,clr,440,194,str
+NA,s & r mcendree,109,ang,460,193,str
+NA,trey jagers,10,clr,370,190,str
+NA,joe bill nunn,27,clr,460,187,str
+NA,esty ranch,22,ang,440,184,str
+NA,kenneth garcia,20,clr,360,180,str
+NA,charlie crockett,6,ang,480,175,str
+NA,todd shallbetter,43,clr,455,173,str
+NA,justin emick,50,ang,510,168,str
+NA,allen kasparian,42,clr,485,165,str
+NA,sterling whitaker,16,clr,525,163,str
+NA,kelvin wollert,21,clr,525,160.5,str
+NA,reed ranch,30,mix,515,160.5,str
+NA,daniel borrego,13,ang,540,155,str
+NA,hutcherson ranch,58,ang,475,155,hfr
+NA,davis ranch inc,20,lim,535,154,str
+NA,joe muniz,12,ang,425,150,hfr
+NA,roy oliver,33,lim,545,141,hfr
+NA,louden ranch,72,ang,595,148.5,hfr
+NA,hutcherson ranch,60,ang,550,142.5,hfr
+NA,davis ranch inc,19,lim,560,139,hfr
+NA,treadwell ranch,11,ang,550,138,hfr
+NA,trey & danny sullivan,20,ang,550,137,hfr
+NA,sterling whitaker,28,clr,605,135,hfr
+NA,charlie crockett,39,clr,605,135,hfr
+NA,tommy crawford,20,ang,580,135,hfr
+NA,jake pargin,25,clr,595,134.5,hfr
+NA,spear w ranch,18,ang,615,133.5,hfr
+NA,joe bill nunn,29,clr,625,133.5,hfr
+NA,gary hill,31,ang,660,133,hfr
+NA,idi ranch,64,clr,670,132.5,hfr
+NA,jessie bagwell,23,ang,570,131,hfr
+NA,james harkins,33,clr,620,129.5,hfr
+NA,doug bagwell,31,clr,635,128.5,hfr
+NA,kyle & september atwater,16,ang,660,128,hfr
+NA,huffaker ranch,17,mix,680,126.5,hfr
+NA,a slash cattle co,33,mix,700,125,hfr
+NA,lonnie jackson,28,ang,665,122.5,hfr
+NA,jolly cattle co,11,clr,880,117,hfr
+NA,kelly goetsch,26,ang,1040,115,hfr
+NA,jake pargin,16,clr,565,154,str
+NA,danny sullivan,33,ang,575,152,str
+NA,james harkins,14,clr,580,151,str
+NA,allen kasparian,63,clr,585,150,str
+NA,esty ranch,14,ang,615,148,str
+NA,tracy kester,88,ang,575,148,str
+NA,justin emick,58,ang,610,146.5,str
+NA,kelly goetsch,18,ang,600,144,str
+NA,jessie bagwell,23,ang,610,143.5,str
+NA,treadwell ranch,44,ang,670,142,str
+NA,tommy crawford,20,ang,640,142,str
+NA,derrell & greg shawcroft,56,clr,625,142,str
+NA,sterling whitaker,24,clr,650,141.5,str
+NA,kyle & september atwater,10,ang,630,141,str
+NA,gary hill,42,ang,690,140.5,str
+NA,garth perry,14,ang,710,140,str
+NA,carl thrall estate,31,clr,700,139,str
+NA,lonnie jackson,37,ang,600,139,str
+NA,idi ranch,58,clr,715,138,str
+NA,spear w ranch,27,ang,695,138,str
+NA,doug bagwell,31,clr,705,137.25,str
+NA,drew lower,18,clr,725,136,str
+NA,huffaker ranch,72,mix,705,134,str
+NA,darrell nimmo,1,clr,1650,59,cow
+NA,ben christensen,5,clr,1140,59,cow
+NA,jolly cattle co,22,clr,1340,57,cow
+NA,daris jutten,14,clr,1240,56,cow
+NA,martille faatz,6,clr,1205,56,cow
+NA,kyle atwater,1,clr,1390,54,cow
+NA,weston meardon,28,clr,1235,53.75,cow
+NA,leroy martinez,18,clr,1175,53.5,cow
+NA,alvin carter,1,clr,1160,53,cow
+NA,tommy crawford,7,mix,1130,53,cow
+NA,reynolds ranch,10,mix,1380,52.75,cow
+NA,bb ranch,4,mix,1430,52,cow
+NA,adelaido martinez,8,clr,1260,51.5,cow
+NA,perry barnes,10,clr,1580,49,cow
+NA,esty ranch,12,clr,1415,48.25,cow
+NA,chris matthew,2,char,2165,80.5,bull
