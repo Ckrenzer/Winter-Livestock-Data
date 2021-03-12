@@ -37,3 +37,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Old Scripts
+La Junta cleaning.R
+La Junta.R
+La Junta long format.R
