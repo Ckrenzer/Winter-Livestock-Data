@@ -7,7 +7,9 @@ output: html_document
 
 # Introduction
 
-Alright, I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO.
+I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO. The old method works well enough, but limitations in available data make this approach far more lucrative.
+
+This implementation assumes a few things about the structure of the text, so this scraper may need to be restricted to a certain date range.
 
 
 
@@ -57,7 +59,268 @@ if(file.exists("La Junta Market Reports.csv")){
 ```
 
 
-# Functions
+
+
+
+
+
+
+
+
+# Collection()
+
+This function is a wrapper around the web scraper.
+
+
+```{r collection()}
+
+collection <- function(urls)
+  
+  
+  for(URL in urls){
+    
+    # Reading in data from webpage ------------------------------
+    # Saving the webpage into a variable
+    webpage <- read_html(URL)
+    
+    # Saving data from the webpage written in html
+    # The nodes are consistent across market reports
+    livestock_data_html <- html_nodes(webpage, "div:nth-child(9) div.sml")
+    
+    # Converting to plain text
+    livestock_data <- html_text(livestock_data_html)
+    
+    
+    
+    
+    # Determining appropriate delimiter -------------------------
+    # The first delimiter we will try
+    delimiter <- "\n"
+    
+    # Asks whether the list has more than 30 entries after the strsplit(). If there is only one entry, then that means the format uses "\r" as its delimiter or does not contain information we care about.
+    if(length(strsplit(livestock_data, delimiter)) < 30){
+      
+      # If the first delimiter does not get us what we are looking for, we will try the second delimiter instead.
+      delimiter <- "\r" 
+      
+      # Now we test the second delimiter...
+      if(length(strsplit(livestock_data, delimiter)) < 30){
+        
+        # If the second delimiter fails to deliver, skip to the next iteration of the loop (this webpage does not contain information we care about).
+        next 
+        
+      }#end of nested if()
+    }#end of if()
+    
+    
+    
+    # Determining location (La Junta) -------------------------
+    # If we've made it this far, that means that there is information about a market report.
+    # We now need to determine whether this market report is a market report for La Junta, CO.
+    # This shouldn't be too hard. We can assume that "La Junta" will not appear in non-La Junta, CO market reports. If we find "la junta" anywhere in the text, then we found a La Junta market report.
+    
+
+    # Let's finally store the results from the strsplit() into a variable
+    livestock_data <- strsplit(livestock_data, delimiter)
+    
+    # making all the text lowercase (to avoid the "la junta" != "La Junta" problem)
+    livestock_data <- str_to_lower(livestock_data)
+    
+    # Now we can search for "la junta" in the text
+    if(!str_detect(livestock_data, pattern = "la junta")){
+      
+      # If "la junta" is not found in the data, that means that this is not a La Junta market report--skip to the next iteration of the loop.
+      next
+    }
+    
+    
+    
+    
+    # Let's store everything in a character vector
+    livestock_data <- as.vector(livestock_data[[1]])
+    
+    
+    
+    
+    
+    
+    
+    
+    # Header Removal with Keywords ------------------------------------------------------
+    # A set of keywords designed to remove heading information
+    # and other information we are not interested in observing
+    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"
+    
+    
+    # Removes headings and unrelated information from the data
+    livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
+    
+    
+    
+    # Removing Unwanted Sections -------------------------------------------------------
+    
+    # We can pull out the sales information by removing lines we do not
+    # care about. Since we know that the information we want is stored
+    # in lines that are much shorter than the others, we can pull out
+    # lines that have fewer characters than some optimal number.
+    # I chose 60. In other words, I am keeping only those lines
+    # (which are stored as elements in the vector) that contain
+    # fewer than 60 characters.
+    livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
+    
+    
+    # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
+    # if the person made more than one purchase, the line starts with "\n\t\t"--this is the reason
+    # why we cannot make use of str_trim(). We need the "\n\t\t" to indicate whether
+    # that element in the vector is really another purchase by the same buyer.
+    
+    # You can see what I am talking about by running
+    # the code below. The "\n\t\t" is hidden, but
+    # you can see the highlighted boxes at the
+    # beginning of the lines containing the pattern:
+    str_view(livestock_data, "\n\t\t")
+    
+    
+    
+    
+    # Buyer names -----------------------------------------------------
+    # Step 1. Names of Buyers:
+    # Pulling out the indices that contain the buyer's name.
+    buyers <- livestock_data[!str_detect(livestock_data, "\n\t\t")]
+    
+    # removing leading newline characters
+    buyers <- str_trim(buyers)
+    
+    # Extracting the buyer's name--the name ends when
+    # the first "\t" is encountered. You can see that
+    # with this line:
+    str_view(buyers, ".*?(?=\t)")
+    
+    # The names of the buyers:
+    buyers <- str_extract(buyers, ".*?(?=\t)")
+    
+    # removing unneeded white space
+    buyers <- str_trim(buyers)
+    
+    
+    
+    # Adding Buyer Names Back In ----------------------------------------------
+    # This section uses ID numbers to identify the buyer for
+    # each sale listed on the market report. It then adds
+    # the buyer's name back onto the lines from which it
+    # was omitted.
+    
+    # I will provide each buyer an ID number to determine
+    # which purchases that buyer made. I am not crazy about
+    # using loops, as I could probably write a function
+    # to do this task for me, but it does everything we
+    # need it to.
+    current_ID <- 0
+    for(i in 1:length(livestock_data)){
+      if(str_detect(livestock_data[i], "\n\t\t")){
+        # Only multiple purchases will have the "\n\t\t" so we can
+        # use "\n\t\t" as a placeholder for the beginning of the string,
+        # where the buyer's name goes, and make it look the same as the
+        # lines where the name is present
+        livestock_data[i] <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[current_ID], "\t", sep = ""))
+        
+      } else if(!str_detect(livestock_data[i], "\n\t\t")){
+        # if the index lands on a new buyer, give them
+        # the next ID number
+        current_ID <- current_ID + 1 
+      }
+      
+    }# end of for loop
+    
+    # removing white leading and trailing white space
+    livestock_data <- str_trim(livestock_data)
+    
+    
+    
+    
+    
+    # Data frame ---------------------------------------------------
+    # Making a data frame
+    livestock_data <- tibble(livestock_data)
+    
+    
+    # making new columns based off the sections
+    # separated by "\t"
+    livestock_data <- livestock_data %>% 
+      separate(livestock_data, into = c("buyer", "quantity", "weight", "price"), sep = "\t")
+    
+    # Replaces the space separating the quantity and the type with a semicolon
+    livestock_data$quantity <- str_replace(livestock_data$quantity, " ", ";")
+    
+    # Making quantity and type their own columns
+    livestock_data <- livestock_data %>% 
+      separate(quantity, into = c("quantity", "type"), sep = ";")
+    
+    
+    # Making quantity, weight, and price numeric datatypes
+    livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
+    
+    # Adding the date from the market report as a column
+    
+    
+    
+    # We are just about there! All that remains is removing the section
+    # with NA's introduced:
+    as.data.frame(livestock_data)
+    
+    # How do we fix that? Well, since we may want that information
+    # for future use, we won't want to remove it entirely with a
+    # keyword search, as was done in the beginning. What we can
+    # remove observations with NA values to keep only the data
+    # that matches our desired format:
+    livestock_data <- na.omit(livestock_data)
+    
+    # Finishing Touches --------------------------------------------
+    
+    # We have all the data we need, though there are still a couple
+    # problems with our output.
+    #   1. We want a date column
+    #   2. We want to remove the "s" at the end of the 
+    #      type column to account for cases when there is only one
+    #      cow bought by the buyer (Ex. "black cow" and "black cows"
+    #      should both read "black cow")
+    
+    
+    ## Uncomment the line below this code if you plan to schedule -----------------------------------------------
+    ## this on your computer, and comment this line out
+    livestock_data <- mutate(livestock_data, "date" = DATE[k], .before = 1)
+    
+    # Adding in the date
+    #livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
+    
+    
+    # Removing the plural of the type--this is especially helpful for
+    # use with group_by()
+    livestock_data$type <- str_replace(livestock_data$type, "s$", "")
+    
+    
+    
+    # Writing to CSV ---------------------------------------
+    # We are now ready to write the data to a file!
+    # Just remember to add in the column names if
+    # this file is not already on your computer
+    write_csv(x = livestock_data,
+              file = "La Junta Market Reports.csv",
+              append = T,
+              col_names = F)
+    
+  } # end of for loop
+
+
+
+
+```
+
+
+
+
+
+
 
 
 
