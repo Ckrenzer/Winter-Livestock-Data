@@ -80,7 +80,7 @@ collection <- function(urls){
   for(URL in urls){
     
     
-    # simple yet effective way of showing an the operation's progress
+    # simple yet effective way of showing the operation's progress
     cat(".")
     
     
@@ -416,8 +416,11 @@ collection <- function(urls){
               append = T,
               col_names = F)
     
-    #says that data was added to the file
-    cat("\nDATA ADDED\n")
+    
+    
+    
+    # Confirmation message saying data was added to the file
+    cat(paste0("\nDATA ADDED: ", date_of_sale, "\n"))
     
   } # end of for loop
   
@@ -441,12 +444,12 @@ collection <- function(urls){
 
 
 
-I have been changing the URLs around to find different data, but the 11000 to 13500 ballpark seems to be the best range for La Junta.
+I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016.
 
 ```{r urls-execute}
 
 # This just parses together different market report IDs
-urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 10000:13500, "#marketreport")
+urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
 
 # No need to save the output--this function writes to a csv file...

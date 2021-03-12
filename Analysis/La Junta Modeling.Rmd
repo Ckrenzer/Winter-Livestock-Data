@@ -65,6 +65,14 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com",
 # Know that I only used paste0() on the url
 # to avoid getting into that dark LaTex magic
 # for pdf output!
+
+
+# I am going to remove missing values
+lajunta <- lajunta %>% 
+  filter(!is.na(lajunta$Reprod),
+         !is.na(lajunta$Weight),
+         !is.na(lajunta$Price))
+
 ```
 
 To familiarize you with the dataset, let's take a quick peek:
@@ -253,8 +261,8 @@ lajunta_knn_q <- lajunta_knn_q %>%
 # Setting the random number stream
 set.seed(2021)
 lajunta_knn_q_split <- rsample::initial_split(lajunta_knn_q,
-                                            prob = 0.80,
-                                            strata = Reprod)
+                                              prob = 0.80,
+                                              strata = Reprod)
 
 # As of 2/6/2021, the split is 869 in train
 # and 289 in test, with a total of 1158 observations
@@ -269,17 +277,17 @@ lajunta_knn_q_test <- rsample::testing(lajunta_knn_q_split)
 # the cl argument is the factor of the true
 # classifications from the training set
 knn_29_q <- class::knn(train = lajunta_knn_q_train[1:3],
-                     test = lajunta_knn_q_test[1:3],
-                     cl = lajunta_knn_q_train$Reprod,
-                     k = optimal_k)
+                       test = lajunta_knn_q_test[1:3],
+                       cl = lajunta_knn_q_train$Reprod,
+                       k = optimal_k)
 
 
 acc_q <- numeric(100)
 for(i in 1:100){
   knn_q_mod <- class::knn(train = lajunta_knn_q_train[1:3],
-                     test = lajunta_knn_q_test[1:3],
-                     cl = lajunta_knn_q_train$Reprod,
-                     k = i)
+                          test = lajunta_knn_q_test[1:3],
+                          cl = lajunta_knn_q_train$Reprod,
+                          k = i)
   acc_q[i] <- accuracy(table(knn_q_mod, lajunta_knn_q_test$Reprod))
   
 }
@@ -768,8 +776,8 @@ Due to imbalances in the number of observations in reproductive status of the li
 # Setting the random number stream
 set.seed(2021)
 lajunta_lda_split <- rsample::initial_split(lajunta_lda,
-                                               prob = 0.80,
-                                               strata = Reprod)
+                                            prob = 0.80,
+                                            strata = Reprod)
 
 # separating the data into two new data frames
 lajunta_lda_train <- rsample::training(lajunta_lda_split)
@@ -782,7 +790,7 @@ Now, let's fit the model and see the results:
 
 ```{r lda model, results = "show"}
 lajunta_lda_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity,
-                       data = lajunta_lda_train)
+                             data = lajunta_lda_train)
 
 lajunta_lda_fit
 ```
@@ -853,7 +861,7 @@ Finally, we can visualize how well LDA separated the different reproductive stat
 ```{r lda viz, echo = FALSE, results = "show"}
 
 lajunta_lda_plot <- cbind(lajunta_lda_train,
-                    predict(lajunta_lda_fit)$x)
+                          predict(lajunta_lda_fit)$x)
 
 #create plot
 ggplot(lajunta_lda_plot, aes(LD1, LD2)) +
@@ -891,13 +899,19 @@ plotly::plot_ly(x = lajunta$Weight,
 
 
 ### Cleaning
-Character variables will be transformed into factors, the Date column will become a date type, and the logical column, "is_Steer," will be added to the data frame.
+Character variables will be transformed into factors, the Date column will become a date type, and the logical column, "is_Steer," will be added to the data frame. Note that missing values for the Date are removed.
 
 ```{r svm cleaning}
 lajunta_svm <- lajunta %>% 
   mutate(across(where(is.character), as.factor),
          Date = Date,
-         "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE))
+         "is_Steer" = ifelse(Reprod == "str", TRUE, FALSE)) %>% 
+  filter(!is.na(Date))
+
+
+
+
+
 ```
 
 
@@ -927,23 +941,23 @@ Multiple different kernel functions will be tried to find the best fit. Radial b
 ```{r svm computation}
 # linear
 lajunta_svm_classifier <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
-    type = "C-classification", kernel = "linear")
+                              type = "C-classification", kernel = "linear")
 
 # quadratic
 lajunta_svm_classifier2 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
-    type = "C-classification", kernel = "polynomial", degree = 2)
+                               type = "C-classification", kernel = "polynomial", degree = 2)
 
 # cubic
 lajunta_svm_classifier3 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
-    type = "C-classification", kernel = "polynomial", degree = 3)
+                               type = "C-classification", kernel = "polynomial", degree = 3)
 
 # sigmoid
 lajunta_svm_classifier4 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
-    type = "C-classification", kernel = "sigmoid")
+                               type = "C-classification", kernel = "sigmoid")
 
 # radial
 lajunta_svm_classifier5 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
-    type = "C-classification", kernel = "radial")
+                               type = "C-classification", kernel = "radial")
 ```
 
 
@@ -959,23 +973,23 @@ As usual, we now check the model's performance using the test dataset.
 ```{r svm test results}
 # linear
 lajunta_svm_predict <- predict(lajunta_svm_classifier, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Price, Quantity, is_Steer))
+                                 dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # quadratic
 lajunta_svm_predict2 <- predict(lajunta_svm_classifier2, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Price, Quantity, is_Steer))
+                                  dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # cubic
 lajunta_svm_predict3 <- predict(lajunta_svm_classifier3, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Price, Quantity, is_Steer))
+                                  dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # sigmoid
 lajunta_svm_predict4 <- predict(lajunta_svm_classifier4, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Price, Quantity, is_Steer))
+                                  dplyr::select(Weight, Price, Quantity, is_Steer))
 
 # radial
 lajunta_svm_predict5 <- predict(lajunta_svm_classifier5, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Price, Quantity, is_Steer))
+                                  dplyr::select(Weight, Price, Quantity, is_Steer))
 ```
 
 
@@ -1039,15 +1053,15 @@ lajunta_svm_classifier8 <- svm(data = lajunta_svm_train,
 # Testing Data ----------------------
 # radial, with Date
 lajunta_svm_predict6 <- predict(lajunta_svm_classifier6, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Date, Price, Buyer, Quantity, is_Steer))
+                                  dplyr::select(Weight, Date, Price, Buyer, Quantity, is_Steer))
 
 # radial, with Type
 lajunta_svm_predict7 <- predict(lajunta_svm_classifier7, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Type, Price, Buyer, Quantity, is_Steer))
+                                  dplyr::select(Weight, Type, Price, Buyer, Quantity, is_Steer))
 
 # radial, more vars
 lajunta_svm_predict8 <- predict(lajunta_svm_classifier8, newdata = lajunta_svm_test %>% 
-          dplyr::select(Weight, Date, Type, Price, Buyer, Quantity, is_Steer))
+                                  dplyr::select(Weight, Date, Type, Price, Buyer, Quantity, is_Steer))
 
 
 
