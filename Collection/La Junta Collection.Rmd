@@ -483,7 +483,7 @@ collection(urls = urls)
 
 # Cleaning
 
-The final step before we are ready for analysis is data cleaning. There are two primary goals in the cleaning script. First, we want to add column names to the csv and put entries in chronological order. The second goal is to organize cattle into a smaller number of distinct groups.
+The final step before we are ready for analysis is data cleaning. There are two primary goals in the cleaning script. First, we want to add column names to the csv. The second goal is to organize cattle into a smaller number of distinct groups.
 
 Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze some of my judgement calls and decide for yourself what needs to be done to group the different types of livestock.
 
@@ -509,7 +509,6 @@ lajunta <- lajunta %>%
 # Putting the entries in chronological order,
 # first changing the data type to a Date:
 lajunta$Date <- lubridate::mdy(lajunta$Date)
-lajunta <- arrange(lajunta, Date)
 
 # removing the plural of the type (Ex. "black cows" becomes "black cow")
 lajunta$Type <- str_remove("s$")
