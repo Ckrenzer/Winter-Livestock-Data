@@ -463,11 +463,11 @@ collection <- function(urls){
 
 
 
-I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. I think some of the market reports are under two separate market IDs, so a few hundred observations may be replicas.
+I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
 
 ```{r urls-execute}
 
-# This just parses together different market report IDs
+# This parses together different market report IDs and stores them in a vector
 urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
 
@@ -566,16 +566,16 @@ lajunta$Type <- lajunta %>%
   str_replace_all("red\\s+(gel)", "\\1") %>% 
   str_replace_all("red\\s+(here)", "\\1") %>% 
   str_replace_all("red\\s+(char)", "\\1") %>% 
-  str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors) *** this section is likely giving us problems
-  str_replace_all("red\\s+black\\s+(lim)", "\\1") %>% 
-  str_replace_all("red\\s+black\\s+(gel)", "\\1") %>% 
-  str_replace_all("red\\s+black\\s+(here)", "\\1") %>% 
-  str_replace_all("red\\s+black\\s+(char)", "\\1") %>% 
-  str_replace_all("black\\s+red\\s+(ang)", "\\1") %>%
-  str_replace_all("black\\s+red\\s+(lim)", "\\1") %>% 
-  str_replace_all("black\\s+red\\s+(gel)", "\\1") %>% 
-  str_replace_all("black\\s+red\\s+(here)", "\\1") %>%
-  str_replace_all("black\\s+red\\s+(char)", "\\1") %>%# removing color ends on this line
+  # str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors) *** this section is likely giving us problems
+  # str_replace_all("red\\s+black\\s+(lim)", "\\1") %>% 
+  # str_replace_all("red\\s+black\\s+(gel)", "\\1") %>% 
+  # str_replace_all("red\\s+black\\s+(here)", "\\1") %>% 
+  # str_replace_all("red\\s+black\\s+(char)", "\\1") %>% 
+  # str_replace_all("black\\s+red\\s+(ang)", "\\1") %>%
+  # str_replace_all("black\\s+red\\s+(lim)", "\\1") %>% 
+  # str_replace_all("black\\s+red\\s+(gel)", "\\1") %>% 
+  # str_replace_all("black\\s+red\\s+(here)", "\\1") %>%
+  # str_replace_all("black\\s+red\\s+(char)", "\\1") %>%# removing color ends on this line
   str_squish() %>% 
   str_trim()
 
@@ -587,11 +587,11 @@ lajunta$Type <- lajunta %>%
 lajunta$Type <- lajunta %>% 
   dplyr::select(Type) %>% 
   unlist() %>% 
-  str_replace_all("black red|black|red|gray|grey|balck|irishred|spot|brwn|", "clr") %>%   # "black red," "black," and "red" are all 
+  str_replace_all("black red|black|red|gray|grey", "clr") %>%   # "black red," "black," and "red" are all 
   str_replace_all("bwf|rwf|wf", "face") %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
 
-
+#|balck|irishred|spot|brwn|
 
 # This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct value.
 # lajunta$Type <- lajunta %>% 
