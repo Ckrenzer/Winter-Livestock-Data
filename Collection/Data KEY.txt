@@ -6,12 +6,18 @@
 > cow is a cow
 > bull is a bull
 
-> clr is an animal whose only characteristic provided was its color
+> clr is an animal whose only characteristic provided was its color. Extended to be the 'catch-all' group when certain types do not fit well with larger categories.
 > ang is angus
 > mix is a cross between any two breeds
 > char is charolais
 > lim is limousin
 > gel is gelbvieh
+> bfmstr is beefmaster
+> mot is ?????
+> me is maine-anjou
+> sthrn is shorthorn
+> lnhrn is longhorn
+> hol is holstein
 
 
 

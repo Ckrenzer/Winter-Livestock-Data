@@ -3,6 +3,8 @@ title: "Collection (La Junta)"
 author: "Connor Krenzer"
 date: "3/11/2021"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Introduction
@@ -34,7 +36,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # Packages
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate)
+pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, ggplot2)
 
 ```
 
@@ -491,6 +493,12 @@ Do you think that prices should be adjusted for inflation at some point in the f
 
 If you have trouble reading this csv file, click on Tools > Global Options > RMarkdown, then set 'Evaluate chunks in directory:' to Project.
 
+
+
+
+BEFORE RUNNING, SAVE A COPY OF THE CSV FILE IN ANOTHER FOLDER SO THAT YOU DO NOT HAVE TO RUN THE ABOVE CHUNKS AGAIN (should the cleaning script have problems)!
+
+
 ```{r cleaning}
 
 # Step 1: adding a header to the csv --------------------------
@@ -539,10 +547,13 @@ lajunta$Type <- lajunta %>%
   str_remove_all("sim-") %>%                      # removing the sim- from sim-angus
   str_replace_all("sim\\s+ang", "ang") %>%        # removing "sim " from "sim angus"
   str_replace_all("\\s*sim", " ang") %>%          # replacing " sim" with " ang"
+  str_replace_all("beefmaster|beefmstr", "bfmstr") %>%     # replacing "beefmaster" with "bfmstr"
+  str_replace_all("shorthorn|shthrn", "sthrn") %>%# replacing "shorthorn" with "sthrn"
+  str_replace_all("clr longhorn", "lnhrn") %>%    # replacing "longhorn" with "lnhrn" 
   str_replace_all("limousin", "lim") %>% 
   str_replace_all("limo", "lim") %>%              # replacing "limo" with "lim"
   str_replace_all(".*\\s+lim|lim flex", "lim") %>%# combining all different types of limousins 
-  str_replace_all("gelbvieh", "gel") %>% 
+  str_replace_all("gelbvieh|gelb|gelvieh", "gel") %>% 
   str_replace_all("hereford", "here") %>% 
   str_replace_all("charolais", "char") %>% 
   str_replace_all("brahman", "brah") %>%
@@ -550,12 +561,16 @@ lajunta$Type <- lajunta %>%
   str_remove_all("\\s*&") %>%                     # removing ampersands
   str_replace_all("\\s?blk\\s?", "black") %>%     # replacing abbreviation "blk" with "black"
   str_replace_all("red black", "black red") %>%   # reordering "red and black" to "black and red"
-  str_replace_all(".*-.*", "mix") %>%             # replaces any named cross-breed with "mix"
-  str_replace_all("balancer", "mix") %>%          # replaces "balancer" with "mix", since it's a hybrid
+  str_replace_all(".*-.*|mixed", "mix") %>%       # replaces any named cross-breed with "mix"
+  str_replace_all("ang char|char ang", "mix") %>% # replaces "char ang" with "mix" explicitly 
+  str_replace_all("balancer|bal|bclr", "mix") %>% # replaces "balancer" with "mix", since it's a hybrid
+  str_replace_all("santa gert", "mix") %>%        # replaces "santa gert" with "mix", since it's a hybrid
+  str_replace_all("stabilizer|stab", "mix") %>%   # replaces "stabilizer" with "mix", since it's a hybrid 
+  str_replace_all("barzona", "mix") %>%           # replaces "barzona" with "mix", since it's a hybrid
   str_remove_all("\\s+wf|\\s+bwf|\\s+rwf") %>%    # removing face types at after the name
   str_replace_all("^wf$", "bwf") %>%              # recoding "wf" as "bwf" because it performs similarly and has few observations
   str_remove_all("wf\\s+|bwf\\s+|rwf\\s+") %>%    # removing face types before the name
-  str_replace_all("here|brah", "red") %>%         # replacing "here" and "brah" with "red" due to few observations and similar weight
+  #str_replace_all("here|brah", "red") %>%         # replacing "here" and "brah" with "red" due to few observations and similar weight (Since the sample size increased, these cattle can now be kept)
   str_replace_all("black\\s+(ang)", "\\1") %>%    # removing color starts on this line
   str_replace_all("black\\s+(lim)", "\\1") %>% 
   str_replace_all("black\\s+(gel)", "\\1") %>% 
@@ -565,17 +580,7 @@ lajunta$Type <- lajunta %>%
   str_replace_all("red\\s+(lim)", "\\1") %>% 
   str_replace_all("red\\s+(gel)", "\\1") %>% 
   str_replace_all("red\\s+(here)", "\\1") %>% 
-  str_replace_all("red\\s+(char)", "\\1") %>% 
-  # str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors) *** this section is likely giving us problems
-  # str_replace_all("red\\s+black\\s+(lim)", "\\1") %>% 
-  # str_replace_all("red\\s+black\\s+(gel)", "\\1") %>% 
-  # str_replace_all("red\\s+black\\s+(here)", "\\1") %>% 
-  # str_replace_all("red\\s+black\\s+(char)", "\\1") %>% 
-  # str_replace_all("black\\s+red\\s+(ang)", "\\1") %>%
-  # str_replace_all("black\\s+red\\s+(lim)", "\\1") %>% 
-  # str_replace_all("black\\s+red\\s+(gel)", "\\1") %>% 
-  # str_replace_all("black\\s+red\\s+(here)", "\\1") %>%
-  # str_replace_all("black\\s+red\\s+(char)", "\\1") %>%# removing color ends on this line
+  str_replace_all("red\\s+(char)", "\\1") %>%     # removing color ends on this line
   str_squish() %>% 
   str_trim()
 
@@ -587,26 +592,55 @@ lajunta$Type <- lajunta %>%
 lajunta$Type <- lajunta %>% 
   dplyr::select(Type) %>% 
   unlist() %>% 
-  str_replace_all("black red|black|red|gray|grey", "clr") %>%   # "black red," "black," and "red" are all 
-  str_replace_all("bwf|rwf|wf", "face") %>%
+  str_replace_all("black red|black|balck|red|gray|grey|roan|brown|brwn|bwn", "clr") %>%   # "black red," "black," and "red" are all colors
+  str_replace_all("bwf|rwf|wf|spot", "face") %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
 
-#|balck|irishred|spot|brwn|
-
-# This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct value.
-# lajunta$Type <- lajunta %>% 
-#   dplyr::select(Type) %>% 
-#   unlist() %>% 
-#   str_replace_all("clrclr", "clr") %>% #One of the errors I found
-#   str_replace_all("clr, clr, char", "char") %>% # a surprisingly common error
-#   str_replace_all("clrang", "ang") %>% 
-#   str_replace_all()
 
 
 
 
 
-# We now have six categories in the "Type" variable
+
+
+# Miscellaneous Corrections -----------------------------------
+# This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct values. I checked the distinct Type values after running the above lines in this section, then fixed the remaining values to fit into a few categories. An admittedly lazy way of doing things, but the file is small--and I'm not a software engineer!
+#Note: many of these operations assume that cross-breeds have already been assigned "mix"
+lajunta$Type <- lajunta %>%
+  dplyr::select(Type) %>%
+  unlist() %>%
+  str_remove_all("x ") %>%                  # removing stray 'x' characters
+  str_replace_all("weaned", "clr") %>%      # Weaned cattle isn't a type, so it gets pooled in with "clr"
+  str_replace_all("sal", "clr") %>%         # I don't know what type of cattle "sal" is, so it gets pooled in with "clr"
+  str_replace_all("lh", "clr") %>%          # I don't know what type of cattle "lh" is, so it gets pooled in with "clr"
+  str_replace_all("brnd", "clr") %>%        # I don't know what type of cattle "brnd" is, so it gets pooled in with "clr"
+  str_replace_all("clrrod", "clr") %>%      # I don't know what type of cattle "clrrod" is (before "clr" was appended to the name in an earlier operation), so it gets pooled in with "clr"
+  str_replace_all("mis", "clr") %>%         # I don't know what type of cattle "mis" is, so it gets pooled in with "clr"
+  str_replace_all(".*char$", "char") %>%    # removing all characters preceding "char"
+  str_replace_all("chr|char.*", "char") %>% # replacing "chr" with "char"
+  str_replace_all(".*ang$", "ang") %>%      # removing all characters preceding "ang"
+  str_replace_all("angmental", "ang") %>%   # replacing "angmental" with "ang"
+  str_replace_all(".*maine$", "maine") %>%  # removing all characters preceding "maine"
+  str_replace_all("maine", "me") %>%        # replacing "maine" with "me"
+  str_remove_all("irish") %>%               # removing the word "irish" anywhere it appears (usually accompanying 'red')
+  str_replace_all(".*clr$", "clr") %>%      # removing all characters preceding "clr" (this can only be done after the cases for more specific types [like char] have been addressed)
+  str_replace_all("hererord", "here") %>%  # Fixing Errors
+  str_replace_all("ang strs", "ang") %>% 
+  str_replace_all("mixck", "mix")          # End of Fixing Errors
+
+
+# After doing more testing it would appear that the remaining breeds do not have a large enough sample to be worth using. All cattle types not in the below list will be assigned to "clr":
+types <- c("clr", "ang", "mix", "char", "lim", "gel", "here", "mot")
+
+lajunta$Type[which(!lajunta$Type %in% types)] <- "clr"
+
+
+
+# We now have eight categories in the "Type" variable
+
+
+
+
 
 
 
@@ -622,11 +656,41 @@ write_csv(x = lajunta,
 
 
 
+Of course, we want to make sure everything looks good, no? This section identifies problem areas in the file.
 
-
-```{r reading file}
+```{r testing}
 
 lajunta <- read_csv("La Junta Market Reports.csv")
+
+
+# finds counts of all types--good for finding how many types are in the data
+# this one is especially useful, so I'm storing it into a variable
+counts <- count(lajunta, Type) %>% 
+  arrange(desc(n)) %>% 
+  as.data.frame()
+
+
+# relevant info when imputing values:
+lajunta %>% 
+  group_by(Reprod) %>% 
+  summarize("Median price" = median(Price, na.rm = T),
+            "Mean weight" = mean(Weight, na.rm = T),
+            "Median weight" = median(Weight, na.rm = T))
+# also remember that KNN is probably the best imputation method for this data
+
+
+# You can see the distribution of missing Reprod values
+lajunta %>% 
+  filter(is.na(Reprod)) %>% 
+  ggplot() +
+  geom_col(mapping = aes(x = Weight, y = Price))
+
+# see any patterns? Can you impute any values using this information (particularly on Reprod)?
+lajunta %>% 
+  select(Type, Weight, Reprod) %>% 
+  filter(is.na(Reprod)) %>% 
+  as.data.frame()
+
 
 ```
 

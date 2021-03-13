@@ -865,7 +865,7 @@ lajunta_lda_plot <- cbind(lajunta_lda_train,
                           predict(lajunta_lda_fit)$x)
 
 #create plot, excluding the extreme outlier
-ggplot(lajunta_lda_plot, aes(LD1, LD2)) +
+ggplot(lajunta_lda_plot, aes(LD2, LD1)) +
   geom_point(aes(color = Reprod)) +
   ylim(-10, 10) +
   ggtitle("Linear Discriminant 1 vs Linear Discriminant 2") +
