@@ -566,7 +566,7 @@ lajunta$Type <- lajunta %>%
   str_replace_all("red\\s+(gel)", "\\1") %>% 
   str_replace_all("red\\s+(here)", "\\1") %>% 
   str_replace_all("red\\s+(char)", "\\1") %>% 
-  str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors)
+  str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors) *** this section is likely giving us problems
   str_replace_all("red\\s+black\\s+(lim)", "\\1") %>% 
   str_replace_all("red\\s+black\\s+(gel)", "\\1") %>% 
   str_replace_all("red\\s+black\\s+(here)", "\\1") %>% 
@@ -594,13 +594,13 @@ lajunta$Type <- lajunta %>%
 
 
 # This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct value.
-lajunta$Type <- lajunta %>% 
-  dplyr::select(Type) %>% 
-  unlist() %>% 
-  str_replace_all("clrclr", "clr") %>% #One of the errors I found
-  str_replace_all("clr, clr, char", "char") %>% # a surprisingly common error
-  str_replace_all("clrang", "ang") %>% 
-  str_replace_all()
+# lajunta$Type <- lajunta %>% 
+#   dplyr::select(Type) %>% 
+#   unlist() %>% 
+#   str_replace_all("clrclr", "clr") %>% #One of the errors I found
+#   str_replace_all("clr, clr, char", "char") %>% # a surprisingly common error
+#   str_replace_all("clrang", "ang") %>% 
+#   str_replace_all()
 
 
 
