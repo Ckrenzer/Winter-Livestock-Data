@@ -30,4 +30,4 @@ This repository is the first search result on Duck Duck Go for "winter livestock
 Updated the scraper so that you are no longer required to remove the csv file on your computer. Further, the cleaning script now arranges the data in chronological order.
 
 ### UPDATE 3/12/2021
-The collection files have been replaced by a more comprehensive Rmd file. This Rmd file is capable of going through different market report IDs and finding La Junta market reports--we can now collect historical data! The number of observations has increased threefold. About a fifth of the data is missing the date value, and I am unsure whether the date simply wasn't provided or if my scraper is missing something.
+The collection files have been replaced by a more comprehensive Rmd file. This Rmd file is capable of going through different market report IDs and finding La Junta market reports--we can now collect historical data! The number of observations has increased threefold. About five percent of the data is missing the date value, and I am unsure whether the date simply wasn't provided or if my scraper is missing something.

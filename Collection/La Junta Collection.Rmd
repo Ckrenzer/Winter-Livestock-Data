@@ -664,8 +664,7 @@ lajunta <- read_csv("La Junta Market Reports.csv")
 
 
 # finds counts of all types--good for finding how many types are in the data
-# this one is especially useful, so I'm storing it into a variable
-counts <- count(lajunta, Type) %>% 
+count(lajunta, Type) %>% 
   arrange(desc(n)) %>% 
   as.data.frame()
 
@@ -676,7 +675,7 @@ lajunta %>%
   summarize("Median price" = median(Price, na.rm = T),
             "Mean weight" = mean(Weight, na.rm = T),
             "Median weight" = median(Weight, na.rm = T))
-# also remember that KNN is probably the best imputation method for this data
+# KNN is probably the best imputation method for this data
 
 
 # You can see the distribution of missing Reprod values
@@ -690,6 +689,10 @@ lajunta %>%
   select(Type, Weight, Reprod) %>% 
   filter(is.na(Reprod)) %>% 
   as.data.frame()
+
+
+lajunta %>% 
+  count(Date)
 
 
 ```

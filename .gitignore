@@ -42,3 +42,6 @@ vignettes/*.pdf
 La Junta cleaning.R
 La Junta.R
 La Junta long format.R
+
+# Debugging Files
+La Junta Market Reports (before cleaning).csv
