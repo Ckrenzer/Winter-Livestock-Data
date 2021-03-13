@@ -690,9 +690,13 @@ lajunta %>%
   filter(is.na(Reprod)) %>% 
   as.data.frame()
 
-
+# How many sales were there on a given day?
 lajunta %>% 
   count(Date)
+
+# how many missing values are in the Date column?
+lajunta %>% 
+  filter(is.na(Date))
 
 
 ```

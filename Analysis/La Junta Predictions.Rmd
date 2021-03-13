@@ -46,48 +46,57 @@ knitr::kable(lajunta %>%
                rename("Number of Appearances in Data" = n) %>% 
                arrange(desc(`Number of Appearances in Data`)))
 
-# overall plot of weight vs price
+# overall plot of weight vs price (after removing the outlier)
 lajunta %>% 
+  filter(Price < 1000) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
-  ggtitle("Weight vs. Price")
+  ggtitle("Weight vs. Price") +
+  theme_dark()
 
-# weight vs price by type
+# weight vs price by type (after removing the outlier)
 lajunta %>%
+  filter(Price < 1000) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   facet_wrap(~Type) +
-  ggtitle("Weight vs. Price by Type")
+  ggtitle("Weight vs. Price by Type") +
+  theme_dark()
 
-# weight vs price by reproductive status
+# weight vs price by reproductive status (after removing the outlier Reprod NA values)
 lajunta %>%
+  filter(!is.na(Reprod),
+         Price < 1000) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
   facet_wrap(~Reprod) +
-  ggtitle("Weight vs. Price by Reproductive Status") 
+  ggtitle("Weight vs. Price by Reproductive Status") +
+  theme_dark()
 
 
 
-# Price and Quantity over time
+# Price changes over time
 q1 <- lajunta %>%  
   filter(Reprod %in% c("str", "hfr")) %>% 
   group_by(Date) %>% 
-  summarize(Price = mean(Price) , Reprod, Quantity) %>% 
+  summarize(Price = mean(Price) , Reprod) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price, size = Quantity)) +
+  geom_point(mapping = aes(x = Date, y = Price)) +
   geom_line(mapping = aes(x = Date, y = Price)) +
   facet_wrap(~Reprod) +
-  ggtitle("Price and Quantity Over Time")
+  ggtitle("Price Changes Over Time") +
+  theme_dark()
 
 
 q2 <-  lajunta %>%  
   filter(Reprod %in% c("bull", "cow")) %>% 
   group_by(Date) %>% 
-  summarize(Price = mean(Price) , Reprod, Quantity) %>% 
+  summarize(Price = mean(Price) , Reprod) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price, size = Quantity)) +
+  geom_point(mapping = aes(x = Date, y = Price)) +
   geom_line(mapping = aes(x = Date, y = Price)) +
-  facet_wrap(~Reprod)
+  facet_wrap(~Reprod) +
+  theme_dark()
 
 # using patchwork's "/" operator
 q1 / q2
