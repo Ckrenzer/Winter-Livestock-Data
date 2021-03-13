@@ -510,10 +510,21 @@ lajunta <- lajunta %>%
 # first changing the data type to a Date:
 lajunta$Date <- lubridate::mdy(lajunta$Date)
 
-# removing the plural of the type (Ex. "black cows" becomes "black cow")
-lajunta$Type <- str_remove("s$")
+
+
+
+
+
+
+
+
+
+
 
 # Step 2: categorizing cattle ---------------------------------
+# Removing the plural of the type (Ex. "black cows" becomes "black cow")
+lajunta$Type <- str_remove(lajunta$Type, "s$")
+
 # Making a column assigning cattle reproductive status
 lajunta <- lajunta %>% 
   mutate(Reprod = str_extract(lajunta$Type, "hfr$|str$|bull$|cow$"))
@@ -582,7 +593,7 @@ lajunta$Type <- lajunta %>%
 
 
 
-# This correction of the Type column is done after finding the errors explicitly. I am 'hard-coding' in the correct value.
+# This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct value.
 lajunta$Type <- lajunta %>% 
   dplyr::select(Type) %>% 
   unlist() %>% 
