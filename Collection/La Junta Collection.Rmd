@@ -69,7 +69,7 @@ if(file.exists("La Junta Market Reports.csv")){
 
 # Collection()
 
-This function is a wrapper around the web scraper.
+This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program by a negligible amount, but I'm keeping them in to simplify debugging.
 
 
 ```{r collection()}
@@ -160,7 +160,7 @@ collection <- function(urls){
     livestock_data <- strsplit(livestock_data, delimiter)
     
     
-    # Saves the first entry that finds digits then the word "cattle"--this entry contains the sentence from which we can pull the date
+    # Saves the first entry that finds digits followed by the word "cattle"--this entry contains the sentence from which we can pull the date
     date_of_sale <- livestock_data[[1]][sapply(livestock_data, str_detect, "\\d+\\s*cattle") %>% 
                                           which() %>% 
                                           min()]
@@ -172,7 +172,8 @@ collection <- function(urls){
     month_of_sale <- str_extract(date_of_sale, "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept|oct|nov|dec")
     
     # the date of the sale in "month ##nd YYYY" format (Ex. "march 9th 2021")
-    date_of_sale <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}[a-z]{0,2}\\s+\\d{4}")) %>% 
+    #note: some sales take place over two days, so we have to remove the "& ##th" following the first day's date
+    date_of_sale <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}[a-z0-9&\\s]{0,15}\\d{4}")) %>% 
       #replacing the month name with its corresponding number
       str_replace_all(month_of_sale,
                       case_when(month_of_sale == "january" ~ "1",
@@ -190,7 +191,7 @@ collection <- function(urls){
                                 month_of_sale == "jan" ~ "1",
                                 month_of_sale == "feb" ~ "2",
                                 month_of_sale == "mar" ~ "3",
-                                month_of_sale == "apr" ~ "4", #you don't need to repeat may, remember
+                                month_of_sale == "apr" ~ "4", #you don't need to repeat MAY, remember
                                 month_of_sale == "jun" ~ "6",
                                 month_of_sale == "jul" ~ "7",
                                 month_of_sale == "aug" ~ "8",
@@ -200,11 +201,29 @@ collection <- function(urls){
                                 month_of_sale == "dec" ~ "12",
                       )) %>% 
       #removing letters and replacing space characters with hyphens
-      str_replace_all("[a-z]", "") %>% 
+      str_remove_all("[a-z]") %>%
+      str_replace_all("\\s+", " ") %>% #replacing multiple spaces with just one space
       str_replace_all("\\s", "-")
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    # Dealing with multi-day sales ----------------------------
+    
+    # Checks if the sale took place over two days (the date wasn't provided if the value is null)
+    if(!is.na(date_of_sale) & !str_detect(date_of_sale, "\\d{1,2}-\\d{1,2}-\\d{4}")){
+      
+      # If this is a two-day sale, then we keep only the first day
+      date_of_sale <- str_replace_all(date_of_sale, "(\\d{1,2}-\\d{1,2})-&*-\\d{1,2}(-\\d{4})", "\\1\\2")
+    }
     
     
     # Let's store everything back into a character vector
@@ -329,7 +348,7 @@ collection <- function(urls){
       
     }# end of for loop
     
-    # removing white leading and trailing white space
+    # removing leading and trailing white space
     livestock_data <- str_trim(livestock_data)
     
     
@@ -395,15 +414,15 @@ collection <- function(urls){
     #      cow bought by the buyer (Ex. "black cow" and "black cows"
     #      should both read "black cow")
     
+    # Adding in the date
     livestock_data <- mutate(livestock_data, "date" = date_of_sale, .before = 1)
     
-    # Adding in the date
-    #livestock_data <- mutate(livestock_data, "date" = Sys.Date(), .before = 1)
     
     
-    # Removing the plural of the type--this is especially helpful for
-    # use with group_by()
-    livestock_data$type <- str_replace(livestock_data$type, "s$", "")
+    
+    
+    
+    
     
     
     
@@ -444,7 +463,7 @@ collection <- function(urls){
 
 
 
-I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016.
+I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. I think some of the market reports are under two separate market IDs, so a few hundred observations may be replicas.
 
 ```{r urls-execute}
 
@@ -458,15 +477,6 @@ collection(urls = urls)
 ```
 
 
-Excellent. The next step is to read in the data we just collected. The reason I wrote it to a csv file first is because I did not know whether the result would be too large to save directly into memory. I doubt it, but you never know!
-
-If you have trouble reading this csv file, click on Tools > Global Options > RMarkdown, then set 'Evaluate chunks in directory:' to Project.
-
-```{r reading file}
-
-lajunta <- read_csv("La Junta Market Reports.csv")
-
-```
 
 
 
@@ -478,6 +488,8 @@ The final step before we are ready for analysis is data cleaning. There are two 
 Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze some of my judgement calls and decide for yourself what needs to be done to group the different types of livestock.
 
 Do you think that prices should be adjusted for inflation at some point in the future?
+
+If you have trouble reading this csv file, click on Tools > Global Options > RMarkdown, then set 'Evaluate chunks in directory:' to Project.
 
 ```{r cleaning}
 
@@ -499,6 +511,8 @@ lajunta <- lajunta %>%
 lajunta$Date <- lubridate::mdy(lajunta$Date)
 lajunta <- arrange(lajunta, Date)
 
+# removing the plural of the type (Ex. "black cows" becomes "black cow")
+lajunta$Type <- str_remove("s$")
 
 # Step 2: categorizing cattle ---------------------------------
 # Making a column assigning cattle reproductive status
@@ -509,11 +523,12 @@ lajunta <- lajunta %>%
 lajunta$Type <- lajunta %>% 
   dplyr::select(Type) %>% 
   unlist() %>% 
+  str_remove_all("\\.|,") %>%                     # removing punctuation
   str_remove_all("\\sx.*$|\\s[^\\s]*$") %>%  # removing " x hfr", " hfr", " x str", etc.
   str_replace_all("angus", "ang") %>% 
   str_remove_all("sim-") %>%                      # removing the sim- from sim-angus
   str_replace_all("sim\\s+ang", "ang") %>%        # removing "sim " from "sim angus"
-  str_replace_all("\\s+sim", " ang") %>%          # replacing " sim" with " ang"
+  str_replace_all("\\s*sim", " ang") %>%          # replacing " sim" with " ang"
   str_replace_all("limousin", "lim") %>% 
   str_replace_all("limo", "lim") %>%              # replacing "limo" with "lim"
   str_replace_all(".*\\s+lim|lim flex", "lim") %>%# combining all different types of limousins 
@@ -540,18 +555,46 @@ lajunta$Type <- lajunta %>%
   str_replace_all("red\\s+(lim)", "\\1") %>% 
   str_replace_all("red\\s+(gel)", "\\1") %>% 
   str_replace_all("red\\s+(here)", "\\1") %>% 
-  str_replace_all("red\\s+(char)", "\\1") %>%     # removing color ends on this line
+  str_replace_all("red\\s+(char)", "\\1") %>% 
+  str_replace_all("red\\s+black\\s+(ang)", "\\1") %>% #(removing combinations of colors)
+  str_replace_all("red\\s+black\\s+(lim)", "\\1") %>% 
+  str_replace_all("red\\s+black\\s+(gel)", "\\1") %>% 
+  str_replace_all("red\\s+black\\s+(here)", "\\1") %>% 
+  str_replace_all("red\\s+black\\s+(char)", "\\1") %>% 
+  str_replace_all("black\\s+red\\s+(ang)", "\\1") %>%
+  str_replace_all("black\\s+red\\s+(lim)", "\\1") %>% 
+  str_replace_all("black\\s+red\\s+(gel)", "\\1") %>% 
+  str_replace_all("black\\s+red\\s+(here)", "\\1") %>%
+  str_replace_all("black\\s+red\\s+(char)", "\\1") %>%# removing color ends on this line
   str_squish() %>% 
   str_trim()
+
+
+
 
 
 #combining all colors into a new category--"clr" (optional)
 lajunta$Type <- lajunta %>% 
   dplyr::select(Type) %>% 
   unlist() %>% 
-  str_replace_all("black red|black|red|gray|grey", "clr") %>%   # "black red," "black," and "red" are all 
+  str_replace_all("black red|black|red|gray|grey|balck|irishred|spot|brwn|", "clr") %>%   # "black red," "black," and "red" are all 
   str_replace_all("bwf|rwf|wf", "face") %>%
   str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
+
+
+
+# This correction of the Type column is done after finding the errors explicitly. I am 'hard-coding' in the correct value.
+lajunta$Type <- lajunta %>% 
+  dplyr::select(Type) %>% 
+  unlist() %>% 
+  str_replace_all("clrclr", "clr") %>% #One of the errors I found
+  str_replace_all("clr, clr, char", "char") %>% # a surprisingly common error
+  str_replace_all("clrang", "ang") %>% 
+  str_replace_all()
+
+
+
+
 
 # We now have six categories in the "Type" variable
 
@@ -570,6 +613,12 @@ write_csv(x = lajunta,
 
 
 
+
+```{r reading file}
+
+lajunta <- read_csv("La Junta Market Reports.csv")
+
+```
 
 
 
