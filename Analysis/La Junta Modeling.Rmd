@@ -36,6 +36,9 @@ pacman::p_load(dplyr, readr, ggplot2,
                knitr, broom, stringr,
                plotly)
 
+# Imputation Packages
+pacman::p_load(VIM)
+
 # KNN Packages
 pacman::p_load(rsample, class)
 
@@ -67,10 +70,11 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com/",
 # for pdf output!
 
 
-# I am going to remove missing values
+# Remove missing values for Weight and Price--missing values
+# for Reprod will be imputed.
+# Missing values for neither Date nor Quantity will be imputed or filtered out.
 lajunta <- lajunta %>% 
-  filter(!is.na(lajunta$Reprod),
-         !is.na(lajunta$Weight),
+  filter(!is.na(lajunta$Weight),
          !is.na(lajunta$Price))
 
 ```
@@ -98,6 +102,24 @@ lajunta %>%
 ```
 
 The dark theme on ggplot looks really nice, don't you think? We can clearly see four distinct groups and will explore these relationships in various ways.
+
+
+
+### Imputation
+
+Some of the data contains missing values. I will not impute missing data for Date, but the Reprod column can be reasonably estimated. The next section will walk through KNN in-depth, but just know that it will be used to impute missing values. The VIM package is used to perform this algorithm.
+
+
+```{r imputation}
+
+lajunta <- VIM::kNN(data = lajunta,
+                    variable = "Reprod",
+                    dist_var = c("Price", "Weight", "Quantity"))
+
+```
+
+
+
 
 # KNN Clustering
 
@@ -919,6 +941,9 @@ Character variables will be transformed into factors, the Date column will becom
 
 ```{r svm cleaning}
 
+#note: remember that missing values for Price and Weight
+#      were filtered out, and missing values for Reprod
+#      were imputed using K-nearest neighbors.
 lajunta_svm <- lajunta %>% 
   mutate(across(where(is.character), as.factor),
          Date = Date,
@@ -927,9 +952,6 @@ lajunta_svm <- lajunta %>%
          !is.na(Buyer),
          !is.na(Quantity),
          !is.na(Type),
-         !is.na(Weight),
-         !is.na(Price),
-         !is.na(Reprod),
          !is.na(is_Steer))
 
 

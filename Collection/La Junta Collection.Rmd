@@ -672,9 +672,12 @@ count(lajunta, Type) %>%
 # relevant info when imputing values:
 lajunta %>% 
   group_by(Reprod) %>% 
-  summarize("Median price" = median(Price, na.rm = T),
+  dplyr::summarize("Median price" = median(Price, na.rm = T),
+            "Median weight" = median(Weight, na.rm = T),
+            "Median quantity" = median(Quantity, na.rm = T),
+            "Mean Price" = mean(Price, na.rm = T),
             "Mean weight" = mean(Weight, na.rm = T),
-            "Median weight" = median(Weight, na.rm = T))
+            "Mean quantity" = mean(Quantity))
 # KNN is probably the best imputation method for this data
 
 
