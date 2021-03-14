@@ -17,7 +17,7 @@ Further, there is now a script ("La Junta cleaning.R") that formats the data so 
 
 In addition, the 99 categories of cattle are reduced to just six! Many types of cattle have very few observations, so they were lumped in with other groups.
 
-Finally, there is a shiny app you can run to see view analysis of the data, and even predict the price of cattle!
+Finally, there is a shiny app you can run to view an analysis of the data, and even predict the price of cattle!
 
 
 ### UPDATE 2/7/2021 ----------------------------------------------
