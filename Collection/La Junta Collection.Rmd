@@ -13,8 +13,6 @@ I figure it's time to dig a bit deeper into Winter Livestock's market reports. I
 
 This implementation assumes a few things about the structure of the text, so there may be small issues here and there with the data.
 
-
-
 Some improvements that could be made in the future are the following:
 
 -   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv.
@@ -22,10 +20,6 @@ Some improvements that could be made in the future are the following:
 -   Find out why some dates are not found when pulling the data.
 
 -   Simplify the cleaning script--it's a hot mess!
-
-
-
-
 
 # How It Works
 
@@ -38,7 +32,6 @@ After that, we extract the date from the text, remove the heading, remove inform
 Once we have a csv file, we clean it. Basically, this means you become best friends with stringr and abuse regex until you can only understand your code via the comments.
 
 Then we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
-
 
 ```{r setup-packages, include = FALSE}
 
