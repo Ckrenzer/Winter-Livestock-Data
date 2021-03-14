@@ -11,10 +11,17 @@ editor_options:
 
 I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO. The old method works well enough, but limitations in available data using the old scripts make this approach far more lucrative.
 
-This implementation assumes a few things about the structure of the text, so the scraper may need to be restricted to a certain date range.
+This implementation assumes a few things about the structure of the text, so there may be small issues here and there with the data.
 
 
 
+Some improvements that could be made in the future are the following:
+
+-   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv.
+
+-   Find out why some dates are not found when pulling the data.
+
+-   Simplify the cleaning script--it's a hot mess!
 
 
 
@@ -22,7 +29,15 @@ This implementation assumes a few things about the structure of the text, so the
 
 # How It Works
 
-To do this, I will first check whether the web scraper requires "\n" or "\r" as its delimiter. How do you do that? I'm glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+To collect the data, I will first check whether the webpage text requires "\n" or "\r" as its delimiter. How do you do that? I'm glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+
+Once we have a market report, we determine whether the market report is a La Junta market report by searching for 'la junta' in the text.
+
+After that, we extract the date from the text, remove the heading, remove information that is not about a sale, extract the buyer name and parse it together with the rest of the sale info, save everything to a data frame, then write the data frame to a csv. SAVE A COPY OF THIS CSV FILE TO ANOTHER FOLDER SO THAT YOU DON'T HAVE TO RE-RUN THE collection() FUNCTION IF THE CLEANING CHUNK HAS PROBLEMS.
+
+Once we have a csv file, we clean it. Basically, this means you become best friends with stringr and abuse regex until you can only understand your code via the comments.
+
+Then we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
 
 
 ```{r setup-packages, include = FALSE}
@@ -40,14 +55,6 @@ pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, ggplot2)
 
 ```
 
-
-
-
-
-
-
-
-
 # Remove File
 
 If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
@@ -60,19 +67,9 @@ if(file.exists("La Junta Market Reports.csv")){
 
 ```
 
-
-
-
-
-
-
-
-
-
 # Collection()
 
 This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program by a negligible amount, but I'm keeping them in to simplify debugging.
-
 
 ```{r collection()}
 
@@ -450,20 +447,7 @@ collection <- function(urls){
 
 ```
 
-
-
-
-
-
-
-
-
-
-
 # Implementation
-
-
-
 
 I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
 
@@ -478,11 +462,6 @@ collection(urls = urls)
 
 ```
 
-
-
-
-
-
 # Cleaning
 
 The final step before we are ready for analysis is data cleaning. There are two primary goals in the cleaning script. First, we want to add column names to the csv. The second goal is to organize cattle into a smaller number of distinct groups.
@@ -491,13 +470,9 @@ Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze 
 
 Do you think that prices should be adjusted for inflation at some point in the future?
 
-If you have trouble reading this csv file, click on Tools > Global Options > RMarkdown, then set 'Evaluate chunks in directory:' to Project.
-
-
-
+If you have trouble reading this csv file, click on Tools \> Global Options \> RMarkdown, then set 'Evaluate chunks in directory:' to Project.
 
 BEFORE RUNNING, SAVE A COPY OF THE CSV FILE IN ANOTHER FOLDER SO THAT YOU DO NOT HAVE TO RUN THE ABOVE CHUNKS AGAIN (should the cleaning script have problems)!
-
 
 ```{r cleaning}
 
@@ -653,9 +628,6 @@ write_csv(x = lajunta,
 
 ```
 
-
-
-
 Of course, we want to make sure everything looks good, no? This section identifies problem areas in the file.
 
 ```{r testing}
@@ -703,6 +675,3 @@ lajunta %>%
 
 
 ```
-
-
-
