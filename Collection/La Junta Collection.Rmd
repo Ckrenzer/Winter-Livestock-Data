@@ -465,9 +465,14 @@ Do you think that prices should be adjusted for inflation at some point in the f
 
 If you have trouble reading this csv file, click on Tools \> Global Options \> RMarkdown, then set 'Evaluate chunks in directory:' to Project.
 
-BEFORE RUNNING, SAVE A COPY OF THE CSV FILE IN ANOTHER FOLDER SO THAT YOU DO NOT HAVE TO RUN THE ABOVE CHUNKS AGAIN (should the cleaning script have problems)!
+
+A copy of the csv file will be created so we don't have to rerun the collection() function should the cleaning chunk need updating.
 
 ```{r cleaning}
+
+# Step 0: save a copy of the file!
+file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
+
 
 # Step 1: adding a header to the csv --------------------------
 lajunta <- readr::read_csv("La Junta Market Reports.csv", 
