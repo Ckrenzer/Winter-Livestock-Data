@@ -15,9 +15,17 @@ This implementation assumes a few things about the structure of the text, so the
 
 Some improvements that could be made in the future are the following:
 
--   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv.
+-   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv. You may have to do this manually after finding the URL.
 
 -   Find out why some dates are not found when pulling the data.
+
+-   Store the urls into a text file so that time no longer has to be wasted searching for the correct url (just make the urls variable in the "urls-execute" section a vector of the contents of the file containing urls).
+
+-   Store the urls in a named vector for easy debugging and identification of repeated values (the date should be the vector's name)
+
+-   Look at NA dates and see if you can find out where things go awry (one problem I've found is that the year is sometimes not provided on multi-day sales).
+
+-   Add the word 'internet' to a keyword removal list to skip over results from an internet auction?
 
 -   Simplify the cleaning script--it's a hot mess!
 
@@ -431,7 +439,7 @@ collection <- function(urls){
     
     
     # Confirmation message saying data was added to the file
-    cat(paste0("\nDATA ADDED: ", date_of_sale, "\n"))
+    cat(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
     
   } # end of for loop
   
@@ -449,6 +457,8 @@ I have been changing the URLs around to find different data, and the market repo
 # This parses together different market report IDs and stores them in a vector
 urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
+#the most recent market report
+#urls <- "http://www.winterlivestock.com/lajunta.php"
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
@@ -464,7 +474,6 @@ Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze 
 Do you think that prices should be adjusted for inflation at some point in the future?
 
 If you have trouble reading this csv file, click on Tools \> Global Options \> RMarkdown, then set 'Evaluate chunks in directory:' to Project.
-
 
 A copy of the csv file will be created so we don't have to rerun the collection() function should the cleaning chunk need updating.
 
@@ -671,5 +680,7 @@ lajunta %>%
 lajunta %>% 
   filter(is.na(Date))
 
+# Taking a look at the newest data
+tail(lajunta)
 
 ```
