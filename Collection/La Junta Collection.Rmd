@@ -27,6 +27,8 @@ Some improvements that could be made in the future are the following:
 
 -   Add the word 'internet' to a keyword removal list to skip over results from an internet auction?
 
+-   Improve the models (particularly the linear models)
+
 -   Simplify the cleaning script--it's a hot mess!
 
 # How It Works
