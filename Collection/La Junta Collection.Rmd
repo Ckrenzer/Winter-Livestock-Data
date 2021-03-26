@@ -476,7 +476,7 @@ collection(urls = urls)
 
 The final step before we are ready for analysis is data cleaning. There are two primary goals in the cleaning script. First, we want to add column names to the csv. The second goal is to organize cattle into a smaller number of distinct groups.
 
-Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze some of my judgement calls and decide for yourself what needs to be done to group the different types of livestock.
+Goal 1 is a piece of cake, but goal 2 is easier said than done. You can analyze some of my judgment calls and decide for yourself what needs to be done to group the different types of livestock.
 
 Do you think that prices should be adjusted for inflation at some point in the future?
 
@@ -486,15 +486,29 @@ A copy of the csv file will be created so we don't have to rerun the collection(
 
 ```{r cleaning, eval = FALSE}
 
-# Step 0: save a copy of the file!
-file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
 
+
+
+# Step 0: save a copy of the uncleaned file if we don't already have one!
+if(!file.exists("La Junta Market Reports (before cleaning).csv")){
+  file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
+  
+  #Read in LJMR.csv to clean (if this code executes, this file is unclean)
+  lajunta <- readr::read_csv("La Junta Market Reports.csv", 
+                             col_names = F)
+} else {
+  # If the above chunk did not execute, the file already exists in our system. That means we want to append new data to LJMR(bc).csv instead of the already clean LJMR.csv; the plan if this conditional executes is to read in the uncleaned version, clean it, then overwrite the (outdated) clean version of the csv file.
+  
+  # This is useful for updating the file each week without having to scrape the entire website again.
+  
+  #Reads in the uncleaned version of the csv
+  lajunta <- readr::read_csv("La Junta Market Reports (before cleaning).csv", 
+                             col_names = F)
+  
+}#end of conditional
 
 # Step 1: adding a header to the csv --------------------------
-lajunta <- readr::read_csv("La Junta Market Reports.csv", 
-                           col_names = F)
-
-# Adding in the column names
+# Adding in the column names [this will throw an error which we can ignore if we read in the LJMR(bc).csv file]
 lajunta <- lajunta %>% 
   rename("Date" = X1,
          "Buyer" = X2,
