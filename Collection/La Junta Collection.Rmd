@@ -45,7 +45,7 @@ Once we have a csv file, we clean it. Basically, this means you become best frie
 
 Then we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
 
-```{r setup-packages, include = FALSE}
+```{r setup-packages, include = FALSE, eval = FALSE}
 
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
@@ -64,7 +64,7 @@ pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, ggplot2)
 
 If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
 
-```{r remove csv}
+```{r remove csv, eval = FALSE}
 
 if(file.exists("La Junta Market Reports.csv")){
   file.remove("La Junta Market Reports.csv")
@@ -76,7 +76,7 @@ if(file.exists("La Junta Market Reports.csv")){
 
 This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program by a negligible amount, but I'm keeping them in to simplify debugging.
 
-```{r collection()}
+```{r collection(), eval = FALSE}
 
 collection <- function(urls){
   
@@ -410,13 +410,7 @@ collection <- function(urls){
     
     # Finishing Touches --------------------------------------------
     
-    # We have all the data we need, though there are still a couple
-    # problems with our output.
-    #   1. We want a date column
-    #   2. We want to remove the "s" at the end of the 
-    #      type column to account for cases when there is only one
-    #      cow bought by the buyer (Ex. "black cow" and "black cows"
-    #      should both read "black cow")
+    # We have all the data we need, though we still want a date column
     
     # Adding in the date
     livestock_data <- mutate(livestock_data, "date" = date_of_sale, .before = 1)
@@ -432,13 +426,22 @@ collection <- function(urls){
     
     # Writing to CSV ---------------------------------------
     # We are now ready to write the data to a file!
-    # Just remember to add in the column names if
-    # this file is not already on your computer
-    write_csv(x = livestock_data,
-              file = "La Junta Market Reports.csv",
-              append = T,
-              col_names = F)
     
+    # If the file is already on your computer, we want to append the new data to the uncleaned csv file.
+    if(file.exists("La Junta Market Reports (before cleaning).csv")){
+      write_csv(x = livestock_data,
+                file = "La Junta Market Reports (before cleaning).csv",
+                append = T,
+                col_names = F)
+      
+    } else {
+      # If the file is not in your computer, append the data to the new file.
+      write_csv(x = livestock_data,
+                file = "La Junta Market Reports.csv",
+                append = T,
+                col_names = F)
+      
+    }#end of conditional
     
     
     
@@ -456,13 +459,13 @@ collection <- function(urls){
 
 I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
 
-```{r urls-execute}
+```{r urls-execute, eval = FALSE}
 
 # This parses together different market report IDs and stores them in a vector
-urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
+#urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
 #the most recent market report
-#urls <- "http://www.winterlivestock.com/lajunta.php"
+urls <- "http://www.winterlivestock.com/lajunta.php"
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
@@ -481,7 +484,7 @@ If you have trouble reading this csv file, click on Tools \> Global Options \> R
 
 A copy of the csv file will be created so we don't have to rerun the collection() function should the cleaning chunk need updating.
 
-```{r cleaning}
+```{r cleaning, eval = FALSE}
 
 # Step 0: save a copy of the file!
 file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
@@ -641,7 +644,7 @@ write_csv(x = lajunta,
 
 Of course, we want to make sure everything looks good, no? This section identifies problem areas in the file.
 
-```{r testing}
+```{r testing, eval = FALSE}
 
 lajunta <- read_csv("La Junta Market Reports.csv")
 
@@ -656,11 +659,11 @@ count(lajunta, Type) %>%
 lajunta %>% 
   group_by(Reprod) %>% 
   dplyr::summarize("Median price" = median(Price, na.rm = T),
-            "Median weight" = median(Weight, na.rm = T),
-            "Median quantity" = median(Quantity, na.rm = T),
-            "Mean Price" = mean(Price, na.rm = T),
-            "Mean weight" = mean(Weight, na.rm = T),
-            "Mean quantity" = mean(Quantity))
+                   "Median weight" = median(Weight, na.rm = T),
+                   "Median quantity" = median(Quantity, na.rm = T),
+                   "Mean Price" = mean(Price, na.rm = T),
+                   "Mean weight" = mean(Weight, na.rm = T),
+                   "Mean quantity" = mean(Quantity))
 # KNN is probably the best imputation method for this data
 
 
