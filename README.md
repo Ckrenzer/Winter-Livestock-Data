@@ -34,3 +34,6 @@ The collection files have been replaced by a more comprehensive Rmd file. This R
 
 ### UPDATE 3/13/2021
 "La Junta Modeling.Rmd" now imputes missing values for the Reprod column using KNN.
+
+### UPDATE 3/25/2021
+"La Junta Collection.Rmd" no longer requires you to run all of collection() to update one week's worth of data.

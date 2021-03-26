@@ -15,6 +15,8 @@ This implementation assumes a few things about the structure of the text, so the
 
 Some improvements that could be made in the future are the following:
 
+-   Check whether you still need the remove.file() call in this document.
+
 -   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv. You may have to do this manually after finding the URL.
 
 -   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
