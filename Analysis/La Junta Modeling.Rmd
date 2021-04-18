@@ -74,6 +74,7 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com/",
 # for Reprod will be imputed.
 # Missing values for neither Date nor Quantity will be imputed or filtered out.
 lajunta <- lajunta %>% 
+  select(-url) %>% 
   filter(!is.na(lajunta$Weight),
          !is.na(lajunta$Price))
 

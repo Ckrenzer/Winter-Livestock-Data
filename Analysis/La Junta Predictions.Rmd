@@ -28,7 +28,8 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
                                      Type = col_factor(),
                                      Weight = col_double(),
                                      Price = col_double(),
-                                     Reprod = col_factor()))
+                                     Reprod = col_factor())) %>% 
+  select(-url)
 ```
 
 I want to bring your attention to the distinct types of cattle and how many of them appear in the data. See the data dictionary ("data KEY.txt") in the Collection folder for more info.

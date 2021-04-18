@@ -474,8 +474,9 @@ collection <- function(urls){
     
     # We have all the data we need, though we still want a date column
     
-    # Adding in the date
-    livestock_data <- mutate(livestock_data, "date" = date_of_sale, .before = 1)
+    # Adding in the date and URL
+    livestock_data <- mutate(livestock_data, "date" = date_of_sale, .before = 1) %>% 
+      mutate("url" = URL)
     
     
     
