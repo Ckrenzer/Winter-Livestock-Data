@@ -249,13 +249,11 @@ collection <- function(urls){
     # Header Removal with Keywords ------------------------------------------------------
     # A set of keywords designed to remove heading information
     # and other information we are not interested in observing
-    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"
+    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"                                           
     
     
     # Removes headings and unrelated information from the data
     livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
-    
-    
     
     
     
@@ -284,24 +282,20 @@ collection <- function(urls){
     # the code below. The "\n\t\t" is hidden, but
     # you can see the highlighted boxes at the
     # beginning of the lines containing the pattern:
-    str_view(livestock_data, "\n\t\t")
+    str_view(livestock_data, "\t\t")
     
     
+    # the sales are the entries that do not have semicolons but do have digits
+    livestock_data <- livestock_data[!str_detect(livestock_data, ";") & str_detect(livestock_data, "\\d")]
     
-    
-    
-    
-    
-    
-    
-    
+    # livestock_data now contains only the sales data
     
     
     
     # Buyer names -----------------------------------------------------
     # Step 1. Names of Buyers:
     # Pulling out the indices that contain the buyer's name.
-    buyers <- livestock_data[!str_detect(livestock_data, "\n\t\t")]
+    buyers <- livestock_data[!str_detect(livestock_data, "\t\t")]
     
     # removing leading newline characters
     buyers <- str_trim(buyers)
@@ -314,12 +308,35 @@ collection <- function(urls){
     # The names of the buyers:
     buyers <- str_extract(buyers, ".*?(?=\t)")
     
-    # removing unneeded white space
+    #If the entries are not tab-delimited, that means they used spaces instead.
+    if(all(is.na(buyers))){
+      
+      # repeating step 1
+      # Pulling out the indices that contain the buyer's name (doesn't start with a number, but contains a number; also does not contain a semicolon)
+      buyers <- livestock_data[!str_detect(livestock_data, "^\\d") &
+                                 str_detect(livestock_data, "\\d") &
+                                 !str_detect(livestock_data, ";")]
+      
+      # removing leading newline characters
+      buyers <- str_trim(buyers)
+      
+      
+      
+      #extracting the buyer names and the first number
+      buyers <- str_extract_all(buyers, "^[a-z].*?\\s\\d", simplify = TRUE)
+      buyers <- as.vector(buyers)
+      #removing the first number found
+      buyers <- str_remove_all(buyers, "\\d")
+    }
+    
+    
+    
+    
+    # removing unneeded white space and missing values
     buyers <- str_trim(buyers)
+    buyers <- buyers[!is.na(buyers)]
     
-    
-    
-    
+    # We should now have a character vector containing each buyer's name
     
     
     
@@ -339,14 +356,20 @@ collection <- function(urls){
     # need it to.
     current_ID <- 0
     for(i in 1:length(livestock_data)){
-      if(str_detect(livestock_data[i], "\n\t\t")){
-        # Only multiple purchases will have the "\n\t\t" so we can
+      
+      if(str_detect(livestock_data[i], "\n?\t\t|^\\d")){#if a multiple purchase:
+        # Only multiple purchases will have the "\n\t\t" or start with a digit, so we can
         # use "\n\t\t" as a placeholder for the beginning of the string,
         # where the buyer's name goes, and make it look the same as the
         # lines where the name is present
-        livestock_data[i] <- str_replace(livestock_data[i], "\n\t\t",  paste(buyers[current_ID], "\t", sep = ""))
+        livestock_data[i] <- paste0(buyers[current_ID], "\t", livestock_data[i])
+        livestock_data[i] <- str_remove(livestock_data[i], "\n")
         
-      } else if(!str_detect(livestock_data[i], "\n\t\t")){
+      } else if(!str_detect(livestock_data[i], "\n?\t\t|^\\d")){
+        
+        #add the \t to the buyer name
+        livestock_data[i] <- str_replace(livestock_data[i], buyers[current_ID+1], paste0(buyers[current_ID+1], "\t"))
+        
         # if the index lands on a new buyer, give them
         # the next ID number
         current_ID <- current_ID + 1 
@@ -354,8 +377,32 @@ collection <- function(urls){
       
     }# end of for loop
     
-    # removing leading and trailing white space
-    livestock_data <- str_trim(livestock_data)
+    #This is where we will add the tabs:
+    str_view_all(livestock_data, "\\d\\s|[a-z]\\s+\\d")
+    
+    
+    #inserting tab characters between the fields--I was careful to not put a tab between the quantity and type
+    livestock_data <- str_replace_all(livestock_data, "(\\d)\\s(\\d)", "\\1\t\\2") 
+    livestock_data <- str_replace_all(livestock_data, "([a-z])\\s+(\\d)", "\\1\t\\2")
+    
+    
+    #remove any extra "\t" characters after the buyer name
+    livestock_data <- str_replace_all(livestock_data, "\t+\\s*", "\t")
+    
+    #removing any missing values
+    livestock_data <- livestock_data[!is.na(livestock_data)]
+    
+    
+    #livestock_data should now have the fields separated by tabs
+    
+    #You can confirm with this line:
+    str_view_all(livestock_data, "\t")
+    
+    
+    
+    
+    
+    
     
     
     
@@ -450,6 +497,8 @@ collection <- function(urls){
     # Confirmation message saying data was added to the file
     cat(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
     
+    
+    
   } # end of for loop
   
   
@@ -468,7 +517,8 @@ I have been changing the URLs around to find different data, and the market repo
 
 #the most recent market report
 urls <- "http://www.winterlivestock.com/lajunta.php"
-
+urls <- c("http://www.winterlivestock.com/lajunta.php?reportID=13343#marketreport",
+"http://www.winterlivestock.com/lajunta.php?reportID=13373#marketreport")
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
 
