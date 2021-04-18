@@ -31,6 +31,8 @@ Some improvements that could be made in the future are the following:
 
 -   Add the word 'internet' to a keyword removal list to skip over results from an internet auction?
 
+-   Look into why you have some missing values for the buyer name.
+
 -   Improve the models (particularly the linear models)
 
 -   Simplify the cleaning script--it's a hot mess!
@@ -249,13 +251,14 @@ collection <- function(urls){
     # Header Removal with Keywords ------------------------------------------------------
     # A set of keywords designed to remove heading information
     # and other information we are not interested in observing
-    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$"                                           
+    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
     
     
     # Removes headings and unrelated information from the data
     livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
     
-    
+    #Removes all remaining entries with months and/or dates
+    livestock_data <- livestock_data[!str_detect(livestock_data, "january\\s+\\d|february\\s+\\d|march\\s+\\d|april\\s+\\d|may\\s+\\d|june\\s+\\d|july\\s+\\d|august\\s+\\d|september\\s+\\d|october\\s+\\d|november\\s+\\d|december\\s+\\d|jan\\s+\\d|feb\\s+\\d|mar\\s+\\d|apr\\s+\\d|jun\\s+\\d|jul\\s+\\d|aug\\s+\\d|sept\\s+\\d|oct\\s+\\d|nov\\s+\\d|dec\\s+\\d")]
     
     
     
@@ -287,6 +290,16 @@ collection <- function(urls){
     
     # the sales are the entries that do not have semicolons but do have digits
     livestock_data <- livestock_data[!str_detect(livestock_data, ";") & str_detect(livestock_data, "\\d")]
+    
+    # Keeping only those entries with more than 12 characters (for those entries that slip through the other filters)
+    livestock_data <- livestock_data[which(nchar(livestock_data) > 12)]
+    
+    #Removing internet auction sales--they will be empty character vectors at this point in the code
+    #For more flexibility, if the length is smaller than 10, the data will not be added
+    #Very few (probably zero) market reports have fewer than 10 entries
+    if(length(livestock_data) < 10){
+      next #go to the next iteration of the loop
+    }
     
     # livestock_data now contains only the sales data
     
@@ -473,6 +486,7 @@ collection <- function(urls){
     
     
     
+    
     # Writing to CSV ---------------------------------------
     # We are now ready to write the data to a file!
     
@@ -517,8 +531,7 @@ I have been changing the URLs around to find different data, and the market repo
 
 #the most recent market report
 urls <- "http://www.winterlivestock.com/lajunta.php"
-urls <- c("http://www.winterlivestock.com/lajunta.php?reportID=13343#marketreport",
-"http://www.winterlivestock.com/lajunta.php?reportID=13373#marketreport")
+
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
 
