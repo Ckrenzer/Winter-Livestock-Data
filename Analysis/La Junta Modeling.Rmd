@@ -75,7 +75,7 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com/",
 # for Reprod will be imputed.
 # Missing values for neither Date nor Quantity will be imputed or filtered out.
 lajunta <- lajunta %>% 
-  select(-url) %>% 
+  dplyr::select(-URL) %>% 
   filter(!is.na(lajunta$Weight),
          !is.na(lajunta$Price))
 
@@ -95,7 +95,7 @@ From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenz
 
 ```{r graph, echo = FALSE, results = "show"}
 lajunta %>% 
-  filter(Price < 1000) %>% 
+  filter(Price < 475) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   ggtitle("Price vs. Weight") +

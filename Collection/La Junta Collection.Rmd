@@ -741,6 +741,20 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 
 
 
+# Step 2: reproductive types ---------------------------------
+# Making a column assigning cattle reproductive status
+# (removing values with 's' as the last letter before this step)
+lajunta <- lajunta %>% 
+  mutate(Type = str_remove_all(Type, "s$"),
+  Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"))
+
+lajunta <- lajunta %>% 
+  mutate(Reprod = Reprod %>% 
+  str_replace_all("pair", "cow") %>% #replacing 'pair' with cow. It seemed reasonable...
+  str_replace_all("bow", "cow") %>%  #replacing a typo with the intended value
+  str_replace_all("hrf|hr", "hfr") %>% #replacing typos with the intended values
+  str_replace_all("heifer", "hfr") %>% #shortening name
+  str_replace_all("steer", "str")) #shortening name
 
 
 
@@ -748,22 +762,27 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 
 
 
-# Step 2: categorizing cattle ---------------------------------
+
+
+
+
+
+
+
+
+# Step 3: categorizing cattle ---------------------------------
 # Removing the plural of the type (Ex. "black cows" becomes "black cow")
 lajunta$Type <- str_remove(lajunta$Type, "s$")
 
-# Making a column assigning cattle reproductive status
-lajunta <- lajunta %>% 
-  mutate(Reprod = str_extract(lajunta$Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"))
 
 
-# The minor Reprod edits--I don't know what 'sim' is, so I will let KNN decide
-lajunta %>% 
-  dplyr::select(Reprod) %>% 
-  unlist() %>% 
-  str_replace_all("^pair$", "cow") %>% #replacing 'pair' with cow. It seemed reasonable...
-  str_replace_all("^bow$", "cow") %>%  #replacing a typo with the intended value
-  str_replace_all("^hrf$|^hr$", "hfr")   #replacing typos with the intended values
+
+
+
+
+
+
+
 
 
 # The bulk of the edits
@@ -874,7 +893,13 @@ lajunta$Type[which(!lajunta$Type %in% types)] <- "clr"
 
 
 
-# Step 3: Writing to file -------------------------------------
+
+
+
+
+
+
+# Step 4: Writing to file -------------------------------------
 write_csv(x = lajunta,
           file = "La Junta Market Reports.csv",
           append = F,
@@ -905,6 +930,11 @@ lajunta <- read_csv("La Junta Market Reports.csv")
 
 # finds counts of all types--good for finding how many types are in the data
 count(lajunta, Type) %>% 
+  arrange(desc(n)) %>% 
+  as.data.frame()
+
+# finds counts of all reproductive statuses--there should be five: bull, cow, steer, heifer, and NA (if there are missing values).
+count(lajunta, Reprod) %>% 
   arrange(desc(n)) %>% 
   as.data.frame()
 
