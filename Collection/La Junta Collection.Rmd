@@ -19,8 +19,6 @@ Some improvements that could be made in the future are the following:
 
 -   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv. You may have to do this manually after finding the URL.
 
--   Check that collection() doesn't skip over the first market report of each year.
-
 -   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
 
 -   Find out why some dates are not found when pulling the data.
