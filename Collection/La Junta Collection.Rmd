@@ -578,7 +578,8 @@ lajunta <- lajunta %>%
          "Quantity" = X3,
          "Type" = X4,
          "Weight" = X5,
-         "Price" = X6)
+         "Price" = X6,
+         "URL" = X7)
 
 # Putting the entries in chronological order,
 # first changing the data type to a Date:
@@ -752,7 +753,7 @@ lajunta %>%
 
 # see any patterns? Can you impute any values using this information (particularly on Reprod)?
 lajunta %>% 
-  select(Type, Weight, Reprod) %>% 
+  select(Type, Weight, Reprod, URL) %>% 
   filter(is.na(Reprod)) %>% 
   as.data.frame()
 
