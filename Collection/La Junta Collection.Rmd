@@ -177,9 +177,11 @@ collection <- function(urls){
     
     
     # extracting the month the sale took place from the sentence
-    month_of_sale <- str_extract(date_of_sale, "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept|oct|nov|dec")
+    month_of_sale <- str_extract(date_of_sale, "january|february|march|april|\bmay\b|june|july|august|september|october|november|december|\bjan\b|\bfeb\b|\bmar\b|\bapr\b|\bjun\b|\bjul\b|\baug\b|\bsept\b|\boct\b|\bnov\b|\bdec\b")
     
-    # the date of the sale in "month ##nd YYYY" format (Ex. "march 9th 2021")
+    
+    
+    ##### CASE 1: The date is in "month ##th YYYY" format (Ex. "march 9th 2021")
     #note: some sales take place over two days, so we have to remove the "& ##th" following the first day's date
     date_of_sale <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}[a-z0-9&\\s]{0,15}\\d{4}")) %>% 
       #replacing the month name with its corresponding number
@@ -215,36 +217,156 @@ collection <- function(urls){
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    # Dealing with multi-day sales ----------------------------
-    
-    # Checks if the sale took place over two days (the date wasn't provided if the value is null)
-    if(!is.na(date_of_sale) & !str_detect(date_of_sale, "\\d{1,2}-\\d{1,2}-\\d{4}")){
+    ##### CASE 2: The date is multi-valued but the year is included
+    if(is.na(date_of_sale)){
+      #Repeating initial steps:
+      # Saves the first entry that finds digits followed by the word "cattle"--this entry
+      # contains the sentence from which we can pull the date
+      date_of_sale <- livestock_data[[1]][sapply(livestock_data, str_detect, "\\d+\\s*cattle") %>% 
+                                            which() %>% 
+                                            min()]
+      # removing punctuation from the sentence
+      date_of_sale <- str_remove_all(date_of_sale, "\\.|,|;")
       
-      # If this is a two-day sale, then we keep only the first day
-      date_of_sale <- str_replace_all(date_of_sale, "(\\d{1,2}-\\d{1,2})-&*-\\d{1,2}(-\\d{4})", "\\1\\2")
+      
+      
+      # Pulling out the part of the sentence containing the date
+      date_of_sale <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}.{0,40}\\d{4}"))
+      
+      #Pulling out the month and day
+      md <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}"))
+      #Pulling out the year
+      y <- str_extract(date_of_sale, "\\d{4}")
+      
+      # Changing the month to its corresponding number
+      md <- str_replace_all(string = md,
+                            pattern = month_of_sale,
+                            replacement = case_when(month_of_sale == "january" ~ "1",
+                                                    month_of_sale == "february" ~ "2",
+                                                    month_of_sale == "march" ~ "3",
+                                                    month_of_sale == "april" ~ "4",
+                                                    month_of_sale == "may" ~ "5",
+                                                    month_of_sale == "june" ~ "6",
+                                                    month_of_sale == "july" ~ "7",
+                                                    month_of_sale == "august" ~ "8",
+                                                    month_of_sale == "september" ~ "9",
+                                                    month_of_sale == "october" ~ "10",
+                                                    month_of_sale == "november" ~ "11",
+                                                    month_of_sale == "december" ~ "12",
+                                                    month_of_sale == "jan" ~ "1",
+                                                    month_of_sale == "feb" ~ "2",
+                                                    month_of_sale == "mar" ~ "3",
+                                                    month_of_sale == "apr" ~ "4", #you don't need to repeat MAY, remember
+                                                    month_of_sale == "jun" ~ "6",
+                                                    month_of_sale == "jul" ~ "7",
+                                                    month_of_sale == "aug" ~ "8",
+                                                    month_of_sale == "sept" ~ "9",
+                                                    month_of_sale == "oct" ~ "10",
+                                                    month_of_sale == "nov" ~ "11",
+                                                    month_of_sale == "dec" ~ "12",
+                            )) %>% 
+        #replacing the date with a hyphen
+        str_replace_all("\\s+", "-")
+      
+      #we only want to do this step if date_of_sale is not null (we will get a string saying "NA-NA" otherwise,
+      #which is a pain to correct for in subsequent case-checking)
+      if(!is.na(date_of_sale)){
+        # Concatenating the md and y together (into mdy format!!!)
+        date_of_sale <- paste(md, y, sep = "-")
+      }
+      
     }
     
     
-    # Let's store everything back into a character vector
+    ##### CASE 3: The year was not provided
+    if(is.na(date_of_sale)){
+      #Repeating initial steps:
+      # Saves the first entry that finds digits followed by the word "cattle"--this entry
+      # contains the sentence from which we can pull the date
+      date_of_sale <- livestock_data[[1]][sapply(livestock_data, str_detect, "\\d+\\s*cattle") %>% 
+                                            which() %>% 
+                                            min()]
+      # removing punctuation from the sentence
+      date_of_sale <- str_remove_all(date_of_sale, "\\.|,|;")
+      
+      
+      
+      
+      
+      
+      #Pulling out the month and day
+      md <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}"))
+      #Setting the year equal to the previous sale's year
+      y <- clock::get_year(previous_date_of_sale)  
+      
+      
+      # Changing the month to its corresponding number
+      md <- str_replace_all(string = md,
+                            pattern = month_of_sale,
+                            replacement = case_when(month_of_sale == "january" ~ "1",
+                                                    month_of_sale == "february" ~ "2",
+                                                    month_of_sale == "march" ~ "3",
+                                                    month_of_sale == "april" ~ "4",
+                                                    month_of_sale == "may" ~ "5",
+                                                    month_of_sale == "june" ~ "6",
+                                                    month_of_sale == "july" ~ "7",
+                                                    month_of_sale == "august" ~ "8",
+                                                    month_of_sale == "september" ~ "9",
+                                                    month_of_sale == "october" ~ "10",
+                                                    month_of_sale == "november" ~ "11",
+                                                    month_of_sale == "december" ~ "12",
+                                                    month_of_sale == "jan" ~ "1",
+                                                    month_of_sale == "feb" ~ "2",
+                                                    month_of_sale == "mar" ~ "3",
+                                                    month_of_sale == "apr" ~ "4", #you don't need to repeat MAY, remember
+                                                    month_of_sale == "jun" ~ "6",
+                                                    month_of_sale == "jul" ~ "7",
+                                                    month_of_sale == "aug" ~ "8",
+                                                    month_of_sale == "sept" ~ "9",
+                                                    month_of_sale == "oct" ~ "10",
+                                                    month_of_sale == "nov" ~ "11",
+                                                    month_of_sale == "dec" ~ "12",
+                            )) %>% 
+        #replacing the date with a hyphen
+        str_replace_all("\\s+", "-")
+      
+      #we only want to do this step if date_of_sale is not null (we will get a string saying "NA-NA" otherwise,
+      #which is a pain to correct for in subsequent case-checking)
+      if(!is.na(date_of_sale)){
+        # Concatenating the md and y together (into mdy format!!!)
+        date_of_sale <- paste(md, y, sep = "-")
+      }
+      
+    }
+    
+    
+    
+    ##### CASE 4: The Catch-All
+    #If worse comes to worst, we can just add one week from the previous sale's date
+    if(is.na(date_of_sale)){
+      date_of_sale <- as.character(clock::add_weeks(previous_date_of_sale, n = 1))
+      
+    }
+    
+    
+    
+    
+    #Storing the previous date of sale to extract the year later on
+    #(for those cases where the year is missing, we can append the previous market report's
+    #year to the end of the current one)...I anticipate this strategy to be problematic when
+    #two consecutive dates are missing and also around the new year. It is a 'good enough'
+    #approximation, however (plus, these situations are pretty rare)
+    previous_date_of_sale <- lubridate::mdy(date_of_sale)
+    
+    
+    
+    
+    
+    
+    
+    # Now that we have the dates settled, let's store
+    # livestock_data back into a character vector
     livestock_data <- as.vector(livestock_data[[1]])
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -361,7 +483,7 @@ collection <- function(urls){
     # each sale listed on the market report. It then adds
     # the buyer's name back onto the lines from which it
     # was omitted.
-
+    
     # I will provide each buyer an ID number to determine
     # which purchases that buyer made. I am not crazy about
     # using loops, as I could probably write a function
@@ -379,7 +501,7 @@ collection <- function(urls){
         livestock_data[i] <- str_remove(livestock_data[i], "\n")
         
       } else if(!str_detect(livestock_data[i], "^\n?\t+\\s*\\d|^\\d")){
-
+        
         # if the index lands on a new buyer, give them
         # the next ID number
         current_ID <- current_ID + 1 
@@ -782,7 +904,8 @@ lajunta %>%
 # DATE -__-__-__-__-__-__-__-__-__-__-
 # how many missing values are in the Date column?
 lajunta %>% 
-  filter(is.na(Date))
+  filter(is.na(Date)) %>% 
+  slice_sample(n = 20)
 
 
 # BUYER _--_--_--_--_--_--_--_--_--_--_
@@ -827,6 +950,5 @@ lajunta %>%
   filter(is.na(Reprod)) %>% 
   ggplot() +
   geom_col(mapping = aes(x = Weight, y = Price))
-
 
 ```
