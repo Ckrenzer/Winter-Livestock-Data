@@ -33,7 +33,7 @@ The collection() function follows these steps:
 
 -   Determine the __delimiter__ to split the text into a list. _If neither delimiter works, skip to the next iteration of the loop._
 
--   Determine whether the market report is a La Junta market report by searching for 'la junta co' in the text. _If the text is an internet video auction for la junta, it will be ignored. Non La Junta market reports are ignored. Both of these cases skip to the next iteration of the loop._
+-   Determine whether the market report is a __La Junta market report__ by searching for 'la junta co' in the text. _If the text is an internet video auction for la junta, it will be ignored. Non La Junta market reports are ignored. Both of these cases skip to the next iteration of the loop._
 
 -   Determine the __date__ of the market report. There are four cases for this, and the last case just adds one week to the previous sale in case the other methods failed. Check each one to understand how the date is determined.
 
