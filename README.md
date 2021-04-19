@@ -38,5 +38,7 @@ The collection files have been replaced by a more comprehensive Rmd file. This R
 ### UPDATE 3/25/2021
 "La Junta Collection.Rmd" no longer requires you to run all of collection() to update one week's worth of data.
 
-### UPDATE 4/18/2021
-The collection() function is now better at identifying data in the market reports. About 6000 new entries of historical data are available.
+### UPDATE 4/18/2021-4/19/2021
+The collection() function is now better at identifying data in the market reports. About 6000 new entries of historical data are available. The collection() function is also capable of filtering out some repeat market reports (reducing repeated data).
+
+Be mindful that some dates may are estimated. In cases where the date could not be determined (see CASE 4 in the collection() function), one week is added to the date of the previous sale.

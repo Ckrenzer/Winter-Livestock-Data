@@ -19,6 +19,8 @@ Some improvements that could be made in the future are the following:
 
 -   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv. You may have to do this manually after finding the URL.
 
+-   Check that collection() doesn't skip over the first market report of each year.
+
 -   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
 
 -   Find out why some dates are not found when pulling the data.
@@ -27,11 +29,6 @@ Some improvements that could be made in the future are the following:
 
 -   Store the urls in a named vector for easy debugging and identification of repeated values (the date should be the vector's name)
 
--   Look at NA dates and see if you can find out where things go awry (one problem I've found is that the year is sometimes not provided on multi-day sales).
-
--   Add the word 'internet' to a keyword removal list to skip over results from an internet auction?
-
--   Look into why you have some missing values for the buyer name.
 
 -   Improve the models (particularly the linear models)
 
@@ -60,7 +57,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # Packages
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, ggplot2)
+pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, clock, ggplot2)
 
 ```
 
@@ -177,7 +174,7 @@ collection <- function(urls){
     
     
     # extracting the month the sale took place from the sentence
-    month_of_sale <- str_extract(date_of_sale, "january|february|march|april|\bmay\b|june|july|august|september|october|november|december|\bjan\b|\bfeb\b|\bmar\b|\bapr\b|\bjun\b|\bjul\b|\baug\b|\bsept\b|\boct\b|\bnov\b|\bdec\b")
+    month_of_sale <- str_extract(date_of_sale, "january|february|march|april|may|june|july|august|september|october|november|december|jan\\s|feb\\s|mar\\s|apr\\s|jun\\s|jul\\s|aug\\s|sept\\s|oct\\s|nov\\s|dec\\s")
     
     
     
@@ -218,7 +215,10 @@ collection <- function(urls){
     
     
     ##### CASE 2: The date is multi-valued but the year is included
-    if(is.na(date_of_sale)){
+    
+    # NOTE: the lubridate::mdy() call is meant to ensure we get NA if the formatting did not work as expected.
+    
+    if(is.na(lubridate::mdy(date_of_sale))){
       #Repeating initial steps:
       # Saves the first entry that finds digits followed by the word "cattle"--this entry
       # contains the sentence from which we can pull the date
@@ -279,7 +279,7 @@ collection <- function(urls){
     
     
     ##### CASE 3: The year was not provided
-    if(is.na(date_of_sale)){
+    if(is.na(lubridate::mdy(date_of_sale))){
       #Repeating initial steps:
       # Saves the first entry that finds digits followed by the word "cattle"--this entry
       # contains the sentence from which we can pull the date
@@ -297,7 +297,7 @@ collection <- function(urls){
       #Pulling out the month and day
       md <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}"))
       #Setting the year equal to the previous sale's year
-      y <- clock::get_year(previous_date_of_sale)  
+      y <- clock::get_year(clock::date_parse(previous_date_of_sale, format = "%m-%d-%y"))  
       
       
       # Changing the month to its corresponding number
@@ -343,20 +343,27 @@ collection <- function(urls){
     
     ##### CASE 4: The Catch-All
     #If worse comes to worst, we can just add one week from the previous sale's date
-    if(is.na(date_of_sale)){
-      date_of_sale <- as.character(clock::add_weeks(previous_date_of_sale, n = 1))
+    if(is.na(lubridate::mdy(date_of_sale))){
+      
+      date_of_sale <- lubridate::mdy(previous_date_of_sale) %>% 
+        clock::add_weeks(n = 1) %>% 
+        as.character()
       
     }
     
     
     
+    # If the date has already been added, skip to the next iteration of the loop
+    # (this means there was either A: a repeat of market reports
+    # or B: two different reports in one day--I am unfamiliar with any instances of two market
+    # reports given on the same day, though it could happen)
+    if(exists("previous_date_of_sale")){
+      if(previous_date_of_sale == date_of_sale){
+        next
+      }
+    }
     
-    #Storing the previous date of sale to extract the year later on
-    #(for those cases where the year is missing, we can append the previous market report's
-    #year to the end of the current one)...I anticipate this strategy to be problematic when
-    #two consecutive dates are missing and also around the new year. It is a 'good enough'
-    #approximation, however (plus, these situations are pretty rare)
-    previous_date_of_sale <- lubridate::mdy(date_of_sale)
+    
     
     
     
@@ -424,6 +431,26 @@ collection <- function(urls){
     }
     
     # livestock_data now contains only the sales data
+    
+    
+    
+    
+    
+    ##### SETTING THE `previous_date_of_sale` MUST TAKE PLACE AFTER WE ARE SURE WE ARE ADDING
+    ##### THE DATA TO THE DATA FRAME
+    #Storing the previous date of sale to extract the year later on
+    #(for those cases where the year is missing, we can append the previous market report's
+    #year to the end of the current one)...I anticipate this strategy to be problematic when
+    #two consecutive dates are missing and also around the new year. It is a 'good enough'
+    #approximation, however (plus, these situations are pretty rare)
+    previous_date_of_sale <- as.character(date_of_sale)
+    
+    
+    
+    
+    
+    
+    
     
     
     
