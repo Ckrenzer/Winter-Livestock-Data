@@ -148,7 +148,7 @@ collection <- function(urls){
     livestock_data <- str_to_lower(livestock_data)
     
     # Now we can search for "la junta" in the text
-    if(!str_detect(livestock_data, pattern = "la junta")){
+    if(!str_detect(livestock_data, pattern = "la\\s*junta,*\\s*co")){
       
       # If "la junta" is not found in the data, that means that this is not a La Junta market report--skip to the next iteration of the loop.
       next
@@ -308,7 +308,7 @@ collection <- function(urls){
     # Buyer names -----------------------------------------------------
     # Step 1. Names of Buyers:
     # Pulling out the indices that contain the buyer's name.
-    buyers <- livestock_data[!str_detect(livestock_data, "\t\t")]
+    buyers <- livestock_data[!str_detect(livestock_data, "^\t+")]
     
     # removing leading newline characters
     buyers <- str_trim(buyers)
@@ -361,7 +361,7 @@ collection <- function(urls){
     # each sale listed on the market report. It then adds
     # the buyer's name back onto the lines from which it
     # was omitted.
-    
+
     # I will provide each buyer an ID number to determine
     # which purchases that buyer made. I am not crazy about
     # using loops, as I could probably write a function
@@ -370,19 +370,16 @@ collection <- function(urls){
     current_ID <- 0
     for(i in 1:length(livestock_data)){
       
-      if(str_detect(livestock_data[i], "\n?\t\t|^\\d")){#if a multiple purchase:
+      if(str_detect(livestock_data[i], "^\n?\t+\\s*\\d|^\\d")){#if a multiple purchase:
         # Only multiple purchases will have the "\n\t\t" or start with a digit, so we can
-        # use "\n\t\t" as a placeholder for the beginning of the string,
-        # where the buyer's name goes, and make it look the same as the
+        # use "\n?\t+|^//d" as a placeholder for the beginning of the string
+        # (where the buyer's name goes) and make it look the same as the
         # lines where the name is present
         livestock_data[i] <- paste0(buyers[current_ID], "\t", livestock_data[i])
         livestock_data[i] <- str_remove(livestock_data[i], "\n")
         
-      } else if(!str_detect(livestock_data[i], "\n?\t\t|^\\d")){
-        
-        #add the \t to the buyer name
-        livestock_data[i] <- str_replace(livestock_data[i], buyers[current_ID+1], paste0(buyers[current_ID+1], "\t"))
-        
+      } else if(!str_detect(livestock_data[i], "^\n?\t+\\s*\\d|^\\d")){
+
         # if the index lands on a new buyer, give them
         # the next ID number
         current_ID <- current_ID + 1 

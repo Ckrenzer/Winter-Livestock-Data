@@ -70,6 +70,7 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com/",
 # for pdf output!
 
 
+# Removing the URL column
 # Remove missing values for Weight and Price--missing values
 # for Reprod will be imputed.
 # Missing values for neither Date nor Quantity will be imputed or filtered out.

@@ -20,7 +20,7 @@ if(!require("pacman")) install.packages("pacman")
 pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork)
 
 
-# Reading in the file
+# Reading in the file and removing the URL column
 lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
                     col_types = cols(Date = "D",
                                      Buyer = col_factor(),
