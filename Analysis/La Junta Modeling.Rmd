@@ -918,19 +918,19 @@ The algorithm is supposed to classify observations by creating a hyperplane with
 
 # The filtering removes the extreme outlier so that we can explore the concentration of the data we care about.
 plotly::plot_ly(x = lajunta %>% 
-                  filter(Price < 1000) %>% 
+                  filter(Price < 475) %>% 
                   dplyr::select(Weight) %>% 
                   unlist(),
                 y = lajunta %>% 
-                  filter(Price < 1000) %>% 
+                  filter(Price < 475) %>% 
                   dplyr::select(Price) %>% 
                   unlist(),
                 z = lajunta %>% 
-                  filter(Price < 1000) %>% 
+                  filter(Price < 475) %>% 
                   dplyr::select(Quantity) %>% 
                   unlist(),
                 color = lajunta %>% 
-                  filter(Price < 1000) %>% 
+                  filter(Price < 475) %>% 
                   dplyr::select(Reprod) %>% 
                   unlist()) %>% 
   layout(title = "Livestock by Weight (x), Price (y), and Quantity (z)")

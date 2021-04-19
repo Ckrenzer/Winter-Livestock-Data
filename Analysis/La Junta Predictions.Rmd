@@ -50,7 +50,7 @@ knitr::kable(lajunta %>%
 
 # overall plot of weight vs price (after removing the outlier)
 lajunta %>% 
-  filter(Price < 1000) %>% 
+  filter(Price < 475) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   ggtitle("Weight vs. Price") +
@@ -58,7 +58,7 @@ lajunta %>%
 
 # weight vs price by type (after removing the outlier)
 lajunta %>%
-  filter(Price < 1000) %>% 
+  filter(Price < 475) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
   facet_wrap(~Type) +
@@ -68,7 +68,7 @@ lajunta %>%
 # weight vs price by reproductive status (after removing the outlier Reprod NA values)
 lajunta %>%
   filter(!is.na(Reprod),
-         Price < 1000) %>% 
+         Price < 475) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Weight, y = Price, color = Type)) +
   facet_wrap(~Reprod) +
