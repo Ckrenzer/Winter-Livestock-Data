@@ -17,28 +17,33 @@ Some improvements that could be made in the future are the following:
 
 -   Check whether you still need the remove.file() call in this document.
 
--   Check the date to make sure that you aren't 'double-counting' the same market report that has two IDs (just be sure to handle NA dates carefully) before adding it to the csv. You may have to do this manually after finding the URL.
-
 -   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
-
--   Find out why some dates are not found when pulling the data.
 
 -   Store the urls into a text file so that time no longer has to be wasted searching for the correct url (just make the urls variable in the "urls-execute" section a vector of the contents of the file containing urls).
 
--   Store the urls in a named vector for easy debugging and identification of repeated values (the date should be the vector's name)
-
-
 -   Improve the models (particularly the linear models)
 
--   Simplify the cleaning script--it's a hot mess!
+-   Simplify the cleaning section--it's a hot mess!
 
 # How It Works
 
-To collect the data, I will first check whether the webpage text requires "\n" or "\r" as its delimiter. How do you do that? I'm glad you asked. I will do a strsplit() on the text data with "\n" as the delimiter. If the length of the resulting list is less than 30, I will try again using "\r" as the delimiter. If neither work, the algorithm moves onto the next market report. Most market reports are empty.
+The collection() function follows these steps:
 
-Once we have a market report, we determine whether the market report is a La Junta market report by searching for 'la junta' in the text.
+-   Loop through a set number of Winter Livestock __urls__ and extract the text of the section of the document containing the data.
 
-After that, we extract the date from the text, remove the heading, remove information that is not about a sale, extract the buyer name and parse it together with the rest of the sale info, save everything to a data frame, then write the data frame to a csv. SAVE A COPY OF THIS CSV FILE TO ANOTHER FOLDER SO THAT YOU DON'T HAVE TO RE-RUN THE collection() FUNCTION IF THE CLEANING CHUNK HAS PROBLEMS.
+-   Determine the __delimiter__ to split the text into a list. _If neither delimiter works, skip to the next iteration of the loop._
+
+-   Determine whether the market report is a La Junta market report by searching for 'la junta co' in the text. _If the text is an internet video auction for la junta, it will be ignored. Non La Junta market reports are ignored. Both of these cases skip to the next iteration of the loop._
+
+-   Determine the __date__ of the market report. There are four cases for this, and the last case just adds one week to the previous sale in case the other methods failed. Check each one to understand how the date is determined.
+
+-   Determine which entries have the __sales data__. In the code, this is marked off under the "Header Removal with Keywords" and "Removing Unwanted Sections" sections.
+
+-   Identify the __buyer's name__, and add it to the sales that buyer made, but a name was not provided.
+
+-   Make a __data frame__ and separate the values into different columns.
+
+-   Write to a __csv__. We may save a 'before cleaning' copy for testing the cleaning script.
 
 Once we have a csv file, we clean it. Basically, this means you become best friends with stringr and abuse regex until you can only understand your code via the comments.
 
