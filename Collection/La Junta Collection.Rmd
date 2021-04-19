@@ -251,7 +251,7 @@ collection <- function(urls){
     # Header Removal with Keywords ------------------------------------------------------
     # A set of keywords designed to remove heading information
     # and other information we are not interested in observing
-    keywords <- "\\s+sold|\\s+sale|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
+    keywords <- "\\s+sold|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
     
     
     # Removes headings and unrelated information from the data
@@ -816,16 +816,17 @@ lajunta %>%
 
 
 # REPROD -__-__-__-__-__-__-__-__-__-__-
+# see any patterns?
+lajunta %>% 
+  select(Type, Weight, Reprod, URL) %>% 
+  filter(is.na(Reprod)) %>% 
+  as.data.frame()
+
 # You can see the distribution of missing Reprod values
 lajunta %>% 
   filter(is.na(Reprod)) %>% 
   ggplot() +
   geom_col(mapping = aes(x = Weight, y = Price))
 
-# see any patterns?
-lajunta %>% 
-  select(Type, Weight, Reprod, URL) %>% 
-  filter(is.na(Reprod)) %>% 
-  as.data.frame()
 
 ```
