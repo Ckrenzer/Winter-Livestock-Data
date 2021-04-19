@@ -141,16 +141,16 @@ collection <- function(urls){
     # Determining location (La Junta) -------------------------
     # If we've made it this far, that means that there is information about a market report on the webpage.
     # We now need to determine whether this market report is for La Junta, CO.
-    # This shouldn't be too hard. We can assume that "La Junta" will not appear in non-La Junta, CO market reports. Conversely, if we find "la junta" anywhere in the text, then we found a La Junta market report.
+    # This shouldn't be too hard. We can assume that "La Junta CO" will not appear in non-La Junta, CO market reports. Conversely, if we find "la junta co" anywhere in the text, then we found a La Junta market report.
     
     
     # making all the text lowercase (to avoid the "la junta" != "La Junta" problem)
     livestock_data <- str_to_lower(livestock_data)
     
-    # Now we can search for "la junta" in the text
+    # Now we can search for "la junta, co" in the text
     if(!str_detect(livestock_data, pattern = "la\\s*junta,*\\s*co")){
       
-      # If "la junta" is not found in the data, that means that this is not a La Junta market report--skip to the next iteration of the loop.
+      # If "la junta co" is not found in the data, that means that this is not a La Junta market report--skip to the next iteration of the loop.
       next
     }
     
