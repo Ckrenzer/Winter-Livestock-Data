@@ -39,4 +39,4 @@ The collection files have been replaced by a more comprehensive Rmd file. This R
 "La Junta Collection.Rmd" no longer requires you to run all of collection() to update one week's worth of data.
 
 ### UPDATE 4/18/2021
-The collection() function is now better at identifying the sales data in the market reports.
+The collection() function is now better at identifying the sales data in the market reports. About 6000 new entries of historical data are available.
