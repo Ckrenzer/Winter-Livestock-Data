@@ -1,0 +1,44 @@
+---
+title: "Further Exploration"
+author: "Connor Krenzer"
+date: "4/20/2021"
+output: html_document
+---
+
+
+# Introduction
+
+The other files were getting pretty long, and I want to have a separate location to examine different parts of the data. I am happy with the organization of `La Junta Collection.Rmd`, but `La Junta Modeling.Rmd` and `La Junta Predictions.Rmd` seem like black boxes.
+
+
+```{r setup-packages-data, include = FALSE}
+
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "hide",
+                      error = F,
+                      warning = F,
+                      message = F)
+
+
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork)
+
+
+# Reading in the file and removing the URL column
+lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
+                    col_types = cols(Date = "D",
+                                     Buyer = col_factor(),
+                                     Quantity = col_double(),
+                                     Type = col_factor(),
+                                     Weight = col_double(),
+                                     Price = col_double(),
+                                     Reprod = col_factor())) %>% 
+  dplyr::select(-URL)
+
+```
+
+
+
+
+
+
