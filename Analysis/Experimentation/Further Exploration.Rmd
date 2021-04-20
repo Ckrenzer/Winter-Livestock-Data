@@ -10,6 +10,14 @@ output: html_document
 
 The other files were getting pretty long, and I want to have a separate location to examine different parts of the data. I am happy with the organization of `La Junta Collection.Rmd`, but `La Junta Modeling.Rmd` and `La Junta Predictions.Rmd` seem like black boxes.
 
+In `La Junta Modeling.Rmd`, I just threw one model or graph after the other until I was happy throwing models at the data. The write-ups were nice, but they were mostly classification models. Classification models aren't all that helpful now that my scraping algorithm misses few values.
+
+My initial goal for `La Junta Predictions.Rmd` was to make a nice overview of the data. It served that purpose well, but the names of the files are getting confusing. I have a better idea of the relevant questions to ask from this dataset, so new (very similar files) might be created in the future to find more pertinent answers.
+
+The classification models helped me get a better grasp of the cattle categories, so now the most important questions should be asked. _How can we effectively predict the price?_
+
+This file, and others in the Experimentation folder, are meant to dive deeper into the data and look for trends.
+
 
 ```{r setup-packages-data, include = FALSE}
 
