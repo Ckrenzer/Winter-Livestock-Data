@@ -63,6 +63,7 @@ lajunta <- read_csv(paste0("https://raw.githubusercontent.com/",
                                      Type = col_character(),
                                      Weight = col_double(),
                                      Price = col_double(),
+                                     URL =  col_character(),
                                      Reprod = col_character()))
 
 # Know that I only used paste0() on the url
