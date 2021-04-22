@@ -680,6 +680,7 @@ I have been changing the URLs around to find different data, and the market repo
 #urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
 #the most recent market report
+#NOTE: the URL column will not contain the market report number!!!
 urls <- "http://www.winterlivestock.com/lajunta.php"
 
 # No need to save the output--this function writes to a csv file...
@@ -926,6 +927,22 @@ Of course, we want to make sure everything looks good, no? This section identifi
 ```{r testing, eval = FALSE}
 
 lajunta <- read_csv("La Junta Market Reports.csv")
+
+
+
+# finding market reports using the most recent market report instead of the permalink.
+lajunta %>% 
+  filter(URL == "http://www.winterlivestock.com/lajunta.php") %>% 
+  as.data.frame()
+
+# to fix, pull the url and add it to the right hand side of the following statement:
+PERMANENT_URL_LINK <- "http://www.winterlivestock.com/lajunta.php?reportID=13396#marketreport"
+
+lajunta$URL[which(lajunta$URL == "http://www.winterlivestock.com/lajunta.php")] <- PERMANENT_URL_LINK
+
+
+
+
 
 
 # finds counts of all types--good for finding how many types are in the data
