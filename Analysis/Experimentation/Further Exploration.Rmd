@@ -83,13 +83,9 @@ q1 / q2
 
 ```{r Simple moving average}
 
-
 #MAKE THIS A FUNCTION
-steers <- lajunta %>% 
-  filter(Reprod == "str")
-
-
-weekly_avg <- steers %>% 
+weekly_avg <- lajunta %>% 
+  filter(Reprod == "str") %>% 
   group_by(Date) %>% 
   summarize("mean_price" = mean(Price))
 
@@ -98,6 +94,36 @@ for(i in 5:nrow(weekly_avg)){
    avg[(i-5)] <- mean(weekly_avg$mean_price[(i-4):i])
   
 }
+
+
+
+
+
+
+
+
+
+simple_moving_average <- function(df, reprod_status, variable_name, n){
+  weekly_avg <- df %>% 
+    filter(Reprod == reprod_status) %>%  
+    group_by(Date) %>% 
+    summarize("mean_price" = mean({{variable_name}}))
+  
+  avg <- numeric(nrow(weekly_avg) - n)
+  for(i in n:nrow(weekly_avg)){
+    avg[(i-n)] <- mean(weekly_avg$mean_price[(i-(n-1)):i])
+    
+  }
+  
+  return(avg)
+  
+}#end of simple_moving_average()
+
+
+a <- simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 5)
+
+
+
 
 
 
