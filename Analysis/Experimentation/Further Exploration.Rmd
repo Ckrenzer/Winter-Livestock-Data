@@ -115,7 +115,7 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
 ```{r moving average plots}
 
 # steers
-simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 5) %>% 
+simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
   ggtitle("Steer Price SMA for La Junta, CO Sale Barn") +
