@@ -94,7 +94,7 @@ q1 <- lajunta %>%
 q2 <-  lajunta %>%  
   filter(Reprod %in% c("bull", "cow")) %>% 
   group_by(Date) %>% 
-  summarize(Price = mean(Price) , Reprod) %>% 
+  summarize(Price = mean(Price), Reprod) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Date, y = Price)) +
   geom_line(mapping = aes(x = Date, y = Price)) +

@@ -49,4 +49,61 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
 
 
 
+```{r prices over time}
+
+# This code was taken from 'La Junta Predictions.Rmd'
+
+# Price changes over time
+q1 <- lajunta %>%  
+  filter(Reprod %in% c("str", "hfr")) %>% 
+  group_by(Date) %>% 
+  summarize(Price = mean(Price) , Reprod) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Date, y = Price)) +
+  geom_line(mapping = aes(x = Date, y = Price)) +
+  facet_wrap(~Reprod) +
+  ggtitle("Price Changes Over Time") +
+  theme_dark()
+
+
+q2 <-  lajunta %>%  
+  filter(Reprod %in% c("bull", "cow")) %>% 
+  group_by(Date) %>% 
+  summarize(Price = mean(Price), Reprod) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Date, y = Price)) +
+  geom_line(mapping = aes(x = Date, y = Price)) +
+  facet_wrap(~Reprod) +
+  theme_dark()
+
+# using patchwork's "/" operator
+q1 / q2
+
+```
+
+```{r Simple moving average}
+
+
+#MAKE THIS A FUNCTION
+steers <- lajunta %>% 
+  filter(Reprod == "str")
+
+
+weekly_avg <- steers %>% 
+  group_by(Date) %>% 
+  summarize("mean_price" = mean(Price))
+
+avg <- numeric(nrow(weekly_avg) - 5)
+for(i in 5:nrow(weekly_avg)){
+   avg[(i-5)] <- mean(weekly_avg$mean_price[(i-4):i])
+  
+}
+
+
+
+
+
+
+
+```
 
