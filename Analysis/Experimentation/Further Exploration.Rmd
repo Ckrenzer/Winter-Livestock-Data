@@ -110,12 +110,17 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
     summarize("mean_price" = mean({{variable_name}}))
   
   avg <- numeric(nrow(weekly_avg) - n)
+  last_date_in_period <- character(nrow(weekly_avg) - n)
   for(i in n:nrow(weekly_avg)){
     avg[(i-n)] <- mean(weekly_avg$mean_price[(i-(n-1)):i])
+    last_date_in_period[i-n] <- as.character(weekly_avg$Date[i])
     
   }
+  last_date_in_period <- as.Date(last_date_in_period)
   
-  return(avg)
+  sma_results <- data.frame(Date = last_date_in_period, Avg_Price = avg)
+  
+  return(sma_results)
   
 }#end of simple_moving_average()
 
