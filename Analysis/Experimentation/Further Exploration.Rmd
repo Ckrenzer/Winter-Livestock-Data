@@ -83,26 +83,6 @@ q1 / q2
 
 ```{r Simple moving average}
 
-#MAKE THIS A FUNCTION
-weekly_avg <- lajunta %>% 
-  filter(Reprod == "str") %>% 
-  group_by(Date) %>% 
-  summarize("mean_price" = mean(Price))
-
-avg <- numeric(nrow(weekly_avg) - 5)
-for(i in 5:nrow(weekly_avg)){
-   avg[(i-5)] <- mean(weekly_avg$mean_price[(i-4):i])
-  
-}
-
-
-
-
-
-
-
-
-
 simple_moving_average <- function(df, reprod_status, variable_name, n){
   weekly_avg <- df %>% 
     filter(Reprod == reprod_status) %>%  
@@ -124,15 +104,57 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
   
 }#end of simple_moving_average()
 
-
-a <- simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 5)
-
+```
 
 
 
 
 
 
+
+```{r moving average plots}
+
+# steers
+simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 5) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+  ggtitle("Steer Price SMA for La Junta, CO Sale Barn") +
+  xlab("Final Date in Period") +
+  ylab("Average Price") +
+  theme_minimal()
+
+
+
+# heifers
+simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price, n = 5) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+  ggtitle("Heifer Price SMA for La Junta, CO Sale Barn") +
+  xlab("Final Date in Period") +
+  ylab("Average Price") +
+  theme_minimal()
+
+
+
+# cows
+simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price, n = 5) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+  ggtitle("Cow Price SMA for La Junta, CO Sale Barn") +
+  xlab("Final Date in Period") +
+  ylab("Average Price") +
+  theme_minimal()
+
+
+
+# bulls
+simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Price, n = 5) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+  ggtitle("Bull Price SMA for La Junta, CO Sale Barn") +
+  xlab("Final Date in Period") +
+  ylab("Average Price") +
+  theme_minimal()
 
 
 
