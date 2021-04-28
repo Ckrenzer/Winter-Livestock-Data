@@ -679,6 +679,9 @@ I have been changing the URLs around to find different data, and the market repo
 # This parses together different market report IDs and stores them in a vector
 #urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
+# the last-used market report URL
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13420#marketreport"
+
 #the most recent market report
 #NOTE: the URL column will not contain the market report number!!!
 urls <- "http://www.winterlivestock.com/lajunta.php"
@@ -701,9 +704,6 @@ If you have trouble reading this csv file, click on Tools \> Global Options \> R
 A copy of the csv file will be created so we don't have to rerun the collection() function should the cleaning chunk need updating.
 
 ```{r cleaning, eval = FALSE}
-
-
-
 
 # Step 0: save a copy of the uncleaned file if we don't already have one!
 if(!file.exists("La Junta Market Reports (before cleaning).csv")){
@@ -925,6 +925,7 @@ write_csv(x = lajunta,
 Of course, we want to make sure everything looks good, no? This section identifies problem areas in the file.
 
 ```{r testing, eval = FALSE}
+lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
 
 lajunta <- read_csv("La Junta Market Reports.csv")
 
@@ -936,7 +937,7 @@ lajunta %>%
   as.data.frame()
 
 # to fix, pull the url and add it to the right hand side of the following statement:
-PERMANENT_URL_LINK <- "http://www.winterlivestock.com/lajunta.php?reportID=13396#marketreport"
+PERMANENT_URL_LINK <- "http://www.winterlivestock.com/lajunta.php?reportID=13420#marketreport"
 
 lajunta$URL[which(lajunta$URL == "http://www.winterlivestock.com/lajunta.php")] <- PERMANENT_URL_LINK
 
