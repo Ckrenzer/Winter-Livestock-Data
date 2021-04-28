@@ -17,6 +17,8 @@ Some improvements that could be made in the future are the following:
 
 -   Check whether you still need the remove.file() call in this document.
 
+-   Check file.create() and write.csv() logic when adding new data to the dataset.
+
 -   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
 
 -   Store the urls into a text file so that time no longer has to be wasted searching for the correct url (just make the urls variable in the "urls-execute" section a vector of the contents of the file containing urls).
