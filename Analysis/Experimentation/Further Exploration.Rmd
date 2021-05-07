@@ -5,18 +5,29 @@ date: "4/20/2021"
 output: html_document
 ---
 
+# Exposition
 
-# Introduction
+
+I now plan on making this file a place to work with price prediction--mostly time series, but some other metrics would be interesting to explore too. Perhaps the estimates from time series could be compared to the estimates to linear models (and others!).
+
+
+
 
 The other files were getting pretty long, and I want to have a separate location to examine different parts of the data. I am happy with the organization of `La Junta Collection.Rmd`, but `La Junta Modeling.Rmd` and `La Junta Predictions.Rmd` seem like black boxes.
 
-In `La Junta Modeling.Rmd`, I just threw one model or graph after the other until I was happy throwing models at the data. The write-ups were nice, but they were mostly classification models. Classification models aren't all that helpful now that my scraping algorithm misses few values.
+In `La Junta Modeling.Rmd`, I just threw one model or graph after the other until I was happy throwing models at the data. The write-ups were nice, but they were mostly classification models. Classification models aren't all that helpful now that my scraping algorithm misses few values. Maybe that file should stay the way it is, just get a rename to something indicating what it does (i.e. 'Classification').
 
 My initial goal for `La Junta Predictions.Rmd` was to make a nice overview of the data. It served that purpose well, but the names of the files are getting confusing. I have a better idea of the relevant questions to ask from this dataset, so new (very similar files) might be created in the future to find more pertinent answers.
 
 The classification models helped me get a better grasp of the cattle categories, so now the most important questions should be asked. _How can we effectively predict the price?_
 
 This file, and others in the Experimentation folder, are meant to dive deeper into the data and look for trends.
+
+
+
+
+# Introduction
+
 
 
 ```{r setup-packages-data, include = FALSE}
@@ -49,7 +60,7 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
 
 
 
-```{r prices over time}
+```{r prices over time, results = "show"}
 
 # This code was taken from 'La Junta Predictions.Rmd'
 
@@ -80,6 +91,13 @@ q2 <-  lajunta %>%
 q1 / q2
 
 ```
+
+
+
+# Simple Moving Average
+
+I am sure someone wrote a fine package with functions calculating the simple moving average, but let's just use the one I wrote below. We can use it to get a feel for where the market is going.
+
 
 ```{r simple moving average}
 
@@ -115,7 +133,7 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
 
 
 
-```{r moving average plots}
+```{r moving average plots, results = "show"}
 
 # steers
 simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 52) %>% 
@@ -162,4 +180,28 @@ simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Pric
 
 
 ```
+
+
+
+
+We can see the market is on an upward trajectory from lows of 2020. Whether theses gains will continue beyond the recovery point remains a question only time will tell. But, for now anyway, we see sales prices increasing. 
+
+
+# ARIMA
+
+Let's use an ARIMA model to predict the sales price of the different reproductive statuses of cattle. I'll let someone write the functions for me this time!
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
 
