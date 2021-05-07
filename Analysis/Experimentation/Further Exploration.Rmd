@@ -40,7 +40,12 @@ knitr::opts_chunk$set(echo = FALSE,
 
 
 if(!require("pacman")) install.packages("pacman")
+# General Packages
 pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork)
+
+# ARIMA Packages
+pacman::p_load(forecast, tseries)
+
 
 
 # Reading in the file and removing the URL column
@@ -60,7 +65,7 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
 
 
 
-```{r prices over time, results = "show"}
+```{r prices over time, echo = FALSE, results = "show"}
 
 # This code was taken from 'La Junta Predictions.Rmd'
 
@@ -89,6 +94,10 @@ q2 <-  lajunta %>%
 
 # using patchwork's "/" operator
 q1 / q2
+
+
+# Removing variables we no longer need from the global enivronment
+rm(q1, q2)
 
 ```
 
@@ -133,51 +142,53 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
 
 
 
-```{r moving average plots, results = "show"}
+```{r moving average plots, echo = FALSE, results = "show"}
 
 # steers
-simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 52) %>% 
+steer_sma_plot <- simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
-  ggtitle("Steer Price SMA for La Junta, CO Sale Barn") +
+  ggtitle("Steer") +
   xlab("Final Date in Period") +
   ylab("Average Price") +
   theme_minimal()
-
 
 
 # heifers
-simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price, n = 52) %>% 
+heifer_sma_plot <- simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
-  ggtitle("Heifer Price SMA for La Junta, CO Sale Barn") +
+  ggtitle("Heifer") +
   xlab("Final Date in Period") +
   ylab("Average Price") +
   theme_minimal()
-
 
 
 # cows
-simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price, n = 52) %>% 
+cow_sma_plot <- simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
-  ggtitle("Cow Price SMA for La Junta, CO Sale Barn") +
+  ggtitle("Cow") +
   xlab("Final Date in Period") +
   ylab("Average Price") +
   theme_minimal()
-
 
 
 # bulls
-simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Price, n = 52) %>% 
+bull_sma_plot <- simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
-  ggtitle("Bull Price SMA for La Junta, CO Sale Barn") +
+  ggtitle("Bull") +
   xlab("Final Date in Period") +
   ylab("Average Price") +
   theme_minimal()
 
 
+# Plotting the graphs in a grid
+steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = "The Simple Moving Average for the Previous 52 Weeks")
+
+# Removing variables we no longer need from the global environment
+rm(steer_sma_plot, heifer_sma_plot, cow_sma_plot, bull_sma_plot)
 
 ```
 
@@ -191,7 +202,15 @@ We can see the market is on an upward trajectory from lows of 2020. Whether thes
 
 Let's use an ARIMA model to predict the sales price of the different reproductive statuses of cattle. I'll let someone write the functions for me this time!
 
-```{r}
+```{r arima}
+
+
+
+
+
+
+
+
 
 ```
 
