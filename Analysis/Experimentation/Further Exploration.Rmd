@@ -63,7 +63,7 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
 
 
 
-
+To make this data time-series compatible, sales need to be grouped according to the date on which the sale took place. Therefore, the weekly values of the price are the median for that reproductive status (steers, heifers, etc.) at each sale. The median was chosen over the mean to reduce the chance that a few very expensive livestock can raise the average price higher than the rest of the cattle sold on the same date.
 
 ```{r prices over time, echo = FALSE, results = "show"}
 
@@ -206,22 +206,19 @@ Let's use an ARIMA model to predict the sales price of the different reproductiv
 
 ```{r data prep}
 
-# Storing the average sale price of steers into a variable
+# Storing the average sale price of each reproductive status into an object
 avg_steer_prices <- filter(lajunta, Reprod == "str") %>% 
   group_by(Date) %>% 
   summarize("median_price" = median(Price))
 
-# Storing the average sale price of heifers into a variable
 avg_heifer_prices <- filter(lajunta, Reprod == "hfr") %>% 
   group_by(Date) %>% 
   summarize("median_price" = median(Price))
 
-# Storing the average sale price of cows into a variable
 avg_cow_prices <- filter(lajunta, Reprod == "cow") %>% 
   group_by(Date) %>% 
   summarize("median_price" = median(Price))
 
-# Storing the average sale price of bulls into a variable
 avg_bull_prices <- filter(lajunta, Reprod == "bull") %>% 
   group_by(Date) %>% 
   summarize("median_price" = median(Price))
@@ -231,10 +228,85 @@ avg_bull_prices <- filter(lajunta, Reprod == "bull") %>%
 
 # Making the price a time-series object with the stats package's ts()
 # and checking for outliers with forecast's tsclean()
-avg_steer_prices$median_price <- tsclean(ts(avg_steer_prices$median_price))
-avg_heifer_prices$median_price <- tsclean(ts(avg_heifer_prices$median_price))
-avg_cow_prices$median_price <- tsclean(ts(avg_cow_prices$median_price))
-avg_bull_prices$median_price <- tsclean(ts(avg_bull_prices$median_price))
+avg_steer_prices <- avg_steer_prices %>% 
+  mutate("cleaned_price" = tsclean(ts(avg_steer_prices$median_price)))
+
+avg_heifer_prices<- avg_heifer_prices %>% 
+  mutate("cleaned_price" = tsclean(ts(avg_heifer_prices$median_price)))
+
+avg_cow_prices <- avg_cow_prices %>% 
+  mutate("cleaned_price" = tsclean(ts(avg_cow_prices$median_price)))
+
+avg_bull_prices <- avg_bull_prices %>% 
+  mutate("cleaned_price" = tsclean(ts(avg_bull_prices$median_price)))
+
+
+
+# Making columns containing moving averages
+avg_steer_prices <- avg_steer_prices %>% 
+  mutate("ma_2mo" = ma(avg_steer_prices$cleaned_price, order=8),
+         "ma_6mo" = ma(avg_steer_prices$cleaned_price, order=26))
+
+avg_heifer_prices <- avg_heifer_prices %>% 
+  mutate("ma_2mo" = ma(avg_heifer_prices$cleaned_price, order=8),
+         "ma_6mo" = ma(avg_heifer_prices$cleaned_price, order=26))
+
+avg_cow_prices <- avg_cow_prices %>% 
+  mutate("ma_2mo" = ma(avg_cow_prices$cleaned_price, order=8),
+         "ma_6mo" = ma(avg_cow_prices$cleaned_price, order=26))
+
+avg_bull_prices <- avg_bull_prices %>% 
+  mutate("ma_2mo" = ma(avg_bull_prices$cleaned_price, order=8),
+         "ma_6mo" = ma(avg_bull_prices$cleaned_price, order=26))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ggplot(avg_steer_prices) + 
+  #geom_line(aes(x = Date, y = median_price, color = "Act")) +
+  geom_line(aes(x = Date, y = ma_2mo,   color = "2mo"))  +
+  #geom_line(aes(x = Date, y = ma_6mo, color = "6mo"))  +
+  ylab('Price') 
+
+ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) 
+str(avg_steer_prices)
+
+
+
+decomp <- stl(ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) , s.window="periodic")
+deseasonal_cnt <- seasadj(decomp)
+plot(decomp) 
+
+
+decomp
+
+
+
+
+# Augmented Dickey-Fuller test for stationary data
+adf.test(ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) )
+
+
+
+
+
+
+
+Acf(ts(na.omit(avg_steer_prices$cleaned_price)))
+
+Pacf(ts(na.omit(avg_steer_prices$cleaned_price)))
 
 ```
 
