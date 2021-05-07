@@ -81,7 +81,7 @@ q1 / q2
 
 ```
 
-```{r Simple moving average}
+```{r simple moving average}
 
 simple_moving_average <- function(df, reprod_status, variable_name, n){
   weekly_avg <- df %>% 
@@ -90,7 +90,10 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
     summarize("mean_price" = mean({{variable_name}}))
   
   avg <- numeric(nrow(weekly_avg) - n)
+  
+  #pre-allocating space in a vector
   last_date_in_period <- character(nrow(weekly_avg) - n)
+  
   for(i in n:nrow(weekly_avg)){
     avg[(i-n)] <- mean(weekly_avg$mean_price[(i-(n-1)):i])
     last_date_in_period[i-n] <- as.character(weekly_avg$Date[i])
@@ -126,7 +129,7 @@ simple_moving_average(df = lajunta, reprod_status = "str", variable_name = Price
 
 
 # heifers
-simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price, n = 5) %>% 
+simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
   ggtitle("Heifer Price SMA for La Junta, CO Sale Barn") +
@@ -137,7 +140,7 @@ simple_moving_average(df = lajunta, reprod_status = "hfr", variable_name = Price
 
 
 # cows
-simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price, n = 5) %>% 
+simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
   ggtitle("Cow Price SMA for La Junta, CO Sale Barn") +
@@ -148,7 +151,7 @@ simple_moving_average(df = lajunta, reprod_status = "cow", variable_name = Price
 
 
 # bulls
-simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Price, n = 5) %>% 
+simple_moving_average(df = lajunta, reprod_status = "bull", variable_name = Price, n = 52) %>% 
   ggplot() +
   geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
   ggtitle("Bull Price SMA for La Junta, CO Sale Barn") +
