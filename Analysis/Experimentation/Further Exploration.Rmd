@@ -72,24 +72,26 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
 # Price changes over time
 q1 <- lajunta %>%  
   filter(Reprod %in% c("str", "hfr")) %>% 
-  group_by(Date) %>% 
-  summarize(Price = mean(Price) , Reprod) %>% 
+  group_by(Date, Reprod) %>% 
+  summarize(Price = median(Price)) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Date, y = Price)) +
   geom_line(mapping = aes(x = Date, y = Price)) +
   facet_wrap(~Reprod) +
   ggtitle("Price Changes Over Time") +
+  ylab("Median Price") +
   theme_dark()
 
 
 q2 <-  lajunta %>%  
   filter(Reprod %in% c("bull", "cow")) %>% 
-  group_by(Date) %>% 
-  summarize(Price = mean(Price), Reprod) %>% 
+  group_by(Date, Reprod) %>% 
+  summarize(Price = median(Price)) %>% 
   ggplot() +
   geom_point(mapping = aes(x = Date, y = Price)) +
   geom_line(mapping = aes(x = Date, y = Price)) +
   facet_wrap(~Reprod) +
+  ylab("Median Price") +
   theme_dark()
 
 # using patchwork's "/" operator
@@ -202,10 +204,43 @@ We can see the market is on an upward trajectory from lows of 2020. Whether thes
 
 Let's use an ARIMA model to predict the sales price of the different reproductive statuses of cattle. I'll let someone write the functions for me this time!
 
+```{r data prep}
+
+# Storing the average sale price of steers into a variable
+avg_steer_prices <- filter(lajunta, Reprod == "str") %>% 
+  group_by(Date) %>% 
+  summarize("median_price" = median(Price))
+
+# Storing the average sale price of heifers into a variable
+avg_heifer_prices <- filter(lajunta, Reprod == "hfr") %>% 
+  group_by(Date) %>% 
+  summarize("median_price" = median(Price))
+
+# Storing the average sale price of cows into a variable
+avg_cow_prices <- filter(lajunta, Reprod == "cow") %>% 
+  group_by(Date) %>% 
+  summarize("median_price" = median(Price))
+
+# Storing the average sale price of bulls into a variable
+avg_bull_prices <- filter(lajunta, Reprod == "bull") %>% 
+  group_by(Date) %>% 
+  summarize("median_price" = median(Price))
+
+
+
+
+# Making the price a time-series object with the stats package's ts()
+# and checking for outliers with forecast's tsclean()
+avg_steer_prices$median_price <- tsclean(ts(avg_steer_prices$median_price))
+avg_heifer_prices$median_price <- tsclean(ts(avg_heifer_prices$median_price))
+avg_cow_prices$median_price <- tsclean(ts(avg_cow_prices$median_price))
+avg_bull_prices$median_price <- tsclean(ts(avg_bull_prices$median_price))
+
+```
+
+
+
 ```{r arima}
-
-
-
 
 
 
