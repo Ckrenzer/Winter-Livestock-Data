@@ -84,8 +84,8 @@ q1 <- lajunta %>%
   group_by(Date, Reprod) %>% 
   summarize(Price = median(Price)) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price)) +
-  geom_line(mapping = aes(x = Date, y = Price)) +
+  geom_point(mapping = aes(x = Date, y = Price), size = .5) +
+  geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
   facet_wrap(~Reprod) +
   ggtitle("Price Changes Over Time") +
   theme_dark()
@@ -96,8 +96,8 @@ q2 <-  lajunta %>%
   group_by(Date, Reprod) %>% 
   summarize(Price = median(Price)) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price)) +
-  geom_line(mapping = aes(x = Date, y = Price)) +
+  geom_point(mapping = aes(x = Date, y = Price), size = .5) +
+  geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
   facet_wrap(~Reprod) +
   theme_dark()
 
