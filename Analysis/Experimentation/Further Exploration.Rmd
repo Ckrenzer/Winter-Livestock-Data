@@ -226,20 +226,6 @@ The data prep follows these steps:
 
 ```{r data prep}
 
-# STEP 0
-# Making a date vector helpful for plotting in ggplot later
-dates <- as.Date(character(0))
-
-for(num_weeks in 1:26){
-  
-  dates[num_weeks] <- clock::add_weeks(avg_steer_prices$Date[avg_steer_prices$Date == max(avg_steer_prices$Date)], num_weeks)
-  
-}#end of for loop
-
-
-
-
-
 # STEP 1
 # Storing the average sale price of each reproductive status into an object
 avg_steer_prices <- filter(lajunta, Reprod == "str") %>% 
@@ -395,7 +381,7 @@ cat("The first two differences should be used.")
 # PARAMETERS
 heifer_lags <- 1
 
-heifer_diff_deg <- 2
+heifer_diff_deg <- 1
 
 # The series displays a sharp autocorrelative cutoff,
 # so one will be added to the moving average term, q
@@ -407,7 +393,7 @@ heifer_ma_term <- 2
 
 # Making a new column with containing the values after differencing.
 avg_heifer_prices <- avg_heifer_prices %>% 
-  mutate("seas_adj_diff" = c(rep(NA, 2), diff(avg_heifer_prices$seas_adj, differences = 2)))
+  mutate("seas_adj_diff" = c(rep(NA, 1), diff(avg_heifer_prices$seas_adj, differences = 1)))
 
 
 # The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
@@ -439,7 +425,7 @@ cat("The first difference should be used.")
 # PARAMETERS
 cow_lags <- 1
 
-cow_diff_deg <- 2
+cow_diff_deg <- 1
 
 # The series displays a sharp autocorrelative cutoff,
 # so one will be added to the moving average term, q
@@ -482,7 +468,7 @@ cat("The first difference should be used.")
 # PARAMETERS
 bull_lags <- 1
 
-bull_diff_deg <- 2
+bull_diff_deg <- 1
 
 # The series displays a sharp autocorrelative cutoff,
 # so one will be added to the moving average term, q
@@ -503,6 +489,24 @@ adf.test(na.omit(avg_bull_prices$seas_adj_diff), alternative = "stationary")
 cat("The p-values on the Augmented Dickey-Fuller test are now significant. We have stationary data!")
 
 ```
+
+### Date Vector
+
+```{r}
+
+# STEP 0
+# Making a date vector helpful for plotting in ggplot later
+dates <- as.Date(character(0))
+
+for(num_weeks in 1:26){
+  
+  dates[num_weeks] <- clock::add_weeks(avg_steer_prices$Date[avg_steer_prices$Date == max(avg_steer_prices$Date)], num_weeks)
+  
+}#end of for loop
+
+```
+
+
 
 
 ## Model Fitting
@@ -533,6 +537,7 @@ steer_predictions <- as_tibble(steer_predictions) %>%
   mutate(Date = dates)
 
 
+# The six month forecast
 ggplot() +
   geom_line(data = avg_steer_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
   geom_ribbon(data = steer_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
@@ -548,11 +553,93 @@ ggplot() +
 
 
 
+And onto the heifer forecast:
+
+```{r heifer model fitting}
+
+# The steer model
+heifer_fit <- arima(avg_heifer_prices$seas_adj, order = c(heifer_lags, heifer_diff_deg, heifer_ma_term))
+
+# The predictions for the model, six months out.
+heifer_predictions <- forecast(heifer_fit, h = 26)
+
+# Adding in the date column for the six month forecast
+heifer_predictions <- as_tibble(heifer_predictions) %>% 
+  mutate(Date = dates)
+
+
+# The six month forecast
+ggplot() +
+  geom_line(data = avg_heifer_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
+  geom_ribbon(data = heifer_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
+              fill = "red") +
+  geom_ribbon(data = heifer_predictions, mapping = aes(x = Date, ymin = `Lo 80`, ymax = `Hi 80`), fill = "lightblue") +
+  geom_line(data = heifer_predictions, mapping = aes(x = Date, y = `Point Forecast`), color = "blue", size = 1) +
+  ggtitle("Seasonally Adjusted Six Month Forecast of Heifer Prices in La Junta, CO") +
+  xlab("Date") +
+  ylab("Price") +
+  theme_dark()
+
+```
 
 
 
 
+The cow forecast comes next:
+
+```{r cow model fitting}
+
+# The steer model
+cow_fit <- arima(avg_cow_prices$seas_adj, order = c(cow_lags, cow_diff_deg, cow_ma_term))
+
+# The predictions for the model, six months out.
+cow_predictions <- forecast(cow_fit, h = 26)
+
+# Adding in the date column for the six month forecast
+cow_predictions <- as_tibble(cow_predictions) %>% 
+  mutate(Date = dates)
 
 
+# The six month forecast
+ggplot() +
+  geom_line(data = avg_cow_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
+  geom_ribbon(data = cow_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
+              fill = "red") +
+  geom_ribbon(data = cow_predictions, mapping = aes(x = Date, ymin = `Lo 80`, ymax = `Hi 80`), fill = "lightblue") +
+  geom_line(data = cow_predictions, mapping = aes(x = Date, y = `Point Forecast`), color = "blue", size = 1) +
+  ggtitle("Seasonally Adjusted Six Month Forecast of Cow Prices in La Junta, CO") +
+  xlab("Date") +
+  ylab("Price") +
+  theme_dark()
+
+```
 
 
+How about the bull forecast?
+
+```{r bull model fitting}
+
+# The steer model
+bull_fit <- arima(avg_bull_prices$seas_adj, order = c(bull_lags, bull_diff_deg, bull_ma_term))
+
+# The predictions for the model, six months out.
+bull_predictions <- forecast(bull_fit, h = 26)
+
+# Adding in the date column for the six month forecast
+bull_predictions <- as_tibble(bull_predictions) %>% 
+  mutate(Date = dates)
+
+
+# The six month forecast
+ggplot() +
+  geom_line(data = avg_bull_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
+  geom_ribbon(data = bull_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
+              fill = "red") +
+  geom_ribbon(data = bull_predictions, mapping = aes(x = Date, ymin = `Lo 80`, ymax = `Hi 80`), fill = "lightblue") +
+  geom_line(data = bull_predictions, mapping = aes(x = Date, y = `Point Forecast`), color = "blue", size = 1) +
+  ggtitle("Seasonally Adjusted Six Month Forecast of Bull Prices in La Junta, CO") +
+  xlab("Date") +
+  ylab("Price") +
+  theme_dark()
+
+```
