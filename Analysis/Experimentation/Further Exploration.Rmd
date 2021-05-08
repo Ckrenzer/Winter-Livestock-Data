@@ -311,6 +311,8 @@ avg_bull_prices <- avg_bull_prices %>%
 ```
 
 
+## Differencing
+
 The next steps will be completed by reproductive status, since it makes the most sense to make decisions about the model one group at a time.
 
 If the p-value from the ADF test is not significant, the data needs to be made stationary. To do this, we must find an appropriate order of differencing, which can be found visually with the Pacf() function (or Acf() if using a multiplicative model).
@@ -427,25 +429,34 @@ cat("The p-values on the Augmented Dickey-Fuller test are now significant. We ha
 ```
 
 
-With all data stationary, we can now determine the parameters for the model. First, however, we can use the 
+## Model Fitting
+
+With all data stationary, we can now determine the parameters for the model. The __parameters__ for ARIMA models are the following:
+
+-   _p_: Specifies the number of __lags__ (previous terms) used in the model.
+
+-   _d_: Specifies the __degree of differencing__ in the integreated component. Differencing involves subtracting its current and previous values _d_ times. This is used to maintain the stationarity assumption.
+
+-   _q_: Specifies the __moving average component__, or the error of the model, as a combination of previous error terms. Determines the number of terms to include in the model.
+
+
+We could have just let R do all the work for us and used auto.arima() to fit the model for us, but it never hurts to build models from the ground up--a good learning exercise! Plus, doing the work manually allows us to tune the model to our liking.
 
 ```{r model order}
-
-ggplot(avg_steer_prices) + 
-  #geom_line(aes(x = Date, y = median_price, color = "Act")) +
-  #geom_line(aes(x = Date, y = ma_2mo,   color = "2mo"))  +
-  #geom_line(aes(x = Date, y = ma_6mo, color = "6mo"))  +
-  geom_line(aes(x = Daote, y = seas_adj, color = "adj")) +
-  ylab('Price') 
-
-
-
 
 fit <- forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26)
 
 tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals') 
 
 plot(forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26))
+
+
+
+# p d q
+
+
+arima(avg_steer_prices$seas_adj_diff, order=c(1,1,7))
+
 
 
 
