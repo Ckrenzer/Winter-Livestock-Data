@@ -336,12 +336,100 @@ avg_steer_prices <- avg_steer_prices %>%
 # The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
 # non-stationary data.
 adf.test(na.omit(avg_steer_prices$seas_adj_diff), alternative = "stationary")
+cat("The p-values on the Augmented Dickey-Fuller test are now significant. We have stationary data!")
 
 ```
 
 
 
-```{r arima}
+We now repeat the process for heifers:
+
+```{r heifer differencing, echo = FALSE, results = "show"}
+
+# STEP 5
+# Augmented Dickey-Fuller test for stationary data
+adf.test(ts(na.omit(avg_heifer_prices$seas_adj), frequency=8))
+cat("Fail to reject the null hypothesis--the data is non-stationary.")
+
+
+# This plot helps to determine the correct order of differencing.
+Pacf(ts(na.omit(avg_heifer_prices$seas_adj)))
+cat("The first two differences should be used.")
+
+
+# Making a new column with containing the values after differencing.
+avg_heifer_prices <- avg_heifer_prices %>% 
+  mutate("seas_adj_diff" = c(rep(NA, 2), diff(avg_heifer_prices$seas_adj, differences = 2)))
+
+
+# The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
+# non-stationary data.
+adf.test(na.omit(avg_heifer_prices$seas_adj_diff), alternative = "stationary")
+cat("The p-values on the Augmented Dickey-Fuller test are now significant. We have stationary data!")
+
+```
+
+
+
+We repeat the process again for cows:
+
+```{r cow differencing, echo = FALSE, results = "show"}
+
+# STEP 5
+# Augmented Dickey-Fuller test for stationary data
+adf.test(ts(na.omit(avg_cow_prices$seas_adj), frequency=8))
+cat("Fail to reject the null hypothesis--the data is non-stationary.")
+
+
+# This plot helps to determine the correct order of differencing.
+Pacf(ts(na.omit(avg_cow_prices$seas_adj)))
+cat("The first difference should be used.")
+
+
+# Making a new column with containing the values after differencing.
+avg_cow_prices <- avg_cow_prices %>% 
+  mutate("seas_adj_diff" = c(rep(NA, 1), diff(avg_cow_prices$seas_adj, differences = 1)))
+
+
+# The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
+# non-stationary data.
+adf.test(na.omit(avg_cow_prices$seas_adj_diff), alternative = "stationary")
+cat("The p-values on the Augmented Dickey-Fuller test are now significant. We have stationary data!")
+
+```
+
+
+We repeat the process once more for bullss:
+
+```{r bull differencing, echo = FALSE, results = "show"}
+
+# STEP 5
+# Augmented Dickey-Fuller test for stationary data
+adf.test(ts(na.omit(avg_bull_prices$seas_adj), frequency=8))
+cat("Fail to reject the null hypothesis--the data is non-stationary.")
+
+
+# This plot helps to determine the correct order of differencing.
+Pacf(ts(na.omit(avg_bull_prices$seas_adj)))
+cat("The first difference should be used.")
+
+
+# Making a new column with containing the values after differencing.
+avg_bull_prices <- avg_bull_prices %>% 
+  mutate("seas_adj_diff" = c(rep(NA, 1), diff(avg_bull_prices$seas_adj, differences = 1)))
+
+
+# The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
+# non-stationary data.
+adf.test(na.omit(avg_bull_prices$seas_adj_diff), alternative = "stationary")
+cat("The p-values on the Augmented Dickey-Fuller test are now significant. We have stationary data!")
+
+```
+
+
+With all data stationary, we can now determine the parameters for the model. First, however, we can use the 
+
+```{r model order}
 
 ggplot(avg_steer_prices) + 
   #geom_line(aes(x = Date, y = median_price, color = "Act")) +
@@ -351,8 +439,13 @@ ggplot(avg_steer_prices) +
   ylab('Price') 
 
 
-acf(
 
+
+fit <- forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26)
+
+tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals') 
+
+plot(forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26))
 
 
 
