@@ -112,17 +112,53 @@ These prices are rather consistent, too. There are virtually no outliers. The br
 
 ```{r linear models}
 
-steer_fit <- lm(data = lajunta, subset = Reprod == "str", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
+# Pooling steers with lightweight bulls,
+# since they sell similarly at auction
+steer_lm_data <- lajunta %>% 
+  filter(Reprod == "bull" | Reprod == "str", Weight < 1000)
 
-heifer_fit <- lm(data = lajunta, subset = Reprod == "hfr", formula = Price ~ Date + Quantity + poly(Weight, degree = 2))
+# Pulling data out to ensure
+# cows are not treated like heifers
+# at auction--also removes a few values
+# away from the clusters
+cow_lm_data <- lajunta %>% 
+  filter(Reprod == "cow", Weight > 700)
 
-# a 12th degree polynomial gives us an R-squared of .54, but I think that is due to overfitting
-cow_fit <- lm(data = lajunta, subset = Reprod == "cow", formula = Price ~ Date + poly(Weight, 3))
+# Pulling data out to ensure bulls
+# are not being treated like steers
+# at auction
+bull_lm_data <- lajunta %>% 
+  filter(Reprod == "bull", Weight > 1000)
 
-# a 6th degree polynomial gives an R-squared of .87, but I think that is due to overfitting
-# plus, our sample is small so we want to keep the number of predictors small
-bull_fit <- lm(data = lajunta, subset = Reprod == "bull", formula = Price ~ Date + poly(Weight, 2))
 
+
+# Fitting the models
+steer_fit <- lm(data = steer_lm_data,
+                formula = Price ~ Date +
+                  Quantity + poly(Weight, degree = 2))
+
+
+# Note that a manual subset was not made for heifers.
+heifer_fit <- lm(data = lajunta,
+                 subset = Reprod == "hfr",
+                 formula = Price ~ Date +
+                   Quantity + poly(Weight, degree = 2))
+
+
+# a 12th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting
+cow_fit <- lm(data = cow_lm_data,
+              formula = Price ~ Date +
+                poly(Weight, 3))
+
+
+# a 6th degree polynomial gave a higher
+# R-squared, but I think that is due to overfitting...
+# Our sample is small so we want to keep the
+# number of predictors small
+bull_fit <- lm(data = bull_lm_data,
+               formula = Price ~ Date +
+                 poly(Weight, 2))
 ```
 
 
