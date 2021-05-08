@@ -522,7 +522,6 @@ With all data stationary, we can now determine the parameters for the model. The
 
 We could have just let R do all the work for us and used auto.arima() to fit the model for us, but it never hurts to build models from the ground up--a good learning exercise! Plus, doing the work manually allows us to tune the model to our liking.
 
-We begin with the steer model:
 
 ```{r steer model fitting}
 
@@ -538,7 +537,7 @@ steer_predictions <- as_tibble(steer_predictions) %>%
 
 
 # The six month forecast
-ggplot() +
+steer_forecast <- ggplot() +
   geom_line(data = avg_steer_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
   geom_ribbon(data = steer_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
               fill = "red") +
@@ -553,9 +552,7 @@ ggplot() +
 
 
 
-And onto the heifer forecast:
-
-```{r heifer model fitting}
+```{r heifer model fitting, echo = FALSE}
 
 # The steer model
 heifer_fit <- arima(avg_heifer_prices$seas_adj, order = c(heifer_lags, heifer_diff_deg, heifer_ma_term))
@@ -569,7 +566,7 @@ heifer_predictions <- as_tibble(heifer_predictions) %>%
 
 
 # The six month forecast
-ggplot() +
+heifer_forecast <- ggplot() +
   geom_line(data = avg_heifer_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
   geom_ribbon(data = heifer_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
               fill = "red") +
@@ -584,10 +581,7 @@ ggplot() +
 
 
 
-
-The cow forecast comes next:
-
-```{r cow model fitting}
+```{r cow model fitting, echo = FALSE}
 
 # The steer model
 cow_fit <- arima(avg_cow_prices$seas_adj, order = c(cow_lags, cow_diff_deg, cow_ma_term))
@@ -601,7 +595,7 @@ cow_predictions <- as_tibble(cow_predictions) %>%
 
 
 # The six month forecast
-ggplot() +
+cow_forecast <- ggplot() +
   geom_line(data = avg_cow_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
   geom_ribbon(data = cow_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
               fill = "red") +
@@ -615,9 +609,8 @@ ggplot() +
 ```
 
 
-How about the bull forecast?
 
-```{r bull model fitting}
+```{r bull model fitting, echo = FALSE}
 
 # The steer model
 bull_fit <- arima(avg_bull_prices$seas_adj, order = c(bull_lags, bull_diff_deg, bull_ma_term))
@@ -631,7 +624,7 @@ bull_predictions <- as_tibble(bull_predictions) %>%
 
 
 # The six month forecast
-ggplot() +
+bull_forecast <- ggplot() +
   geom_line(data = avg_bull_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
   geom_ribbon(data = bull_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
               fill = "red") +
@@ -643,3 +636,21 @@ ggplot() +
   theme_dark()
 
 ```
+
+
+## ARIMA Results
+
+The moment we've all been waiting for. Where do these models say the La Junta market is going?
+
+```{r arima plots}
+
+steer_forecast
+
+heifer_forecast
+
+cow_forecast
+
+bull_forecast
+
+```
+
