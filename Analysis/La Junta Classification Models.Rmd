@@ -1,5 +1,5 @@
 ---
-title: "La Junta Models"
+title: "La Junta Classification Models"
 author: "Connor Krenzer"
 date: "2/7/2021"
 output:
