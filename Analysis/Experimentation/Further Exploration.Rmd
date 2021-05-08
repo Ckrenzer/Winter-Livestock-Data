@@ -492,7 +492,7 @@ cat("The p-values on the Augmented Dickey-Fuller test are now significant. We ha
 
 ### Date Vector
 
-```{r}
+```{r date vector}
 
 # STEP 0
 # Making a date vector helpful for plotting in ggplot later
