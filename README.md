@@ -3,6 +3,8 @@ Collects data from Winter Livestock La Junta Sale Tuesday reports each week and 
 
 Please note that this repository can only be updated after the folks over at Winter Livestock release their market reports, meaning there will be a few day's lag between the auction and new data in this repository.
 
+## UPDATES
+Major changes to this repo are listed with each update. I write these updates rather arbitrarily, but when something big changes, I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
 ### UPDATE 2/2/2021 ----------------------------------------------
 Winter Livestock changed their market report format for La Junta, CO. The "La Junta.R" script works well for market reports with the old format, in which the text looks well spaced with paragraphs on your browser. For those market reports that have no spacing between the values and look like one really long paragraph, use the "La Junta long format.R" script.
@@ -29,25 +31,32 @@ This repository is the first search result on Duck Duck Go for "winter livestock
 ### UPDATE 2/11/2021
 Updated the scraper so that you are no longer required to remove the csv file on your computer. Further, the cleaning script now arranges the data in chronological order.
 
+
 ### UPDATE 3/12/2021
 The collection files have been replaced by a more comprehensive Rmd file. This Rmd file is capable of going through different market report IDs and finding La Junta market reports--we can now collect historical data! The number of observations has increased threefold. About five percent of the data is missing the date value, and I am unsure whether the date simply wasn't provided or if my scraper is missing something.
+
 
 ### UPDATE 3/13/2021
 "La Junta Modeling.Rmd" now imputes missing values for the Reprod column using KNN.
 
+
 ### UPDATE 3/25/2021
 "La Junta Collection.Rmd" no longer requires you to run all of collection() to update one week's worth of data.
+
 
 ### UPDATE 4/18/2021-4/19/2021
 The collection() function is now better at identifying data in the market reports. About 6000 new entries of historical data are available. The collection() function is also capable of filtering out some repeat market reports (reducing repeated data).
 
 Be mindful that some dates may be estimated. In cases where the date could not be determined (see CASE 4 in the collection() function), one week is added to the date of the previous sale.
 
+
 ### UPDATE 5/7/2021-5/8/2021
-Now contains files performing ARIMA models on cattle prices.
+Now contains a file performing ARIMA models on cattle prices.
 
 The files have been reorganized, with the tests performed on the data making more intuitive sense.
 
-'La Junta Modeling.Rmd' has been renamed 'La Junta Classification Models.Rmd', 'La Junta Predictions.Rmd' has been renamed 'Overview.Rmd', and 'Further Exploration.Rmd' has been renamed 'La Junta Price Estimation.Rmd'--new explorations into this data will be made behind the scenes.
+'La Junta Modeling.Rmd' has been renamed 'La Junta Classification Models.Rmd'
+'La Junta Predictions.Rmd' has been renamed 'Overview.Rmd'
+'Further Exploration.Rmd' has been renamed 'La Junta Price Estimation.Rmd'
 
-When I create something interesting, it will be added to the repo. Random thoughts will be removed from the different files!
+New experiments with this data will be made behind the scenes. When I create something interesting, it will be added to the repo. Random thoughts will be exluded!
