@@ -10,6 +10,8 @@ output:
 
 # Introduction
 
+The classification models helped us get a better sense of the cattle categories, so now the most important question should be asked: _How can we effectively predict the price?_
+
 This document estimates the price of cattle in the La Junta sale barn.
 
 ```{r setup-packages-data, include = FALSE}

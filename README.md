@@ -53,7 +53,7 @@ Be mindful that some dates may be estimated. In cases where the date could not b
 ### UPDATE 5/7/2021-5/8/2021
 Now contains a file performing ARIMA models on cattle prices.
 
-The files have been reorganized, with the tests performed on the data making more intuitive sense.
+The files have been reorganized so that the file names clearly indicate the contents of the file.
 
 'La Junta Modeling.Rmd' has been renamed 'La Junta Classification Models.Rmd'
 'La Junta Predictions.Rmd' has been renamed 'Overview.Rmd'
