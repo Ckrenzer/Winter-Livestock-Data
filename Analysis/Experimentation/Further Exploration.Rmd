@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 if(!require("pacman")) install.packages("pacman")
 # General Packages
-pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork)
+pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork, clock)
 
 # ARIMA Packages
 pacman::p_load(forecast, tseries)
@@ -225,6 +225,20 @@ The data prep follows these steps:
 -   Fit and evaluate the model. __(order)__
 
 ```{r data prep}
+
+# STEP 0
+# Making a date vector helpful for plotting in ggplot later
+dates <- as.Date(character(0))
+
+for(num_weeks in 1:26){
+  
+  dates[num_weeks] <- clock::add_weeks(avg_steer_prices$Date[avg_steer_prices$Date == max(avg_steer_prices$Date)], num_weeks)
+  
+}#end of for loop
+
+
+
+
 
 # STEP 1
 # Storing the average sale price of each reproductive status into an object
@@ -506,20 +520,39 @@ We could have just let R do all the work for us and used auto.arima() to fit the
 
 ```{r model fitting}
 
-fit <- forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26)
+# The steer model
+steer_fit <- arima(avg_steer_prices$seas_adj, order = c(steer_lags, steer_diff_deg, steer_ma_term))
 
-tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals') 
+# The predictions for the model, six months out.
+steer_predictions <- forecast(steer_fit, h = 26)
 
-plot(forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26))
-
-
-
-# p d q
+steer_predictions <- as_tibble(steer_predictions) %>% 
+  mutate(Date = dates)
 
 
-arima(avg_steer_prices$seas_adj_diff, order=c(1, steer_diff_deg, steer_ma_term))
+steer_plotting_data
 
-arima(avg_steer_prices$seas_adj_diff, order=c(1, 1,1))
+steer_predictions
+
+dplyr::select(avg_steer_prices, Date, median_price) %>% 
+  mutate(`Lo 80` = NA, `Hi 80` = NA, `Lo 95` = NA, `Hi 95` = NA) %>% 
+  rbind(dplyr::select(steer_predictions, Date, "median_price" = `Point Forecast`, `Lo 80`, `Hi 80`, `Lo 95`, `Hi 95`))
+
+
+
+
+avg_steer_prices %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = median_price)) +
+  geom_area(mapping = aes(x = Date, ymin = steer_predictions$`Lo 80`, ymax = steer_predictions$`Hi 80`))
+
+
+
+
+as_tibble(steer_predictions)
+
+
+?geom_area
 
 
 ```
