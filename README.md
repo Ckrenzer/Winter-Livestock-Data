@@ -44,4 +44,10 @@ The collection() function is now better at identifying data in the market report
 Be mindful that some dates may be estimated. In cases where the date could not be determined (see CASE 4 in the collection() function), one week is added to the date of the previous sale.
 
 ### UPDATE 5/7/2021-5/8/2021
-Now contains files performing ARIMA models on cattle prices. Expect file reorganization soon.
+Now contains files performing ARIMA models on cattle prices.
+
+The files have been reorganized, with the tests performed on the data making more intuitive sense.
+
+'La Junta Modeling.Rmd' has been renamed 'La Junta Classification Models.Rmd', 'La Junta Predictions.Rmd' has been renamed 'Overview.Rmd', and 'Further Exploration.Rmd' has been renamed 'La Junta Price Estimation.Rmd'--new explorations into this data will be made behind the scenes.
+
+When I create something interesting, it will be added to the repo. Random thoughts will be removed from the different files!
