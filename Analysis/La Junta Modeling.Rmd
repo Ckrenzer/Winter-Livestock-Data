@@ -8,9 +8,11 @@ output:
     toc_depth: 2
 ---
 
-The Shiny app will be self-contained. Rather than cluttering the Shiny app, this Rmarkdown document has been created for further exploration into the data.
+# Introduction
 
-Some findings could invert over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests will change. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
+This file goes through and performs several classification models on the data. It's primary use was to learn how to use different algorithms while also gathering a fuller picture of the data. As a bonus, these models were put to good use when deciding the correct data imputation method to use for missing data at a time when the collection function was more... primitive.
+
+Findings change over time. I tried to make write-up as flexible as possible with inline code chunks, but--as more data gets added--the results from these tests may make the writing inconsistent with the results. To see the results from when these tests were first performed, change the input to read_csv() so that it reads in the csv file found in the "Analysis" folder.
 
 This was written under R version 4.0.3.
 
