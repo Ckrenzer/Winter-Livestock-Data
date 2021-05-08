@@ -220,7 +220,9 @@ The data prep follows these steps:
 
 -   Correct for non-stationarity via differencing: Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models. __(differencing)__
 
--   Choose a model order. __order__
+-   Determine model parameters. __(differencing)__
+
+-   Fit and evaluate the model. __(order)__
 
 ```{r data prep}
 
@@ -327,12 +329,27 @@ cat("Fail to reject the null hypothesis--the data is non-stationary.")
 
 # This plot helps to determine the correct order of differencing.
 Pacf(ts(na.omit(avg_steer_prices$seas_adj)))
-cat("The first three differences should be used.")
+cat("The first two differences should be used.")
+
+
+
+
+# PARAMETERS
+steer_lags <- 1
+
+steer_diff_deg <- 2
+
+# The series displays a sharp autocorrelative cutoff,
+# so one will be added to the moving average term, q
+steer_ma_term <- 2
+
+
+
 
 
 # Making a new column with containing the values after differencing.
 avg_steer_prices <- avg_steer_prices %>% 
-  mutate("seas_adj_diff" = c(rep(NA, 3), diff(avg_steer_prices$seas_adj, differences = 3)))
+  mutate("seas_adj_diff" = c(rep(NA, steer_diff_deg), diff(avg_steer_prices$seas_adj, differences = steer_diff_deg)))
 
 
 # The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
@@ -357,6 +374,21 @@ cat("Fail to reject the null hypothesis--the data is non-stationary.")
 # This plot helps to determine the correct order of differencing.
 Pacf(ts(na.omit(avg_heifer_prices$seas_adj)))
 cat("The first two differences should be used.")
+
+
+
+
+# PARAMETERS
+heifer_lags <- 1
+
+heifer_diff_deg <- 2
+
+# The series displays a sharp autocorrelative cutoff,
+# so one will be added to the moving average term, q
+heifer_ma_term <- 2
+
+
+
 
 
 # Making a new column with containing the values after differencing.
@@ -388,6 +420,21 @@ Pacf(ts(na.omit(avg_cow_prices$seas_adj)))
 cat("The first difference should be used.")
 
 
+
+
+# PARAMETERS
+cow_lags <- 1
+
+cow_diff_deg <- 2
+
+# The series displays a sharp autocorrelative cutoff,
+# so one will be added to the moving average term, q
+cow_ma_term <- 2
+
+
+
+
+
 # Making a new column with containing the values after differencing.
 avg_cow_prices <- avg_cow_prices %>% 
   mutate("seas_adj_diff" = c(rep(NA, 1), diff(avg_cow_prices$seas_adj, differences = 1)))
@@ -416,6 +463,21 @@ Pacf(ts(na.omit(avg_bull_prices$seas_adj)))
 cat("The first difference should be used.")
 
 
+
+
+# PARAMETERS
+bull_lags <- 1
+
+bull_diff_deg <- 2
+
+# The series displays a sharp autocorrelative cutoff,
+# so one will be added to the moving average term, q
+bull_ma_term <- 2
+
+
+
+
+
 # Making a new column with containing the values after differencing.
 avg_bull_prices <- avg_bull_prices %>% 
   mutate("seas_adj_diff" = c(rep(NA, 1), diff(avg_bull_prices$seas_adj, differences = 1)))
@@ -442,7 +504,7 @@ With all data stationary, we can now determine the parameters for the model. The
 
 We could have just let R do all the work for us and used auto.arima() to fit the model for us, but it never hurts to build models from the ground up--a good learning exercise! Plus, doing the work manually allows us to tune the model to our liking.
 
-```{r model order}
+```{r model fitting}
 
 fit <- forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26)
 
@@ -455,9 +517,9 @@ plot(forecast(auto.arima(avg_steer_prices$seas_adj, seasonal = FALSE), h = 26))
 # p d q
 
 
-arima(avg_steer_prices$seas_adj_diff, order=c(1,1,7))
+arima(avg_steer_prices$seas_adj_diff, order=c(1, steer_diff_deg, steer_ma_term))
 
-
+arima(avg_steer_prices$seas_adj_diff, order=c(1, 1,1))
 
 
 ```
