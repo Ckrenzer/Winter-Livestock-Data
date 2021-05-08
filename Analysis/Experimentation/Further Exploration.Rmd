@@ -242,6 +242,7 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
+
 # Making columns containing moving averages
 avg_steer_prices <- avg_steer_prices %>% 
   mutate("ma_2mo" = ma(avg_steer_prices$cleaned_price, order=8),
@@ -270,28 +271,37 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
+# https://blogs.oracle.com/ai-and-datascience/post/introduction-to-forecasting-with-arima-in-r
 
 
 
 
-ggplot(avg_steer_prices) + 
-  #geom_line(aes(x = Date, y = median_price, color = "Act")) +
-  geom_line(aes(x = Date, y = ma_2mo,   color = "2mo"))  +
-  #geom_line(aes(x = Date, y = ma_6mo, color = "6mo"))  +
-  ylab('Price') 
-
-ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) 
-str(avg_steer_prices)
 
 
 
-decomp <- stl(ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) , s.window="periodic")
-deseasonal_cnt <- seasadj(decomp)
-plot(decomp) 
 
+# Creating a de-seasonalized column
+# STEPS:
+#   1. Calculate moving average (completed above)
+#   2. Extract the seasonal, trend, and cycle components to the model
+#         (Done with calls to stl()--but all missing values must be removed)
+#         (Determine whether an additive or multiplicative model is more appropriate
+#          --additive model is more appropriate for this data).
+#   3. De-seasonalize the data with a call to seasadj()
+#       It calculates the seasonal component of the series using smoothing, and adjusts
+#       the original series by subtracting seasonality.
+#           We use 26 as the frequency for the ts() call because we have 36 sales per period
+avg_steer_prices <- avg_steer_prices %>% 
+  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_steer_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
-decomp
+avg_heifer_prices <- avg_heifer_prices %>% 
+  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_hiefer_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
+avg_cow_prices <- avg_cow_prices %>% 
+  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_cow_prices$ma_6mo), frequency=26) , s.window="periodic"))))
+
+avg_bull_prices <- avg_bull_prices %>% 
+  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_bull_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
 
 
@@ -313,6 +323,14 @@ Pacf(ts(na.omit(avg_steer_prices$cleaned_price)))
 
 
 ```{r arima}
+
+ggplot(avg_steer_prices) + 
+  #geom_line(aes(x = Date, y = median_price, color = "Act")) +
+  #geom_line(aes(x = Date, y = ma_2mo,   color = "2mo"))  +
+  #geom_line(aes(x = Date, y = ma_6mo, color = "6mo"))  +
+  geom_line(aes(x = Date, y = seas_adj, color = "adj")) +
+  ylab('Price') 
+
 
 
 
