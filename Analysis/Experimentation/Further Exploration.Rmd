@@ -218,7 +218,9 @@ The data prep follows these steps:
 
 -   Test for stationarity with the Augmented Dickey-Fuller test. __(differencing)__
 
--   Correct for non-stationarity via differencing. Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models. __(differencing)__
+-   Correct for non-stationarity via differencing: Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models. __(differencing)__
+
+-   Choose a model order. __order__
 
 ```{r data prep}
 
@@ -313,27 +315,27 @@ The next steps will be completed by reproductive status, since it makes the most
 
 If the p-value from the ADF test is not significant, the data needs to be made stationary. To do this, we must find an appropriate order of differencing, which can be found visually with the Pacf() function (or Acf() if using a multiplicative model).
 
-```{r steer differencing}
-
+```{r steer differencing, echo = FALSE, results = "show"}
 
 # STEP 5
 # Augmented Dickey-Fuller test for stationary data
 adf.test(ts(na.omit(avg_steer_prices$seas_adj), frequency=8))
+cat("Fail to reject the null hypothesis--the data is non-stationary.")
 
 
-#
+# This plot helps to determine the correct order of differencing.
 Pacf(ts(na.omit(avg_steer_prices$seas_adj)))
-forecast::Acf(ts(na.omit(avg_steer_prices$seas_adj)))
+cat("The first three differences should be used.")
 
 
-plot(diff(avg_steer_prices$seas_adj, differences = 1))
-adf.test(na.omit(diff(avg_steer_prices$seas_adj, differences = 3)), alternative = "stationary")
-
-
-
-
+# Making a new column with containing the values after differencing.
 avg_steer_prices <- avg_steer_prices %>% 
-  mutate(diff(avg_steer_prices$seas_adj, differences = 1))
+  mutate("seas_adj_diff" = c(rep(NA, 3), diff(avg_steer_prices$seas_adj, differences = 3)))
+
+
+# The p-values on the Augmented Dickey-Fuller test are now significant--we took care of 
+# non-stationary data.
+adf.test(na.omit(avg_steer_prices$seas_adj_diff), alternative = "stationary")
 
 ```
 
