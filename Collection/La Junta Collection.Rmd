@@ -15,6 +15,31 @@ Once we have a csv file, we clean it. Basically, this means you become best frie
 
 After cleaning, we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
 
+
+
+
+
+
+# How It Works
+
+The collection() function follows these steps:
+
+-   Loop through a set number of Winter Livestock __urls__ and extract the text of the section of the document containing the data.
+
+-   Determine the __delimiter__ to split the text into a list. _If neither delimiter works, skip to the next iteration of the loop._
+
+-   Determine whether the market report is a __La Junta market report__ by searching for 'la junta co' in the text. _If the text is an internet video auction for la junta, it will be ignored. Non La Junta market reports are ignored. Both of these cases skip to the next iteration of the loop._
+
+-   Determine the __date__ of the market report. There are four cases for this, and the last case just adds one week to the previous sale in case the other methods failed. Check each one to understand how the date is determined.
+
+-   Determine which entries have the __sales data__. In the code, this is marked off under the "Header Removal with Keywords" and "Removing Unwanted Sections" sections.
+
+-   Identify the __buyer's name__, and add it to the sales that buyer made, but a name was not provided.
+
+-   Make a __data frame__ and separate the values into different columns.
+
+-   Write to a __csv__. We may save a 'before cleaning' copy for testing the cleaning script.
+
 ```{r setup-packages, include = FALSE, eval = FALSE}
 
 knitr::opts_chunk$set(echo = TRUE,
