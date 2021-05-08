@@ -28,7 +28,7 @@ This file, and others in the Experimentation folder, are meant to dive deeper in
 
 # Introduction
 
-
+In this document, we will be working to estimate the price of cattle in the La Junta sale barn.
 
 ```{r setup-packages-data, include = FALSE}
 
@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 if(!require("pacman")) install.packages("pacman")
 # General Packages
-pacman::p_load(dplyr, ggplot2, lubridate, readr, shiny, patchwork, clock)
+pacman::p_load(dplyr, ggplot2, readr, patchwork, clock)
 
 # ARIMA Packages
 pacman::p_load(forecast, tseries)
@@ -642,7 +642,7 @@ bull_forecast <- ggplot() +
 
 The moment we've all been waiting for. Where do these models say the La Junta market is going?
 
-```{r arima plots}
+```{r arima plots, results = "show"}
 
 steer_forecast
 
