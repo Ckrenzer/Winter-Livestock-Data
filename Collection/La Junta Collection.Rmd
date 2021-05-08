@@ -9,13 +9,11 @@ editor_options:
 
 # Introduction
 
-I figure it's time to dig a bit deeper into Winter Livestock's market reports. I plan on checking all the market reports on the website to find historical data--but only for La Junta, CO. The old method works well enough, but limitations in available data using the old scripts make this approach far more lucrative.
-
-This implementation assumes a few things about the structure of the text, so there may be small issues here and there with the data.
+I figure it's time to dig a bit deeper into Winter Livestock's market reports. We check all La Junta, CO market reports on the website to find historical data. This implementation assumes a few things about the structure of the text, so there may be small issues here and there with regards to data quality. Many of these problems have been weeded out over time.
 
 Once we have a csv file, we clean it. Basically, this means you become best friends with stringr and abuse regex until you can only understand your code via the comments.
 
-Then we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
+After cleaning, we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
 
 ```{r setup-packages, include = FALSE, eval = FALSE}
 
