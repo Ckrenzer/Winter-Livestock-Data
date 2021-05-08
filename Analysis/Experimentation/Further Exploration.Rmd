@@ -208,17 +208,17 @@ Let's use an ARIMA model to predict the sales price of the different reproductiv
 
 The data prep follows these steps:
 
--   Store subsets of the data (steers, heifers, etc.) into their own data frames and calculate the median price at each sale.
+-   Store subsets of the data (steers, heifers, etc.) into their own data frames and calculate the median price at each sale. __(data prep)__
 
--   Make the price a time series column.
+-   Make the price a time series column. __(data prep)__
 
--   Calculate moving averages for the data--eight weeks and 26 weeks (6 months) are used for this.
+-   Calculate moving averages for the data--eight weeks and 26 weeks (6 months) are used for this. __(data prep)__
 
--   Calculate a new column for a seasonally adjusted variable.
+-   Calculate a new column for a seasonally adjusted variable. __(data prep)__
 
--   Test for stationarity with the Augmented Dickey-Fuller test.
+-   Test for stationarity with the Augmented Dickey-Fuller test. __(differencing)__
 
--   Correct for non-stationarity via differencing. Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models.
+-   Correct for non-stationarity via differencing. Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models. __(differencing)__
 
 ```{r data prep}
 
@@ -282,22 +282,6 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
-
-
-
-
-
-
-
-
-# https://blogs.oracle.com/ai-and-datascience/post/introduction-to-forecasting-with-arima-in-r
-
-
-
-
-
-
-
 # STEP 4
 # Creating a de-seasonalized column
 # PARTS:
@@ -314,7 +298,7 @@ avg_steer_prices <- avg_steer_prices %>%
   mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_steer_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
 avg_heifer_prices <- avg_heifer_prices %>% 
-  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_hiefer_prices$ma_6mo), frequency=26) , s.window="periodic"))))
+  mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_heifer_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
 avg_cow_prices <- avg_cow_prices %>% 
   mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_cow_prices$ma_6mo), frequency=26) , s.window="periodic"))))
@@ -322,27 +306,34 @@ avg_cow_prices <- avg_cow_prices %>%
 avg_bull_prices <- avg_bull_prices %>% 
   mutate("seas_adj" = c(rep(NA, 26), seasadj(stl(ts(na.omit(avg_bull_prices$ma_6mo), frequency=26) , s.window="periodic"))))
 
+```
 
 
+The next steps will be completed by reproductive status, since it makes the most sense to make decisions about the model one group at a time.
 
+If the p-value from the ADF test is not significant, the data needs to be made stationary. To do this, we must find an appropriate order of differencing, which can be found visually with the Pacf() function (or Acf() if using a multiplicative model).
 
-
-
+```{r steer differencing}
 
 
 # STEP 5
 # Augmented Dickey-Fuller test for stationary data
-adf.test(ts(na.omit(avg_steer_prices$seas_adj), frequency=8) )
+adf.test(ts(na.omit(avg_steer_prices$seas_adj), frequency=8))
 
 
-
-
-
-
-#estimate of
-Acf(ts(na.omit(avg_steer_prices$seas_adj)))
-
+#
 Pacf(ts(na.omit(avg_steer_prices$seas_adj)))
+forecast::Acf(ts(na.omit(avg_steer_prices$seas_adj)))
+
+
+plot(diff(avg_steer_prices$seas_adj, differences = 1))
+adf.test(na.omit(diff(avg_steer_prices$seas_adj, differences = 3)), alternative = "stationary")
+
+
+
+
+avg_steer_prices <- avg_steer_prices %>% 
+  mutate(diff(avg_steer_prices$seas_adj, differences = 1))
 
 ```
 
@@ -358,7 +349,7 @@ ggplot(avg_steer_prices) +
   ylab('Price') 
 
 
-
+acf(
 
 
 
