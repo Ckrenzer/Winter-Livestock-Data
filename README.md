@@ -60,3 +60,5 @@ The files have been reorganized so that the file names clearly indicate the cont
 'Further Exploration.Rmd' has been renamed 'La Junta Price Estimation.Rmd'
 
 New experiments with this data will be made behind the scenes. When I create something interesting, it will be added to the repo. Random thoughts will be exluded!
+
+Finally, HTML output will now be ignored and removed from the repo. If you want to see the results, either ask me or knit the documents yourself!
