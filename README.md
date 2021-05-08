@@ -4,7 +4,7 @@ Collects data from Winter Livestock La Junta Sale Tuesday reports each week and 
 Please note that this repository can only be updated after the folks over at Winter Livestock release their market reports, meaning there will be a few day's lag between the auction and new data in this repository.
 
 ## UPDATES
-Major changes to this repo are listed with each update. I write these updates rather arbitrarily, but when something big changes, I usually know "it's time." Think of this as a history lesson rather than a feature preview.
+Major changes to this repo are listed with each update. I write these updates arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
 ### UPDATE 2/2/2021 ----------------------------------------------
 Winter Livestock changed their market report format for La Junta, CO. The "La Junta.R" script works well for market reports with the old format, in which the text looks well spaced with paragraphs on your browser. For those market reports that have no spacing between the values and look like one really long paragraph, use the "La Junta long format.R" script.
