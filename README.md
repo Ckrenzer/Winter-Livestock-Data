@@ -42,3 +42,6 @@ The collection files have been replaced by a more comprehensive Rmd file. This R
 The collection() function is now better at identifying data in the market reports. About 6000 new entries of historical data are available. The collection() function is also capable of filtering out some repeat market reports (reducing repeated data).
 
 Be mindful that some dates may be estimated. In cases where the date could not be determined (see CASE 4 in the collection() function), one week is added to the date of the previous sale.
+
+### UPDATE 5/7/2021-5/8/2021
+Now contains files performing ARIMA models on cattle prices. Expect file reorganization soon.

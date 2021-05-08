@@ -222,7 +222,7 @@ The data prep follows these steps:
 
 -   Determine model parameters. __(differencing)__
 
--   Fit and evaluate the model. __(order)__
+-   Fit and evaluate the model. __(fitting)__
 
 ```{r data prep}
 
