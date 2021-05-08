@@ -204,8 +204,25 @@ We can see the market is on an upward trajectory from lows of 2020. Whether thes
 
 Let's use an ARIMA model to predict the sales price of the different reproductive statuses of cattle. I'll let someone write the functions for me this time!
 
+## Data Prep
+
+The data prep follows these steps:
+
+-   Store subsets of the data (steers, heifers, etc.) into their own data frames and calculate the median price at each sale.
+
+-   Make the price a time series column.
+
+-   Calculate moving averages for the data--eight weeks and 26 weeks (6 months) are used for this.
+
+-   Calculate a new column for a seasonally adjusted variable.
+
+-   Test for stationarity with the Augmented Dickey-Fuller test.
+
+-   Correct for non-stationarity via differencing. Use Autocorrelation function (ACF) plots to determine the order of differencing for multiplicative models and partial autocorrelation plots (PACF) to determine the order of differencing for additive models.
+
 ```{r data prep}
 
+# STEP 1
 # Storing the average sale price of each reproductive status into an object
 avg_steer_prices <- filter(lajunta, Reprod == "str") %>% 
   group_by(Date) %>% 
@@ -226,6 +243,7 @@ avg_bull_prices <- filter(lajunta, Reprod == "bull") %>%
 
 
 
+# STEP 2
 # Making the price a time-series object with the stats package's ts()
 # and checking for outliers with forecast's tsclean()
 avg_steer_prices <- avg_steer_prices %>% 
@@ -243,6 +261,7 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
+# STEP 3
 # Making columns containing moving averages
 avg_steer_prices <- avg_steer_prices %>% 
   mutate("ma_2mo" = ma(avg_steer_prices$cleaned_price, order=8),
@@ -279,9 +298,9 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
-
+# STEP 4
 # Creating a de-seasonalized column
-# STEPS:
+# PARTS:
 #   1. Calculate moving average (completed above)
 #   2. Extract the seasonal, trend, and cycle components to the model
 #         (Done with calls to stl()--but all missing values must be removed)
@@ -305,18 +324,25 @@ avg_bull_prices <- avg_bull_prices %>%
 
 
 
+
+
+
+
+
+
+# STEP 5
 # Augmented Dickey-Fuller test for stationary data
-adf.test(ts(na.omit(avg_steer_prices$cleaned_price), frequency=8) )
+adf.test(ts(na.omit(avg_steer_prices$seas_adj), frequency=8) )
 
 
 
 
 
 
+#estimate of
+Acf(ts(na.omit(avg_steer_prices$seas_adj)))
 
-Acf(ts(na.omit(avg_steer_prices$cleaned_price)))
-
-Pacf(ts(na.omit(avg_steer_prices$cleaned_price)))
+Pacf(ts(na.omit(avg_steer_prices$seas_adj)))
 
 ```
 
@@ -328,7 +354,7 @@ ggplot(avg_steer_prices) +
   #geom_line(aes(x = Date, y = median_price, color = "Act")) +
   #geom_line(aes(x = Date, y = ma_2mo,   color = "2mo"))  +
   #geom_line(aes(x = Date, y = ma_6mo, color = "6mo"))  +
-  geom_line(aes(x = Date, y = seas_adj, color = "adj")) +
+  geom_line(aes(x = Daote, y = seas_adj, color = "adj")) +
   ylab('Price') 
 
 
