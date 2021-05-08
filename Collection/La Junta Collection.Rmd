@@ -13,40 +13,6 @@ I figure it's time to dig a bit deeper into Winter Livestock's market reports. I
 
 This implementation assumes a few things about the structure of the text, so there may be small issues here and there with the data.
 
-Some improvements that could be made in the future are the following:
-
--   Check whether you still need the remove.file() call in this document.
-
--   Check file.create() and write.csv() logic when adding new data to the dataset.
-
--   Make the discussions in "La Junta Collections.Rmd" more flexible. The logistic regression section does not hold up well at all. A part of me debates whether this is necessary...didn't you already provide the disclaimer at the outset? If they want the script to make sense, they can use the old dataset.
-
--   Store the urls into a text file so that time no longer has to be wasted searching for the correct url (just make the urls variable in the "urls-execute" section a vector of the contents of the file containing urls).
-
--   Improve the models (particularly the linear models)
-
--   Simplify the cleaning section--it's a hot mess!
-
-# How It Works
-
-The collection() function follows these steps:
-
--   Loop through a set number of Winter Livestock __urls__ and extract the text of the section of the document containing the data.
-
--   Determine the __delimiter__ to split the text into a list. _If neither delimiter works, skip to the next iteration of the loop._
-
--   Determine whether the market report is a __La Junta market report__ by searching for 'la junta co' in the text. _If the text is an internet video auction for la junta, it will be ignored. Non La Junta market reports are ignored. Both of these cases skip to the next iteration of the loop._
-
--   Determine the __date__ of the market report. There are four cases for this, and the last case just adds one week to the previous sale in case the other methods failed. Check each one to understand how the date is determined.
-
--   Determine which entries have the __sales data__. In the code, this is marked off under the "Header Removal with Keywords" and "Removing Unwanted Sections" sections.
-
--   Identify the __buyer's name__, and add it to the sales that buyer made, but a name was not provided.
-
--   Make a __data frame__ and separate the values into different columns.
-
--   Write to a __csv__. We may save a 'before cleaning' copy for testing the cleaning script.
-
 Once we have a csv file, we clean it. Basically, this means you become best friends with stringr and abuse regex until you can only understand your code via the comments.
 
 Then we do some EDA to find any issues we missed. This is where that copy of the csv file comes in handy! If all that works out, the csv file is ready for use!
