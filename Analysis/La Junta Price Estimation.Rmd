@@ -1,5 +1,5 @@
 ---
-title: "Further Exploration"
+title: "Price Estimation"
 author: "Connor Krenzer"
 date: "4/20/2021"
 output: html_document
@@ -187,7 +187,7 @@ bull_sma_plot <- simple_moving_average(df = lajunta, reprod_status = "bull", var
 
 
 # Plotting the graphs in a grid
-steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = "The Simple Moving Average for the Previous 52 Weeks")
+steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = "The Simple Moving Average for the Previous 52 Sales")
 
 # Removing variables we no longer need from the global environment
 rm(steer_sma_plot, heifer_sma_plot, cow_sma_plot, bull_sma_plot)
