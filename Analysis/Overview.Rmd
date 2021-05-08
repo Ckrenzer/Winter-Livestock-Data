@@ -1,5 +1,5 @@
 ---
-title: "La Junta Predictions"
+title: "Shiny App"
 author: "Connor Krenzer"
 date: "2/6/2021"
 output: html_document
