@@ -679,32 +679,23 @@ bull_lm_data <- lajunta %>%
 
 
 # Fitting the models
+#STEER
 steer_fit <- lm(data = steer_lm_data,
-                formula = Price ~ Date +
-                  Quantity + poly(Weight, degree = 2))
+                formula = Price ~ Quantity + poly(Weight, degree = 2))
 
 
-# Note that a manual subset was not made for heifers.
-heifer_fit <- lm(data = lajunta,
-                 subset = Reprod == "hfr",
-                 formula = Price ~ Date +
-                   Quantity + poly(Weight, degree = 2))
+# HEIFER
+heifer_fit <- lm(data = heifer_lm_data,
+                 formula = Price ~ Quantity + poly(Weight, degree = 2))
 
-
-# a 12th degree polynomial gave a higher
-# R-squared, but I think that is due to overfitting
+# COW
 cow_fit <- lm(data = cow_lm_data,
-              formula = Price ~ Date +
-                poly(Weight, 3))
+              formula = Price ~ Quantity + Weight)
 
-
-# a 6th degree polynomial gave a higher
-# R-squared, but I think that is due to overfitting...
-# Our sample is small so we want to keep the
-# number of predictors small
+# BULL
 bull_fit <- lm(data = bull_lm_data,
-               formula = Price ~ Date +
-                 poly(Weight, 2))
+               formula = Price ~ Quantity + Weight)
+
 ```
 
 Now, let's see how these models performed:
