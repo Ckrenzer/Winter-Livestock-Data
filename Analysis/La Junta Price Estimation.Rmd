@@ -652,20 +652,29 @@ The data appears linear, so linear models seem appropriate for this dataset. The
 # Pooling steers with lightweight bulls,
 # since they sell similarly at auction
 steer_lm_data <- lajunta %>% 
-  filter(Reprod == "bull" | Reprod == "str", Weight < 1000)
+  filter(Reprod == "bull" | Reprod == "str",
+         Weight < 1000)
+
+# Removing the extreme outlier from the heifer population
+heifer_lm_data <- lajunta %>% 
+  filter(Reprod == "hfr",
+         Price < 500)
 
 # Pulling data out to ensure
 # cows are not treated like heifers
 # at auction--also removes a few values
 # away from the clusters
 cow_lm_data <- lajunta %>% 
-  filter(Reprod == "cow", Weight > 700)
+  filter(Reprod == "cow",
+         Price < 600,
+         Weight > 500)
 
 # Pulling data out to ensure bulls
 # are not being treated like steers
 # at auction
 bull_lm_data <- lajunta %>% 
-  filter(Reprod == "bull", Weight > 1000)
+  filter(Reprod == "bull",
+         Weight > 1000)
 
 
 
