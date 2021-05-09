@@ -733,4 +733,4 @@ cat("R-squared:",  summary(bull_fit)$r.squared,
 
 Linear regression is an art as much as it is a science. I could write a [30 page paper](https://github.com/Ckrenzer/Nursing-Homes-and-COVID/raw/main/Improving%20Econometrics/Nursing%20Homes%20and%20COVID.docx) explaining all the EDA, providing a play-by-play commentary about potential improvements to this model. But today I think I'll leave things as they are presented here.
 
-See the accompanying Shiny app ("[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/Overview.Rmd)," also linked above) if you'd like to play with these linear models yourself!
+See the accompanying Shiny app ("[Overview.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/Overview.Rmd)," also linked above) if you'd like to play with these linear models yourself!
