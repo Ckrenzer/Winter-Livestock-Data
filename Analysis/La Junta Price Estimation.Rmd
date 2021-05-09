@@ -59,11 +59,9 @@ q1 <- lajunta %>%
   group_by(Date, Reprod) %>% 
   summarize(Price = median(Price)) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price)) +
-  geom_line(mapping = aes(x = Date, y = Price)) +
+  geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
   facet_wrap(~Reprod) +
   ggtitle("Price Changes Over Time") +
-  ylab("Median Price") +
   theme_dark()
 
 
@@ -72,17 +70,15 @@ q2 <-  lajunta %>%
   group_by(Date, Reprod) %>% 
   summarize(Price = median(Price)) %>% 
   ggplot() +
-  geom_point(mapping = aes(x = Date, y = Price)) +
-  geom_line(mapping = aes(x = Date, y = Price)) +
+  geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
   facet_wrap(~Reprod) +
-  ylab("Median Price") +
   theme_dark()
 
 # using patchwork's "/" operator
 q1 / q2
 
 
-# Removing variables we no longer need from the global enivronment
+# Removing variables we no longer need from the global environment
 rm(q1, q2)
 
 ```
@@ -188,7 +184,7 @@ We can see the market is on an upward trajectory from lows of 2020. Whether thes
 
 Let's use an ARIMA model to predict the sales price of the different reproductive statuses of cattle. I'll let someone write the functions for me this time!
 
-## Data Prep
+### Data Prep
 
 The data prep follows these steps:
 
@@ -297,7 +293,7 @@ avg_bull_prices <- avg_bull_prices %>%
 ```
 
 
-## Differencing
+### Differencing
 
 The next steps will be completed by reproductive status, since it makes the most sense to make decisions about the model one group at a time.
 
@@ -493,7 +489,7 @@ for(num_weeks in 1:26){
 
 
 
-## Model Fitting
+### Model Fitting
 
 With all data stationary, we can now determine the parameters for the model. The __parameters__ for ARIMA models are the following:
 
@@ -622,7 +618,7 @@ bull_forecast <- ggplot() +
 ```
 
 
-## ARIMA Results
+### ARIMA Results
 
 The moment we've all been waiting for. Where do these models say the La Junta market is going?
 
