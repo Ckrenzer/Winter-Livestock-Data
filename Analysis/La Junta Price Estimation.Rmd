@@ -40,6 +40,7 @@ lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock
                                      Type = col_factor(),
                                      Weight = col_double(),
                                      Price = col_double(),
+                                     URL = col_character(),
                                      Reprod = col_factor())) %>% 
   dplyr::select(-URL)
 
