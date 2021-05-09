@@ -17,12 +17,14 @@ Findings change over time. I tried to make write-up as flexible as possible with
 This was written under R version 4.0.3.
 
 ```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
                       results = "hide",
                       error = F,
                       warning = F,
                       message = F)
+
 ```
 
 # The Dataset
@@ -30,6 +32,7 @@ knitr::opts_chunk$set(echo = TRUE,
 The La Junta dataset is quickly becoming one of my favorites. I suppose there is something to be said about collecting, cleaning, and analyzing data all by yourself.
 
 ```{r packages-import}
+
 if(!require(pacman)) install.packages("pacman")
 
 # General Packages
@@ -87,9 +90,11 @@ lajunta <- lajunta %>%
 To familiarize you with the dataset, let's take a quick peek:
 
 ```{r the dataset, echo = FALSE, results = "show"}
+
 knitr::kable(lajunta %>% 
                dplyr::select(-Buyer) %>% 
                slice(1:8))
+
 ```
 
 You can see that we have data for the date of the sale, the quantity sold, the type of livestock, the weight in pounds, the price in USD, and the livestock's reproductive status. There is also data on Buyer names, but I thought it would be rude to include that information in this table. It hasn't proved very useful anyway.
@@ -97,6 +102,7 @@ You can see that we have data for the date of the sale, the quantity sold, the t
 From my previous work (see "[La Junta Predictions.Rmd](https://github.com/Ckrenzer/Winter-Livestock-Data/blob/main/Analysis/La%20Junta%20Predictions.Rmd)," for instance), I can confidently say that the "Type" column is *utterly* useless. That's a story in and of itself, I suppose. The simplest graph that tells the bulk of what we need to know is this one:
 
 ```{r graph, echo = FALSE, results = "show"}
+
 lajunta %>% 
   filter(Price < 475) %>% 
   ggplot() +
@@ -141,6 +147,7 @@ Lucky for me, I already spent a full day cleaning this data! All I have to do is
 There are only two predictors in this model, weight and price.
 
 ```{r prepare}
+
 # Fortunately, KNN is well-suited for just a few predictors
 lajunta_knn <- lajunta %>% 
   dplyr::select(Weight, Price, Reprod)
@@ -153,6 +160,7 @@ lajunta_knn$Reprod <- as.factor(lajunta_knn$Reprod)
 Since KNN is sensitive to different scales, the values of the predictors need to be standardized.
 
 ```{r standardize}
+
 # The normalizing function, which transforms
 # all values into the range from 0 to 1
 normalize <- function(x) {
@@ -164,6 +172,7 @@ normalize <- function(x) {
 # columns
 lajunta_knn <- lajunta_knn %>% 
   mutate(across(where(is.numeric), normalize))
+
 ```
 
 ### Step 3: Separate into Training and Test Sets
@@ -171,6 +180,7 @@ lajunta_knn <- lajunta_knn %>%
 A stratified, simple random sampling technique will be used to separate values into training and testing data. Stratification is necessary in this instance because there are far fewer cows and bulls in the dataset than there are heifers or steers. Eighty percent of the values will be placed in the training set and the remaining twenty percent will go to the test set.
 
 ```{r splicing}
+
 # Setting the random number stream
 set.seed(2021)
 lajunta_knn_split <- rsample::initial_split(lajunta_knn,
@@ -183,6 +193,7 @@ lajunta_knn_split <- rsample::initial_split(lajunta_knn,
 # separating the data into two new data frames
 lajunta_knn_train <- rsample::training(lajunta_knn_split)
 lajunta_knn_test <- rsample::testing(lajunta_knn_split)
+
 ```
 
 ### Step 4: Build Model
@@ -190,6 +201,7 @@ lajunta_knn_test <- rsample::testing(lajunta_knn_split)
 To determine the appropriate number for K, I took the square root of the number of observations in the training set.
 
 ```{r the model, results = "show"}
+
 # Determining the appropriate value of K
 optimal_k <- floor(sqrt(nrow(lajunta_knn_train)))
 
@@ -206,7 +218,6 @@ knn_29 <- class::knn(train = lajunta_knn_train[1:2],
                      cl = lajunta_knn_train$Reprod,
                      k = optimal_k)
 
-
 ```
 
 ### Step 5: Evaluate
@@ -214,6 +225,7 @@ knn_29 <- class::knn(train = lajunta_knn_train[1:2],
 To calculate the accuracy, the data was thrown into a confusion matrix and the number of correct classifications were calculated as a rate. Though not shown, all cows and bulls are predicted perfectly. The only data which are not classified correctly are steers and heifers.
 
 ```{r evaluation, results = "show"}
+
 # Create a confusion matrix--The result from knn()
 # and the test data dependent variable are the
 # arguments
@@ -235,6 +247,7 @@ cat("Accuracy", accuracy(knn_29_mat)) # 87.2% as of 2/6/2021
 We can always do better, no? Let's run this again in a loop with changing values of K. The K with the greatest accuracy should be used for all future predictions. Also, this value should be somewhat close to `r optimal_k`--if we get a number very far from `r optimal_k`, it is likely that we are overfitting the model. That pesky bias-variance trade-off...
 
 ```{r optimization}
+
 # Since I am using a loop, best practice
 # is to pre-allocate space in the vector
 acc <- numeric(100)
@@ -246,15 +259,18 @@ for(i in 1:100){
   acc[i] <- accuracy(table(knn_mod, lajunta_knn_test$Reprod))
   
 }
+
 ```
 
 ```{r maximum accuracy, echo = FALSE, eval = FALSE}
+
 # finds the value in the vector named
 # "acc" with the greatest accuracy
 which(acc == max(acc))[1]
 
 # The value of K with the highest accuracy
 acc[which(acc == max(acc))[1]]
+
 ```
 
 The ideal value was `r which(acc == max(acc))[1]`--very close to `r optimal_k`! Using just two variables, we can predict the reproductive status of livestock with `r round(acc[which(acc == max(acc))[1]], 2)` percent accuracy! As previously stated, most of these discrepancies are between steers and heifers. If we are only interested in cows and bulls, we will virtually *always* have the right prediction!
@@ -267,6 +283,7 @@ I am going to repeat this process with Quantity added to the model. Will the acc
 
 
 ```{r knn with quantity, echo = FALSE}
+
 # This section combines all the previous sections of KNN
 # into one chunk of code. The reader does not to see it
 # all again
@@ -343,6 +360,7 @@ Due to enormous differences between cows/bulls and heifers/steers, I expect zero
 First things first. In the first regression, only data for steers and heifers will be included. In the second regression, only data for bulls and cows will be included. In the third regression, steers and heifers will be recoded as "y," for "young," while cows and bulls will be recoded as "par," for "parents" (and yes, I understand that bulls are not necessarily fathers; I had trouble coming up with a good name for these categories). With this in mind, let's store data for the models:
 
 ```{r data subsets}
+
 # Data for regression 1
 lajunta_logit1 <- lajunta %>% 
   filter(Reprod %in% c("str", "hfr")) %>% 
@@ -413,6 +431,7 @@ lajunta_logit3_split <- rsample::initial_split(lajunta_logit3,
 # separating the data into two new data frames
 lajunta_logit3_train <- rsample::training(lajunta_logit3_split)
 lajunta_logit3_test <- rsample::testing(lajunta_logit3_split)
+
 ```
 
 ### Models
@@ -420,6 +439,7 @@ lajunta_logit3_test <- rsample::testing(lajunta_logit3_split)
 The data is now ready for model assembly. I will be using the stats package's glm() function as the engine for the regressions.
 
 ```{r logistic model}
+
 # REGRESSION 1 (steer vs heifer)
 # Quantity is not very different between steers and heifers
 logit1 <- glm(data = lajunta_logit1_train,
@@ -435,6 +455,7 @@ logit2 <- glm(data = lajunta_logit2_train,
 logit3 <- glm(data = lajunta_logit3_train,
               formula = Reprod ~ Weight + Price + Quantity,
               family = "binomial")
+
 ```
 
 Here are the results from the first regression (steers vs heifers):
@@ -479,6 +500,7 @@ We can use the pR2() function from the pscl package to compute McFadden's R-squa
 Let's begin with the first regression:
 
 ```{r McFadden R-squared (logit1), echo = FALSE, results = "show"}
+
 # REGRESSION 1 (steer vs heifer)
 cat(pscl::pR2(logit1)["McFadden"])
 
@@ -487,6 +509,7 @@ cat(pscl::pR2(logit1)["McFadden"])
 As expected, the predictors in the first regression do a pretty good job. Let's see the McFadden statistic from the second regression:
 
 ```{r McFadden R-squared (logit2), echo = FALSE, results = "show"}
+
 # REGRESSION 2 (bull vs cow)
 cat(pscl::pR2(logit2)["McFadden"])
 
@@ -495,6 +518,7 @@ cat(pscl::pR2(logit2)["McFadden"])
 Ah! I see now. The model acts strangely because it is deterministic! I expect this to be the case for the third regression as well:
 
 ```{r McFadden R-squared (logit3), echo = FALSE, results = "show"}
+
 # REGRESSSION 3 (bull/cow vs. steer/heifer)
 cat(pscl::pR2(logit3)["McFadden"])
 
@@ -509,9 +533,9 @@ We can compute the importance of each predictor variable in the model by using t
 The first regression:
 
 ```{r variable importance (logit1), echo = FALSE, results = "show"}
+
 # REGRESSION 1 (steer vs heifer)
 knitr::kable(caret::varImp(logit1))
-
 
 ```
 
@@ -520,18 +544,18 @@ The values are both pretty big, so both of the predictors seem to be 'carrying t
 What about the second regression?
 
 ```{r variable importance (logit2), echo = FALSE, results = "show"}
+
 # REGRESSION 2 (bull vs cow)
 knitr::kable(caret::varImp(logit2))
-
 
 ```
 
 That is certainly consistent with the p-values. The third regression?
 
 ```{r variable importance (logit3), echo = FALSE, results = "show"}
+
 # REGRESSSION 3 (bull/cow vs. steer/heifer)
 knitr::kable(caret::varImp(logit3))
-
 
 ```
 
@@ -544,9 +568,9 @@ We can calculate the VIF of each variable to see if multicollinearity is a probl
 The first regression:
 
 ```{r VIF (logit1), echo = FALSE, results = "show"}
+
 # REGRESSION 1 (steer vs heifer)
 car::vif(logit1)
-
 
 ```
 
@@ -555,9 +579,9 @@ What a relief! Multicollinearity, as measured by VIF, is not a big problem in th
 The second regression:
 
 ```{r VIF (logit2), echo = FALSE, results = "show"}
+
 # REGRESSION 2 (bull vs cow)
 car::vif(logit2)
-
 
 ```
 
@@ -566,9 +590,9 @@ Eh, this could be a problem, but they are still pretty close to five. I opt to w
 The third regression:
 
 ```{r VIF (logit3), echo = FALSE, results = "show"}
+
 # REGRESSSION 3 (bull/cow vs. steer/heifer)
 car::vif(logit3)
-
 
 ```
 
@@ -579,6 +603,7 @@ Good. These scores are not very worrying to me.
 Finally, we can evaluate model performance by using the test dataset. By default, any observation in the test dataset with a probability greater than 0.5 will be predicted to be a steer, cow, or heifer/steer (a "y"), respectively (for regressions 1, 2, and 3). We can calculate these probabilities with this code:
 
 ```{r probabilities, results = "show"}
+
 # REGRESSION 1 (steer vs heifer)
 # calculating the probability of being a steer
 # and storing the results in a vector
@@ -600,6 +625,7 @@ logit2_test_probs <- predict(logit2,
 logit3_test_probs <- predict(logit3,
                              lajunta_logit3_test,
                              type = "response")
+
 ```
 
 Thankfully, mathematical wizards around the world have come together to develop a magical way of determining the optimal probability that maximizes accuracy of the model. The optimalCutoff() function from the InformationValue package finds this value.
@@ -619,6 +645,7 @@ logit1_optimal <- optimalCutoff(lajunta_logit1_test$Reprod,
 
 # print the optimal probability
 cat(logit1_optimal)
+
 ```
 
 The optimal probability is *`r logit1_optimal`*. With this new threshold (the old threshold was 0.5, remember), any livestock with a probability of being a steer at or above `r logit1_optimal` will be classified as a steer, with the rest being classified as heifers.
@@ -630,6 +657,7 @@ Using the optimal threshold, we can create a confusion matrix showing how the mo
 As always, let's begin with the first regression:
 
 ```{r confusion matrix (logit1), echo = FALSE, results = "show"}
+
 # Changing 1's back into steers and 0's back into heifers
 # This line is undoing the operation from the previous chunk
 lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == 1, "str", "hfr")
@@ -643,6 +671,7 @@ The zeroes are heifers and the ones are steers. As we can see, `r InformationVal
 Let's repeat the process for the second regression:
 
 ```{r confusion matrix (logit2), echo = FALSE, results = "show"}
+
 InformationValue::confusionMatrix(lajunta_logit2_test$Reprod, logit2_test_probs)
 
 ```
@@ -652,6 +681,7 @@ The model is deterministic. Zero misclassifications!
 I expect the same for the third regression:
 
 ```{r confusion matrix (logit3), echo = FALSE, results = "show"}
+
 InformationValue::confusionMatrix(lajunta_logit3_test$Reprod, logit3_test_probs)
 
 ```
@@ -665,13 +695,13 @@ We can also calculate the sensitivity (the "true positive rate"), specificity (t
 The misclassification error rate for the first regression at the optimal threshold:
 
 ```{r misclassifications (logit1), echo = FALSE, results = "show"}
+
 # converting "str" to 1's and "hfr" to 0's AGAIN!
 # This is needed for the plotROC() call below
 lajunta_logit1_test$Reprod <- ifelse(lajunta_logit1_test$Reprod == "str", 1, 0)
 
 #calculate misclassification error rate
 cat(InformationValue::misClassError(lajunta_logit1_test$Reprod, logit1_test_probs, threshold = logit1_optimal))
-
 
 ```
 
@@ -682,6 +712,7 @@ Finally, we can put together ROC curves to visualize how well the models fit. Th
 For the first regression
 
 ```{r roc curve (logit1), echo = FALSE, results = "show"}
+
 # plot the ROC curve
 InformationValue::plotROC(lajunta_logit1_test$Reprod, logit1_test_probs)
 
@@ -704,6 +735,7 @@ The engine for the LDA model is the one provided in the MASS package. As usual, 
 Since one of the key assumptions of LDA is that each predictor has the same variance, they should all be scaled to give the data a mean of zero and a standard deviation of one. We can do this with a mutate(across()) call:
 
 ```{r scaling}
+
 lajunta_lda <- lajunta %>% 
   mutate(across(where(is.numeric), scale),
          Date = Date)
@@ -713,9 +745,11 @@ lajunta_lda <- lajunta %>%
 And we can confirm that the standard deviation is, indeed, 1 after transformation:
 
 ```{r scale confimation, results = "show"}
+
 lajunta_lda %>% 
   summarize(across(where(is.numeric), sd)) %>% 
   unlist()
+
 ```
 
 Excellent. We are now ready to separate into training and test samples.
@@ -725,6 +759,7 @@ Excellent. We are now ready to separate into training and test samples.
 Due to imbalances in the number of observations in reproductive status of the livestock, stratified sampling will (again) be used. Okay, let's make the 80/20 split:
 
 ```{r lda sampling}
+
 # Setting the random number stream
 set.seed(2021)
 lajunta_lda_split <- rsample::initial_split(lajunta_lda,
@@ -734,6 +769,7 @@ lajunta_lda_split <- rsample::initial_split(lajunta_lda,
 # separating the data into two new data frames
 lajunta_lda_train <- rsample::training(lajunta_lda_split)
 lajunta_lda_test <- rsample::testing(lajunta_lda_split)
+
 ```
 
 ### Build Model
@@ -741,10 +777,12 @@ lajunta_lda_test <- rsample::testing(lajunta_lda_split)
 Now, let's fit the model and see the results:
 
 ```{r lda model, results = "show"}
+
 lajunta_lda_fit <- MASS::lda(Reprod ~ Price + Weight + Quantity,
                              data = lajunta_lda_train)
 
 lajunta_lda_fit
+
 ```
 
 ### Interpretation
@@ -774,8 +812,10 @@ Displays the percentage separation achieved by each linear discriminant function
 Following our prepare-split-train process, we have now come to the step where we analyze the test data.
 
 ```{r lda predictions}
+
 lajunta_lda_probs <- predict(lajunta_lda_fit,
                              lajunta_lda_test)
+
 ```
 
 There are three elements of a list from this prediction--the predicted class, posterior probability than an observation belongs to each class (the probability of the observation being a steer, heifer, bull, or cow--with these four probabilities summing up to 1), and the linear discriminants.
@@ -783,9 +823,11 @@ There are three elements of a list from this prediction--the predicted class, po
 Let's see the first few posterior probabilities in the test set:
 
 ```{r lda posterior probs table, echo = FALSE, results = "show"}
+
 knitr::kable(lajunta_lda_probs$posterior %>% 
                as_tibble() %>% 
                slice(1:8))
+
 ```
 
 I imagine that I am losing you by this point, because the outcome for these classification problems all approximate the same thing (that the graph in the introduction shows plain as day). I think it is good to use several approaches to confirm results, however, because that only strengthens our understanding of the interaction between the variables.
@@ -795,11 +837,13 @@ With that being said, observation of the above table once again confirms that th
 The question I think you are likely most interested in, "Does LDA perform better than KNN or any of the logistic regressions," can be answered easily by comparing the model's classifications of the test data to the actual observations in the test set.
 
 ```{r lda accuracy, eval = FALSE}
+
 # For you non-R programmers out there,
 # R mathematical functions translate
 # TRUE's into 1's and FALSE's into 0's.
 # In other words, sum(TRUE, TRUE, FALSE) returns 2.
 mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod)
+
 ```
 
 Drum roll please! The model correctly identified the true reproductive status `r 100 * round(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod), 2)` percent of the time! `r ifelse(mean(lajunta_lda_probs$class == lajunta_lda_test$Reprod) > acc[which(acc == max(acc))[1]], "LDA performed better than KNN clustering. For future predictions, it's a good thing this method was checked!", "Well, at least now we know that KNN is a better predictor if we want to classify reproductive status in the future!")` Regardless, they are both reasonably close to one another, so KNN is probably a better choice.
@@ -821,6 +865,7 @@ ggplot(lajunta_lda_plot, aes(y = LD1, x = LD2)) +
   xlim(-10, 10) +
   ggtitle("Linear Discriminant 1 vs Linear Discriminant 2") +
   theme_dark()
+
 ```
 
 We could make similar plots using LD3 as well, but LD1 and LD2 are by far the most important linear discriminants. There is no real justification for including LD3.
@@ -861,6 +906,7 @@ plotly::plot_ly(x = lajunta %>%
                   dplyr::select(Reprod) %>% 
                   unlist()) %>% 
   layout(title = "Livestock by Weight (x), Price (y), and Quantity (z)")
+
 ```
 
 
@@ -883,10 +929,6 @@ lajunta_svm <- lajunta %>%
          !is.na(Type),
          !is.na(is_Steer))
 
-
-
-
-
 ```
 
 
@@ -895,6 +937,7 @@ lajunta_svm <- lajunta %>%
 Alright, let's make the split:
 
 ```{r svm sampling}
+
 # Setting the random number stream
 set.seed(2021)
 # transforming character vectors into factors
@@ -914,6 +957,7 @@ lajunta_svm_test <- testing(lajunta_svm_split)
 Multiple different kernel functions will be tried to find the best fit. Radial basis functions are usually a go-to for these types of operations, and so this is the one I am most interested in.
 
 ```{r svm computation}
+
 # linear
 lajunta_svm_classifier <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
                               type = "C-classification", kernel = "linear")
@@ -933,6 +977,7 @@ lajunta_svm_classifier4 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weig
 # radial
 lajunta_svm_classifier5 <- svm(data = lajunta_svm_train, is_Steer ~ Price + Weight + Quantity, 
                                type = "C-classification", kernel = "radial")
+
 ```
 
 
@@ -946,6 +991,7 @@ As usual, we now check the model's performance using the test dataset.
 #### Test Set
 
 ```{r svm test results}
+
 # linear
 lajunta_svm_predict <- predict(lajunta_svm_classifier, newdata = lajunta_svm_test %>% 
                                  dplyr::select(Weight, Price, Quantity, is_Steer))
@@ -965,6 +1011,7 @@ lajunta_svm_predict4 <- predict(lajunta_svm_classifier4, newdata = lajunta_svm_t
 # radial
 lajunta_svm_predict5 <- predict(lajunta_svm_classifier5, newdata = lajunta_svm_test %>% 
                                   dplyr::select(Weight, Price, Quantity, is_Steer))
+
 ```
 
 
@@ -972,6 +1019,7 @@ lajunta_svm_predict5 <- predict(lajunta_svm_classifier5, newdata = lajunta_svm_t
 Now, let's see how the classifier performed with a confusion matrix:
 
 ```{r svm confusion matrix, echo = FALSE, results = "show"}
+
 # linear
 knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict, lajunta_svm_test$is_Steer), caption = "Linear Kernel Function")
 
@@ -986,6 +1034,7 @@ knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict4, lajunta_svm
 
 # radial
 knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict5, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function")
+
 ```
 
 
@@ -1050,6 +1099,7 @@ knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict7, lajunta_svm
 
 # radial, with Date and Type
 knitr::kable(InformationValue::confusionMatrix(lajunta_svm_predict8, lajunta_svm_test$is_Steer), caption = "Radial Kernel Function (with Date and Type)")
+
 ```
 
 It would appear that the Type column increases misclassification error. That's too bad--with no prior knowledge, I really thought that the type of cattle would influence the price. I spent a lot of time organizing that column. All the work that went into that was not in vain, though, since I would not have been able to disprove the fact that the type of cattle has no bearing on its price without doing the overhead.
