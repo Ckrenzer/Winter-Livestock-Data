@@ -671,7 +671,7 @@ I have been changing the URLs around to find different data, and the market repo
 #urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
 # the last-used market report URL
-urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13457#marketreport"
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13479#marketreport"
 
 #the most recent market report
 #NOTE: the URL column will not contain the market report number!!!
