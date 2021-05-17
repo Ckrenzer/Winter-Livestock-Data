@@ -62,3 +62,6 @@ The files have been reorganized so that the file names clearly indicate the cont
 New experiments with this data will be made behind the scenes. When I create something interesting, it will be added to the repo. Random thoughts will be exluded!
 
 Finally, HTML output will now be ignored and removed from the repo. If you want to see the results, either ask me or knit the documents yourself!
+
+### UPDATE 5/17/2021
+Yeah, actually, I will be keeping the HTML output in the repository. It will be in it's own dedicated folder, 'Output'.
