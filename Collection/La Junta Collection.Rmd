@@ -927,13 +927,6 @@ lajunta %>%
   filter(URL == "http://www.winterlivestock.com/lajunta.php") %>% 
   as.data.frame()
 
-# to fix, pull the url and add it to the right hand side of the following statement:
-#PERMANENT_URL_LINK <- "http://www.winterlivestock.com/lajunta.php?reportID=13420#marketreport"
-
-#lajunta$URL[which(lajunta$URL == "http://www.winterlivestock.com/lajunta.php")] <- PERMANENT_URL_LINK
-
-
-#lajunta$URL[which(lajunta$Date == "2021-04-20")] <- "http://www.winterlivestock.com/lajunta.php?reportID=13396#marketreport"
 
 
 
