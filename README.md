@@ -9,7 +9,7 @@ To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https:
 To see the output for 'La Junta Classification Models.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Output/La-Junta-Classification-Models.html).
 
 ## UPDATES
-Major changes to this repo are listed with each update. I write these updates arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
+Major changes to this repo are listed with each update. Updates are written arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
 ### UPDATE 2/2/2021 ----------------------------------------------
 Winter Livestock changed their market report format for La Junta, CO. The "La Junta.R" script works well for market reports with the old format, in which the text looks well spaced with paragraphs on your browser. For those market reports that have no spacing between the values and look like one really long paragraph, use the "La Junta long format.R" script.
