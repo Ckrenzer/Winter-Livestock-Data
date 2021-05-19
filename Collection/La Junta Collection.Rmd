@@ -670,12 +670,14 @@ I have been changing the URLs around to find different data, and the market repo
 # This parses together different market report IDs and stores them in a vector
 #urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
 
+
+#the most recent market report, without the permalink
+#NOTE: the URL column will not contain the market report number!!!
+urls <- "http://www.winterlivestock.com/lajunta.php"
+
 # the last-used market report URL
 urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13498#marketreport"
 
-#the most recent market report
-#NOTE: the URL column will not contain the market report number!!!
-urls <- "http://www.winterlivestock.com/lajunta.php"
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
