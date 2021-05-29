@@ -70,3 +70,6 @@ Finally, HTML output will now be ignored and removed from the repo. If you want 
 
 ### UPDATE 5/17/2021
 Yeah, actually, I will be keeping the HTML output in the repository. It will be in it's own dedicated folder, 'Output'.
+
+### UPDATE 5/28/2021
+Added all URLs to a text file to shorten the collection() function's runtime, simplified the logic in the use and creation of csv files.
