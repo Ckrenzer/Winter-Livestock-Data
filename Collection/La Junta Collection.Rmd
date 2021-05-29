@@ -69,7 +69,7 @@ if(file.exists("La Junta Market Reports.csv")){
 
 # Collection()
 
-This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program by a negligible amount, but I'm keeping them in to simplify debugging.
+This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program, but I'm keeping them in to simplify debugging.
 
 ```{r collection(), eval = FALSE}
 
@@ -700,21 +700,19 @@ A copy of the csv file will be created so we don't have to rerun the collection(
 
 # Step 0: save a copy of the uncleaned file if we don't already have one!
 if(!file.exists("La Junta Market Reports (before cleaning).csv")){
+  
+  # "La Junta Market Reports.csv" is unclean if this line executes
   file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
   
-  #Read in LJMR.csv to clean (if this code executes, this file is unclean)
-  lajunta <- readr::read_csv("La Junta Market Reports.csv", 
-                             col_names = F)
-} else {
-  # If the above chunk did not execute, the file already exists in our system. That means we want to append new data to LJMR(bc).csv instead of the already clean LJMR.csv; the plan if this conditional executes is to read in the uncleaned version, clean it, then overwrite the (outdated) clean version of the csv file.
-  
-  # This is useful for updating the file each week without having to scrape the entire website again.
-  
-  #Reads in the uncleaned version of the csv
-  lajunta <- readr::read_csv("La Junta Market Reports (before cleaning).csv", 
-                             col_names = F)
-  
-}#end of conditional
+}
+
+# Reads in the uncleaned version of the csv, which should be a copy
+# of "La Junta Market Reports.csv" if you are 'starting fresh'
+lajunta <- readr::read_csv("La Junta Market Reports (before cleaning).csv", 
+                           col_names = F)
+
+
+
 
 # Step 1: adding a header to the csv --------------------------
 # Adding in the column names [this will throw an error which we can ignore if we read in the LJMR(bc).csv file]
@@ -740,15 +738,15 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 # (removing values with 's' as the last letter before this step)
 lajunta <- lajunta %>% 
   mutate(Type = str_remove_all(Type, "s$"),
-  Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"))
+         Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"))
 
 lajunta <- lajunta %>% 
   mutate(Reprod = Reprod %>% 
-  str_replace_all("pair", "cow") %>% #replacing 'pair' with cow. It seemed reasonable...
-  str_replace_all("bow", "cow") %>%  #replacing a typo with the intended value
-  str_replace_all("hrf|hr", "hfr") %>% #replacing typos with the intended values
-  str_replace_all("heifer", "hfr") %>% #shortening name
-  str_replace_all("steer", "str")) #shortening name
+           str_replace_all("pair", "cow") %>% #replacing 'pair' with cow. It seemed reasonable...
+           str_replace_all("bow", "cow") %>%  #replacing a typo with the intended value
+           str_replace_all("hrf|hr", "hfr") %>% #replacing typos with the intended values
+           str_replace_all("heifer", "hfr") %>% #shortening name
+           str_replace_all("steer", "str")) #shortening name
 
 
 
