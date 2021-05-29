@@ -678,12 +678,22 @@ I have been changing the URLs around to find different data, and the market repo
 ```{r urls-execute, eval = FALSE}
 
 # This parses together different market report IDs and stores them in a vector
+# (useful for when you do not know the URLs beforehand)
 #urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:14000, "#marketreport")
 
 
 #the most recent market report, without the permalink
 #NOTE: the URL column will not contain the market report number!!!
-urls <- "http://www.winterlivestock.com/lajunta.php"
+#urls <- "http://www.winterlivestock.com/lajunta.php"
+
+
+# This contains all the La Junta market report URLs for easy access
+# (recommended if you plan to re-collect the data from scratch--just
+# do not forget the possibility that some market reports could have
+# been missed, if you really think it necessary to recollect this data)
+urls <- read_lines("Collection/La Junta URLs.txt")
+
+
 
 # the last-used market report URL
 urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13526#marketreport"
@@ -907,6 +917,12 @@ write_csv(x = lajunta,
           file = "La Junta Market Reports.csv",
           append = F,
           col_names = T)
+
+
+# Writing the URLs to a file
+write_lines(x = unique(lajunta$URL),
+            file = "Collection/La Junta URLs.txt",
+            append = F)
 
 ```
 
