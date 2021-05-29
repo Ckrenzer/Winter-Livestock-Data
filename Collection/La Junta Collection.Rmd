@@ -715,7 +715,7 @@ lajunta <- readr::read_csv("La Junta Market Reports (before cleaning).csv",
 
 
 # Step 1: adding a header to the csv --------------------------
-# Adding in the column names [this will throw an error which we can ignore if we read in the LJMR(bc).csv file]
+# Adding in the column names
 lajunta <- lajunta %>% 
   rename("Date" = X1,
          "Buyer" = X2,
@@ -737,8 +737,9 @@ lajunta$Date <- lubridate::mdy(lajunta$Date)
 # Making a column assigning cattle reproductive status
 # (removing values with 's' as the last letter before this step)
 lajunta <- lajunta %>% 
-  mutate(Type = str_remove_all(Type, "s$"),
-         Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"))
+  mutate(Type = str_remove_all(Type, "s$")) %>% 
+  mutate(Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"),
+         .before = 7)
 
 lajunta <- lajunta %>% 
   mutate(Reprod = Reprod %>% 
