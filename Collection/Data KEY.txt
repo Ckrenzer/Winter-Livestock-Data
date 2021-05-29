@@ -14,6 +14,7 @@
 > gel is gelbvieh
 > bfmstr is beefmaster
 > mot is ?????
+> here is hereford
 > me is maine-anjou
 > sthrn is shorthorn
 > lnhrn is longhorn
@@ -58,7 +59,7 @@
 > moved "str," "hfr," "bull," and "cow" to a new column, `Reprod`
 
 > cattle whose only information was the color are coded as "clr"
-> brahman and hereford cattle were assigned "clr" due to few observations
+> many types of cattle were assigned "clr" due to few observations
 > bwf stands for "black white faced" but is lumped into the "clr" category (when not a subcategory)
 > wf stands for "white faced" but is lumped into the "clr" category (when not a subcategory)
 > rwf stands for "red white faced" but is lumped into the "clr" category (when not a subcategory)
