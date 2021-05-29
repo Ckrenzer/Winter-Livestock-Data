@@ -55,17 +55,6 @@ pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, clock, ggplot2, h
 
 ```
 
-# Remove File
-
-If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
-
-```{r remove csv, eval = FALSE}
-
-if(file.exists("La Junta Market Reports.csv")){
-  file.remove("La Junta Market Reports.csv")
-}
-
-```
 
 # Collection()
 
@@ -661,14 +650,35 @@ collection <- function(urls){
 
 ```
 
+
+
+
+
+
+# Remove File
+
+If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
+
+```{r remove csv, eval = FALSE}
+
+if(file.exists("La Junta Market Reports.csv")){
+  file.remove("La Junta Market Reports.csv")
+}
+
+```
+
+
+
+
+
 # Implementation
 
-I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 13500. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
+I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 14000. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
 
 ```{r urls-execute, eval = FALSE}
 
 # This parses together different market report IDs and stores them in a vector
-#urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:13500, "#marketreport")
+#urls <- paste0("http://www.winterlivestock.com/lajunta.php?reportID=", 6680:14000, "#marketreport")
 
 
 #the most recent market report, without the permalink
