@@ -654,23 +654,6 @@ collection <- function(urls){
 
 
 
-
-# Remove File
-
-If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
-
-```{r remove csv, eval = FALSE}
-
-if(file.exists("La Junta Market Reports.csv")){
-  file.remove("La Junta Market Reports.csv")
-}
-
-```
-
-
-
-
-
 # Implementation
 
 I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 14000. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
@@ -696,13 +679,32 @@ urls <- read_lines("Collection/La Junta URLs.txt")
 
 
 # the last-used market report URL
-urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13526#marketreport"
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13536#marketreport"
 
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
 
 ```
+
+
+
+
+
+
+# Remove File
+
+If you would like to remove the csv file on your computer when updating data (meaning you would like to start from scratch), you can run the below chunk to remove the file.
+
+```{r remove csv, eval = FALSE}
+
+if(file.exists("La Junta Market Reports.csv")){
+  file.remove("La Junta Market Reports.csv")
+}
+
+```
+
+
 
 # Cleaning
 
