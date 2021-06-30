@@ -679,7 +679,7 @@ urls <- read_lines("Collection/La Junta URLs.txt")
 
 
 # the last-used market report URL
-urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13584#marketreport"
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13619#marketreport"
 
 
 # No need to save the output--this function writes to a csv file...
@@ -1032,7 +1032,7 @@ lajunta %>%
 # REPROD -__-__-__-__-__-__-__-__-__-__-
 # see any patterns?
 lajunta %>% 
-  select(Type, Weight, Reprod, URL) %>% 
+  dplyr::select(Type, Weight, Reprod, URL) %>% 
   filter(is.na(Reprod)) %>% 
   as.data.frame()
 
