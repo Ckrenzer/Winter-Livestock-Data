@@ -73,3 +73,6 @@ Yeah, actually, I will be keeping the HTML output in the repository. It will be 
 
 ### UPDATE 5/28/2021
 Added all URLs to a text file to shorten the collection() function's runtime, simplified the logic in the use and creation of csv files.
+
+### UPDATE 7/1/2021
+Added a new Shiny app serving as a dashboard for the Lajunta, CO market.
