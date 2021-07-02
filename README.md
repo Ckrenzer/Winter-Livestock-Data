@@ -5,11 +5,14 @@ Please note that this repository can only be updated after the folks over at Win
 
 # Output
 To see the Lajunta dashboard, run the following code in your R console:
-`if(!require(shiny)) install.packages("shiny")
+
+```
+if(!require(shiny)) install.packages("shiny")
 shiny::runGitHub(repo = "Winter-Livestock-Data",
                  username = "Ckrenzer",
                  subdir = "Analysis/Dashboards/Lajunta_Dashboard",
-                 ref = "main")`
+                 ref = "main")
+```
 
 To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Output/La-Junta-Price-Estimation.html).
 
