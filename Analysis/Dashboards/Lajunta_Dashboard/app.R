@@ -401,12 +401,28 @@ server <- function(input, output) {
     })
     
     output$distribution_plot <- renderPlot({
-        plot_densities(lajunta)
+        plot_densities(outliers_removed)
     })
     # Toggles the distribution graphs
     observeEvent(input$distributions, {
         toggle("distribution_plot")
     })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
