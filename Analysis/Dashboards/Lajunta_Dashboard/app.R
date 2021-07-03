@@ -1,5 +1,5 @@
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(shiny, shinycssloaders, shinyjs, dplyr, lubridate, clock, readr, ggplot2, patchwork, plotly, forecast, tseries)
+pacman::p_load(shiny, shinycssloaders, shinyjs, dplyr, magrittr, lubridate, clock, readr, ggplot2, patchwork, plotly, forecast, tseries)
 
 
 # Reading in the file and removing the URL column
@@ -292,6 +292,7 @@ plot_densities <- function(df){
 
 # Define UI for application that draws a histogram
 ui <- navbarPage("Lajunta, CO Market Overview",
+                 selected = "Visuals",
                  
                  # Initializing shinyjs
                  useShinyjs(),
@@ -303,7 +304,33 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  
                  tabPanel("Price Summary",
+                          
+                          
+                          
                           sidebarPanel(
+                              
+                              
+                              helpText("Supply a reproductive status, weight range, and date range (make the dates the same to check one sale) to find the average price for cattle meeting the specifications."),
+                              
+                              
+                              # Determines the reproductive status for price calculations
+                              selectInput("reprod",
+                                          "What reproductive status are you interested in?",
+                                          choices = list("Steer" = "str",
+                                                         "Heifer" = "hfr",
+                                                         "Cow" = "cow",
+                                                         "Bull" = "bull"),
+                                          selected = "str"),
+                              
+                              # Determines the weight range for price calculations
+                              sliderInput("weight_range", "Weight Range:",
+                                          min = 100,
+                                          max = 2800,
+                                          value = c(0, 2800),
+                                          step = 10,
+                                          post = " pounds",
+                                          width = 600),
+                              
                               # Determines the date range to show in the data
                               dateRangeInput(inputId = "daterange",
                                              label = "Date range:",
@@ -314,8 +341,12 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                              format = "yyyy-mm-dd",
                                              separator = " THROUGH "),
                               
+                              
+                              helpText("The date range allows you to choose dates to include for your historical price calculation. It also adjusts the data shown in the historical price data. Further, the date range decides which data to include on the download button."),
+                              
+                              
                               # Allows the user to download the dataset
-                              downloadButton("market_report", "Get data (filtered by input dates)"),
+                              downloadButton("market_report", "Get data (in date range)"),
                               
                               # Determines whether to show the graphs
                               checkboxInput(
@@ -338,6 +369,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           
                           # Put all outputs for this tab here
                           mainPanel(
+                              verbatimTextOutput("price_summary"),
                               plotOutput("price_changes_over_time") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("moving_average"),
                               plotOutput("six_month_forecast", height = 1600)
@@ -444,7 +476,13 @@ server <- function(input, output) {
     })
     
     
-    
+    # The dataset filtered by date, reproductive statues, and weight
+    price_summary_data <- reactive({
+        date_filtered_data() %>% 
+            filter(Reprod == input$reprod,
+                   Weight >= input$weight_range[1],
+                   Weight <= input$weight_range[2])
+    })
     
     
     
@@ -458,6 +496,31 @@ server <- function(input, output) {
             write_csv(x = date_filtered_data(), file = file, col_names = TRUE)
         }
     )
+    
+    
+    output$price_summary <- renderPrint({
+        price <- price_summary_data() %>% 
+            dplyr::pull(Price) %>% 
+            mean() %>% 
+            divide_by(100) %>% 
+            round(2)
+        
+        if(is.nan(price)){
+            price <- "(NO DATA)"
+        }
+        
+        reproductive_status <- case_when(
+            input$reprod == "str" ~ "steers",
+            input$reprod == "hrr" ~ "heifers",
+            input$reprod == "cow" ~ "cows",
+            input$reprod == "bull" ~ "bulls"
+        )
+        
+        cat("Average price of ", reproductive_status, " matching your criteria: $", price, sep = "")
+    })
+    
+    
+    
     
     output$price_changes_over_time <- renderPlot({
         
