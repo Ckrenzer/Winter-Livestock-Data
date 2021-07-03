@@ -24,6 +24,82 @@ outliers_removed <- lajunta %>%
 
 # Helper functions--these may be moved to their own Rscripts,
 # but keeping things in one file makes things simpler...
+# Added in the order they are used in the server() function
+
+# Price changes over time using the median to calculate the weekly average
+price_change_over_time <- function(df){
+    plot1 <- df %>%  
+        filter(Reprod %in% c("str", "hfr")) %>% 
+        group_by(Date, Reprod) %>% 
+        summarize(Price = median(Price)) %>% 
+        ggplot() +
+        geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
+        facet_wrap(~Reprod) +
+        ggtitle("Median Weekly Price") +
+        theme_dark()
+    
+    
+    plot2 <-  df %>%  
+        filter(Reprod %in% c("bull", "cow")) %>% 
+        group_by(Date, Reprod) %>% 
+        summarize(Price = median(Price)) %>% 
+        ggplot() +
+        geom_line(mapping = aes(x = Date, y = Price), color = "orange") +
+        facet_wrap(~Reprod) +
+        theme_dark()
+    
+    # using patchwork's "/" operator
+    plot1 / plot2
+}#end of price_change_over_time()
+
+
+# A simple moving average
+simple_moving_average <- function(df, reprod_status, variable_name, n){
+    weekly_avg <- df %>% 
+        filter(Reprod == reprod_status) %>%  
+        group_by(Date) %>% 
+        summarize("mean_price" = mean({{variable_name}}))
+    
+    avg <- numeric(nrow(weekly_avg) - n)
+    
+    #pre-allocating space in a vector
+    last_date_in_period <- character(nrow(weekly_avg) - n)
+    
+    for(i in n:nrow(weekly_avg)){
+        avg[(i-n)] <- mean(weekly_avg$mean_price[(i-(n-1)):i])
+        last_date_in_period[i-n] <- as.character(weekly_avg$Date[i])
+        
+    }
+    last_date_in_period <- as.Date(last_date_in_period)
+    
+    sma_results <- data.frame(Date = last_date_in_period, Avg_Price = avg) %>% 
+        ggplot() +
+        geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+        xlab("Final Date in Period") +
+        ylab("Average Price") +
+        theme_dark()
+    
+    return(sma_results)
+    
+}#end of simple_moving_average()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Plots weight against price
 plot_weight_vs_price <- function(df){
@@ -191,12 +267,33 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  tabPanel("Price Summary",
                           sidebarPanel(
-                              #
-                          ),
+                              # Determines the date range to show in the data
+                              dateRangeInput(inputId = "daterange",
+                                             label = "Date range:",
+                                             start  = "2016-01-05",
+                                             end    = max(lajunta$Date),
+                                             min    = "2016-01-05",
+                                             max    = max(lajunta$Date),
+                                             format = "yyyy-mm-dd",
+                                             separator = " THROUGH "),
+                              
+                              # Determines the number of weeks to use in the sma calculation
+                              sliderInput(inputId = "numweeks",
+                                          label = "How many weeks do you want to use for the moving average?",
+                                          min = 4,
+                                          max = 52,
+                                          step = 4,
+                                          value = 4,
+                                          post = "weeks"
+                              ),
+                              
+                          ),#end of sidebarPanel()
                           
                           # Put all outputs for this tab here
                           mainPanel(
-                              plotOutput("lajunta") %>% withSpinner(color = "#0dc5c1")
+                              plotOutput("price_changes_over_time") %>% withSpinner(color = "#0dc5c1"),
+                              plotOutput("moving_average"),
+                              plotOutput("six_month_forecast")
                           )
                  ),
                  
@@ -293,6 +390,67 @@ ui <- navbarPage("Lajunta, CO Market Overview",
 server <- function(input, output) {
     
     # 'Price Summary' Tab Output
+    output$price_changes_over_time <- renderPlot({
+        
+        # Making sure the date goes between the user's input dates
+        lajunta %>% 
+            filter(Date >= input$daterange[1],
+                   Date <= input$daterange[2]) %>% 
+            price_change_over_time()
+        
+    })
+    
+    output$moving_average <- renderPlot({
+        
+        # Making sure the date goes between the user's input dates
+        data <- lajunta %>% 
+            filter(Date >= input$daterange[1],
+                   Date <= input$daterange[2])
+        
+        
+        
+        # Building the plots
+        steer_sma_plot <- data %>% 
+            simple_moving_average(df = .,
+                                  reprod_status = "str",
+                                  variable_name = Price,
+                                  n = input$numweeks) +
+            ggtitle("Steer")
+        
+        heifer_sma_plot <- data %>% 
+            simple_moving_average(df = .,
+                                  reprod_status = "hfr",
+                                  variable_name = Price,
+                                  n = input$numweeks) +
+            ggtitle("Heifer")
+        
+        cow_sma_plot <- data %>% 
+            simple_moving_average(df = .,
+                                  reprod_status = "cow",
+                                  variable_name = Price,
+                                  n = input$numweeks) +
+            ggtitle("Cow")
+        
+        bull_sma_plot <- data %>% 
+            simple_moving_average(df = .,
+                                  reprod_status = "bull",
+                                  variable_name = Price,
+                                  n = input$numweeks) +
+            ggtitle("Bull")
+        
+        
+        # The graph to return
+        steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = paste0("The Simple Moving Average Using the Previous ",  input$numweeks, " Sales"))
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
