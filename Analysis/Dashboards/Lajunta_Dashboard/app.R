@@ -143,7 +143,7 @@ plot_weight_vs_price <- function(df){
     df %>% 
         ggplot() +
         geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
-        ggtitle("Price vs. Weight") +
+        ggtitle("Weight vs. Price") +
         theme_dark()
     
 }#end of plot_weight_vs_price()
@@ -369,6 +369,8 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           
                           # Put all outputs for this tab here
                           mainPanel(
+                              h1("Historical Prices"),
+                              p("Below you will find a tool that finds the mean price based on the reproductive status, weight, price, and date of cattle. Below that are graphs containing the raw prices over time, simple moving averages, and price forecasts using ARIMA models."),
                               verbatimTextOutput("price_summary"),
                               plotOutput("price_changes_over_time") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("moving_average"),
@@ -428,7 +430,9 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           
                           # The four plots for this tab
                           mainPanel(
-                              plotOutput("weight_vs_price_plot"),
+                              h1("Granular Information"),
+                              p("My favorite graph, the \"Weight vs. Price\" graph...It can be adjusted to show a couple different breakdowns. The 'cattle in each category' graphs show the number of times a given type of cattle was shown in the dataset (it is NOT a sum of the cattle quantities). If you feel so inclined, the 3D graph is interactive and can be explored at your leisure. Finally, at the bottom are some Honest-to-God probability density functions. Did someone say lognormal?"),
+                              plotOutput("weight_vs_price_plot") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("raw_counts_plots"),
                               plotlyOutput("plotly_3d"),
                               plotOutput("distribution_plot", height = 1200)
