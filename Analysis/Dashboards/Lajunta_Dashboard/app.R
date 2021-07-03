@@ -1,3 +1,4 @@
+# PACKAGES --------------------------------------
 if(!require("pacman")) install.packages("pacman")
 pacman::p_load(shiny, shinycssloaders, shinyjs,
                dplyr, magrittr, lubridate, clock, readr,
@@ -6,6 +7,7 @@ pacman::p_load(shiny, shinycssloaders, shinyjs,
                tidymodels, randomForest)
 
 
+# DATA SETUP ------------------------------------
 # Reading in the file and removing the URL column
 # Fortunately, we only have to do this once
 lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
@@ -24,9 +26,25 @@ lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Li
 outliers_removed <- lajunta %>% 
     filter(Price < 475)
 
+# recodes bulls that act like steers on the market as steers
+# and similarly for cows that act like heifers
+model_data <- outliers_removed %>% 
+    dplyr::select(-Buyer) %>% 
+    mutate(Price = log(Price),
+           Reprod = as.character(Reprod),
+           Reprod = case_when(
+               Reprod == "bull" && Weight < 1050 ~ "str",
+               Reprod == "cow" && Price > 100 ~ "hfr",
+               TRUE ~ Reprod),
+           Reprod = as.factor(Reprod)
+    )
 
 
-# Helper functions--these may be moved to their own Rscripts,
+
+
+
+# HELPER FUNCTIONS ------------------------------
+# These may be moved to their own Rscripts,
 # but keeping things in one file makes things simpler...
 # Added in the order they are used in the server() function
 
@@ -55,7 +73,6 @@ price_change_over_time <- function(df){
     # using patchwork's "/" operator
     plot1 / plot2
 }#end of price_change_over_time()
-
 
 # A simple moving average
 simple_moving_average <- function(df, reprod_status, variable_name, n){
@@ -86,7 +103,6 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
     return(sma_results)
     
 }#end of simple_moving_average()
-
 
 # Plots the results of an arima model forecasting 6mo into the future
 arima_plot <- function(df, reprod, reprod_fullname, lags, diff_deg, ma_term){
@@ -141,7 +157,6 @@ arima_plot <- function(df, reprod, reprod_fullname, lags, diff_deg, ma_term){
     return(price_forecast)
 }#end of arima_plot()
 
-
 # Plots weight against price
 plot_weight_vs_price <- function(df){
     df %>% 
@@ -151,7 +166,6 @@ plot_weight_vs_price <- function(df){
         theme_dark()
     
 }#end of plot_weight_vs_price()
-
 
 # Counts the number of observations in the data
 plot_counts <- function(df){
@@ -184,7 +198,7 @@ plot_counts <- function(df){
     return(cattle_type + cattle_reprod)    
 }#end of plot_counts()
 
-
+# Plots the distribution functions of the variables
 plot_densities <- function(df){
     
     # The plots to be built
@@ -286,13 +300,96 @@ plot_densities <- function(df){
     return(return_plot)
 }#end of plot_densities()
 
+# Fits a model based on the reproductive status
+fit_models <- function(df, reprod){
+    # Setting the random number generator
+    set.seed(2021)
+    
+    # Testing and training splits
+    initial_split_data <- df %>% 
+        dplyr::filter(Reprod == reprod) %>% 
+        dplyr::select(-Reprod) %>% 
+        initial_split(prob = 0.75)
+    training_set <- training(initial_split_data)
+    testing_set <- testing(initial_split_data)
+    
+    # Model specifications
+    lm_mod <- linear_reg() %>% 
+        set_mode("regression") %>% 
+        set_engine("lm")
+    rf_mod <- rand_forest() %>% 
+        set_mode("regression") %>% 
+        set_engine("randomForest")
+    
+    # Model fitting
+    lm_fit <- lm_mod %>% 
+        fit(Price ~ Date + Weight + Quantity, data = training_set)
+    rf_fit <- rf_mod %>% 
+        fit(Price ~ Date + Weight + Quantity, data = training_set)
+    
+    return(list(lm_fit = lm_fit, rf_fit = rf_fit, test = testing_set))
+}#end of fit_models()
+
+# Calculates the price to be passed to price_calculation({})
+price_converter <- function(model, date, weight, quantity, reprod){
+    # Extracting the predicted price based on the inputs
+    price <- predict(object = model,
+                     new_data = tibble(Date = date,
+                                       Weight = weight,
+                                       Quantity = quantity,
+                                       Reprod = reprod)) %>% 
+        pull(.pred)
+    
+    # Converting the price to dollars, from log(cents)
+    price <- round((exp(price) / 100), 2)
+    return(price)
+}#end of price_converter()
+
+# Creates the plots showing the root mean squared error
+plot_rmse <- function(trained_models, test_df){
+    # trained_models is a list containing the trained models
+    
+    # Calculating predicted values
+    results <- test_df %>% 
+        bind_cols(predict(trained_models[["lm_fit"]], test_df)) %>% 
+        rename(lm_estimates = .pred) %>% 
+        bind_cols(predict(trained_models[["rf_fit"]], test_df)) %>% 
+        rename(rf_estimates = .pred)
+    
+    # Converting the price back to original units
+    # and making a column that extracts the year, for plotting
+    results <- results %>% 
+        mutate(lm_estimates = exp(lm_estimates),
+               rf_estimates = exp(rf_estimates),
+               Price = exp(Price),
+               Year = as.factor(get_year(Date)))
+    
+    # The MSE output graphs
+    lm_rmse_plot <- results %>% 
+        ggplot(mapping = aes(x = Price, y = lm_estimates)) +
+        geom_abline(lty = 2, color = "gray50") +
+        geom_point(aes(color = Year), size = 1.5, alpha = 0.3, show.legend = FALSE) +
+        geom_smooth(method = "lm", se = FALSE) +
+        xlab("Actual Price") +
+        ylab("Predicted Price") +
+        ggtitle("Linear Regression")
+    
+    rf_rmse_plot <- results %>% 
+        ggplot(mapping = aes(x = Price, y = rf_estimates)) +
+        geom_abline(lty = 2, color = "gray50") +
+        geom_point(aes(color = Year), size = 1.5, alpha = 0.3, show.legend = FALSE) +
+        geom_smooth(method = "lm", se = FALSE) +
+        xlab("Actual Price") +
+        ylab("Predicted Price") +
+        ggtitle("Random Forest")
+    
+    return(lm_rmse_plot + rf_rmse_plot + plot_annotation(title = "Predicted vs. Actual Price, by Model")) 
+}#end of plot_rmse()
 
 
 
 
-
-
-
+# SHINY APP -------------------------------------
 
 # Define UI for application that draws a histogram
 ui <- navbarPage("Lajunta, CO Market Overview",
@@ -374,7 +471,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           # Put all outputs for this tab here
                           mainPanel(
                               h1("Historical Prices"),
-                              p("Below you will find a tool that finds the mean price based on the reproductive status, weight, price, and date of cattle. Below that are graphs containing the raw prices over time, simple moving averages, and price forecasts using ARIMA models."),
+                              p("The tool below calculates the mean price based on the reproductive status, weight, price, and date of sale (sales in the date range) for the cattle. The graphs under that contain raw prices over time, simple moving averages, and price forecasts using ARIMA models."),
                               verbatimTextOutput("price_summary"),
                               plotOutput("price_changes_over_time") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("moving_average"),
@@ -435,7 +532,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           # The four plots for this tab
                           mainPanel(
                               h1("Granular Information"),
-                              p("My favorite graph, the \"Weight vs. Price\" graph...It can be adjusted to show a couple different breakdowns. The 'cattle in each category' graphs show the number of times a given type of cattle was shown in the dataset (it is NOT a sum of the cattle quantities). If you feel so inclined, the 3D graph is interactive and can be explored at your leisure. Finally, at the bottom are some Honest-to-God probability density functions. Did someone say lognormal?"),
+                              p("My favorite graph, \"Weight vs. Price\"...It can be adjusted to show a couple different breakdowns. The 'cattle in each category' graphs show the number of times a given type of cattle was shown in the dataset (it is NOT a sum of the cattle quantities). If you feel so inclined, the 3D graph is interactive and can be explored at your leisure. Finally, at the bottom are some Honest-to-God probability density functions. Did someone say lognormal?"),
                               plotOutput("weight_vs_price_plot") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("raw_counts_plots"),
                               plotlyOutput("plotly_3d"),
@@ -459,13 +556,14 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  tabPanel("Price Estimation",
                           sidebarPanel(
-                              # Determines whether to fit the models
-                              checkboxInput(
-                                  inputId = "fit_models",
-                                  label = "Run models (this may take some time)?",
-                                  value = FALSE
-                              ),
-                              
+                              # Chooses which reproductive status price to predict
+                              selectInput("reprod_model",
+                                          "What reproductive status are you interested in?",
+                                          choices = list("Steer" = "str",
+                                                         "Heifer" = "hfr",
+                                                         "Cow" = "cow",
+                                                         "Bull" = "bull"),
+                                          selected = "str"),
                               
                               helpText("Please note that the models become less accurate the further into the future you try to predict."),
                               
@@ -498,7 +596,15 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           ),
                           
                           mainPanel(
-                              # ADD OUTPUTS HERE
+                              h1("Modelling"),
+                              p("This section creates models using the data and allow you to predict what the price will be at a future sale. It takes a long time to load due to the computationally-heavy tasks it performs on startup (~35 seconds with an Intel i5-8250U CPU)."),
+                              strong("Instructions"),
+                              p("Provide inputs to the sidebar on the left-hand side, and the models will return the predicted price."),
+                              p("You will want to use the performance metrics provided in the graphs below to judge the accuracy of the model. Accurate predictions are those where the line of best fit comes close to the dotted line. If the prediction the model gave out does not come close to the dotted line, do not trust the result."),
+                              strong("Use these models with caution--I am a data scientist, not a fortune-teller."),
+                              verbatimTextOutput("lm_price_estimation"),
+                              verbatimTextOutput("rf_price_estimation"),
+                              plotOutput("rmse") %>% withSpinner(color = "#0dc5c1")
                           )
                  )
 )#end of navbarPage()
@@ -780,8 +886,152 @@ server <- function(input, output) {
     
     
     # 'Price Estimation' Tab Output
+    # Fits the models and then returns them in a named list
+    model_fitting <- reactive({
+        steer_models <- fit_models(df = model_data, reprod = "str")
+        heifer_models <- fit_models(df = model_data, reprod = "hfr")
+        cow_models <- fit_models(df = model_data, reprod = "cow")
+        bull_models <- fit_models(df = model_data, reprod = "bull")
+        
+        model_list <- list(steer_models = steer_models,
+                           heifer_models = heifer_models,
+                           cow_models = cow_models,
+                           bull_models = bull_models)
+        
+        return(model_list)
+    })
+    
+    # Calculates the price to show in the prediction
+    price_calculation <- reactive({
+        
+        # Linear regression price estimates
+        steer_lm_price <- price_converter(model = model_fitting()[["steer_models"]][["lm_fit"]], 
+                                          date = input$sale_date, 
+                                          weight = input$sale_weight, 
+                                          quantity = input$sale_quantity, 
+                                          reprod = input$reprod_model)
+        
+        heifer_lm_price <- price_converter(model = model_fitting()[["heifer_models"]][["lm_fit"]], 
+                                           date = input$sale_date, 
+                                           weight = input$sale_weight, 
+                                           quantity = input$sale_quantity, 
+                                           reprod = input$reprod_model)
+        
+        cow_lm_price <- price_converter(model = model_fitting()[["cow_models"]][["lm_fit"]], 
+                                        date = input$sale_date, 
+                                        weight = input$sale_weight, 
+                                        quantity = input$sale_quantity, 
+                                        reprod = input$reprod_model)
+        
+        bull_lm_price <- price_converter(model = model_fitting()[["bull_models"]][["lm_fit"]], 
+                                         date = input$sale_date, 
+                                         weight = input$sale_weight, 
+                                         quantity = input$sale_quantity, 
+                                         reprod = input$reprod_model)
+        
+        # Random forest price estimates
+        steer_rf_price <- price_converter(model = model_fitting()[["steer_models"]][["rf_fit"]], 
+                                          date = input$sale_date, 
+                                          weight = input$sale_weight, 
+                                          quantity = input$sale_quantity, 
+                                          reprod = input$reprod_model)
+        
+        heifer_rf_price <- price_converter(model = model_fitting()[["heifer_models"]][["rf_fit"]], 
+                                           date = input$sale_date, 
+                                           weight = input$sale_weight, 
+                                           quantity = input$sale_quantity, 
+                                           reprod = input$reprod_model)
+        
+        cow_rf_price <- price_converter(model = model_fitting()[["cow_models"]][["rf_fit"]], 
+                                        date = input$sale_date, 
+                                        weight = input$sale_weight, 
+                                        quantity = input$sale_quantity, 
+                                        reprod = input$reprod_model)
+        
+        bull_rf_price <- price_converter(model = model_fitting()[["bull_models"]][["rf_fit"]], 
+                                         date = input$sale_date, 
+                                         weight = input$sale_weight, 
+                                         quantity = input$sale_quantity, 
+                                         reprod = input$reprod_model)
+        
+        # Adding all prices to a named list
+        all_prices <- list(steer_lm_price = steer_lm_price,
+                           steer_rf_price = steer_rf_price,
+                           heifer_lm_price = heifer_lm_price,
+                           heifer_rf_price = heifer_rf_price,
+                           cow_lm_price = cow_lm_price,
+                           cow_rf_price = cow_rf_price,
+                           bull_lm_price = bull_lm_price,
+                           bull_rf_price = bull_rf_price)
+        return(all_prices)
+    })
     
     
+    
+    # Shows the predicted price using a linear regression
+    output$lm_price_estimation <- renderPrint({
+        
+        price_category <- case_when(
+            input$reprod_model == "str" ~ "steer_lm_price",
+            input$reprod_model == "hfr" ~ "heifer_lm_price",
+            input$reprod_model == "cow" ~ "cow_lm_price",
+            TRUE ~ "bull_lm_price"
+        )
+        
+        # Extracting the predicted price based on the inputs
+        price <- price_calculation()[[price_category]]
+        
+        
+        cat("The estimated price using a linear model is $", price, " per pound.", sep = "")
+        
+    })
+    
+    # Shows the predicted price using a random forest regression
+    output$rf_price_estimation <- renderPrint({
+        
+        price_category <- case_when(
+            input$reprod_model == "str" ~ "steer_rf_price",
+            input$reprod_model == "hfr" ~ "heifer_rf_price",
+            input$reprod_model == "cow" ~ "cow_rf_price",
+            TRUE ~ "bull_rf_price"
+        )
+        
+        # Extracting the predicted price based on the inputs
+        price <- price_calculation()[[price_category]]
+        
+        
+        cat("The estimated price using a random forest model is $", price, " per pound.", sep = "")
+        
+    })
+    
+    # Shows the RMSE on the testing set
+    output$rmse <- renderPlot({
+        
+        # Stores the rmse plots into variables
+        steer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$steer_models[["lm_fit"]],
+                                                            rf_fit = model_fitting()$steer_models[["rf_fit"]]),
+                                      test_df = model_fitting()$steer_models[["test"]])
+        heifer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$heifer_models[["lm_fit"]],
+                                                             rf_fit = model_fitting()$heifer_models[["rf_fit"]]),
+                                       test_df = model_fitting()$heifer_models[["test"]])
+        cow_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$cow_models[["lm_fit"]],
+                                                          rf_fit = model_fitting()$cow_models[["rf_fit"]]),
+                                    test_df = model_fitting()$cow_models[["test"]])
+        bull_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$bull_models[["lm_fit"]],
+                                                           rf_fit = model_fitting()$bull_models[["rf_fit"]]),
+                                     test_df = model_fitting()$bull_models[["test"]])
+        
+        # Decides which plot to show
+        if(input$reprod_model == "str"){
+            return(steer_rmse_facet)
+        } else if(input$reprod_model == "hfr"){
+            return(heifer_rmse_facet)
+        } else if(input$reprod_model == "cow"){
+            return(cow_rmse_facet)
+        } else {
+            return(bull_rmse_facet) 
+        }#end of conditional
+    })
     
     
     
