@@ -1,20 +1,24 @@
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(shiny, shinycssloaders, shinyjs, dplyr, magrittr, lubridate, clock, readr, ggplot2, patchwork, plotly, forecast, tseries)
+pacman::p_load(shiny, shinycssloaders, shinyjs,
+               dplyr, magrittr, lubridate, clock, readr,
+               ggplot2, patchwork, plotly,
+               forecast, tseries,
+               tidymodels, randomForest)
 
 
 # Reading in the file and removing the URL column
 # Fortunately, we only have to do this once
-lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
-                    col_types = cols(Date = "D",
-                                     Buyer = col_factor(),
-                                     Quantity = col_double(),
-                                     Type = col_factor(),
-                                     Weight = col_double(),
-                                     Price = col_double(),
-                                     URL = col_character(),
-                                     Reprod = col_factor())) %>% 
+lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
+                           col_types = readr::cols(Date = "D",
+                                                   Buyer = readr::col_factor(),
+                                                   Quantity = readr::col_double(),
+                                                   Type = readr::col_factor(),
+                                                   Weight = readr::col_double(),
+                                                   Price = readr::col_double(),
+                                                   URL = readr::col_character(),
+                                                   Reprod = readr::col_factor())) %>% 
     dplyr::select(-URL) %>% 
-    filter(!is.na(Reprod))
+    dplyr::filter(!is.na(Reprod))
 
 # This is meant to speed up the runtime instead of placing it in multiple reactive functions
 outliers_removed <- lajunta %>% 
@@ -455,7 +459,42 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  tabPanel("Price Estimation",
                           sidebarPanel(
-                              # ADD INPUTS HERE
+                              # Determines whether to fit the models
+                              checkboxInput(
+                                  inputId = "fit_models",
+                                  label = "Run models (this may take some time)?",
+                                  value = FALSE
+                              ),
+                              
+                              
+                              helpText("Please note that the models become less accurate the further into the future you try to predict."),
+                              
+                              
+                              # Determines the date the user wants to sell for input to predict()
+                              dateInput(inputId = "sale_date",
+                                        label = "When do you plan to sell?",
+                                        value = Sys.Date(),
+                                        min = Sys.Date(),
+                                        max = NULL,
+                                        format = "yyyy-mm-dd"),
+                              
+                              # Determines the number of cattle to sell for input to predict()
+                              numericInput(inputId = "sale_quantity",
+                                           label = "How many animals do you plan to sell?",
+                                           min = 1,
+                                           max = Inf,
+                                           value = 1,
+                                           step = 10
+                              ),
+                              
+                              # Determines the number of cattle to sell for input to predict()
+                              numericInput(inputId = "sale_weight",
+                                           label = "What is the average weight of the livestock in this category?",
+                                           min = 100,
+                                           max = 3000,
+                                           value = 750,
+                                           step = 25
+                              )
                           ),
                           
                           mainPanel(
