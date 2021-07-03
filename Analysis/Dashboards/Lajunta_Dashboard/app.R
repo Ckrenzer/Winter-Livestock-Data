@@ -1,5 +1,5 @@
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(shiny, shinycssloaders, shinyjs, dplyr, lubridate, readr, ggplot2, patchwork, plotly)
+pacman::p_load(shiny, shinycssloaders, shinyjs, dplyr, lubridate, clock, readr, ggplot2, patchwork, plotly, forecast, tseries)
 
 
 # Reading in the file and removing the URL column
@@ -74,7 +74,7 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
     
     sma_results <- data.frame(Date = last_date_in_period, Avg_Price = avg) %>% 
         ggplot() +
-        geom_line(mapping = aes(x = Date, y = Avg_Price), color = "orange", size = 1) +
+        geom_line(mapping = aes(x = Date, y = Avg_Price), color = "green", size = 1) +
         xlab("Final Date in Period") +
         ylab("Average Price") +
         theme_dark()
@@ -84,21 +84,58 @@ simple_moving_average <- function(df, reprod_status, variable_name, n){
 }#end of simple_moving_average()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Plots the results of an arima model forecasting 6mo into the future
+arima_plot <- function(df, reprod, reprod_fullname, lags, diff_deg, ma_term){
+    
+    
+    # A date vector for forecasted dates
+    dates <- as.Date(character(26))
+    for(week_num in 1:26){
+        dates[week_num] <- clock::add_weeks(df$Date[df$Date == max(df$Date)], week_num)
+    }#end of for loop
+    
+    
+    avg_prices <- df %>% 
+        filter(Reprod == reprod) %>% 
+        group_by(Date) %>% 
+        summarize("median_price" = median(Price)) %>% 
+        mutate(
+            "cleaned_price" = tsclean(ts(median_price)),
+            "ma_6mo" = ma(cleaned_price, order = 26),
+            "seas_adj" = c(
+                rep(NA, 26),
+                seasadj(stl(ts(na.omit(ma_6mo), frequency = 26), s.window = "periodic"))
+            ), 
+            "seas_adj_diff" = c(rep(NA, diff_deg),
+                                diff(seas_adj, differences = diff_deg)
+            )
+        )
+    
+    
+    # The steer model
+    model_fit <- arima(avg_prices$seas_adj, order = c(lags, diff_deg, ma_term))
+    
+    # The predictions for the model, six months out.
+    price_predictions <- forecast(model_fit, h = 26)
+    
+    # Adding in the date column for the six month forecast
+    price_predictions <- as_tibble(price_predictions) %>% 
+        mutate(Date = dates)
+    
+    # The six month forecast
+    price_forecast <- ggplot() +
+        geom_line(data = avg_prices, mapping = aes(x = Date, y = seas_adj), color = "orange", size = 1) +
+        geom_ribbon(data = price_predictions, mapping = aes(x = Date, ymin = `Lo 95`, ymax = `Hi 95`),
+                    fill = "red") +
+        geom_ribbon(data = price_predictions, mapping = aes(x = Date, ymin = `Lo 80`, ymax = `Hi 80`), fill = "lightblue") +
+        geom_line(data = price_predictions, mapping = aes(x = Date, y = `Point Forecast`), color = "blue", size = 1) +
+        ggtitle(reprod_fullname) +
+        xlab("Date") +
+        ylab("Cents Per Pound") +
+        theme_dark()
+    
+    return(price_forecast)
+}#end of arima_plot()
 
 
 # Plots weight against price
@@ -137,11 +174,11 @@ plot_counts <- function(df){
                  show.legend = FALSE) +
         ggtitle("Counts by Reproductive Status") +
         xlab("Reproducive Status") +
+        ylab(NULL) +
         theme_dark()
     
     return(cattle_type + cattle_reprod)    
 }#end of plot_counts()
-
 
 
 plot_densities <- function(df){
@@ -277,6 +314,16 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                              format = "yyyy-mm-dd",
                                              separator = " THROUGH "),
                               
+                              # Allows the user to download the dataset
+                              downloadButton("market_report", "Get data (filtered by input dates)"),
+                              
+                              # Determines whether to show the graphs
+                              checkboxInput(
+                                  inputId = "hide_price_graphs",
+                                  label = "Hide graphs?",
+                                  value = FALSE
+                              ),
+                              
                               # Determines the number of weeks to use in the sma calculation
                               sliderInput(inputId = "numweeks",
                                           label = "How many weeks do you want to use for the moving average?",
@@ -284,7 +331,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                           max = 52,
                                           step = 4,
                                           value = 4,
-                                          post = "weeks"
+                                          post = " weeks"
                               ),
                               
                           ),#end of sidebarPanel()
@@ -293,7 +340,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           mainPanel(
                               plotOutput("price_changes_over_time") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("moving_average"),
-                              plotOutput("six_month_forecast")
+                              plotOutput("six_month_forecast", height = 1600)
                           )
                  ),
                  
@@ -389,49 +436,62 @@ ui <- navbarPage("Lajunta, CO Market Overview",
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     
+    # The dataset filtered down by the input date range
+    date_filtered_data <- reactive({
+        lajunta %>% 
+            filter(Date >= input$daterange[1],
+                   Date <= input$daterange[2])
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
     # 'Price Summary' Tab Output
+    output$market_report <- downloadHandler(
+        filename = "La Junta Market Reports.csv",
+        content = function(file){
+            write_csv(x = date_filtered_data(), file = file, col_names = TRUE)
+        }
+    )
+    
     output$price_changes_over_time <- renderPlot({
         
         # Making sure the date goes between the user's input dates
-        lajunta %>% 
-            filter(Date >= input$daterange[1],
-                   Date <= input$daterange[2]) %>% 
+        date_filtered_data() %>% 
             price_change_over_time()
         
     })
     
     output$moving_average <- renderPlot({
         
-        # Making sure the date goes between the user's input dates
-        data <- lajunta %>% 
-            filter(Date >= input$daterange[1],
-                   Date <= input$daterange[2])
-        
-        
-        
         # Building the plots
-        steer_sma_plot <- data %>% 
+        steer_sma_plot <- date_filtered_data() %>% 
             simple_moving_average(df = .,
                                   reprod_status = "str",
                                   variable_name = Price,
                                   n = input$numweeks) +
             ggtitle("Steer")
         
-        heifer_sma_plot <- data %>% 
+        heifer_sma_plot <- date_filtered_data() %>% 
             simple_moving_average(df = .,
                                   reprod_status = "hfr",
                                   variable_name = Price,
                                   n = input$numweeks) +
             ggtitle("Heifer")
         
-        cow_sma_plot <- data %>% 
+        cow_sma_plot <- date_filtered_data() %>% 
             simple_moving_average(df = .,
                                   reprod_status = "cow",
                                   variable_name = Price,
                                   n = input$numweeks) +
             ggtitle("Cow")
         
-        bull_sma_plot <- data %>% 
+        bull_sma_plot <- date_filtered_data() %>% 
             simple_moving_average(df = .,
                                   reprod_status = "bull",
                                   variable_name = Price,
@@ -440,16 +500,33 @@ server <- function(input, output) {
         
         
         # The graph to return
-        steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = paste0("The Simple Moving Average Using the Previous ",  input$numweeks, " Sales"))
+        steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = paste0("Simple Moving Average Using the Previous ",  input$numweeks, " Sales"))
     })
     
     
     
+    output$six_month_forecast <- renderPlot({
+        # Making a bunch of forecasts
+        steer_forecast <- arima_plot(df = lajunta, reprod = "str", reprod_fullname = "Steer", lags = 1, diff_deg = 2, ma_term = 2)
+        heifer_forecast <- arima_plot(df = lajunta, reprod = "hfr", reprod_fullname = "Heifer", lags = 1, diff_deg = 1, ma_term = 2)
+        cow_forecast <- arima_plot(df = lajunta, reprod = "cow", reprod_fullname = "Cow", lags = 1, diff_deg = 1, ma_term = 2)
+        bull_forecast <- arima_plot(df = lajunta, reprod = "bull", reprod_fullname = "Bull", lags = 1, diff_deg = 1, ma_term = 2)
+        
+        return(steer_forecast / heifer_forecast / cow_forecast / bull_forecast + plot_annotation(title = "Seasonally Adjusted Six Month ARIMA Forecasts"))
+    })
     
-    
-    
-    
-    
+    # Toggles the graphs on and off
+    observeEvent(input$hide_price_graphs, {
+        if(input$hide_price_graphs){
+            shinyjs::hide("price_changes_over_time")
+            shinyjs::hide("moving_average")
+            shinyjs::hide("six_month_forecast")
+        } else {
+            shinyjs::show("price_changes_over_time")
+            shinyjs::show("moving_average")
+            shinyjs::show("six_month_forecast")
+        }
+    })
     
     
     
