@@ -695,9 +695,9 @@ server <- function(input, output) {
                             pull(Reprod)) %>% 
             layout(title = "Livestock by Weight, Price, and Quantity", 
                    scene = list(
-                       xaxis = list(title = "Weight"),
-                       yaxis = list(title = "Price"),
-                       zaxis = list(title = "Quantity")
+                       xaxis = list(title = "Weight (x)"),
+                       yaxis = list(title = "Price (y)"),
+                       zaxis = list(title = "Quantity (z)")
                    )
             )
     })
