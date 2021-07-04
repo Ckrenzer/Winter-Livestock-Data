@@ -449,6 +449,10 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                               # Allows the user to download the dataset
                               downloadButton("market_report", "Get data (in date range)"),
                               
+                              
+                              helpText("This download omits one observation with a missing reproductive status.*"),
+                              
+                              
                               # Determines whether to show the graphs
                               checkboxInput(
                                   inputId = "hide_price_graphs",
