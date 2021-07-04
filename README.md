@@ -4,6 +4,8 @@ Collects data from Winter Livestock La Junta Sale Tuesday reports each week and 
 Please note that this repository can only be updated after the folks over at Winter Livestock release their market reports, meaning there will be a few day's lag between the auction and new data in this repository.
 
 # Output
+
+## Dashboards
 To see the Lajunta dashboard, run the following code in your R console:
 
 ```
@@ -14,11 +16,12 @@ shiny::runGitHub(repo = "Winter-Livestock-Data",
                  ref = "main")
 ```
 
-To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Output/La-Junta-Price-Estimation.html).
+## Archived Output
+To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Archived/Output/La-Junta-Price-Estimation.html).
 
-To see the output for 'La Junta Classification Models.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Output/La-Junta-Classification-Models.html).
+To see the output for 'La Junta Classification Models.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Archived/Output/La-Junta-Classification-Models.html).
 
-## UPDATES
+# UPDATES
 Major changes to this repo are listed with each update. Updates are written arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
 ### UPDATE 2/2/2021 ----------------------------------------------
@@ -85,4 +88,4 @@ Yeah, actually, I will be keeping the HTML output in the repository. It will be 
 Added all URLs to a text file to shorten the collection() function's runtime, simplified the logic in the use and creation of csv files.
 
 ### UPDATE 7/1/2021
-Added a new Shiny app serving as a dashboard for the Lajunta, CO market.
+Added a new Shiny app serving as a dashboard for the Lajunta, CO market. Further, many previous output files are being moved to the newly created Archived folder. The Lajunta dashboard incorporates the 'greatest hits' of many of these files. These files, in the state they are at the time of writing, will be kept in the Archived folder instead of being removed in the event someone wants a bit more detail about the methodologies used than the end result provided in the Lajunta dashboard.
