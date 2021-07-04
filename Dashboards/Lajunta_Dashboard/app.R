@@ -565,7 +565,10 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                                          "Bull" = "bull"),
                                           selected = "str"),
                               
+                              
                               helpText("Please note that the models become less accurate the further into the future you try to predict."),
+                              
+                              helpText("The following fields accept keyboard input."),
                               
                               
                               # Determines the date the user wants to sell for input to predict()

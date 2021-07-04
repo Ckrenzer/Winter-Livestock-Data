@@ -12,7 +12,7 @@ To see the Lajunta dashboard, run the following code in your R console:
 if(!require(shiny)) install.packages("shiny")
 shiny::runGitHub(repo = "Winter-Livestock-Data",
                  username = "Ckrenzer",
-                 subdir = "Analysis/Dashboards/Lajunta_Dashboard",
+                 subdir = "Dashboards/Lajunta_Dashboard",
                  ref = "main")
 ```
 
@@ -88,4 +88,6 @@ Yeah, actually, I will be keeping the HTML output in the repository. It will be 
 Added all URLs to a text file to shorten the collection() function's runtime, simplified the logic in the use and creation of csv files.
 
 ### UPDATE 7/1/2021
-Added a new Shiny app serving as a dashboard for the Lajunta, CO market. Further, many previous output files are being moved to the newly created Archived folder. The Lajunta dashboard incorporates the 'greatest hits' of many of these files. These files, in the state they are at the time of writing, will be kept in the Archived folder instead of being removed in the event someone wants a bit more detail about the methodologies used than the end result provided in the Lajunta dashboard.
+Added a new Shiny app serving as a dashboard for the Lajunta, CO market.
+
+Further, many previous output files are being moved to the newly created Archived folder. The Lajunta dashboard incorporates the 'greatest hits' of many of these files. These files, in the state they are at the time of writing, will be kept in the Archived folder instead of being removed in the event someone wants a bit more detail about the methodologies used than the end result provided in the Lajunta dashboard.
