@@ -163,6 +163,7 @@ plot_weight_vs_price <- function(df){
         ggplot() +
         geom_point(mapping = aes(x = Weight, y = Price, color = Reprod)) +
         ggtitle("Weight vs. Price") +
+        ylab("Price (cents per pound)") +
         theme_dark()
     
 }#end of plot_weight_vs_price()
@@ -372,7 +373,7 @@ plot_rmse <- function(trained_models, test_df){
         geom_smooth(method = "lm", se = FALSE) +
         xlab("Actual Price") +
         ylab("Predicted Price") +
-        ggtitle("Linear Regression")
+        ggtitle("Linear Regression (cents per pound)")
     
     rf_rmse_plot <- results %>% 
         ggplot(mapping = aes(x = Price, y = rf_estimates)) +
@@ -381,7 +382,7 @@ plot_rmse <- function(trained_models, test_df){
         geom_smooth(method = "lm", se = FALSE) +
         xlab("Actual Price") +
         ylab("Predicted Price") +
-        ggtitle("Random Forest")
+        ggtitle("Random Forest (cents per pound)")
     
     return(lm_rmse_plot + rf_rmse_plot + plot_annotation(title = "Predicted vs. Actual Price, by Model")) 
 }#end of plot_rmse()
@@ -536,7 +537,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           # The four plots for this tab
                           mainPanel(
                               h1("Granular Information"),
-                              p("My favorite graph, \"Weight vs. Price\"...It can be adjusted to show a couple different breakdowns. The 'cattle in each category' graphs show the number of times a given type of cattle was shown in the dataset (it is NOT a sum of the cattle quantities). If you feel so inclined, the 3D graph is interactive and can be explored at your leisure. Finally, at the bottom are some Honest-to-God probability density functions. Did someone say lognormal?"),
+                              p("My favorite graph, \"Weight vs. Price\"...It can be adjusted to show a couple different breakdowns. The 'cattle in each category' graphs show the number of times a given type of cattle was shown in the dataset (it is NOT a sum of the cattle quantities grouped by type). If you feel so inclined, the 3D graph is interactive and can be explored at your leisure. Finally, at the bottom are some Honest-to-God probability density functions. Did someone say lognormal?"),
                               plotOutput("weight_vs_price_plot") %>% withSpinner(color = "#0dc5c1"),
                               plotOutput("raw_counts_plots"),
                               plotlyOutput("plotly_3d"),
@@ -667,7 +668,7 @@ server <- function(input, output) {
         
         reproductive_status <- case_when(
             input$reprod == "str" ~ "steers",
-            input$reprod == "hrr" ~ "heifers",
+            input$reprod == "hfr" ~ "heifers",
             input$reprod == "cow" ~ "cows",
             input$reprod == "bull" ~ "bulls"
         )
