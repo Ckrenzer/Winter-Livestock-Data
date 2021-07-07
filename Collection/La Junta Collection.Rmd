@@ -40,7 +40,7 @@ The collection() function follows these steps:
 
 -   Write to a __csv__. We may save a 'before cleaning' copy for testing the cleaning script.
 
-```{r setup-packages, include = FALSE, eval = FALSE}
+```{r setup-packages, include = FALSE, eval = TRUE}
 
 knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE,
@@ -60,7 +60,7 @@ pacman::p_load(rvest, stringr, tidyr, readr, dplyr, lubridate, clock, ggplot2, h
 
 This function is a wrapper around the web scraper. Calls to str_view() are unnecessary and may even slow down the program, but I'm keeping them in to simplify debugging.
 
-```{r collection(), eval = FALSE}
+```{r collection(), eval = TRUE}
 
 collection <- function(urls){
   
@@ -658,7 +658,7 @@ collection <- function(urls){
 
 I have been changing the URLs around to find different data, and the market reports seem to start around ID == 6700. The max URL at the time of writing is around 14000. The data begins in 2016. In a few instances, the same market report may have two separate market IDs, so a few hundred observations could be replicas.
 
-```{r urls-execute, eval = FALSE}
+```{r urls-execute, eval = TRUE}
 
 # This parses together different market report IDs and stores them in a vector
 # (useful for when you do not know the URLs beforehand)
@@ -681,6 +681,9 @@ urls <- read_lines("Collection/La Junta URLs.txt")
 # the last-used market report URL
 urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13619#marketreport"
 
+
+# This line is used to automate the update process through RPAs
+urls <- read_lines("Collection/current_url_Lajunta.txt")
 
 # No need to save the output--this function writes to a csv file...
 collection(urls = urls)
@@ -718,7 +721,7 @@ If you have trouble reading this csv file, click on Tools \> Global Options \> R
 
 A copy of the csv file will be created so we don't have to rerun the collection() function should the cleaning chunk need updating.
 
-```{r cleaning, eval = FALSE}
+```{r cleaning, eval = TRUE}
 
 # Step 0: save a copy of the uncleaned file if we don't already have one!
 if(!file.exists("La Junta Market Reports (before cleaning).csv")){
