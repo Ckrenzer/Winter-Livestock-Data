@@ -91,3 +91,6 @@ Added all URLs to a text file to shorten the collection() function's runtime, si
 Added a new Shiny app serving as a dashboard for the Lajunta, CO market.
 
 Further, many previous output files are being moved to the newly created Archived folder. The Lajunta dashboard incorporates the 'greatest hits' of many of these files. These files, in the state they are at the time of writing, will be kept in the Archived folder instead of being removed in the event someone wants a bit more detail about the methodologies used than the end result provided in the Lajunta dashboard.
+
+### UPDATE 7/6/2021
+An RPA is now used to scrape the Winter Livestock site for new data. It is scheduled to run at 5pm on Thursdays. The collection() function was updated to prevent previouly-used URLs from adding data (in the event there was no sale on a particular week).

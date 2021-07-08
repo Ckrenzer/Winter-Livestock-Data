@@ -64,6 +64,13 @@ This function is a wrapper around the web scraper. Calls to str_view() are unnec
 
 collection <- function(urls){
   
+  # Stores previously used URLs in a vector (urls used before running the collection() function)
+  # This condition allows us to prevent repeated data from being added
+  if(file.exists("Collection/La Junta URLs.txt")){
+    used_urls <- read_lines("Collection/La Junta URLs.txt") 
+  } else {
+    used_urls <- "No previously used URLs" 
+  }
   
   for(URL in urls){
     
@@ -71,6 +78,14 @@ collection <- function(urls){
     # simple yet effective way of showing the operation's progress
     cat(".")
     
+    
+    
+    # Checking for previously used URLs ------------------------------
+    # If the url has been used before the execution of the collection() function,
+    # skip to the next iteration of the loop
+    if(URL %in% used_urls){
+      next
+    }
     
     
     # Reading in data from webpage ------------------------------
@@ -420,7 +435,7 @@ collection <- function(urls){
     
     
     ##### SETTING THE `previous_date_of_sale` MUST TAKE PLACE AFTER WE ARE SURE WE ARE ADDING
-    ##### THE DATA TO THE DATA FRAME
+    ##### THE DATA TO THE DATA FRAME (only relevant when adding multiple sales to the csv)
     #Storing the previous date of sale to extract the year later on
     #(for those cases where the year is missing, we can append the previous market report's
     #year to the end of the current one)...I anticipate this strategy to be problematic when
@@ -626,14 +641,14 @@ collection <- function(urls){
                 file = "La Junta Market Reports (before cleaning).csv",
                 append = T,
                 col_names = F)
-      
+
     } else {
       # If the file is not in your computer, append the data to the new file.
       write_csv(x = livestock_data,
                 file = "La Junta Market Reports.csv",
                 append = T,
                 col_names = F)
-      
+
     }#end of conditional
     
     
