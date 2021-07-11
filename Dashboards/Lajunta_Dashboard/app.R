@@ -4,7 +4,7 @@ pacman::p_load(shiny, shinycssloaders, shinyjs,
                dplyr, magrittr, lubridate, clock, readr,
                ggplot2, patchwork, plotly,
                forecast, tseries,
-               tidymodels, rsample, randomForest)
+               tidymodels, rsample, parsnip, randomForest)
 
 
 # DATA SETUP ------------------------------------
