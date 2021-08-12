@@ -694,7 +694,7 @@ urls <- read_lines("Collection/La Junta URLs.txt")
 
 
 # the last-used market report URL
-urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13713#marketreport"
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13741#marketreport"
 
 
 # This line is used to automate the update process through RPAs
