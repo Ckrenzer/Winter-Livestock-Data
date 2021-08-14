@@ -80,65 +80,11 @@ collection <- function(urls){
     
     
     
-    
-    
-    
-    
-    
-    
-    
     # Buyer names -----------------------------------------------------------------------
-    # Step 1. Names of Buyers:
-    # Pulling out the indices that contain the buyer's name.
-    buyers <- livestock_data[!str_detect(livestock_data, "^\t+")]
-    
-    # removing leading newline characters
-    buyers <- str_trim(buyers)
-    
-    # Extracting the buyer's name--the name ends when
-    # the first "\t" is encountered. You can see that
-    # with this line:
-    str_view(buyers, ".*?(?=\t)")
-    
-    # The names of the buyers:
-    buyers <- str_extract(buyers, ".*?(?=\t)")
-    
-    #If the entries are not tab-delimited, that means they used spaces instead.
-    if(all(is.na(buyers))){
-      
-      # repeating step 1
-      # Pulling out the indices that contain the buyer's name (doesn't start with a number, but contains a number; also does not contain a semicolon)
-      buyers <- livestock_data[!str_detect(livestock_data, "^\\d") &
-                                 str_detect(livestock_data, "\\d") &
-                                 !str_detect(livestock_data, ";")]
-      
-      # removing leading newline characters
-      buyers <- str_trim(buyers)
-      
-      
-      
-      #extracting the buyer names and the first number
-      buyers <- str_extract_all(buyers, "^[a-z].*?\\s\\d", simplify = TRUE)
-      buyers <- as.vector(buyers)
-      #removing the first number found
-      buyers <- str_remove_all(buyers, "\\d")
-    }
+    # A character vector containing each buyer's name
+    buyers <- extract_buyer_name()
     
     
-    
-    
-    # removing unneeded white space and missing values
-    buyers <- str_trim(buyers)
-    buyers <- buyers[!is.na(buyers)]
-    
-    # We should now have a character vector containing each buyer's name
-    
-    
-    
-    
-    
-    
-    # Adding Buyer Names Back In --------------------------------------------------------
     # This section uses ID numbers to identify the buyer for
     # each sale listed on the market report. It then adds
     # the buyer's name back onto the lines from which it
