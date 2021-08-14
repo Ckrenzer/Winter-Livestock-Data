@@ -11,5 +11,5 @@ split_text <- function(text = livestock_data){
   if(length(data) >= 30){
     return(str_to_lower(data))
   }
-  return(NULL)
+  return(NA)
 }

@@ -9,14 +9,11 @@ collection <- function(urls){
   }
   
   for(URL in urls){
-    
-    
     # simple yet effective way of showing the operation's progress
     message(".")
     
     
-    
-    # Checking for previously used URLs ------------------------------
+    # Checking for previously used URLs -------------------------------------------------
     # If the url has been used before,
     # skip to the next iteration of the loop
     if(URL %in% used_urls){
@@ -24,19 +21,18 @@ collection <- function(urls){
     }
     
     
-    # Reading in data from webpage ------------------------------
+    # Reading in data from webpage ------------------------------------------------------
     livestock_data <- extract_webpage_text()
     livestock_data <- split_text()
-    # If the return value from split_text() was null, skip to the
+    # If the return value from split_text() was missing, skip to the
     # next iteration of the loop--the current webpage does not
     # have information we care about
     if(is.na(livestock_data)){
-      next 
+      next
     }
     
     
-    
-    # Determining location (La Junta) -------------------------
+    # Determining location (La Junta) ---------------------------------------------------
     # If we've made it this far, that means that there is information about a market report on the webpage.
     # We now need to determine whether this market report is for La Junta, CO.
     # We assume that "La Junta CO" will not appear in non-La Junta, CO
@@ -47,15 +43,7 @@ collection <- function(urls){
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    # Finding the date of sale ----------------------------------------
+    # Finding the date of sale ----------------------------------------------------------
     if(exists("preivous_date_of_sale")){
       date_of_sale <- determine_date_of_sale(previous_date_of_sale = previous_date_of_sale)
       # If the date has already been added, skip to the next iteration of the loop
@@ -68,76 +56,27 @@ collection <- function(urls){
     }
     
     
-    
-    
-    
-    # Header Removal with Keywords ------------------------------------------------------
-    # A set of keywords designed to remove heading information
-    # and other information we are not interested in observing
-    keywords <- "\\s+sold|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
-    
-    
-    # Removes headings and unrelated information from the data
-    livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
-    
-    #Removes all remaining entries with months and/or dates
-    livestock_data <- livestock_data[!str_detect(livestock_data, "january\\s+\\d|february\\s+\\d|march\\s+\\d|april\\s+\\d|may\\s+\\d|june\\s+\\d|july\\s+\\d|august\\s+\\d|september\\s+\\d|october\\s+\\d|november\\s+\\d|december\\s+\\d|jan\\s+\\d|feb\\s+\\d|mar\\s+\\d|apr\\s+\\d|jun\\s+\\d|jul\\s+\\d|aug\\s+\\d|sept\\s+\\d|oct\\s+\\d|nov\\s+\\d|dec\\s+\\d")]
-    
-    
-    
-    
-    
     # Removing Unwanted Sections -------------------------------------------------------
-    
-    # We can pull out the sales information by removing lines we do not
-    # care about. Since we know that the information we want is stored
-    # in lines that are much shorter than the others, we can pull out
-    # lines that have fewer characters than some optimal number.
-    # I chose 60. In other words, I am keeping only those lines
-    # (which are stored as elements in the vector) that contain
-    # fewer than 60 characters.
-    livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
-    
-    
-    # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
-    # if the person made more than one purchase, the line starts with "\n\t\t"--this is the reason
-    # why we cannot make use of str_trim(). We need the "\n\t\t" to indicate whether
-    # that element in the vector is really another purchase by the same buyer.
-    
-    # You can see what I am talking about by running
-    # the code below. The "\n\t\t" is hidden, but
-    # you can see the highlighted boxes at the
-    # beginning of the lines containing the pattern:
-    str_view(livestock_data, "\t\t")
-    
-    
-    # the sales are the entries that do not have semicolons but do have digits
-    livestock_data <- livestock_data[!str_detect(livestock_data, ";") & str_detect(livestock_data, "\\d")]
-    
-    # Keeping only those entries with more than 12 characters (for those entries that slip through the other filters)
-    livestock_data <- livestock_data[which(nchar(livestock_data) > 12)]
-    
-    #Removing internet auction sales--they will be empty character vectors at this point in the code
-    #For more flexibility, if the length is smaller than 10, the data will not be added
-    #Very few (probably zero) market reports have fewer than 10 entries
+    livestock_data <- remove_unwanted_sections()
+    # Removing internet auction sales--they should be empty character vectors by this point.
+    # For more flexibility, if the length is smaller than 10, the data will not be added
+    # Very few (probably zero) market reports have fewer than 10 entries
     if(length(livestock_data) < 10){
-      next #go to the next iteration of the loop
+      next
     }
-    
-    # livestock_data now contains only the sales data
-    
+    # `livestock_data` now contains only the sales data
     
     
-    
-    
-    ##### SETTING THE `previous_date_of_sale` MUST TAKE PLACE AFTER WE ARE SURE WE ARE ADDING
-    ##### THE DATA TO THE DATA FRAME (only relevant when adding multiple sales to the csv)
-    #Storing the previous date of sale to extract the year later on
-    #(for those cases where the year is missing, we can append the previous market report's
-    #year to the end of the current one)...I anticipate this strategy to be problematic when
-    #two consecutive dates are missing and also around the new year. It is a 'good enough'
-    #approximation, however (plus, these situations are pretty rare)
-    previous_date_of_sale <- as.character(date_of_sale)
+    # previous_date_of_sale -------------------------------------------------------------
+    # `previous_date_of_sale` CAN ONLY BE ASSIGNED AFTER WE ARE SURE WE ARE ADDING
+    # THE DATA TO THE DATA FRAME (only relevant when adding multiple sales to the csv)
+    #
+    # Storing the previous date of sale to extract the year later on
+    # (for those cases where the year is missing, we can append the previous market report's
+    # year to the end of the current one)...I anticipate this strategy to be problematic when
+    # two consecutive dates are missing and also around the new year. It is a 'good enough'
+    # approximation, however (plus, these situations are pretty rare)
+    previous_date_of_sale <- date_of_sale
     
     
     
@@ -148,7 +87,7 @@ collection <- function(urls){
     
     
     
-    # Buyer names -----------------------------------------------------
+    # Buyer names -----------------------------------------------------------------------
     # Step 1. Names of Buyers:
     # Pulling out the indices that contain the buyer's name.
     buyers <- livestock_data[!str_detect(livestock_data, "^\t+")]
@@ -199,7 +138,7 @@ collection <- function(urls){
     
     
     
-    # Adding Buyer Names Back In ----------------------------------------------
+    # Adding Buyer Names Back In --------------------------------------------------------
     # This section uses ID numbers to identify the buyer for
     # each sale listed on the market report. It then adds
     # the buyer's name back onto the lines from which it
@@ -265,7 +204,7 @@ collection <- function(urls){
     
     
     
-    # Data frame ---------------------------------------------------
+    # Data frame ------------------------------------------------------------------------
     # Making a data frame
     livestock_data <- tibble(livestock_data)
     
@@ -310,7 +249,7 @@ collection <- function(urls){
     
     
     
-    # Finishing Touches --------------------------------------------
+    # Finishing Touches -----------------------------------------------------------------
     
     # We have all the data we need, though we still want a date column
     
@@ -328,7 +267,7 @@ collection <- function(urls){
     
     
     
-    # Writing to CSV ---------------------------------------
+    # Writing to CSV --------------------------------------------------------------------
     # We are now ready to write the data to a file!
     
     # If the file is already on your computer, we want to append the new data to the uncleaned csv file.
@@ -350,7 +289,7 @@ collection <- function(urls){
     
     
     # Confirmation message saying data was added to the file
-    cat(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
+    message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
     
     
     
