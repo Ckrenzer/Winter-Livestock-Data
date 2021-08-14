@@ -1,8 +1,8 @@
-determine_date_of_sale <- function(livestock_data = livestock_data, previous_date_of_sale = NULL){
+determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
   # Saves the first entry that finds digits followed by the word "cattle"--this entry
   # contains the sentence from which we can extract the date
-  first_element_containing_date <- which(str_detect(livestock_data, "\\d+\\s*cattle"))[1]
-  date_of_sale_sentence <- livestock_data[first_element_containing_date] %>% 
+  first_element_containing_date <- which(str_detect(text, "\\d+\\s*cattle"))[1]
+  date_of_sale_sentence <- text[first_element_containing_date] %>% 
     str_remove_all("\\.|,|;")
   
   # Extracting the sale's month from the sentence
@@ -45,7 +45,7 @@ determine_date_of_sale <- function(livestock_data = livestock_data, previous_dat
     # month and day
     md <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}"))
     # previous sale's year
-    y <- clock::get_year(clock::date_parse(previous_date_of_sale, format = "%m-%d-%y"))  
+    y <- clock::get_year(clock::date_parse(previous_date, format = "%m-%d-%y"))  
     
     # converting month name to month number
     md <- month_name_to_num(text = md) %>% 
@@ -59,7 +59,7 @@ determine_date_of_sale <- function(livestock_data = livestock_data, previous_dat
   ##### CASE 4: The Catch-All
   # If worse comes to worst, we can just add one week from the previous sale's date
   if(str_detect(date_of_sale, "[a-zA-Z]")){
-    date_of_sale <- lubridate::mdy(previous_date_of_sale) %>% 
+    date_of_sale <- lubridate::mdy(previous_date) %>% 
       clock::add_weeks(n = 1) %>% 
       as.character()
   } 

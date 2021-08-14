@@ -54,7 +54,7 @@ collection <- function(urls){
     
     # Finding the date of sale ----------------------------------------------------------
     if(exists("preivous_date_of_sale")){
-      date_of_sale <- determine_date_of_sale(previous_date_of_sale = previous_date_of_sale)
+      date_of_sale <- determine_date_of_sale(previous_date = previous_date_of_sale)
       # If the date has already been added, skip to the next iteration of the loop
       # this means there was a duplicate market report url
       if(previous_date_of_sale == date_of_sale){
