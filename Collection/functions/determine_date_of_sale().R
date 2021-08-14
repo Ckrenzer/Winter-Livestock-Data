@@ -18,8 +18,9 @@ determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
     month_name_to_num(text = ., sale_month = month_of_sale) %>% 
     str_remove_all("[a-z]") %>%
     str_replace_all("\\s+", " ") %>% 
-    str_replace_all("\\s", "-")
-  #note: if letters are found, that means the date did not parse correctly
+    str_replace_all("\\s", "-") %>% 
+    paste0()
+  #note: if letters are found (paste0() will convert NA to "NA"), that means the date did not parse correctly
   
   
   ##### CASE 2: The date is multi-valued and the year is included

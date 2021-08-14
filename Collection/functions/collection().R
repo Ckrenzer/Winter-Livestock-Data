@@ -1,4 +1,4 @@
-collection <- function(urls){
+collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   # Sourcing in helper functions
   source("Collection/functions/extract_webpage_text().R", local = TRUE)
   source("Collection/functions/split_text().R", local = TRUE)
@@ -11,7 +11,7 @@ collection <- function(urls){
   
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
-  if(file.exists("Collection/La Junta URLs.txt")){
+  if(file.exists("Collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
     used_urls <- read_lines("Collection/La Junta URLs.txt") 
   } else {
     used_urls <- "No previously used URLs" 

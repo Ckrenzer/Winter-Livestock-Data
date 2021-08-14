@@ -47,6 +47,7 @@ I have been changing the URLs around to find different data, and the market repo
 # (recommended if you plan to re-collect the data from scratch--just
 # do not forget the possibility that some market reports could have
 # been missed, if you really think it necessary to recollect this data)
+# just be sure to set `prevent_use_of_previous_urls` to FALSE
 urls <- read_lines("Collection/La Junta URLs.txt")
 
 
