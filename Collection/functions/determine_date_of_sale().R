@@ -1,13 +1,15 @@
 determine_date_of_sale <- function(livestock_data = livestock_data){
   # Saves the first entry that finds digits followed by the word "cattle"--this entry
   # contains the sentence from which we can extract the date
-  date_of_sale_sentence <- livestock_data[which(str_detect(livestock_data, "\\d+\\s*cattle"))[1]]
-  # removing punctuation from the sentence
-  date_of_sale_sentence <- str_remove_all(date_of_sale, "\\.|,|;")
+  first_element_containing_date <- which(str_detect(livestock_data, "\\d+\\s*cattle"))[1]
+  date_of_sale_sentence <- livestock_data[first_element_containing_date] %>% 
+    str_remove_all("\\.|,|;")
+  
+  # Extracting the sale's month from the sentence
+  month_name_regex <- "january|february|march|april|may|june|july|august|september|october|november|december|jan\\s|feb\\s|mar\\s|apr\\s|jun\\s|jul\\s|aug\\s|sept\\s|oct\\s|nov\\s|dec\\s"
+  month_of_sale <- str_extract(date_of_sale_sentence, month_name_regex)
   
   
-  # extracting the month the sale took place from the sentence
-  month_of_sale <- str_extract(date_of_sale_sentence, "january|february|march|april|may|june|july|august|september|october|november|december|jan\\s|feb\\s|mar\\s|apr\\s|jun\\s|jul\\s|aug\\s|sept\\s|oct\\s|nov\\s|dec\\s")
   
   
   ##### CASE 1: The date is in "month ##th YYYY" format (Ex. "march 9th 2021")
@@ -19,9 +21,9 @@ determine_date_of_sale <- function(livestock_data = livestock_data){
     str_replace_all("\\s", "-")
   
   
-  
-  ##### CASE 2: The date is multi-valued but the year is included
-  #note: the lubridate::mdy() call is meant to ensure we get NA if the formatting did not work as expected.
+  ##### CASE 2: The date is multi-valued and the year is included
+  #note: the lubridate::mdy() call is meant to ensure we get NA if the formatting did not work
+  #in the previous step
   if(is.na(lubridate::mdy(date_of_sale))){
     
     # Pulling out the part of the sentence containing the date
