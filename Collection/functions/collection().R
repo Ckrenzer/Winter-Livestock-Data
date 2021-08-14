@@ -9,14 +9,13 @@ collection <- function(urls){
   source("Collection/functions/insert_buyer_names().R", local = TRUE)
   source("Collection/functions/insert_delimiter().R", local = TRUE)
   
-  
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
-  #if(file.exists("Collection/La Junta URLs.txt")){
-  #  used_urls <- read_lines("Collection/La Junta URLs.txt") 
-  #} else {
-  used_urls <- "No previously used URLs" 
-  #}
+  if(file.exists("Collection/La Junta URLs.txt")){
+    used_urls <- read_lines("Collection/La Junta URLs.txt") 
+  } else {
+    used_urls <- "No previously used URLs" 
+  }
   
   for(URL in urls){
     # simple yet effective way of showing the operation's progress
@@ -118,18 +117,18 @@ collection <- function(urls){
     
     # Writing to CSV --------------------------------------------------------------------
     # If the file already exists, we want to append the new data to the uncleaned csv file.
-    #if(file.exists("La Junta Market Reports (before cleaning).csv")){
-    #  write_csv(x = livestock_data,
-    #            file = "La Junta Market Reports (before cleaning).csv",
-    #            append = TRUE,
-    #            col_names = FALSE)
-    #} else {
-    #  # If the file is not in your computer, append the data to the new file.
-    #  write_csv(x = livestock_data,
-    #            file = "La Junta Market Reports.csv",
-    #            append = TRUE,
-    #            col_names = FALSE)
-    #}
+    if(file.exists("La Junta Market Reports (before cleaning).csv")){
+      write_csv(x = livestock_data,
+                file = "La Junta Market Reports (before cleaning).csv",
+                append = TRUE,
+                col_names = FALSE)
+    } else {
+      # If the file is not in your computer, append the data to the new file.
+      write_csv(x = livestock_data,
+                file = "La Junta Market Reports.csv",
+                append = TRUE,
+                col_names = FALSE)
+    }
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
   }#end of for loop
