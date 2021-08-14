@@ -92,66 +92,18 @@ collection <- function(urls){
     
     
     # Data frame ------------------------------------------------------------------------
-    # Making a data frame
-    livestock_data <- tibble(livestock_data)
-    
-    
-    # making new columns based off the sections
-    # separated by "\t"
+    livestock_data <- tibble(entries = livestock_data)
+    # Making new columns based off the sections
+    # separated by "\t" or " "
     livestock_data <- livestock_data %>% 
-      separate(livestock_data, into = c("buyer", "quantity", "weight", "price"), sep = "\t")
-    
-    # Replaces the space separating the quantity and the type with a semicolon
-    livestock_data$quantity <- str_replace(livestock_data$quantity, " ", ";")
-    
-    # Making quantity and type their own columns
-    livestock_data <- livestock_data %>% 
-      separate(quantity, into = c("quantity", "type"), sep = ";")
-    
-    
-    # Making quantity, weight, and price numeric datatypes
-    livestock_data[c(2, 4, 5)] <- sapply(livestock_data[c(2, 4, 5)], as.numeric)
-    
-    # Adding the date from the market report as a column
-    
-    
-    
-    # We are just about there! All that remains is removing the section
-    # with NA's introduced:
-    as.data.frame(livestock_data)
-    
-    # How do we fix that? Well, since we may want that information
-    # for future use, we won't want to remove it entirely with a
-    # keyword search, as was done in the beginning. What we can
-    # remove observations with NA values to keep only the data
-    # that matches our desired format:
-    livestock_data <- na.omit(livestock_data)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    # Finishing Touches -----------------------------------------------------------------
-    
-    # We have all the data we need, though we still want a date column
-    
-    # Adding in the date and URL
-    livestock_data <- mutate(livestock_data, "date" = date_of_sale, .before = 1) %>% 
-      mutate("url" = URL)
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      separate(entries, into = c("buyer", "quantity", "weight", "price"), sep = "\t") %>% 
+      separate(quantity, into = c("quantity", "type"), sep = " ") %>% 
+      mutate(quantity = as.double(quantity),
+             weight = as.double(weight),
+             price = as.double(price)) %>% 
+      na.omit() %>% 
+      mutate("date" = date_of_sale, .before = 1,
+             "url" = URL)
     
     
     # Writing to CSV --------------------------------------------------------------------
