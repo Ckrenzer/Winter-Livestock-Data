@@ -2,29 +2,20 @@ month_name_to_num <- function(text, month_of_sale = month_of_sale){
   return(str_replace_all(string = text,
                          pattern = month_of_sale,
                          replacement = case_when(
-                           month_of_sale == "january" ~ "1",
-                           month_of_sale == "february" ~ "2",
-                           month_of_sale == "march" ~ "3",
-                           month_of_sale == "april" ~ "4",
+                           any(month_of_sale == c("january", "jan")) ~ "1",
+                           any(month_of_sale == c("february", "feb")) ~ "2",
+                           any(month_of_sale == c("march", "mar")) ~ "3",
+                           any(month_of_sale == c("april", "apr"))~ "4",
                            month_of_sale == "may" ~ "5",
-                           month_of_sale == "june" ~ "6",
-                           month_of_sale == "july" ~ "7",
-                           month_of_sale == "august" ~ "8",
-                           month_of_sale == "september" ~ "9",
-                           month_of_sale == "october" ~ "10",
-                           month_of_sale == "november" ~ "11",
-                           month_of_sale == "december" ~ "12",
-                           month_of_sale == "jan" ~ "1",
-                           month_of_sale == "feb" ~ "2",
-                           month_of_sale == "mar" ~ "3",
-                           month_of_sale == "apr" ~ "4", #you don't need to repeat MAY, remember
-                           month_of_sale == "jun" ~ "6",
-                           month_of_sale == "jul" ~ "7",
-                           month_of_sale == "aug" ~ "8",
-                           month_of_sale == "sept" ~ "9",
-                           month_of_sale == "oct" ~ "10",
-                           month_of_sale == "nov" ~ "11",
-                           month_of_sale == "dec" ~ "12",
+                           any(month_of_sale == c("june", "jun")) ~ "6",
+                           any(month_of_sale == c("july", "jul")) ~ "7",
+                           any(month_of_sale == c("august", "aug")) ~ "8",
+                           any(month_of_sale == c("september", "sept")) ~ "9",
+                           any(month_of_sale == c("october", "oct")) ~ "10",
+                           any(month_of_sale == c("november", "nov")) ~ "11",
+                           any(month_of_sale == c("december", "dec")) ~ "12",
+                           
+                           TRUE ~ month_of_sale
                          ))
          )
 }
