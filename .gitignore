@@ -39,6 +39,7 @@ vignettes/*.pdf
 .Renviron
 
 # Old Scripts
+Archived/
 La Junta cleaning.R
 La Junta.R
 La Junta long format.R
