@@ -22,10 +22,8 @@ determine_date_of_sale <- function(livestock_data = livestock_data){
   
   
   ##### CASE 2: The date is multi-valued and the year is included
-  #note: the lubridate::mdy() call is meant to ensure we get NA if the formatting did not work
-  #in the previous step
-  if(is.na(lubridate::mdy(date_of_sale))){
-    
+  #note: if letters are found, that means the date did not parse correctly
+  if(str_detect(date_of_sale, "[a-zA-Z]")){
     # Pulling out the part of the sentence containing the date
     date_of_sale <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}.{0,40}\\d{4}"))
     
@@ -36,50 +34,35 @@ determine_date_of_sale <- function(livestock_data = livestock_data){
     # year
     y <- str_extract(date_of_sale, "\\d{4}")
     
-    #we only want to do this step if date_of_sale is not null (we will get a string saying "NA-NA" otherwise,
-    #which is a pain to correct for in subsequent case-checking)
-    if(!is.na(date_of_sale)){
-      # Concatenating the md and y together (into mdy format!!!)
-      date_of_sale <- paste(md, y, sep = "-")
-    }
-    
+    # Concatenating the md and y together (into mdy format!!!)
+    date_of_sale <- paste(md, y, sep = "-")
   }
   
   
   ##### CASE 3: The year was not provided
-  if(is.na(lubridate::mdy(date_of_sale))){
-    
-    #Pulling out the month and day
+  # We use the month and day provided then append the year of the last sale
+  if(str_detect(date_of_sale, "[a-zA-Z]")){
+    # month and day
     md <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}"))
-    #Setting the year equal to the previous sale's year
+    # previous sale's year
     y <- clock::get_year(clock::date_parse(previous_date_of_sale, format = "%m-%d-%y"))  
     
-    
-    # Changing the month to its corresponding number
+    # converting month name to month number
     md <- month_name_to_num(text = md) %>% 
-      #replacing the date with a hyphen
       str_replace_all("\\s+", "-")
     
-    #we only want to do this step if date_of_sale is not null (we will get a string saying "NA-NA" otherwise,
-    #which is a pain to correct for in subsequent case-checking)
-    if(!is.na(date_of_sale)){
-      # Concatenating the md and y together (into mdy format!!!)
-      date_of_sale <- paste(md, y, sep = "-")
-    }
-    
+    # Concatenating the md and y together (into mdy format!!!)
+    date_of_sale <- paste(md, y, sep = "-")
   }
   
   
-  
   ##### CASE 4: The Catch-All
-  #If worse comes to worst, we can just add one week from the previous sale's date
-  if(is.na(lubridate::mdy(date_of_sale))){
-    
+  # If worse comes to worst, we can just add one week from the previous sale's date
+  if(str_detect(date_of_sale, "[a-zA-Z]")){
     date_of_sale <- lubridate::mdy(previous_date_of_sale) %>% 
       clock::add_weeks(n = 1) %>% 
       as.character()
-    
   } 
   
-  
+  return(date_of_sale)
 }
