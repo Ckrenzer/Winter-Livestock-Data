@@ -83,52 +83,21 @@ collection <- function(urls){
     # Buyer names -----------------------------------------------------------------------
     # A character vector containing each buyer's name
     buyers <- extract_buyer_name()
-    
-    
-    # This section uses ID numbers to identify the buyer for
-    # each sale listed on the market report. It then adds
-    # the buyer's name back onto the lines from which it
-    # was omitted.
-    
-    # I will provide each buyer an ID number to determine
-    # which purchases that buyer made. I am not crazy about
-    # using loops, as I could probably write a function
-    # to do this task for me, but it does everything we
-    # need it to.
-    current_ID <- 0
-    for(i in 1:length(livestock_data)){
-      
-      if(str_detect(livestock_data[i], "^\n?\t+\\s*\\d|^\\d")){#if a multiple purchase:
-        # Only multiple purchases will have the "\n\t\t" or start with a digit, so we can
-        # use "\n?\t+|^//d" as a placeholder for the beginning of the string
-        # (where the buyer's name goes) and make it look the same as the
-        # lines where the name is present
-        livestock_data[i] <- paste0(buyers[current_ID], "\t", livestock_data[i])
-        livestock_data[i] <- str_remove(livestock_data[i], "\n")
-        
-      } else if(!str_detect(livestock_data[i], "^\n?\t+\\s*\\d|^\\d")){
-        
-        # if the index lands on a new buyer, give them
-        # the next ID number
-        current_ID <- current_ID + 1 
-      }
-      
-    }# end of for loop
+    livestock_data <- insert_buyer_names()
     
     #This is where we will add the tabs:
     str_view_all(livestock_data, "\\d\\s|[a-z]\\s+\\d")
     
     
-    #inserting tab characters between the fields--I was careful to not put a tab between the quantity and type
+    # Inserting tab characters between the fields--I was careful to not put a tab between the quantity and type
     livestock_data <- str_replace_all(livestock_data, "(\\d)\\s(\\d)", "\\1\t\\2") 
     livestock_data <- str_replace_all(livestock_data, "([a-z])\\s+(\\d)", "\\1\t\\2")
     
-    
-    #remove any extra "\t" characters after the buyer name
+    # Remove any extra "\t" characters after the buyer name
     livestock_data <- str_replace_all(livestock_data, "\t+\\s*", "\t")
     
-    #removing any missing values
-    livestock_data <- livestock_data[!is.na(livestock_data)]
+    # Removing any missing values
+    livestock_data <- livestock_data[!is.na(livestock_data)] 
     
     
     #livestock_data should now have the fields separated by tabs
