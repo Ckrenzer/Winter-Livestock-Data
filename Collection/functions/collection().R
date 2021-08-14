@@ -30,7 +30,7 @@ collection <- function(urls){
     # If the return value from split_text() was null, skip to the
     # next iteration of the loop--the current webpage does not
     # have information we care about
-    if(is.null(livestock_data)){
+    if(is.na(livestock_data)){
       next 
     }
     
