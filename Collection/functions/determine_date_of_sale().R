@@ -15,7 +15,7 @@ determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
   ##### CASE 1: The date is in "month ##th YYYY" format (Ex. "march 9th 2021")
   #note: some sales take place over two days, so we have to remove the "& ##th" following the first day's date
   date_of_sale <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}[a-z0-9&\\s]{0,15}\\d{4}")) %>% 
-    month_name_to_num(text = .) %>% 
+    month_name_to_num(text = ., sale_month = month_of_sale) %>% 
     str_remove_all("[a-z]") %>%
     str_replace_all("\\s+", " ") %>% 
     str_replace_all("\\s", "-")

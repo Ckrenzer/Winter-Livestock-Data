@@ -1,12 +1,12 @@
-remove_unwanted_sections <- function(livestock_data = livestock_data){
+remove_unwanted_sections <- function(text = livestock_data){
   
   # A set of keywords designed to remove heading information
   # and other information we are not interested in observing
   keywords <- "\\s+sold|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
   # Removes headings and unrelated information from the data
-  livestock_data <- livestock_data[!str_detect(livestock_data, keywords)]
+  text <- text[!str_detect(text, keywords)]
   # Removes all remaining entries with months and/or dates
-  livestock_data <- livestock_data[!str_detect(livestock_data, "january\\s+\\d|february\\s+\\d|march\\s+\\d|april\\s+\\d|may\\s+\\d|june\\s+\\d|july\\s+\\d|august\\s+\\d|september\\s+\\d|october\\s+\\d|november\\s+\\d|december\\s+\\d|jan\\s+\\d|feb\\s+\\d|mar\\s+\\d|apr\\s+\\d|jun\\s+\\d|jul\\s+\\d|aug\\s+\\d|sept\\s+\\d|oct\\s+\\d|nov\\s+\\d|dec\\s+\\d")]
+  text <- text[!str_detect(text, "january\\s+\\d|february\\s+\\d|march\\s+\\d|april\\s+\\d|may\\s+\\d|june\\s+\\d|july\\s+\\d|august\\s+\\d|september\\s+\\d|october\\s+\\d|november\\s+\\d|december\\s+\\d|jan\\s+\\d|feb\\s+\\d|mar\\s+\\d|apr\\s+\\d|jun\\s+\\d|jul\\s+\\d|aug\\s+\\d|sept\\s+\\d|oct\\s+\\d|nov\\s+\\d|dec\\s+\\d")]
   
   
   # We can pull out the sales information by removing lines we do not
@@ -16,7 +16,7 @@ remove_unwanted_sections <- function(livestock_data = livestock_data){
   # I chose 60. In other words, I am keeping only those lines
   # (which are stored as elements in the vector) that contain
   # fewer than 60 characters.
-  livestock_data <- livestock_data[-c(which((nchar(livestock_data) > 60)))]
+  text <- text[-c(which((nchar(text) > 60)))]
   
   
   # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
@@ -26,10 +26,10 @@ remove_unwanted_sections <- function(livestock_data = livestock_data){
   
   
   # the sales are the entries that do not have semicolons but do have digits
-  livestock_data <- livestock_data[!str_detect(livestock_data, ";") & str_detect(livestock_data, "\\d")]
+  text <- text[!str_detect(text, ";") & str_detect(text, "\\d")]
   
   # Keeping only those entries with more than 12 characters (for those entries that slip through the other filters)
-  livestock_data <- livestock_data[which(nchar(livestock_data) > 12)] 
+  text <- text[which(nchar(text) > 12)] 
   
-  return(livestock_data)
+  return(text)
 }

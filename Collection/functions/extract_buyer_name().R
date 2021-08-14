@@ -1,6 +1,6 @@
-extract_buyer_name <- function(livestock_data = livestock_data){
+extract_buyer_name <- function(text = livestock_data){
   # Pulling out the indexes that contain the buyer's name.
-  buyers <- livestock_data[!str_detect(livestock_data, "^\t+")] %>% 
+  buyers <- text[!str_detect(text, "^\t+")] %>% 
     str_trim()
   
   # Extracting the buyer's name--the name ends when
@@ -11,9 +11,9 @@ extract_buyer_name <- function(livestock_data = livestock_data){
   if(all(is.na(buyers))){
     # Pulling out the indexes that contain the buyer's name
     # (doesn't start with a number, but contains a number; also does not contain a semicolon)
-    buyers <- livestock_data[!str_detect(livestock_data, "^\\d") &
-                               str_detect(livestock_data, "\\d") &
-                               !str_detect(livestock_data, ";")] %>% 
+    buyers <- text[!str_detect(text, "^\\d") &
+                     str_detect(text, "\\d") &
+                     !str_detect(text, ";")] %>% 
       str_trim()
     # Extracting the buyer names
     buyers <- str_extract_all(buyers, "^[a-z].*?\\s\\d", simplify = FALSE)[[1]] %>% 
