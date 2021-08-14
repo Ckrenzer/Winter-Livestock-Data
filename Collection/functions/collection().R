@@ -102,37 +102,25 @@ collection <- function(urls){
              weight = as.double(weight),
              price = as.double(price)) %>% 
       na.omit() %>% 
-      mutate("date" = date_of_sale, .before = 1,
-             "url" = URL)
+      mutate("date" = date_of_sale, .before = 1) %>% 
+      mutate("url" = URL)
     
     
     # Writing to CSV --------------------------------------------------------------------
-    # We are now ready to write the data to a file!
-    
-    # If the file is already on your computer, we want to append the new data to the uncleaned csv file.
+    # If the file already exists, we want to append the new data to the uncleaned csv file.
     if(file.exists("La Junta Market Reports (before cleaning).csv")){
       write_csv(x = livestock_data,
                 file = "La Junta Market Reports (before cleaning).csv",
-                append = T,
-                col_names = F)
-      
+                append = TRUE,
+                col_names = FALSE)
     } else {
       # If the file is not in your computer, append the data to the new file.
       write_csv(x = livestock_data,
                 file = "La Junta Market Reports.csv",
-                append = T,
-                col_names = F)
-      
-    }#end of conditional
-    
-    
-    
+                append = TRUE,
+                col_names = FALSE)
+    }
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
-    
-    
-    
-  } # end of for loop
-  
-  
-}#end of collection()
+  }#end of for loop
+}
