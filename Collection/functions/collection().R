@@ -79,44 +79,16 @@ collection <- function(urls){
     previous_date_of_sale <- date_of_sale
     
     
-    
     # Buyer names -----------------------------------------------------------------------
     # A character vector containing each buyer's name
     buyers <- extract_buyer_name()
+    # Adds the associated buyer name to each sale
     livestock_data <- insert_buyer_names()
     
-    #This is where we will add the tabs:
-    str_view_all(livestock_data, "\\d\\s|[a-z]\\s+\\d")
     
-    
-    # Inserting tab characters between the fields--I was careful to not put a tab between the quantity and type
-    livestock_data <- str_replace_all(livestock_data, "(\\d)\\s(\\d)", "\\1\t\\2") 
-    livestock_data <- str_replace_all(livestock_data, "([a-z])\\s+(\\d)", "\\1\t\\2")
-    
-    # Remove any extra "\t" characters after the buyer name
-    livestock_data <- str_replace_all(livestock_data, "\t+\\s*", "\t")
-    
-    # Removing any missing values
-    livestock_data <- livestock_data[!is.na(livestock_data)] 
-    
-    
-    #livestock_data should now have the fields separated by tabs
-    
-    #You can confirm with this line:
-    str_view_all(livestock_data, "\t")
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    # Insert Delimiter ------------------------------------------------------------------
+    # `livestock_data` should now have the fields separated by tabs
+    livestock_data <- insert_delimiter()
     
     
     # Data frame ------------------------------------------------------------------------
