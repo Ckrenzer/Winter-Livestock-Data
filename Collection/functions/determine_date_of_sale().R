@@ -1,4 +1,4 @@
-determine_date_of_sale <- function(livestock_data = livestock_data){
+determine_date_of_sale <- function(livestock_data = livestock_data, previous_date_of_sale = NULL){
   # Saves the first entry that finds digits followed by the word "cattle"--this entry
   # contains the sentence from which we can extract the date
   first_element_containing_date <- which(str_detect(livestock_data, "\\d+\\s*cattle"))[1]
@@ -19,10 +19,10 @@ determine_date_of_sale <- function(livestock_data = livestock_data){
     str_remove_all("[a-z]") %>%
     str_replace_all("\\s+", " ") %>% 
     str_replace_all("\\s", "-")
+  #note: if letters are found, that means the date did not parse correctly
   
   
   ##### CASE 2: The date is multi-valued and the year is included
-  #note: if letters are found, that means the date did not parse correctly
   if(str_detect(date_of_sale, "[a-zA-Z]")){
     # Pulling out the part of the sentence containing the date
     date_of_sale <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}.{0,40}\\d{4}"))
