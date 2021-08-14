@@ -22,6 +22,10 @@ collection <- function(urls){
     message(".")
     
     
+    # Pause the operation to lower stress on the server
+    Sys.sleep(time = runif(n = 1, min = 10, max = 15))
+    
+    
     # Checking for previously used URLs -------------------------------------------------
     # If the url has been used before,
     # skip to the next iteration of the loop

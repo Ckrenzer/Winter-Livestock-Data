@@ -99,14 +99,14 @@ A copy of the csv file will be created so we don't have to rerun the collection(
 if(!file.exists("La Junta Market Reports (before cleaning).csv")){
   
   # "La Junta Market Reports.csv" is unclean if this line executes
-  file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = T)
+  file.copy(from = "La Junta Market Reports.csv", to = "La Junta Market Reports (before cleaning).csv", overwrite = TRUE)
   
 }
 
 # Reads in the uncleaned version of the csv, which should be a copy
 # of "La Junta Market Reports.csv" if you are 'starting fresh'
 lajunta <- readr::read_csv("La Junta Market Reports (before cleaning).csv", 
-                           col_names = F)
+                           col_names = FALSE)
 
 
 
