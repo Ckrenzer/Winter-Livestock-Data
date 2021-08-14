@@ -1,4 +1,13 @@
 collection <- function(urls){
+  # Sourcing in helper functions
+  source("Collection/functions/extract_webpage_text().R", local = TRUE)
+  source("Collection/functions/split_text().R", local = TRUE)
+  source("Collection/functions/determine_date_of_sale().R", local = TRUE)
+  source("Collection/functions/remove_unwanted_sections().R", local = TRUE)
+  source("Collection/functions/extract_buyer_name().R", local = TRUE)
+  source("Collection/functions/insert_buyer_names().R", local = TRUE)
+  source("Collection/functions/insert_delimiter().R", local = TRUE)
+  
   
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
