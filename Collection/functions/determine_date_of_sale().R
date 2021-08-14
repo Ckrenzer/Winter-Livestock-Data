@@ -16,31 +16,7 @@ determine_date_of_sale <- function(livestock_data = livestock_data){
   #note: some sales take place over two days, so we have to remove the "& ##th" following the first day's date
   date_of_sale <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}[a-z0-9&\\s]{0,15}\\d{4}")) %>% 
     #replacing the month name with its corresponding number
-    str_replace_all(month_of_sale,
-                    case_when(month_of_sale == "january" ~ "1",
-                              month_of_sale == "february" ~ "2",
-                              month_of_sale == "march" ~ "3",
-                              month_of_sale == "april" ~ "4",
-                              month_of_sale == "may" ~ "5",
-                              month_of_sale == "june" ~ "6",
-                              month_of_sale == "july" ~ "7",
-                              month_of_sale == "august" ~ "8",
-                              month_of_sale == "september" ~ "9",
-                              month_of_sale == "october" ~ "10",
-                              month_of_sale == "november" ~ "11",
-                              month_of_sale == "december" ~ "12",
-                              month_of_sale == "jan" ~ "1",
-                              month_of_sale == "feb" ~ "2",
-                              month_of_sale == "mar" ~ "3",
-                              month_of_sale == "apr" ~ "4", #you don't need to repeat MAY, remember
-                              month_of_sale == "jun" ~ "6",
-                              month_of_sale == "jul" ~ "7",
-                              month_of_sale == "aug" ~ "8",
-                              month_of_sale == "sept" ~ "9",
-                              month_of_sale == "oct" ~ "10",
-                              month_of_sale == "nov" ~ "11",
-                              month_of_sale == "dec" ~ "12",
-                    )) %>% 
+    month_name_to_num(text = .) %>% 
     #removing letters and replacing space characters with hyphens
     str_remove_all("[a-z]") %>%
     str_replace_all("\\s+", " ") %>% #replacing multiple spaces with just one space
