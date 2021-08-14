@@ -3,6 +3,7 @@ collection <- function(urls){
   source("Collection/functions/extract_webpage_text().R", local = TRUE)
   source("Collection/functions/split_text().R", local = TRUE)
   source("Collection/functions/determine_date_of_sale().R", local = TRUE)
+  source("Collection/functions/month_name_to_num().R", local = TRUE)
   source("Collection/functions/remove_unwanted_sections().R", local = TRUE)
   source("Collection/functions/extract_buyer_name().R", local = TRUE)
   source("Collection/functions/insert_buyer_names().R", local = TRUE)
