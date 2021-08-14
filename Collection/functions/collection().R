@@ -46,7 +46,7 @@ collection <- function(urls){
     # We now need to determine whether this market report is for La Junta, CO.
     # We assume that "La Junta CO" will not appear in non-La Junta, CO
     # market reports but WILL appear in all La Junta, CO market reports
-    if(!all(str_detect(livestock_data, pattern = "la\\s*junta,*\\s*co"))){
+    if(!any(str_detect(livestock_data, pattern = "la\\s*junta,*\\s*co"))){
       # If "la junta co" is not found, skip to the next iteration of the loop
       next
     }
