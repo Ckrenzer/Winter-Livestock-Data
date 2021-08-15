@@ -9,6 +9,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   source("Collection/functions/insert_buyer_names().R", local = TRUE)
   source("Collection/functions/insert_delimiter().R", local = TRUE)
   
+  
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
   if(file.exists("Collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
@@ -16,6 +17,9 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   } else {
     used_urls <- "No previously used URLs" 
   }
+  # The first sale date
+  previous_date_of_sale <- "01-01-2016"
+  
   
   for(URL in urls){
     # simple yet effective way of showing the operation's progress
@@ -57,15 +61,11 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     
     
     # Finding the date of sale ----------------------------------------------------------
-    if(exists("preivous_date_of_sale")){
-      date_of_sale <- determine_date_of_sale(previous_date = previous_date_of_sale)
-      # If the date has already been added, skip to the next iteration of the loop
-      # this means there was a duplicate market report url
-      if(previous_date_of_sale == date_of_sale){
-        next
-      }
-    } else {
-      date_of_sale <- determine_date_of_sale() 
+    date_of_sale <- determine_date_of_sale(previous_date = previous_date_of_sale)
+    # If the date has already been added, skip to the next iteration of the loop
+    # this means there was a duplicate market report url
+    if(previous_date_of_sale == date_of_sale){
+      next
     }
     
     
@@ -107,13 +107,12 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     # Data frame ------------------------------------------------------------------------
     livestock_data <- tibble(entries = livestock_data)
     # Making new columns based off the sections
-    # separated by "\t" or " "
+    # separated by "\t"
     livestock_data <- livestock_data %>% 
-      separate(entries, into = c("buyer", "quantity", "weight", "price"), sep = "\t") %>% 
-      separate(quantity, into = c("quantity", "type"), sep = " ") %>% 
-      mutate(quantity = as.double(quantity),
-             weight = as.double(weight),
-             price = as.double(price)) %>% 
+      separate(entries, into = c("buyer", "quantity", "type", "weight", "price"), sep = "\t") %>%  
+      mutate(quantity = parse_number(quantity),
+             weight = parse_number(weight),
+             price = parse_number(price)) %>% 
       na.omit() %>% 
       mutate("date" = date_of_sale, .before = 1) %>% 
       mutate("url" = URL)

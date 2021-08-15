@@ -1,4 +1,4 @@
-determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
+determine_date_of_sale <- function(text = livestock_data, previous_date){
   # Saves the first entry that finds digits followed by the word "cattle"--this entry
   # contains the sentence from which we can extract the date
   first_element_containing_date <- which(str_detect(text, "\\d+\\s*cattle"))[1]
@@ -30,7 +30,7 @@ determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
     
     # month and day
     md <- str_extract(date_of_sale, paste0(month_of_sale, "\\s+\\d{1,2}")) %>% 
-      month_name_to_num(text = .) %>% 
+      month_name_to_num(text = ., sale_month = month_of_sale) %>% 
       str_replace_all("\\s+", "-")
     # year
     y <- str_extract(date_of_sale, "\\d{4}")
@@ -46,10 +46,10 @@ determine_date_of_sale <- function(text = livestock_data, previous_date = NULL){
     # month and day
     md <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}"))
     # previous sale's year
-    y <- clock::get_year(clock::date_parse(previous_date, format = "%m-%d-%y"))  
+    y <- clock::get_year(clock::date_parse(previous_date, format = "%m-%d-%Y"))
     
     # converting month name to month number
-    md <- month_name_to_num(text = md) %>% 
+    md <- month_name_to_num(text = md, sale_month = month_of_sale) %>% 
       str_replace_all("\\s+", "-")
     
     # Concatenating the md and y together (into mdy format!!!)
