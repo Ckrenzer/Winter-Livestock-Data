@@ -49,6 +49,7 @@ I have been changing the URLs around to find different data, and the market repo
 # been missed, if you really think it necessary to recollect this data)
 # just be sure to set `prevent_use_of_previous_urls` to FALSE
 urls <- read_lines("Collection/La Junta URLs.txt")
+urls <- read_lines("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Collection/La%20Junta%20URLs.txt")
 #collection(urls = urls, prevent_use_of_previous_urls = FALSE)
 
 
@@ -60,7 +61,7 @@ urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13741#marketreport"
 urls <- read_lines("Collection/current_url_Lajunta.txt")
 
 # No need to save the output--this function writes to a csv file...
-collection(urls = urls, prevent_use_of_previous_urls = FALSE)
+collection(urls = urls)
 
 ```
 

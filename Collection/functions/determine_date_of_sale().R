@@ -24,7 +24,7 @@ determine_date_of_sale <- function(text = livestock_data, previous_date){
   
   
   ##### CASE 2: The date is multi-valued and the year is included
-  if(str_detect(date_of_sale, "[a-zA-Z]")){
+  if(str_detect(date_of_sale, "[a-zA-Z&]")){
     # Pulling out the part of the sentence containing the date
     date_of_sale <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}.{0,40}\\d{4}"))
     
@@ -42,7 +42,7 @@ determine_date_of_sale <- function(text = livestock_data, previous_date){
   
   ##### CASE 3: The year was not provided
   # We use the month and day provided then append the year of the last sale
-  if(str_detect(date_of_sale, "[a-zA-Z]")){
+  if(str_detect(date_of_sale, "[a-zA-Z&]")){
     # month and day
     md <- str_extract(date_of_sale_sentence, paste0(month_of_sale, "\\s+\\d{1,2}"))
     # previous sale's year
@@ -59,7 +59,7 @@ determine_date_of_sale <- function(text = livestock_data, previous_date){
   
   ##### CASE 4: The Catch-All
   # If worse comes to worst, we can just add one week from the previous sale's date
-  if(str_detect(date_of_sale, "[a-zA-Z]")){
+  if(str_detect(date_of_sale, "[a-zA-Z&]")){
     date_of_sale <- lubridate::mdy(previous_date) %>% 
       clock::add_weeks(n = 1) %>% 
       as.character()
