@@ -60,7 +60,7 @@ urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13741#marketreport"
 urls <- read_lines("Collection/current_url_Lajunta.txt")
 
 # No need to save the output--this function writes to a csv file...
-collection(urls = urls)
+collection(urls = urls, prevent_use_of_previous_urls = FALSE)
 
 ```
 

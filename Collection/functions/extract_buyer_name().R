@@ -10,14 +10,15 @@ extract_buyer_name <- function(text = livestock_data){
   # If the entries are not tab-delimited, that means they used spaces instead.
   if(all(is.na(buyers))){
     # Pulling out the indexes that contain the buyer's name
-    # (doesn't start with a number, but contains a number; also does not contain a semicolon)
+    # (doesn't start with a number, but contains a number, also does not contain a semicolon or comma)
     buyers <- text[!str_detect(text, "^\\d") &
-                     str_detect(text, "\\d") &
-                     !str_detect(text, ";")] %>% 
+                     str_detect(text, "\\d+\\D+\\d+") &
+                     !str_detect(text, ";|,")] %>% 
       str_trim()
     # Extracting the buyer names
-    buyers <- str_extract_all(buyers, "^[a-z].*?\\s\\d", simplify = FALSE)[[1]] %>% 
-      str_remove_all("\\d")
+    buyers <- str_extract_all(buyers, "^[a-z].*?\\s\\d", simplify = FALSE) %>% 
+      str_remove_all("\\d") %>% 
+      unlist()
   }
   
   # Removing unneeded white space and missing values
