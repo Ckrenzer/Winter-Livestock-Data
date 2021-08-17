@@ -28,6 +28,9 @@ remove_unwanted_sections <- function(text = livestock_data){
   # the sales are the entries that do not have semicolons but do have digits
   text <- text[!str_detect(text, ";") & str_detect(text, "\\d")]
   
+  # the sales are the entries with at least two distinct numbers (quantity, price, weight)
+  text <- text[str_detect(text, "\\d+\\D+\\d+")]
+  
   # Keeping only those entries with more than 12 characters (for those entries that slip through the other filters)
   text <- text[which(nchar(text) > 12)] 
   
