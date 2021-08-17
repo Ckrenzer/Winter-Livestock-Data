@@ -25,14 +25,18 @@ remove_unwanted_sections <- function(text = livestock_data){
   # that element in the vector is really another purchase by the same buyer.
   
   
-  # the sales are the entries that do not have semicolons but do have digits
+  # The sales do not have semicolons but do have digits
   text <- text[!str_detect(text, ";") & str_detect(text, "\\d")]
   
-  # the sales are the entries with at least two distinct numbers (quantity, price, weight)
+  # The sales have at least two distinct numbers (quantity, price, weight)
   text <- text[str_detect(text, "\\d+\\D+\\d+")]
   
-  # the sales are the entries that do not contain hashtags
+  # The sales do not contain hashtags
   text <- text[!str_detect(text, "#")]
+  
+  # The sales do not contain hyphens connecting digits to digits (7-5),
+  # letters to digits (2-way), or digits to letters (hi-5)
+  text <- text[!str_detect(text, "\\d-\\d|[a-z]-\\d|\\d-[a-z]")]
   
   # Keeping only those entries with more than 12 characters (for those entries that slip through the other filters)
   text <- text[which(nchar(text) > 12)] 
