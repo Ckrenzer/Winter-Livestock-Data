@@ -59,7 +59,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       next
     }
     
-    browser()
+    
     # Finding the date of sale ----------------------------------------------------------
     date_of_sale <- determine_date_of_sale(previous_date = previous_date_of_sale)
     # If the date has already been added, skip to the next iteration of the loop
