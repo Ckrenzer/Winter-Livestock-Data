@@ -2,11 +2,11 @@ remove_unwanted_sections <- function(text = livestock_data){
   
   # A set of keywords designed to remove heading information
   # and other information we are not interested in observing
-  keywords <- "\\s+sold|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo"                                           
+  keywords <- "\\s+sold|\\s+monday|\\s+tuesday|\\s+wednesday|\\s+thursday|\\s+friday|\\s+saturday|\\s+sunday|\\s+receipts|\\s+through|\\s+mostly|\\s+winter|\\s+summer|\\s+spring|\\s+fall|\\s+autumn|\\s+is\\s+|\\s+next|\\s+quality|\\s+mostly|\\s+noon|\\s+early|\\s+stock|\\s+steady|\\s+test\\s+|\\s+offer|\\s+selection|\\s+week|\\s+annual|\\s+package|consigned|\\s*now\\s+|special\\s+|\\s+higher|calves\\s&\\syearlings\\s*$|\\s+am\\s+|\\s+pm\\s+|\\s+a.m.\\s+|\\s+p.m.\\s+|report[:]?\\s+|la\\s+junta,|\\s+co$|\\*$|estimate|internet\\svideo|\\s+to\\s+"                                           
   # Removes headings and unrelated information from the data
   text <- text[!str_detect(text, keywords)]
   # Removes all remaining entries with months and/or dates
-  text <- text[!str_detect(text, "january\\s+\\d|february\\s+\\d|march\\s+\\d|april\\s+\\d|may\\s+\\d|june\\s+\\d|july\\s+\\d|august\\s+\\d|september\\s+\\d|october\\s+\\d|november\\s+\\d|december\\s+\\d|jan\\s+\\d|feb\\s+\\d|mar\\s+\\d|apr\\s+\\d|jun\\s+\\d|jul\\s+\\d|aug\\s+\\d|sept\\s+\\d|oct\\s+\\d|nov\\s+\\d|dec\\s+\\d")]
+  text <- text[!str_detect(text, "january\\.*,*\\s+\\d|february\\.*,*\\s+\\d|march\\.*,*\\s+\\d|april\\.*,*\\s+\\d|may\\.*,*\\s+\\d|june\\.*,*\\s+\\d|july\\.*,*\\s+\\d|august\\.*,*\\s+\\d|september\\.*,*\\s+\\d|october\\.*,*\\s+\\d|november\\.*,*\\s+\\d|december\\.*,*\\s+\\d|jan\\.*,*\\s+\\d|feb\\.*,*\\s+\\d|mar\\.*,*\\s+\\d|apr\\.*,*\\s+\\d|jun\\.*,*\\s+\\d|jul\\.*,*\\s+\\d|aug\\.*,*\\s+\\d|sept\\.*,*\\s+\\d|oct\\.*,*\\s+\\d|nov\\.*,*\\s+\\d|dec\\.*,*\\s+\\d")]
   
   
   # We can pull out the sales information by removing lines we do not
