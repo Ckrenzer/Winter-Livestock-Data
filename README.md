@@ -94,3 +94,6 @@ Further, many previous output files are being moved to the newly created Archive
 
 ### UPDATE 7/6/2021
 An RPA is now used to scrape the Winter Livestock site for new data. It is scheduled to run at 5pm on Thursdays. The collection() function was updated to prevent previouly-used URLs from adding data (in the event there was no sale on a particular week).
+
+### UPDATE 8/16/2021
+The collection() function has been split up into several different scripts to make the code easier to follow. The algorithm has been improved to miss slightly fewer cases than previous implementations.
