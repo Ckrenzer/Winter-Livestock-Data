@@ -119,7 +119,6 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       mutate("URL" = URL)
     
     
-    
     # Cleaning --------------------------------------------------------------------------
     # Creates the 'Reprod' column and simplifies the 'Type' column down to 8 categories
     livestock_data <- cleaning(lajunta = livestock_data)
