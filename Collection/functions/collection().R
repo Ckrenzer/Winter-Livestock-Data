@@ -118,20 +118,19 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       mutate("URL" = URL)
     
     
+    
+    # Cleaning --------------------------------------------------------------------------
+    # Creates the 'Reprod' column and simplifies the 'Type' column down to 8 categories
+    livestock_data <- cleaning(lajunta = livestock_data)
+    
+    
     # Writing to CSV --------------------------------------------------------------------
-    # If the file already exists, we want to append the new data to the uncleaned csv file.
-    if(file.exists("La Junta Market Reports (before cleaning).csv")){
-      write_csv(x = livestock_data,
-                file = "La Junta Market Reports (before cleaning).csv",
-                append = TRUE,
-                col_names = FALSE)
-    } else {
-      # If the file is not in your computer, append the data to the new file.
-      write_csv(x = livestock_data,
-                file = "La Junta Market Reports.csv",
-                append = TRUE,
-                col_names = FALSE)
-    }
+    write_csv(x = livestock_data,
+              file = "La Junta Market Reports.csv",
+              append = TRUE,
+              col_names = FALSE)
+    
+    
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
   }#end of for loop
