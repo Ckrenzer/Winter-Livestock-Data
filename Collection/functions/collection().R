@@ -109,13 +109,13 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     # Making new columns based off the sections
     # separated by "\t"
     livestock_data <- livestock_data %>% 
-      separate(entries, into = c("buyer", "quantity", "type", "weight", "price"), sep = "\t") %>%  
-      mutate(quantity = parse_number(quantity),
-             weight = parse_number(weight),
-             price = parse_number(price)) %>% 
+      separate(entries, into = c("Buyer", "Quantity", "Type", "Weight", "Price"), sep = "\t") %>%  
+      mutate(Quantity = parse_number(Quantity),
+             Weight = parse_number(Weight),
+             Price = parse_number(Price)) %>% 
       na.omit() %>% 
-      mutate("date" = date_of_sale, .before = 1) %>% 
-      mutate("url" = URL)
+      mutate("Date" = date_of_sale, .before = 1) %>% 
+      mutate("URL" = URL)
     
     
     # Writing to CSV --------------------------------------------------------------------
