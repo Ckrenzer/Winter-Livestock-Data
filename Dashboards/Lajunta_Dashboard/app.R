@@ -11,7 +11,7 @@ pacman::p_load(shiny, shinycssloaders, shinyjs,
 # Reading in the file and removing the URL column
 # Fortunately, we only have to do this once
 lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
-                           col_types = readr::cols(Date = "D",
+                           col_types = readr::cols(Date = col_date("%m-%d-%Y"),
                                                    Buyer = readr::col_factor(),
                                                    Quantity = readr::col_double(),
                                                    Type = readr::col_factor(),
