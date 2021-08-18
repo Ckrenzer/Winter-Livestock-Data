@@ -8,6 +8,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   source("Collection/functions/extract_buyer_name().R", local = TRUE)
   source("Collection/functions/insert_buyer_names().R", local = TRUE)
   source("Collection/functions/insert_delimiter().R", local = TRUE)
+  source("Collection/functions/cleaning().R", local = TRUE)
   
   
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
