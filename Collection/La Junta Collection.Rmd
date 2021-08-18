@@ -92,6 +92,7 @@ if(file.exists("La Junta Market Reports.csv")){
 Of course, we want to make sure everything looks good, no? This section identifies problem areas in the file.
 
 ```{r testing, eval = FALSE}
+
 #lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
 
 lajunta <- read_csv("La Junta Market Reports.csv")

@@ -128,7 +128,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     write_csv(x = livestock_data,
               file = "La Junta Market Reports.csv",
               append = TRUE,
-              col_names = FALSE)
+              col_names = TRUE)
     
     
     # Confirmation message saying data was added to the file
