@@ -54,7 +54,7 @@ urls <- read_lines("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-
 
 
 # the last-used market report URL
-urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13741#marketreport"
+urls <- "http://www.winterlivestock.com/lajunta.php?reportID=13763#marketreport"
 
 
 # This line is used to automate the update process through RPAs

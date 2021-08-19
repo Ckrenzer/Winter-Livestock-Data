@@ -125,10 +125,14 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     
     
     # Writing to CSV --------------------------------------------------------------------
+    write_colnames <- if_else(condition = !file.exists("La Junta Market Reports.csv"),
+                              true = TRUE,
+                              false = FALSE)
+    
     write_csv(x = livestock_data,
               file = "La Junta Market Reports.csv",
               append = TRUE,
-              col_names = TRUE)
+              col_names = write_colnames)
     
     
     # Confirmation message saying data was added to the file
