@@ -22,7 +22,13 @@ lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Li
                                                    Price = readr::col_double(),
                                                    URL = readr::col_character(),
                                                    Reprod = readr::col_factor())) %>% 
-    dplyr::select(-URL) %>% 
+    dplyr::select(-URL)
+
+# The full, unfiltered dataset for export
+lajunta_full <- lajunta
+
+
+lajunta <- lajunta %>% 
     dplyr::filter(!is.na(Reprod))
 
 # This is meant to speed up the runtime instead of placing it in multiple reactive functions
@@ -117,14 +123,11 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                              separator = " THROUGH "),
                               
                               
-                              helpText("The date range allows you to choose dates to include for your historical price calculation. It also adjusts the data shown in the historical price data. Further, the date range decides which data to include on the download button."),
+                              helpText("The date range allows you to choose dates to include for your historical price calculation. It also adjusts the data shown in the historical price data."),
                               
                               
                               # Allows the user to download the dataset
-                              downloadButton("market_report", "Get data (in date range)"),
-                              
-                              
-                              helpText("This download omits one observation with a missing reproductive status.*"),
+                              downloadButton("market_report", "Get data"),
                               
                               
                               # Determines whether to show the graphs
@@ -323,7 +326,7 @@ server <- function(input, output) {
     output$market_report <- downloadHandler(
         filename = "La Junta Market Reports.csv",
         content = function(file){
-            write_csv(x = date_filtered_data(), file = file, col_names = TRUE)
+            write_csv(x = lajunta_full, file = file, col_names = TRUE)
         }
     )
     
