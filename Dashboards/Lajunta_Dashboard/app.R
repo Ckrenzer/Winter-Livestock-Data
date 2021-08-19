@@ -7,6 +7,9 @@ pacman::p_load(shiny, shinycssloaders, shinyjs,
                tidymodels, rsample, parsnip, randomForest)
 
 
+
+
+
 # DATA SETUP ----------------------------------------------------------------------------
 # Reading in the file and removing the URL column
 # Fortunately, we only have to do this once
@@ -45,15 +48,16 @@ model_data <- outliers_removed %>%
 
 # HELPER FUNCTIONS ----------------------------------------------------------------------
 # Sourced in the order they are used in the server() function
-source("PRICE_CHANGE_OVER_TIME_URL")
-source("SMA_URL")
-source("ARIMA_PLOT_URL")
-source("PLOT_WEIGHT_VS_PRICE_URL")
-source("PLOT_COUNTS_URL")
-source("PLOT_DENSITIES_URL")
-source("FIT_MODELS_URL")
-source("PRICE_CONVERTER_URL")
-source("PLOT_RMSE_URL")
+repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Dashboards/scripts/La_Junta/"
+source(paste0(repo_functions_path, "price_change_over_time().R"))
+source(paste0(repo_functions_path, "simple_moving_average().R"))
+source(paste0(repo_functions_path, "arima_plot().R"))
+source(paste0(repo_functions_path, "plot_weight_vs_price().R"))
+source(paste0(repo_functions_path, "plot_counts().R"))
+source(paste0(repo_functions_path, "plot_densities().R"))
+source(paste0(repo_functions_path, "fit_models().R"))
+source(paste0(repo_functions_path, "price_converter().R"))
+source(paste0(repo_functions_path, "plot_rmse().R"))
 
 
 
