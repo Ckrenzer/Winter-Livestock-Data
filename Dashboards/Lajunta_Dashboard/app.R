@@ -1,7 +1,7 @@
 # PACKAGES ------------------------------------------------------------------------------
 if(!require("pacman")) install.packages("pacman")
 pacman::p_load(shiny, shinycssloaders, shinyjs,
-               dplyr, magrittr, lubridate, clock, readr,
+               dplyr, magrittr, lubridate, clock, readr, datagovindia,
                ggplot2, patchwork, plotly,
                forecast, tseries,
                tidymodels, rsample, parsnip, randomForest)
@@ -15,7 +15,7 @@ repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livest
 
 # Data
 source(paste0(repo_functions_path, "data.R"))
-source(paste0(repo_functions_path, "saved_objects/La Junta lm and rf models.rds"))
+model_results <- datagovindia::read_rds_from_github("https://github.com/Ckrenzer/Winter-Livestock-Data/raw/main/Dashboards/scripts/La_Junta/saved_objects/La%20Junta%20lm%20and%20rf%20models.rds")
 
 # Helper functions
 # Sourced in the order they are used in the server() function
