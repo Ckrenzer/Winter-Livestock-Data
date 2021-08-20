@@ -15,6 +15,7 @@ repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livest
 
 # Data
 source(paste0(repo_functions_path, "data.R"))
+source(paste0(repo_functions_path, "saved_objects/La Junta lm and rf models.rds"))
 
 # Helper functions
 # Sourced in the order they are used in the server() function
@@ -657,18 +658,18 @@ server <- function(input, output) {
     output$rmse <- renderPlot({
         
         # Stores the rmse plots into variables
-        steer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$steer_models[["lm_fit"]],
-                                                            rf_fit = model_fitting()$steer_models[["rf_fit"]]),
-                                      test_df = model_fitting()$steer_models[["test"]])
-        heifer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$heifer_models[["lm_fit"]],
-                                                             rf_fit = model_fitting()$heifer_models[["rf_fit"]]),
-                                       test_df = model_fitting()$heifer_models[["test"]])
-        cow_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$cow_models[["lm_fit"]],
-                                                          rf_fit = model_fitting()$cow_models[["rf_fit"]]),
-                                    test_df = model_fitting()$cow_models[["test"]])
-        bull_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_fitting()$bull_models[["lm_fit"]],
-                                                           rf_fit = model_fitting()$bull_models[["rf_fit"]]),
-                                     test_df = model_fitting()$bull_models[["test"]])
+        steer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_results[["steer"]][["lm_fit"]],
+                                                            rf_fit = model_results[["steer"]][["rf_fit"]]),
+                                      test_df = model_results[["steer"]][["test"]])
+        heifer_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_results[["heifer"]][["lm_fit"]],
+                                                             rf_fit = model_results[["heifer"]][["rf_fit"]]),
+                                       test_df = model_results[["heifer"]][["test"]])
+        cow_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_results[["cow"]][["lm_fit"]],
+                                                          rf_fit = model_results[["cow"]][["rf_fit"]]),
+                                    test_df = model_results[["cow"]][["test"]])
+        bull_rmse_facet <- plot_rmse(trained_models = list(lm_fit = model_results[["bull"]][["lm_fit"]],
+                                                           rf_fit = model_results[["bull"]][["rf_fit"]]),
+                                     test_df = model_results[["bull"]][["test"]])
         
         # Decides which plot to show
         if(input$reprod_model == "str"){
