@@ -32,7 +32,7 @@ model_data <- outliers_removed %>%
   mutate(Price = log(Price),
          Reprod = as.character(Reprod),
          Reprod = case_when(
-           Reprod == "bull" && Weight < 1050 ~ "str",
+           Reprod == "bull" && Price > 125 ~ "str",
            Reprod == "cow" && Price > 100 ~ "hfr",
            TRUE ~ Reprod),
          Reprod = as.factor(Reprod)

@@ -17,12 +17,19 @@ plot_rmse <- function(trained_models, test_df){
            Price = exp(Price),
            Year = as.factor(get_year(Date)))
   
+  # The y-axis limits
+  limits <- c(
+    min(min(results$Price), min(results$lm_estimates), min(results$rf_estimates)),
+    max(max(results$Price), max(results$lm_estimates), max(results$rf_estimates))
+    )
+  
   # The MSE output graphs
   lm_rmse_plot <- results %>% 
     ggplot(mapping = aes(x = Price, y = lm_estimates)) +
     geom_abline(lty = 2, color = "gray50") +
     geom_point(aes(color = Year), size = 1.5, alpha = 0.3, show.legend = FALSE) +
     geom_smooth(method = "lm", se = FALSE) +
+    ylim(limits) +
     xlab("Actual Price") +
     ylab("Predicted Price") +
     ggtitle("Linear Regression (cents per pound)")
@@ -32,6 +39,7 @@ plot_rmse <- function(trained_models, test_df){
     geom_abline(lty = 2, color = "gray50") +
     geom_point(aes(color = Year), size = 1.5, alpha = 0.3, show.legend = FALSE) +
     geom_smooth(method = "lm", se = FALSE) +
+    ylim(limits) +
     xlab("Actual Price") +
     ylab("Predicted Price") +
     ggtitle("Random Forest (cents per pound)")
