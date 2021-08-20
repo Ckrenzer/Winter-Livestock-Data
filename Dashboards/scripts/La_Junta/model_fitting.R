@@ -78,7 +78,7 @@ model_results <- list(steer = list(lm_fit = lm_fit_steer, rf_fit = rf_fit_steer,
 # Writing to an RDS file
 write_rds(x = model_results,
           file = "Dashboards/scripts/La_Junta/saved_objects/La Junta lm and rf models.rds",
-          compress = "none")
+          compress = "gz")
 
 
 
