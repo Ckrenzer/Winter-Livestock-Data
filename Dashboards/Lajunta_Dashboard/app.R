@@ -10,7 +10,7 @@ pacman::p_load(shiny, shinycssloaders, shinyjs,
 
 
 
-# SETUP ----------------------------------------------------------------------------
+# SETUP ---------------------------------------------------------------------------------
 repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Dashboards/scripts/La_Junta/"
 
 # Data
@@ -264,10 +264,12 @@ ui <- navbarPage("Lajunta, CO Market Overview",
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     
-    # The dataset filtered down by the input date range
+    # The dataset filtered down by the input date range,
+    # after removing probable outliers (price above 500)
     date_filtered_data <- reactive({
         lajunta %>% 
-            filter(Date >= input$daterange[1],
+            filter(Price < 300,
+                   Date >= input$daterange[1],
                    Date <= input$daterange[2])
     })
     
