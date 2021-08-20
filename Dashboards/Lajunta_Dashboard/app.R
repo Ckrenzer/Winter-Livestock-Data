@@ -368,10 +368,10 @@ server <- function(input, output) {
     
     output$six_month_forecast <- renderPlot({
         # Making a bunch of forecasts
-        steer_forecast <- arima_plot(df = lajunta, reprod = "str", reprod_fullname = "Steer", lags = 1, diff_deg = 2, ma_term = 2)
-        heifer_forecast <- arima_plot(df = lajunta, reprod = "hfr", reprod_fullname = "Heifer", lags = 1, diff_deg = 1, ma_term = 2)
-        cow_forecast <- arima_plot(df = lajunta, reprod = "cow", reprod_fullname = "Cow", lags = 1, diff_deg = 1, ma_term = 2)
-        bull_forecast <- arima_plot(df = lajunta, reprod = "bull", reprod_fullname = "Bull", lags = 1, diff_deg = 1, ma_term = 2)
+        steer_forecast <- arima_plot(df = outliers_removed, reprod = "str", reprod_fullname = "Steer", lags = 1, diff_deg = 2, ma_term = 2)
+        heifer_forecast <- arima_plot(df = outliers_removed, reprod = "hfr", reprod_fullname = "Heifer", lags = 1, diff_deg = 1, ma_term = 2)
+        cow_forecast <- arima_plot(df = outliers_removed, reprod = "cow", reprod_fullname = "Cow", lags = 1, diff_deg = 1, ma_term = 2)
+        bull_forecast <- arima_plot(df = outliers_removed, reprod = "bull", reprod_fullname = "Bull", lags = 1, diff_deg = 1, ma_term = 2)
         
         return(steer_forecast / heifer_forecast / cow_forecast / bull_forecast + plot_annotation(title = "Seasonally Adjusted Six Month ARIMA Forecasts"))
     })
