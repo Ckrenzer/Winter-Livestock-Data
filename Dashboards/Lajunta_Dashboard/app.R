@@ -1,11 +1,26 @@
 # PACKAGES ------------------------------------------------------------------------------
-if(!require("pacman")) install.packages("pacman")
-pacman::p_load(shiny, shinycssloaders, shinyjs,
-               dplyr, magrittr, lubridate, clock, readr, datagovindia,
-               ggplot2, patchwork, plotly,
-               forecast, tseries,
-               tidymodels, rsample, parsnip, randomForest)
+library(shiny)
+library(shinycssloaders)
+library(shinyjs)
 
+library(dplyr)
+library(magrittr)
+library(lubridate)
+library(clock)
+library(readr)
+library(datagovindia)
+
+library(ggplot2)
+library(patchwork)
+library(plotly)
+
+library(forecast)
+library(tseries)
+
+library(tidymodels)
+library(rsample)
+library(parsnip)
+library(randomForest)
 
 
 
