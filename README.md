@@ -16,6 +16,9 @@ shiny::runGitHub(repo = "Winter-Livestock-Data",
                  ref = "main")
 ```
 
+The app will occasionally be hosted on [shinyapps.io](https://www.shinyapps.io/), so--if the app is running--you can use [this link](http://7phynv-connor0krenzer.shinyapps.io/La_Junta_Dashboard) to access it in your browser.
+
+
 ## Archived Output
 To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Archived/Output/La-Junta-Price-Estimation.html).
 
@@ -97,3 +100,6 @@ An RPA is now used to scrape the Winter Livestock site for new data. It is sched
 
 ### UPDATE 8/16/2021
 The collection() function has been split up into several different scripts to make the code easier to follow. The algorithm has been improved to miss slightly fewer cases than previous implementations. Similarly, the market report cleaning has been put into a function and moved to a script that is called inside the collection() function. This means that the 'before cleaning' csv will no longer be available.
+
+### UPDATE 8/21/2021
+The Shiny app has been reworked to load in helper functions and other data in by sourcing dedicated scripts. The linear and random forest models have been fitted before running and are now read in via an RDS file. This drastically reduces start up time and prevents fitting on the full dataset (as new data will not be included), which helps combat overfitting. Finally, the app has been published on shinyapps.io!
