@@ -18,8 +18,7 @@ source(paste0(repo_functions_path, "data.R"))
 
 # If you prefer reading in data from the web:
 #model_results <- datagovindia::read_rds_from_github("https://github.com/Ckrenzer/Winter-Livestock-Data/raw/main/Dashboards/Lajunta_Dashboard/scripts/saved_objects/La%20Junta%20lm%20and%20rf%20models.rds")
-
-model_results <- readr::read_rds("Dashboards/Lajunta_Dashboard/scripts/saved_objects/La Junta lm and rf models.rds")
+model_results <- readr::read_rds("scripts/saved_objects/La Junta lm and rf models.rds")
 
 
 # Helper functions
@@ -30,7 +29,6 @@ source(paste0(repo_functions_path, "arima_plot().R"))
 source(paste0(repo_functions_path, "plot_weight_vs_price().R"))
 source(paste0(repo_functions_path, "plot_counts().R"))
 source(paste0(repo_functions_path, "plot_densities().R"))
-source(paste0(repo_functions_path, "fit_models().R"))
 source(paste0(repo_functions_path, "price_converter().R"))
 source(paste0(repo_functions_path, "plot_rmse().R"))
 
@@ -39,8 +37,6 @@ source(paste0(repo_functions_path, "plot_rmse().R"))
 
 
 # SHINY APP -----------------------------------------------------------------------------
-
-# Define UI for application that draws a histogram
 ui <- navbarPage("Lajunta, CO Market Overview",
                  selected = "Visuals",
                  
@@ -52,7 +48,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  
                  
-                 
+                 # Price Summary Layout -------------------------------------------------
                  tabPanel("Price Summary",
                           
                           
@@ -142,7 +138,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  
                  
-                 
+                 # Visuals Panel Layout -------------------------------------------------
                  tabPanel("Visuals",
                           sidebarPanel(
                               # Determines whether to show the Weight vs. Price graph
@@ -203,7 +199,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  
                  
                  
-                 
+                 # Price Estimation Panel Layout ----------------------------------------
                  tabPanel("Price Estimation",
                           sidebarPanel(
                               # Chooses which reproductive status price to predict
@@ -267,9 +263,10 @@ ui <- navbarPage("Lajunta, CO Market Overview",
 
 
 
-# Define server logic required to draw a histogram
+
 server <- function(input, output) {
     
+    # Server setup ----------------------------------------------------------------------
     # The dataset filtered down by the input date range,
     # after removing probable outliers (price above 500)
     date_filtered_data <- reactive({
@@ -293,7 +290,7 @@ server <- function(input, output) {
     
     
     
-    # 'Price Summary' Tab Output
+    # 'Price Summary' Tab Output --------------------------------------------------------
     output$market_report <- downloadHandler(
         filename = "La Junta Market Reports.csv",
         content = function(file){
@@ -415,7 +412,7 @@ server <- function(input, output) {
     
     
     
-    # 'Visuals' Tab Output
+    # 'Visuals' Tab Output --------------------------------------------------------------
     output$weight_vs_price_plot <- renderPlot({
         
         # The weight vs price object
@@ -540,70 +537,55 @@ server <- function(input, output) {
     
     
     
-    # 'Price Estimation' Tab Output
-    # Fits the models and then returns them in a named list
-    model_fitting <- reactive({
-        steer_models <- fit_models(df = model_data, reprod = "str")
-        heifer_models <- fit_models(df = model_data, reprod = "hfr")
-        cow_models <- fit_models(df = model_data, reprod = "cow")
-        bull_models <- fit_models(df = model_data, reprod = "bull")
-        
-        model_list <- list(steer_models = steer_models,
-                           heifer_models = heifer_models,
-                           cow_models = cow_models,
-                           bull_models = bull_models)
-        
-        return(model_list)
-    })
-    
+    # 'Price Estimation' Tab Output -----------------------------------------------------
     # Calculates the price to show in the prediction
     price_calculation <- reactive({
         
         # Linear regression price estimates
-        steer_lm_price <- price_converter(model = model_fitting()[["steer_models"]][["lm_fit"]], 
+        steer_lm_price <- price_converter(model = model_results[["steer"]][["lm_fit"]], 
                                           date = input$sale_date, 
                                           weight = input$sale_weight, 
                                           quantity = input$sale_quantity, 
                                           reprod = input$reprod_model)
         
-        heifer_lm_price <- price_converter(model = model_fitting()[["heifer_models"]][["lm_fit"]], 
+        heifer_lm_price <- price_converter(model = model_results[["heifer"]][["lm_fit"]], 
                                            date = input$sale_date, 
                                            weight = input$sale_weight, 
                                            quantity = input$sale_quantity, 
                                            reprod = input$reprod_model)
         
-        cow_lm_price <- price_converter(model = model_fitting()[["cow_models"]][["lm_fit"]], 
+        cow_lm_price <- price_converter(model = model_results[["cow"]][["lm_fit"]], 
                                         date = input$sale_date, 
                                         weight = input$sale_weight, 
                                         quantity = input$sale_quantity, 
                                         reprod = input$reprod_model)
         
-        bull_lm_price <- price_converter(model = model_fitting()[["bull_models"]][["lm_fit"]], 
+        bull_lm_price <- price_converter(model = model_results[["bull"]][["lm_fit"]], 
                                          date = input$sale_date, 
                                          weight = input$sale_weight, 
                                          quantity = input$sale_quantity, 
                                          reprod = input$reprod_model)
         
         # Random forest price estimates
-        steer_rf_price <- price_converter(model = model_fitting()[["steer_models"]][["rf_fit"]], 
+        steer_rf_price <- price_converter(model = model_results[["steer"]][["rf_fit"]], 
                                           date = input$sale_date, 
                                           weight = input$sale_weight, 
                                           quantity = input$sale_quantity, 
                                           reprod = input$reprod_model)
         
-        heifer_rf_price <- price_converter(model = model_fitting()[["heifer_models"]][["rf_fit"]], 
+        heifer_rf_price <- price_converter(model = model_results[["heifer"]][["rf_fit"]], 
                                            date = input$sale_date, 
                                            weight = input$sale_weight, 
                                            quantity = input$sale_quantity, 
                                            reprod = input$reprod_model)
         
-        cow_rf_price <- price_converter(model = model_fitting()[["cow_models"]][["rf_fit"]], 
+        cow_rf_price <- price_converter(model = model_results[["cow"]][["rf_fit"]], 
                                         date = input$sale_date, 
                                         weight = input$sale_weight, 
                                         quantity = input$sale_quantity, 
                                         reprod = input$reprod_model)
         
-        bull_rf_price <- price_converter(model = model_fitting()[["bull_models"]][["rf_fit"]], 
+        bull_rf_price <- price_converter(model = model_results[["bull"]][["rf_fit"]], 
                                          date = input$sale_date, 
                                          weight = input$sale_weight, 
                                          quantity = input$sale_quantity, 
