@@ -1,26 +1,26 @@
 # PACKAGES ------------------------------------------------------------------------------
-library(shiny)
-library(shinycssloaders)
-library(shinyjs)
+if(!library(shiny, logical.return = TRUE)) install.packages("shiny")
+if(!library(shinycssloaders, logical.return = TRUE)) install.packages("shinycssloaders")
+if(!library(shinyjs, logical.return = TRUE)) install.packages("shinyjs")
 
-library(dplyr)
-library(magrittr)
-library(lubridate)
-library(clock)
-library(readr)
-library(datagovindia)
+if(!library(dplyr, logical.return = TRUE)) install.packages("dplyr")
+if(!library(magrittr, logical.return = TRUE)) install.packages("magrittr")
+if(!library(lubridate, logical.return = TRUE)) install.packages("lubridate")
+if(!library(clock, logical.return = TRUE)) install.packages("clock")
+if(!library(readr, logical.return = TRUE)) install.packages("readr")
+if(!library(datagovindia, logical.return = TRUE)) install.packages("datagovindia")
 
-library(ggplot2)
-library(patchwork)
-library(plotly)
+if(!library(ggplot2, logical.return = TRUE)) install.packages("ggplot2")
+if(!library(patchwork, logical.return = TRUE)) install.packages("patchwork")
+if(!library(plotly, logical.return = TRUE)) install.packages("plotly")
 
-library(forecast)
-library(tseries)
+if(!library(forecast, logical.return = TRUE)) install.packages("forecast")
+if(!library(tseries, logical.return = TRUE)) install.packages("tseries")
 
-library(tidymodels)
-library(rsample)
-library(parsnip)
-library(randomForest)
+if(!library(tidymodels, logical.return = TRUE)) install.packages("tidymodels")
+if(!library(rsample, logical.return = TRUE)) install.packages("rsample")
+if(!library(parsnip, logical.return = TRUE)) install.packages("parsnip")
+if(!library(randomForest, logical.return = TRUE)) install.packages("randomForest")
 
 
 
