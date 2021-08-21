@@ -246,7 +246,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           
                           mainPanel(
                               h1("Modeling"),
-                              p("This section creates models using the data and allow you to predict what the price will be at a future sale. It takes a long time to load due to the computationally-heavy tasks it performs on startup (~35 seconds with an Intel i5-8250U CPU)."),
+                              p("This section creates models using the data and allow you to predict what the price will be at a future sale."),
                               strong("Instructions"),
                               p("Provide inputs to the sidebar on the left-hand side, and the models will return the predicted price."),
                               p("You will want to use the performance metrics provided in the graphs below to judge the accuracy of the model. Accurate predictions are those where the line of best fit comes close to the dotted line. If the prediction the model gave out does not come close to the dotted line, do not trust the result."),
