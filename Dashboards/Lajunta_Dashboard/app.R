@@ -16,7 +16,7 @@ repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livest
 # Data
 source(paste0(repo_functions_path, "data.R"))
 
-# If you prefer reading in data from the web:
+# If you prefer reading data from the web:
 #model_results <- datagovindia::read_rds_from_github("https://github.com/Ckrenzer/Winter-Livestock-Data/raw/main/Dashboards/Lajunta_Dashboard/scripts/saved_objects/La%20Junta%20lm%20and%20rf%20models.rds")
 model_results <- readr::read_rds("scripts/saved_objects/La Junta lm and rf models.rds")
 

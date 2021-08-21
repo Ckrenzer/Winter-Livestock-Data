@@ -1,3 +1,6 @@
+# You run this script every so often to update the fitted model stored in the RDS file
+
+
 # Setting the random number generator -------------------------------------------------
 set.seed(2021)
 
