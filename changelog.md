@@ -4,9 +4,9 @@ Major changes to this repo are listed with each update. Updates are written arbi
 ### UPDATE 8/31/2021
 Changes revolve around streamlining automation of market report updates.
 
-'La Junta Collection.Rmd' has been replaced by three R scripts. 'La Junta Collection.R' does the scraping and updating to the repo, 'testing.R' provides visual inspection on the data, and 'La Junta url options.R' provides different parsings of the market report URLs to make scraping the data easier in the future.
+'La Junta Collection.Rmd' has been replaced by three R scripts. 'La Junta Collection.R' does the scraping and updating to the repo, 'testing.R' provides visual inspection on the data, and 'La Junta url options.R' provides different parsings of the market report URLs to make scraping data easier in the future.
 
-The changes made to 'La Junta Collection.R' mean the user has to make a few changes to make the code work on his or her local device. Namely, the `repository path` variable should be the root directory of this repo and the section committing and pushing changes to GitHub should be ignored or removed. The user may also need to set up RSelenium and FireFox before the this script works verbatim--RSelenium is only used to get the current market report URL so you may also ignore this code if you choose to get the URL yourself.
+The changes made to 'La Junta Collection.R' mean the user has to make a few changes to make the code work on his or her local device. Namely, the section committing and pushing changes to GitHub should be ignored or removed. The user may also need to set up RSelenium and FireFox before the this script works verbatim--RSelenium is only used to get the current market report URL so you may also ignore this code if you choose to get the URL yourself.
 
 ### UPDATE 8/21/2021
 The Shiny app has been reworked to load in helper functions and other data in by sourcing dedicated scripts. The linear and random forest models have been fitted before running and are now read in via an RDS file. This drastically reduces start up time and prevents fitting on the full dataset (as new data will not be included), which helps combat overfitting. Finally, the app has been published on shinyapps.io!

@@ -7,12 +7,6 @@ pacman::p_load(RSelenium, rvest, htmltools, htmlwidgets,
 # The collection() function
 source("Collection/functions/collection().R")
 
-# When getwd() is called from the task scheduler, it will only recognize the
-# path of the script (as opposed to the project). Therefore, we want to move
-# to the parent directory of Collection/
-repository_path <- str_extract(getwd(), ".*(?=/Collection)")
-setwd(repository_path)
-
 
 
 # Market Report -------------------------------------------------------------------------
@@ -62,9 +56,9 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 
 
 # UPLOAD:
-# We only try to commit and push if the repo was changed
-if(appended_new_data){
+# We only try to commit and push if we changed the repo and have access
+if(appended_new_data && file.exists("PAT.txt")){
   GITHUB_PAT <- read_lines("PAT.txt")
-  git2r::commit(repo = repository_path, message = "Weekly Market Update", all = TRUE, session = TRUE)
-  git2r::push(object = repository_path, credentials = git2r::cred_token())
+  git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
+  git2r::push(object = getwd(), credentials = git2r::cred_token())
 }
