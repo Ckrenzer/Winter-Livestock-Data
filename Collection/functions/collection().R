@@ -149,5 +149,6 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     data_successfully_added <- TRUE
   }#end of for loop
   
+  
   return(data_successfully_added)
 }
