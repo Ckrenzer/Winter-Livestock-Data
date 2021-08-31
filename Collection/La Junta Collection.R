@@ -66,5 +66,5 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 if(appended_new_data){
   GITHUB_PAT <- read_lines("PAT.txt")
   git2r::commit(repo = repository_path, message = "Weekly Market Update", all = TRUE, session = TRUE)
-  git2r::push(object = repository_path, credentials = cred_token())
+  git2r::push(object = repository_path, credentials = git2r::cred_token())
 }

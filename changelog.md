@@ -1,6 +1,13 @@
 # UPDATES
 Major changes to this repo are listed with each update. Updates are written arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
+### UPDATE 8/31/2021
+Changes revolve around streamlining automation of market report updates.
+
+'La Junta Collection.Rmd' has been replaced by three R scripts. 'La Junta Collection.R' does the scraping and updating to the repo, 'testing.R' provides visual inspection on the data, and 'La Junta url options.R' provides different parsings of the market report URLs to make scraping the data easier in the future.
+
+The changes made to 'La Junta Collection.R' means the user will have to make a few changes to make the code work on his or her local device. Namely, the `repository path` variable should be the root directory of this repo and the section committing and pushing changes to GitHub should be ignored or removed. The user may also need to set up RSelenium and FireFox before the this script works verbatim--RSelenium is only used to get the current market report URL so you may also ignore this code if you choose to get the URL yourself.
+
 ### UPDATE 8/21/2021
 The Shiny app has been reworked to load in helper functions and other data in by sourcing dedicated scripts. The linear and random forest models have been fitted before running and are now read in via an RDS file. This drastically reduces start up time and prevents fitting on the full dataset (as new data will not be included), which helps combat overfitting. Finally, the app has been published on shinyapps.io!
 
@@ -8,7 +15,7 @@ The Shiny app has been reworked to load in helper functions and other data in by
 The collection() function has been split up into several different scripts to make the code easier to follow. The algorithm has been improved to miss slightly fewer cases than previous implementations. Similarly, the market report cleaning has been put into a function and moved to a script that is called inside the collection() function. This means that the 'before cleaning' csv will no longer be available.
 
 ### UPDATE 7/6/2021
-An RPA is now used to scrape the Winter Livestock site for new data. It is scheduled to run at 5pm on Thursdays. The collection() function was updated to prevent previouly-used URLs from adding data (in the event there was no sale on a particular week).
+An RPA is now used to scrape the Winter Livestock site for new data. It is scheduled to run at 8:30pm on Thursdays. The collection() function was updated to prevent previouly-used URLs from adding data (in the event there was no sale on a particular week).
 
 ### UPDATE 7/1/2021
 Added a new Shiny app serving as a dashboard for the Lajunta, CO market.
