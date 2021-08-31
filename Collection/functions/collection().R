@@ -14,7 +14,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
   if(file.exists("Collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
-    used_urls <- read_lines("Collection/La Junta URLs.txt") 
+    used_urls <- read_lines("Collection/La Junta URLs.txt")
   } else {
     used_urls <- "No previously used URLs" 
   }
@@ -141,6 +141,8 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
               append = TRUE,
               col_names = write_colnames)
     
+    # Adding the current URL to the used URL list
+    write_lines(x = URL, file = "Collection/La Junta URLs.txt", append = TRUE)
     
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
