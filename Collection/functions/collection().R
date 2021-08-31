@@ -22,6 +22,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   previous_date_of_sale <- "01-01-2016"
   
   
+  
   for(URL in urls){
     # simple yet effective way of showing the operation's progress
     message(".")
@@ -29,6 +30,12 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     
     # Pause the operation to lower stress on the server
     Sys.sleep(time = runif(n = 1, min = 10, max = 15))
+    
+    
+    # Determines whether data was added
+    # (used for task scheduler updates in which we need to
+    # determine whether any changes were made to the repository)
+    data_successfully_added <- FALSE
     
     
     # Checking for previously used URLs -------------------------------------------------
@@ -137,5 +144,10 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
+    
+    # If we add data successfully, set this value to TRUE
+    data_successfully_added <- TRUE
   }#end of for loop
+  
+  return(list(data_successfully_added = data_successfully_added))
 }
