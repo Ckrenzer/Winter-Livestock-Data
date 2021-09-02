@@ -2,7 +2,7 @@
 if(!require(pacman)) install.packages("pacman")
 pacman::p_load(RSelenium, rvest, htmltools, htmlwidgets,
                stringr, tidyr, readr, dplyr, lubridate, clock,
-               git2r)
+               gert)
 
 # The collection() function
 source("Collection/functions/collection().R")
@@ -58,7 +58,6 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 # UPLOAD:
 # We only try to commit and push if we changed the repo and have access
 if(appended_new_data && file.exists("PAT.txt")){
-  GITHUB_PAT <- read_lines("PAT.txt")
-  git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
-  git2r::push(object = getwd(), credentials = git2r::cred_token())
+  gert::git_commit(message = "Weekly Market Update", author = "Ckrenzer", committer = "Ckrenzer", repo = repository_path)
+  gert::git_push(repo = repository_path, verbose = FALSE)
 }
