@@ -23,7 +23,8 @@ lajunta <- lajunta %>%
 
 # This is meant to speed up the runtime instead of placing it in multiple reactive functions
 outliers_removed <- lajunta %>% 
-  filter(Price < 325)
+  filter(Price < 325,
+         Weight < 4000)
 
 # recodes bulls that act like steers on the market as steers
 # and similarly for cows that act like heifers
