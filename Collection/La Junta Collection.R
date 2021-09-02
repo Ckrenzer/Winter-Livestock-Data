@@ -48,12 +48,13 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 
 # UPLOAD --------------------------------------------------------------------------------
 # UPLOAD NOTES:
-# Commit and push our changes to the repo.
+# Commit and push our changes to the repo. Uncomment this section if you wish
+# to use it.
 
 
 # UPLOAD:
 # We only try to commit and push if we changed the repo and have access
-if(appended_new_data){
-  git2r::commit(repo = repository_path, message = "Weekly Market Update", all = TRUE, session = TRUE)
-  gert::git_push(repo = repository_path, verbose = FALSE)
-}
+#if(appended_new_data){
+#  git2r::commit(repo = repository_path, message = "Weekly Market Update", all = TRUE, session = TRUE)
+#  gert::git_push(repo = repository_path, verbose = FALSE)
+#}
