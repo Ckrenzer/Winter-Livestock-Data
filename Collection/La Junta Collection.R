@@ -49,15 +49,11 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 # UPLOAD --------------------------------------------------------------------------------
 # UPLOAD NOTES:
 # Commit and push our changes to the repo.
-# The Personal Access Token (PAT) needs updating every 90 days.
-# Follow these instructions:
-# https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
-# Basically, this means generating a new PAT and overwriting PAT.txt with the new code.
 
 
 # UPLOAD:
 # We only try to commit and push if we changed the repo and have access
-if(appended_new_data && file.exists("PAT.txt")){
+if(appended_new_data){
   git2r::commit(repo = repository_path, message = "Weekly Market Update", all = TRUE, session = TRUE)
   gert::git_push(repo = repository_path, verbose = FALSE)
 }
