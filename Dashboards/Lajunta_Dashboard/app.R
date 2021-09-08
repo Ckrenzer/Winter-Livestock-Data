@@ -4,6 +4,7 @@ if(!library(shinycssloaders, logical.return = TRUE)) install.packages("shinycssl
 if(!library(shinyjs, logical.return = TRUE)) install.packages("shinyjs")
 
 if(!library(dplyr, logical.return = TRUE)) install.packages("dplyr")
+if(!library(stringr, logical.return = TRUE)) install.packages("stringr")
 if(!library(magrittr, logical.return = TRUE)) install.packages("magrittr")
 if(!library(lubridate, logical.return = TRUE)) install.packages("lubridate")
 if(!library(clock, logical.return = TRUE)) install.packages("clock")
