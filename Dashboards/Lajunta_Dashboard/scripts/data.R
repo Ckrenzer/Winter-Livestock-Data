@@ -20,7 +20,8 @@ lajunta_full <- lajunta
 
 
 lajunta <- lajunta %>% 
-  dplyr::filter(!is.na(Reprod) | Reprod != "NA")
+  dplyr::filter(!is.na(Reprod),
+                Reprod != "NA")
 
 # This is meant to speed up the runtime instead of placing it in multiple reactive functions
 outliers_removed <- lajunta %>% 
