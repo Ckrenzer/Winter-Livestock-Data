@@ -1,9 +1,9 @@
 # We load in the app's data using this script
 
 # Reading in the file and removing the URL column
-# Fortunately, we only have to do this once
+# Fortunately, we only have to do this once (readr::col_date() was giving me a hard time, so we use a mutate() call)
 lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
-                           col_types = readr::cols(Date = col_date("%m-%d-%Y"),
+                           col_types = readr::cols(Date = readr::col_character(),
                                                    Buyer = readr::col_factor(),
                                                    Quantity = readr::col_double(),
                                                    Type = readr::col_factor(),
@@ -11,7 +11,8 @@ lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Li
                                                    Price = readr::col_double(),
                                                    URL = readr::col_character(),
                                                    Reprod = readr::col_factor())) %>% 
-  dplyr::select(-URL)
+  dplyr::select(-URL) %>% 
+  mutate(Date = readr::parse_date(x = Date, format = "%m-%d-%Y"))
 
 
 # The full, unfiltered dataset for export
