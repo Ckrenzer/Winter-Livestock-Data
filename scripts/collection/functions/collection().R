@@ -1,20 +1,20 @@
 collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   # Sourcing in helper functions
-  source("Collection/functions/extract_webpage_text().R", local = TRUE)
-  source("Collection/functions/split_text().R", local = TRUE)
-  source("Collection/functions/determine_date_of_sale().R", local = TRUE)
-  source("Collection/functions/month_name_to_num().R", local = TRUE)
-  source("Collection/functions/remove_unwanted_sections().R", local = TRUE)
-  source("Collection/functions/extract_buyer_name().R", local = TRUE)
-  source("Collection/functions/insert_buyer_names().R", local = TRUE)
-  source("Collection/functions/insert_delimiter().R", local = TRUE)
-  source("Collection/functions/cleaning().R", local = TRUE)
+  source("scripts/collection/functions/extract_webpage_text().R", local = TRUE)
+  source("scripts/collection/functions/split_text().R", local = TRUE)
+  source("scripts/collection/functions/determine_date_of_sale().R", local = TRUE)
+  source("scripts/collection/functions/month_name_to_num().R", local = TRUE)
+  source("scripts/collection/functions/remove_unwanted_sections().R", local = TRUE)
+  source("scripts/collection/functions/extract_buyer_name().R", local = TRUE)
+  source("scripts/collection/functions/insert_buyer_names().R", local = TRUE)
+  source("scripts/collection/functions/insert_delimiter().R", local = TRUE)
+  source("scripts/collection/functions/cleaning().R", local = TRUE)
   
   
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
-  if(file.exists("Collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
-    used_urls <- read_lines("Collection/La Junta URLs.txt")
+  if(file.exists("scripts/collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
+    used_urls <- read_lines("scripts/collection/La Junta URLs.txt")
   } else {
     used_urls <- "No previously used URLs" 
   }
@@ -132,17 +132,17 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     
     
     # Writing to CSV --------------------------------------------------------------------
-    write_colnames <- if_else(condition = !file.exists("La Junta Market Reports.csv"),
+    write_colnames <- if_else(condition = !file.exists("data/La Junta Market Reports.csv"),
                               true = TRUE,
                               false = FALSE)
     
     write_csv(x = livestock_data,
-              file = "La Junta Market Reports.csv",
+              file = "data/La Junta Market Reports.csv",
               append = TRUE,
               col_names = write_colnames)
     
     # Adding the current URL to the used URL list
-    write_lines(x = URL, file = "Collection/La Junta URLs.txt", append = TRUE)
+    write_lines(x = URL, file = "scripts/collection/La Junta URLs.txt", append = TRUE)
     
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
@@ -151,6 +151,5 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     data_successfully_added <- TRUE
   }#end of for loop
   
-  
-  return(data_successfully_added)
+  data_successfully_added
 }

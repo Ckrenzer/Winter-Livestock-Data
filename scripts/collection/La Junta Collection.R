@@ -5,7 +5,7 @@ pacman::p_load(RSelenium, rvest, htmltools, htmlwidgets,
                git2r, gert)
 
 # The collection() function
-source("Collection/functions/collection().R")
+source("scripts/collection/functions/collection().R")
 
 
 
