@@ -1,6 +1,9 @@
 # UPDATES
 Major changes to this repo are listed with each update. Updates are written arbitrarily, but--when something big changes--I usually know "it's time." Think of this as a history lesson rather than a feature preview.
 
+### UPDATE 2/4/2022
+The file structure of this repo has been simplified. The 'Collection' and 'Dashboards' directories are now subdirectories of 'scripts', renamed to lowercase.
+
 ### UPDATE 8/31/2021
 Changes revolve around streamlining automation of market report updates.
 
