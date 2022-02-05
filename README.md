@@ -12,7 +12,7 @@ To see the Lajunta dashboard, run the following code in your R console:
 if(!require(shiny)) install.packages("shiny")
 shiny::runGitHub(repo = "Winter-Livestock-Data",
                  username = "Ckrenzer",
-                 subdir = "Dashboards/Lajunta_Dashboard",
+                 subdir = "scripts/dashboards/Lajunta_Dashboard",
                  ref = "main")
 ```
 
