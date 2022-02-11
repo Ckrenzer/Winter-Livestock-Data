@@ -1,8 +1,18 @@
 # Packages ------------------------------------------------------------------------------
-if(!require(pacman)) install.packages("pacman")
-pacman::p_load(RSelenium, rvest, htmltools, htmlwidgets,
-               stringr, tidyr, readr, dplyr, lubridate, clock,
-               git2r, gert)
+if(!require(RSelenium)) install.packages("RSelenium"); library(RSelenium)
+if(!require(rvest)) install.packages("rvest"); library(rvest)
+if(!require(htmltools)) install.packages("htmltools"); library(htmltools)
+if(!require(htmlwidgets)) install.packages("htmlwidgets"); library(htmlwidgets)
+
+if(!require(stringr)) install.packages("stringr"); library(stringr)
+if(!require(tidyr)) install.packages("tidyr"); library(tidyr)
+if(!require(readr)) install.packages("readr"); library(readr)
+if(!require(dplyr)) install.packages("dplyr"); library(dplyr)
+if(!require(lubridate)) install.packages("lubridate"); library(lubridate)
+if(!require(clock)) install.packages("clock"); library(clock)
+
+if(!require(git2r)) install.packages("git2r"); library(git2r)
+if(!require(gert)) install.packages("gert"); library(gert)
 
 # The collection() function
 source("scripts/collection/functions/collection().R")
@@ -49,7 +59,7 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 # UPLOAD --------------------------------------------------------------------------------
 # UPLOAD NOTES:
 # Commit and push our changes to the repo. Uncomment this section if you wish
-# to use it.
+# to use it. You will have to provide the path to this repo as a string to `repository_path`.
 
 
 # UPLOAD:
