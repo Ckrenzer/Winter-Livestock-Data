@@ -2,7 +2,7 @@
 
 # Reading in the file and removing the URL column
 # Fortunately, we only have to do this once (readr::col_date() was giving me a hard time, so we use a mutate() call)
-lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv",
+lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/data/La%20Junta%20Market%20Reports.csv",
                            col_types = readr::cols(Date = readr::col_character(),
                                                    Buyer = readr::col_factor(),
                                                    Quantity = readr::col_double(),
@@ -12,7 +12,7 @@ lajunta <- readr::read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Li
                                                    URL = readr::col_character(),
                                                    Reprod = readr::col_factor())) %>% 
   dplyr::select(-URL) %>% 
-  mutate(Date = readr::parse_date(x = Date, format = "%m-%d-%Y"))
+  dplyr::mutate(Date = readr::parse_date(x = Date, format = "%m-%d-%Y"))
 
 
 # The full, unfiltered dataset for export
@@ -25,18 +25,18 @@ lajunta <- lajunta %>%
 
 # This is meant to speed up the runtime instead of placing it in multiple reactive functions
 outliers_removed <- lajunta %>% 
-  filter(Price < 325,
-         Weight < 4000)
+  dplyr::filter(Price < 325,
+                Weight < 4000)
 
 # recodes bulls that act like steers on the market as steers
 # and similarly for cows that act like heifers
 model_data <- outliers_removed %>% 
   dplyr::select(-Buyer) %>% 
-  mutate(Price = log(Price),
-         Reprod = as.character(Reprod),
-         Reprod = case_when(
-           Reprod == "bull" && Price > 125 ~ "str",
-           Reprod == "cow" && Price > 100 ~ "hfr",
-           TRUE ~ Reprod),
-         Reprod = as.factor(Reprod)
+  dplyr::mutate(Price = log(Price),
+                Reprod = as.character(Reprod),
+                Reprod = case_when(
+                  Reprod == "bull" && Price > 125 ~ "str",
+                  Reprod == "cow" && Price > 100 ~ "hfr",
+                  TRUE ~ Reprod),
+                Reprod = as.factor(Reprod)
   )
