@@ -9,18 +9,42 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   source("scripts/collection/functions/insert_buyer_names().R", local = TRUE)
   source("scripts/collection/functions/insert_delimiter().R", local = TRUE)
   source("scripts/collection/functions/cleaning().R", local = TRUE)
+
+  
+  # File names ----------------------------------------------------------------
+  ljmr_csv <- "data/La Junta Market Reports.csv"
+  ljmr_urls <- "scripts/collection/La Junta URLs.txt"
   
   
+  # Default Values ------------------------------------------------------------
   # Stores previously used URLs in a vector (urls in which we have already collected the data)
   # This condition allows us to prevent repeated data from being added
-  if(file.exists("scripts/collection/La Junta URLs.txt") && prevent_use_of_previous_urls){
-    used_urls <- read_lines("scripts/collection/La Junta URLs.txt")
+  if(file.exists(ljmr_urls) && prevent_use_of_previous_urls){
+    used_urls <- read_lines(ljmr_urls)
   } else {
-    used_urls <- "No previously used URLs" 
+    used_urls <- "No previously used URLs"
   }
-  # The first sale date
-  previous_date_of_sale <- "01-01-2016"
   
+  # Sometimes two URLs contain the same sales report. The unique identifier
+  # of a market report during the scrape should, therefore, be the
+  # combination of the url and date.
+  #
+  # But, if either a url or date appear twice, it's probably safe to skip.
+  ljmr_csv_exists <- file.exists(ljmr_csv)
+  if(ljmr_csv_exists){
+    # The most recently-used url in the csv file
+    previous_date_of_sale <- read_csv(ljmr_csv,
+                                      col_select = "Date",
+                                      col_types = cols(col_character())) %>% 
+      pull() %>% 
+      as.Date(., "%m-%d-%Y") %>% 
+      max() 
+  } else {
+    # Set a default value for the previous date that won't
+    # interfere with the first date in the data on the
+    # Winter Livestock website
+    previous_date_of_sale <- "01-01-2016"
+  }
   
   
   for(URL in urls){
@@ -38,7 +62,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     data_successfully_added <- FALSE
     
     
-    # Checking for previously used URLs -------------------------------------------------
+    # Checking for previously used URLs ---------------------------------------
     # If the url has been used before,
     # skip to the next iteration of the loop
     if(URL %in% used_urls){
@@ -46,7 +70,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     }
     
     
-    # Reading in data from webpage ------------------------------------------------------
+    # Reading in data from webpage --------------------------------------------
     livestock_data <- extract_webpage_text()
     livestock_data <- split_text()
     # If the return value from split_text() was missing, skip to the
@@ -57,7 +81,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     }
     
     
-    # Determining location (La Junta) ---------------------------------------------------
+    # Determining location (La Junta) -----------------------------------------
     # If we've made it this far, that means that there is information about a market report on the webpage.
     # We now need to determine whether this market report is for La Junta, CO.
     # We assume that "La Junta CO" will not appear in non-La Junta, CO
@@ -68,7 +92,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     }
     
     
-    # Finding the date of sale ----------------------------------------------------------
+    # Finding the date of sale ------------------------------------------------
     date_of_sale <- determine_date_of_sale(previous_date = previous_date_of_sale)
     # If the date has already been added, skip to the next iteration of the loop
     # this means there was a duplicate market report url
@@ -77,7 +101,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     }
     
     
-    # Removing Unwanted Sections -------------------------------------------------------
+    # Removing Unwanted Sections ----------------------------------------------
     livestock_data <- remove_unwanted_sections()
     # Removing internet auction sales--they should be empty character vectors by this point.
     # For more flexibility, if the length is smaller than 10, the data will not be added
@@ -88,7 +112,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     # `livestock_data` now contains only the sales data
     
     
-    # previous_date_of_sale -------------------------------------------------------------
+    # previous_date_of_sale ---------------------------------------------------
     # `previous_date_of_sale` CAN ONLY BE ASSIGNED AFTER WE ARE SURE WE ARE ADDING
     # THE DATA TO THE DATA FRAME (only relevant when adding multiple sales to the csv)
     #
@@ -100,19 +124,19 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     previous_date_of_sale <- date_of_sale
     
     
-    # Buyer names -----------------------------------------------------------------------
+    # Buyer names -------------------------------------------------------------
     # A character vector containing each buyer's name
     buyers <- extract_buyer_name()
     # Adds the associated buyer name to each sale
     livestock_data <- insert_buyer_names()
     
     
-    # Insert Delimiter ------------------------------------------------------------------
+    # Insert Delimiter --------------------------------------------------------
     # `livestock_data` should now have the fields separated by tabs
     livestock_data <- insert_delimiter()
     
     
-    # Data frame ------------------------------------------------------------------------
+    # Data frame --------------------------------------------------------------
     livestock_data <- tibble(entries = livestock_data)
     # Making new columns based off the sections
     # separated by "\t"
@@ -126,23 +150,21 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       mutate("URL" = URL)
     
     
-    # Cleaning --------------------------------------------------------------------------
+    # Cleaning ----------------------------------------------------------------
     # Creates the 'Reprod' column and simplifies the 'Type' column down to 8 categories
     livestock_data <- cleaning(lajunta = livestock_data)
     
     
-    # Writing to CSV --------------------------------------------------------------------
-    write_colnames <- if_else(condition = !file.exists("data/La Junta Market Reports.csv"),
-                              true = TRUE,
-                              false = FALSE)
+    # Writing to CSV ----------------------------------------------------------
+    write_colnames <- !ljmr_csv_exists
     
     write_csv(x = livestock_data,
-              file = "data/La Junta Market Reports.csv",
+              file = ljmr_csv,
               append = TRUE,
               col_names = write_colnames)
     
     # Adding the current URL to the used URL list
-    write_lines(x = URL, file = "scripts/collection/La Junta URLs.txt", append = TRUE)
+    write_lines(x = URL, file = ljmr_urls, append = TRUE)
     
     # Confirmation message saying data was added to the file
     message(paste0("\nDATA ADDED: ", date_of_sale, "\tURL: ", URL, "\n"))
