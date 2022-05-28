@@ -58,13 +58,12 @@ appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE
 
 # UPLOAD --------------------------------------------------------------------------------
 # UPLOAD NOTES:
-# Commit and push our changes to the repo. Uncomment this section if you wish
-# to use it. You will have to provide the path to this repo as a string to `repository_path`.
-
+# Commit and push changes to the repo. Change the user if you wish to use this method.
+#
+# You have to provide the path to this repo as a string to `repository_path`.
 
 # UPLOAD:
-# We only try to commit and push if we changed the repo and have access
-#if(appended_new_data){
-#  git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
-#  gert::git_push(repo = getwd(), verbose = FALSE)
-#}
+if(Sys.info()["effective_user"] == "crkre" & appended_new_data){
+  git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
+  gert::git_push(repo = getwd(), verbose = FALSE)
+}
