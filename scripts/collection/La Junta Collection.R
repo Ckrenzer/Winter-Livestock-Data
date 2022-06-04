@@ -43,6 +43,9 @@ xpath_value <- "/html/body/div/div[3]/div[7]/div/div/table/tbody/tr/td[1]/a"
 # Click on the link to the most current market report
 remote_driver$findElements(using = "xpath", value = xpath_value)[[1]]$clickElement()
 
+# Let the page load in...
+Sys.sleep(7.2)
+
 # Getting the current URL
 urls <- remote_driver$getCurrentUrl()[[1]]
 
