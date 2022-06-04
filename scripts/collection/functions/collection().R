@@ -36,7 +36,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     previous_date_of_sale <- read_csv(ljmr_csv,
                                       col_select = "Date",
                                       col_types = cols(col_character())) %>% 
-      pull() %>% 
+      dplyr::pull() %>% 
       as.Date(., "%m-%d-%Y") %>% 
       max() 
   } else {
