@@ -38,7 +38,8 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
                                       col_types = cols(col_character())) %>% 
       dplyr::pull() %>% 
       as.Date(., "%m-%d-%Y") %>% 
-      max() 
+      max() %>% 
+      as.character()
   } else {
     # Set a default value for the previous date that won't
     # interfere with the first date in the data on the
