@@ -23,32 +23,25 @@ if(!library(parsnip, logical.return = TRUE)) install.packages("parsnip")
 if(!library(randomForest, logical.return = TRUE)) install.packages("randomForest")
 
 
-
-
 # SETUP ---------------------------------------------------------------------------------
-repo_functions_path <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/scripts/dashboards/Lajunta_Dashboard/scripts/"
+path_functions <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/scripts/dashboards/lajunta/scripts"
 
 # Data
-source(paste0(repo_functions_path, "data.R"))
-
+source(paste0(path_functions, "data.R"))
 # If you prefer reading data from the web:
-model_results <- datagovindia::read_rds_from_github("https://github.com/Ckrenzer/Winter-Livestock-Data/raw/main/scripts/dashboards/Lajunta_Dashboard/scripts/saved_objects/La%20Junta%20lm%20and%20rf%20models.rds")
-#model_results <- readr::read_rds("scripts/saved_objects/La Junta lm and rf models.rds")
-
+model_results <- datagovindia::read_rds_from_github(paste0(path_functions, "extras/models_fit.rds"))
+#model_results <- readr::read_rds("scripts/extras/models_fit.rds")
 
 # Helper functions
 # Sourced in the order they are used in the server() function
-source(paste0(repo_functions_path, "price_change_over_time().R"))
-source(paste0(repo_functions_path, "simple_moving_average().R"))
-source(paste0(repo_functions_path, "arima_plot().R"))
-source(paste0(repo_functions_path, "plot_weight_vs_price().R"))
-source(paste0(repo_functions_path, "plot_counts().R"))
-source(paste0(repo_functions_path, "plot_densities().R"))
-source(paste0(repo_functions_path, "price_converter().R"))
-source(paste0(repo_functions_path, "plot_rmse().R"))
-
-
-
+source(paste0(path_functions, "price_change_over_time.R"))
+source(paste0(path_functions, "simple_moving_average.R"))
+source(paste0(path_functions, "arima_plot.R"))
+source(paste0(path_functions, "plot_weight_vs_price.R"))
+source(paste0(path_functions, "plot_counts.R"))
+source(paste0(path_functions, "plot_densities.R"))
+source(paste0(path_functions, "price_converter.R"))
+source(paste0(path_functions, "plot_rmse.R"))
 
 
 # SHINY APP -----------------------------------------------------------------------------
@@ -59,20 +52,12 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                  useShinyjs(),
                  
                  
-                 
-                 
-                 
-                 
                  # Price Summary Layout -------------------------------------------------
                  tabPanel("Price Summary",
                           
-                          
-                          
                           sidebarPanel(
                               
-                              
                               helpText("Supply a reproductive status, weight range, and date range (make the dates the same to check one sale) to find the average price for cattle meeting the specifications."),
-                              
                               
                               # Determines the reproductive status for price calculations
                               selectInput("reprod",
@@ -101,15 +86,12 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                              max    = max(lajunta$Date),
                                              format = "yyyy-mm-dd",
                                              separator = " THROUGH "),
-                              
-                              
+
                               helpText("The date range allows you to choose dates to include for your historical price calculation. It also adjusts the data shown in the historical price data."),
-                              
-                              
+
                               # Allows the user to download the dataset
                               downloadButton("market_report", "Get data"),
-                              
-                              
+
                               # Determines whether to show the graphs
                               checkboxInput(
                                   inputId = "hide_price_graphs",
@@ -140,19 +122,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           )
                  ),
                  
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
+
                  # Visuals Panel Layout -------------------------------------------------
                  tabPanel("Visuals",
                           sidebarPanel(
@@ -201,19 +171,7 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                           )
                  ),
                  
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
+
                  # Price Estimation Panel Layout ----------------------------------------
                  tabPanel("Price Estimation",
                           sidebarPanel(
@@ -225,13 +183,11 @@ ui <- navbarPage("Lajunta, CO Market Overview",
                                                          "Cow" = "cow",
                                                          "Bull" = "bull"),
                                           selected = "str"),
-                              
-                              
+
                               helpText("Please note that the models become less accurate the further into the future you try to predict."),
                               
                               helpText("The following fields accept keyboard input."),
-                              
-                              
+
                               # Determines the date the user wants to sell for input to predict()
                               dateInput(inputId = "sale_date",
                                         label = "When do you plan to sell?",
@@ -274,11 +230,6 @@ ui <- navbarPage("Lajunta, CO Market Overview",
 )#end of navbarPage()
 
 
-
-
-
-
-
 server <- function(input, output) {
     
     # Server setup ----------------------------------------------------------------------
@@ -291,7 +242,6 @@ server <- function(input, output) {
                    Date <= input$daterange[2])
     })
     
-    
     # The dataset filtered by date, reproductive statues, and weight
     price_summary_data <- reactive({
         date_filtered_data() %>% 
@@ -300,11 +250,7 @@ server <- function(input, output) {
                    Weight <= input$weight_range[2])
     })
     
-    
-    
-    
-    
-    
+
     # 'Price Summary' Tab Output --------------------------------------------------------
     output$market_report <- downloadHandler(
         filename = "La Junta Market Reports.csv",
@@ -312,7 +258,6 @@ server <- function(input, output) {
             write_csv(x = lajunta_full, file = file, col_names = TRUE)
         }
     )
-    
     
     output$price_summary <- renderPrint({
         price <- price_summary_data() %>% 
@@ -334,9 +279,6 @@ server <- function(input, output) {
         
         cat("Average price of ", reproductive_status, " matching your criteria: $", price, sep = "")
     })
-    
-    
-    
     
     output$price_changes_over_time <- renderPlot({
         
@@ -377,12 +319,9 @@ server <- function(input, output) {
                                   n = input$numweeks) +
             ggtitle("Bull")
         
-        
         # The graph to return
         steer_sma_plot + heifer_sma_plot + cow_sma_plot + bull_sma_plot + plot_annotation(title = paste0("Simple Moving Average Using the Previous ",  input$numweeks, " Sales"))
     })
-    
-    
     
     output$six_month_forecast <- renderPlot({
         # Making a bunch of forecasts
@@ -406,25 +345,6 @@ server <- function(input, output) {
             shinyjs::show("six_month_forecast")
         }
     })
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     # 'Visuals' Tab Output --------------------------------------------------------------
@@ -485,8 +405,6 @@ server <- function(input, output) {
         }
     })
     
-    
-    
     output$raw_counts_plots <- renderPlot({
         return(plot_counts(lajunta))
     })
@@ -494,7 +412,6 @@ server <- function(input, output) {
     observeEvent(input$counts, {
         toggle("raw_counts_plots")
     })
-    
     
     output$plotly_3d <- renderPlotly({
         plotly::plot_ly(x = outliers_removed  %>% 
@@ -521,35 +438,6 @@ server <- function(input, output) {
     observeEvent(input$distributions, {
         toggle("distribution_plot")
     })
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     # 'Price Estimation' Tab Output -----------------------------------------------------
@@ -618,8 +506,6 @@ server <- function(input, output) {
         return(all_prices)
     })
     
-    
-    
     # Shows the predicted price using a linear regression
     output$lm_price_estimation <- renderPrint({
         
@@ -651,9 +537,7 @@ server <- function(input, output) {
         # Extracting the predicted price based on the inputs
         price <- price_calculation()[[price_category]]
         
-        
         cat("The estimated price using a random forest model is $", price, " per pound.", sep = "")
-        
     })
     
     # Shows the RMSE on the testing set
@@ -684,11 +568,8 @@ server <- function(input, output) {
             return(bull_rmse_facet) 
         }#end of conditional
     })
-    
-    
-    
-    
 }
+
 
 # Run the application 
 shinyApp(ui = ui, server = server)

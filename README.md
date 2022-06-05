@@ -1,19 +1,25 @@
 # Winter-Livestock-Data
-Collects data from Winter Livestock La Junta Sale Tuesday reports each week and organizes them into a csv. Updated Weekly.
+Collects data from Winter Livestock La Junta Sale Tuesday reports each week and organizes them into a csv.
+Updated Weekly.
 
-Please note that this repository can only be updated after the folks over at Winter Livestock release their market reports, meaning there will be a few day's lag between the auction and new data in this repository.
+Please note that this repository can only be updated after the folks over at
+Winter Livestock release their market reports, meaning there will be
+a few day's lag between the auction and new data in this repository.
 
 # Output
 
 ## Dashboards
-To see the Lajunta dashboard, run the following code in your R console:
+To see the La Junta dashboard, run the following code in your R console:
 
 ```
 if(!require(shiny)) install.packages("shiny")
 shiny::runGitHub(repo = "Winter-Livestock-Data",
                  username = "Ckrenzer",
-                 subdir = "scripts/dashboards/Lajunta_Dashboard",
+                 subdir = "scripts/dashboards/lajunta",
                  ref = "main")
 ```
 
-The app will occasionally be hosted on [shinyapps.io](https://www.shinyapps.io/), so--if the app is live--you can use [this link](http://7phynv-connor0krenzer.shinyapps.io/La_Junta_Dashboard) to access it in your browser.
+The app will occasionally be hosted on [shinyapps.io](https://www.shinyapps.io/),
+so--if the app is live--you can use
+[this link](http://7phynv-connor0krenzer.shinyapps.io/La_Junta_Dashboard)
+to access it in your browser.

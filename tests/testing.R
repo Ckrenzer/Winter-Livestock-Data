@@ -1,8 +1,4 @@
 # This script identifies problem-areas within the La Junta dataset after scraping
-if(!require(pacman)) install.packages("pacman")
-pacman::p_load(readr, dplyr, ggplot2)
-
-
 
 
 

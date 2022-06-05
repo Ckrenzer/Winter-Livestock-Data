@@ -1,19 +1,19 @@
 collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   # Sourcing in helper functions
-  source("scripts/collection/functions/extract_webpage_text().R", local = TRUE)
-  source("scripts/collection/functions/split_text().R", local = TRUE)
-  source("scripts/collection/functions/determine_date_of_sale().R", local = TRUE)
-  source("scripts/collection/functions/month_name_to_num().R", local = TRUE)
-  source("scripts/collection/functions/remove_unwanted_sections().R", local = TRUE)
-  source("scripts/collection/functions/extract_buyer_name().R", local = TRUE)
-  source("scripts/collection/functions/insert_buyer_names().R", local = TRUE)
-  source("scripts/collection/functions/insert_delimiter().R", local = TRUE)
-  source("scripts/collection/functions/cleaning().R", local = TRUE)
+  source(str_glue("{path_functions}/extract_webpage_text.R"), local = TRUE)
+  source(str_glue("{path_functions}/split_text.R"), local = TRUE)
+  source(str_glue("{path_functions}/determine_date_of_sale.R"), local = TRUE)
+  source(str_glue("{path_functions}/month_name_to_num.R"), local = TRUE)
+  source(str_glue("{path_functions}/remove_unwanted_sections.R"), local = TRUE)
+  source(str_glue("{path_functions}/extract_buyer_name.R"), local = TRUE)
+  source(str_glue("{path_functions}/insert_buyer_names.R"), local = TRUE)
+  source(str_glue("{path_functions}/insert_delimiter.R"), local = TRUE)
+  source(str_glue("{path_functions}/cleaning.R"), local = TRUE)
 
   
   # File names ----------------------------------------------------------------
-  ljmr_csv <- "data/La Junta Market Reports.csv"
-  ljmr_urls <- "scripts/collection/La Junta URLs.txt"
+  ljmr_csv <- "data/ljmr.csv"
+  ljmr_urls <- "scripts/collection/lajunta/urls.txt"
   
   
   # Default Values ------------------------------------------------------------

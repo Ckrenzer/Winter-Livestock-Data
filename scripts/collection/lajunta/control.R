@@ -10,19 +10,19 @@ if(!require(readr)) install.packages("readr"); library(readr)
 if(!require(dplyr)) install.packages("dplyr"); library(dplyr)
 if(!require(lubridate)) install.packages("lubridate"); library(lubridate)
 if(!require(clock)) install.packages("clock"); library(clock)
+if(!require(ggplot2)) install.packages("ggplot2"); library(ggplot2)
 
 if(!require(git2r)) install.packages("git2r"); library(git2r)
 if(!require(gert)) install.packages("gert"); library(gert)
 
 # The collection() function
-source("scripts/collection/functions/collection().R")
-
+path_functions <- "scripts/collection/lajunta/functions"
+source(str_glue("{path_functions}/collection.R"))
 
 
 # Market Report -------------------------------------------------------------------------
 # NOTES:
 # This section gets the current URL and sends it to the collection() function.
-
 
 # BEGIN:
 # Starting a browser
@@ -61,14 +61,26 @@ remote_driver$closeall()
 appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE)
 
 
+# Run tests -----------------------------------------------------------------------------
+# Performs checks, throws errors, and writes to the log.
+# Only runs when new data is added to the csv file.
+if(appended_new_data){
+  # If the current working directory is not the project's root directory,
+  # assume the script was called from rscript.exe and the working directory
+  # is in scripts/collection/lajunta/.
+  # Move back to the parent directory if this is the case.
+  reponame <- "Winter-Livestock-Data"
+  rootdir <- normalizePath("/", winslash = "/")
+  while(basename(getwd()) != reponame & getwd() != rootdir) setwd(dirname(getwd()))
+  source("tests/test_lajunta_collection.R")
+}
+
 
 # UPLOAD --------------------------------------------------------------------------------
 # UPLOAD NOTES:
 # Commit and push changes to the repo. Change the user if you wish to use this method.
 #
 # You have to provide the path to this repo as a string to `repository_path`.
-
-# UPLOAD:
 if(Sys.info()["effective_user"] == "crkre" & appended_new_data){
   git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
   gert::git_push(repo = getwd(), verbose = FALSE)
