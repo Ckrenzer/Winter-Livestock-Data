@@ -17,9 +17,3 @@ shiny::runGitHub(repo = "Winter-Livestock-Data",
 ```
 
 The app will occasionally be hosted on [shinyapps.io](https://www.shinyapps.io/), so--if the app is live--you can use [this link](http://7phynv-connor0krenzer.shinyapps.io/La_Junta_Dashboard) to access it in your browser.
-
-
-## Archived Output
-To see the output for 'La Junta Price Estimation.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Archived/Output/La-Junta-Price-Estimation.html).
-
-To see the output for 'La Junta Classification Models.Rmd', follow [this link](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/Archived/Output/La-Junta-Classification-Models.html).
