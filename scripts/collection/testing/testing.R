@@ -7,7 +7,7 @@ pacman::p_load(readr, dplyr, ggplot2)
 
 
 #lajunta <- read_csv("https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/La%20Junta%20Market%20Reports.csv")
-lajunta <- read_csv("La Junta Market Reports.csv")
+lajunta <- read_csv("data/La Junta Market Reports.csv")
 
 
 
