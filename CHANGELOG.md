@@ -133,7 +133,7 @@ Many types of cattle have very few observations, so they were lumped in with oth
 Finally, there is a shiny app you can run to view an analysis of the data,
 and even predict the price of cattle!
 
-### UPDATE 2/2/2021 ----------------------------------------------
+### UPDATE 2/2/2021
 Winter Livestock changed their market report format for La Junta, CO.
 The "La Junta.R" script works well for market reports with the old format,
 in which the text looks well spaced with paragraphs on your browser.
