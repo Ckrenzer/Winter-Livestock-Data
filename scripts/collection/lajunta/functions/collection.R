@@ -9,7 +9,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   source(str_glue("{path_functions}/insert_buyer_names.R"), local = TRUE)
   source(str_glue("{path_functions}/insert_delimiter.R"), local = TRUE)
   source(str_glue("{path_functions}/cleaning.R"), local = TRUE)
-
+  
   
   # File names ----------------------------------------------------------------
   ljmr_csv <- "data/ljmr.csv"
@@ -30,6 +30,12 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   # combination of the url and date.
   #
   # But, if either a url or date appear twice, it's probably safe to skip.
+  #
+  #
+  # Default value for the previous date that won't
+  # interfere with the first date in the data on the
+  # Winter Livestock website:
+  previous_date_of_sale <- "01-01-2016"
   ljmr_csv_exists <- file.exists(ljmr_csv)
   if(ljmr_csv_exists){
     # The most recently-used url in the csv file
@@ -40,11 +46,6 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       as.Date(., "%m-%d-%Y") %>% 
       max() %>% 
       as.character()
-  } else {
-    # Set a default value for the previous date that won't
-    # interfere with the first date in the data on the
-    # Winter Livestock website
-    previous_date_of_sale <- "01-01-2016"
   }
   
   
@@ -105,7 +106,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
     # Removing Unwanted Sections ----------------------------------------------
     livestock_data <- remove_unwanted_sections()
     # Removing internet auction sales--they should be empty character vectors by this point.
-    # For more flexibility, if the length is smaller than 10, the data will not be added
+    # For more flexibility, if the length is smaller than 10, the data will not be added.
     # Very few (probably zero) market reports have fewer than 10 entries
     if(length(livestock_data) < 10){
       next

@@ -9,15 +9,26 @@ remove_unwanted_sections <- function(text = livestock_data){
   text <- text[!str_detect(text, "january\\.*,*\\s+\\d|february\\.*,*\\s+\\d|march\\.*,*\\s+\\d|april\\.*,*\\s+\\d|may\\.*,*\\s+\\d|june\\.*,*\\s+\\d|july\\.*,*\\s+\\d|august\\.*,*\\s+\\d|september\\.*,*\\s+\\d|october\\.*,*\\s+\\d|november\\.*,*\\s+\\d|december\\.*,*\\s+\\d|jan\\.*,*\\s+\\d|feb\\.*,*\\s+\\d|mar\\.*,*\\s+\\d|apr\\.*,*\\s+\\d|jun\\.*,*\\s+\\d|jul\\.*,*\\s+\\d|aug\\.*,*\\s+\\d|sept\\.*,*\\s+\\d|oct\\.*,*\\s+\\d|nov\\.*,*\\s+\\d|dec\\.*,*\\s+\\d")]
   
   
-  # We can pull out the sales information by removing lines we do not
-  # care about. Since we know that the information we want is stored
-  # in lines that are much shorter than the others, we can pull out
-  # lines that have fewer characters than some optimal number.
-  # I chose 60. In other words, I am keeping only those lines
-  # (which are stored as elements in the vector) that contain
-  # fewer than 60 characters.
-  text <- text[-c(which((nchar(text) > 60)))]
-  
+  # Filter down to the sales information.
+  #
+  # Assuming the sales information resides on lines that
+  # are much shorter than the rest of the webpage,
+  # sales can be identified by filtering out lines
+  # with more characters than some optimal number.
+  # I chose 60.
+  #
+  # Further checks on the filtered out values should ensure
+  # that exceptions to the rule are preserved.
+  #   The criteria for eligibility becomes stricter
+  #   after a line contains more than 60 characters.
+  text <- local({
+    is_long_line <- str_length(text) > 60
+    exceptions_to_rule <- list(has_no_semicolons = !str_detect(text, ";"),
+                               has_decimals = str_detect(text, "\\d{3}\\.00"))
+    is_exception <- exceptions_to_rule[["has_no_semicolons"]] & exceptions_to_rule[["has_decimals"]]
+    is_long_line[is_long_line & is_exception] <- FALSE
+    text[!is_long_line]
+  })
   
   # The livestock data starts each day with a person's name and then has the quantity, type, weight, and price
   # if the person made more than one purchase, the line starts with "\n\t\t"--this is the reason
