@@ -1,4 +1,4 @@
-# Packages ------------------------------------------------------------------------------
+# Packages --------------------------------------------------------------------
 if(!require(RSelenium)) install.packages("RSelenium"); library(RSelenium)
 if(!require(rvest)) install.packages("rvest"); library(rvest)
 if(!require(htmltools)) install.packages("htmltools"); library(htmltools)
@@ -20,22 +20,18 @@ path_functions <- "scripts/collection/lajunta/functions"
 source(str_glue("{path_functions}/collection.R"))
 
 
-# Market Report -------------------------------------------------------------------------
-# NOTES:
-# This section gets the current URL and sends it to the collection() function.
-
-# BEGIN:
-# Starting a browser
+# Get URL ---------------------------------------------------------------------
+# Start a browser
 browser <- rsDriver(port = 4545L,
                     browser = "firefox",
                     version = "latest",
                     geckover = "latest",
                     verbose = FALSE)
 
-# Assigning the browser client to an object
+# Browser client object
 remote_driver <- browser[["client"]]
 
-# Navigate to the La Junta webpage
+# Open the La Junta webpage
 remote_driver$navigate("http://www.winterlivestock.com/lajunta.php#marketreport")
 
 # the xpath of the current market report
@@ -45,24 +41,25 @@ remote_driver$findElements(using = "xpath", value = xpath_value)[[1]]$clickEleme
 
 # Let the page load in...
 Sys.sleep(3.2)
-
-# Getting the current URL
+# Extract the current URL
 urls <- remote_driver$getCurrentUrl()[[1]]
-
-# Give the program a few seconds to extract the URL
+# Give the program a few seconds to complete the task
 Sys.sleep(3.2)
 
-# Closing the browser
+# Close the browser
 remote_driver$closeall()
 
+
+# Append New Data -------------------------------------------------------------
 # Try to append market report data to the csv,
 # saving the logical value returned indicating success
 # or failure of the market report addition
 appended_new_data <- collection(urls = urls, prevent_use_of_previous_urls = TRUE)
 
 
-# Run tests -----------------------------------------------------------------------------
-# Performs checks, throws errors, and writes to the log.
+# Run tests -------------------------------------------------------------------
+# Performs checks, preventing automatic commits by setting appended_new_data
+# to FALSE when issues are found, and writes to the log.
 # Only runs when new data is added to the csv file.
 if(appended_new_data){
   # If the current working directory is not the project's root directory,
@@ -72,11 +69,16 @@ if(appended_new_data){
   reponame <- "Winter-Livestock-Data"
   rootdir <- normalizePath("/", winslash = "/")
   while(basename(getwd()) != reponame & getwd() != rootdir) setwd(dirname(getwd()))
+  
+  # Write to the log and print the results to the R console
+  # (overwrites previous log).
+  out <- "log/lajunta.txt"
   source("tests/test_lajunta_collection.R")
+  cat(read_lines(out), sep = "\n")
 }
 
 
-# UPLOAD --------------------------------------------------------------------------------
+# UPLOAD ----------------------------------------------------------------------
 # UPLOAD NOTES:
 # Commit and push changes to the repo. Change the user if you wish to use this method.
 #

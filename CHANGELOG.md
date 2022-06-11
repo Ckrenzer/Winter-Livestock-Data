@@ -15,6 +15,8 @@ and file names no longer contain parentheses.
 The file hierarchy was restructured to allow the repo to scale beyond La Junta, CO.
 
 A new directory, tests/ was created to ensure the integrity of the data.
+These tests write their results to the log file, preventing the automatic
+committing and pushing of new data when called non-interactively.
 
 ### UPDATE 2/4/2022
 The file structure of this repo has been simplified.
