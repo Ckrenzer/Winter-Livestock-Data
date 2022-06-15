@@ -33,7 +33,8 @@ local({
   write_log("COLLECTION ERRORS:\n", append = FALSE)
   
   # Finding market reports using the most recent market report instead of the permalink.
-  has_permalinks <- any(lajunta$URL == "http://www.winterlivestock.com/lajunta.php")
+  has_permalinks <- any(lajunta$URL %in% c("http://www.winterlivestock.com/lajunta.php",
+                                           "http://www.winterlivestock.com/lajunta.php?reportID=#marketreport"))
   if(has_permalinks){
     failure("A URL used in the file is a temporary link!\n")
   }

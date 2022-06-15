@@ -1,0 +1,7 @@
+COLLECTION ERRORS:
+
+Missing values were identified in the data.
+# A tibble: 1 x 8
+  Date      Buyer       Quantity Type  Weight Price Reprod URL                                                                  
+  <chr>     <chr>          <dbl> <chr>  <dbl> <dbl> <chr>  <chr>                                                                
+1 6-26-2018 froze creek        1 clr     1780    87 <NA>   http://www.winterlivestock.com/lajunta.php?reportID=9929#marketreport

@@ -50,8 +50,10 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
   
   
   for(URL in urls){
+    ljmr_csv_exists <- file.exists(ljmr_csv)
+    
     # simple yet effective way of showing the operation's progress
-    message(".")
+    message(paste("Trying", URL))
     
     
     # Pause the operation to lower stress on the server
