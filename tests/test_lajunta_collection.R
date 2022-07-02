@@ -42,7 +42,7 @@ local({
   # Check for missing values
   rows_with_missing_values <- lajunta %>% 
     dplyr::filter(if_any(.cols = everything(), .fns = is.na))
-  if(length(rows_with_missing_values) > 0){
+  if(nrow(rows_with_missing_values) > 0){
     failure(msg = "Missing values were identified in the data.\n",
             df = rows_with_missing_values)
   }
