@@ -24,7 +24,7 @@ if(!library(randomForest, logical.return = TRUE)) install.packages("randomForest
 
 
 # SETUP ---------------------------------------------------------------------------------
-path_functions <- "https://github.com/Ckrenzer/Winter-Livestock-Data/tree/main/scripts/dashboards/lajunta/scripts/"
+path_functions <- "https://raw.githubusercontent.com/Ckrenzer/Winter-Livestock-Data/main/scripts/dashboards/lajunta/scripts/"
 
 # Data
 source(paste0(path_functions, "data.R"))
