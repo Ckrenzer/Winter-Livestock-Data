@@ -46,8 +46,10 @@ urls <- remote_driver$getCurrentUrl()[[1]]
 # Give the program a few seconds to complete the task
 Sys.sleep(3.2)
 
-# Close the browser
+# Close the browser, close the server, and kill all java instances
 remote_driver$closeall()
+browser$server$stop()
+system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
 
 
 # Append New Data -------------------------------------------------------------
