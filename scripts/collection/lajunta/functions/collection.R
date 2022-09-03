@@ -149,7 +149,7 @@ collection <- function(urls, prevent_use_of_previous_urls = TRUE){
       mutate(Quantity = parse_number(Quantity),
              Weight = parse_number(Weight),
              Price = parse_number(Price)) %>% 
-      na.omit() %>% 
+      na.omit() %>%
       mutate("Date" = date_of_sale, .before = 1) %>% 
       mutate("URL" = URL)
     

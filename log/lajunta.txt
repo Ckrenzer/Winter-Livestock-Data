@@ -1,7 +1,1 @@
 COLLECTION ERRORS:
-
-Missing values were identified in the data.
-# A tibble: 1 x 8
-  Date      Buyer        Quantity Type  Weight Price Reprod URL                                                                   
-  <chr>     <chr>           <dbl> <chr>  <dbl> <dbl> <chr>  <chr>                                                                 
-1 7-26-2022 matt neuhold        1 clr     1440    76 <NA>   http://www.winterlivestock.com/lajunta.php?reportID=14841#marketreport

@@ -7,12 +7,12 @@ cleaning <- function(lajunta){
 
   # Reproductive types ------------------------------------------------------------------
   # Making a column assigning cattle reproductive status
-  # (removing values with 's' as the last letter before this step)
-  lajunta <- lajunta %>% 
-    mutate(Type = str_remove_all(Type, "s$")) %>% 
+  lajunta <- lajunta %>%
+    mutate(Type = str_remove_all(Type, "[\`'\"]")) %>%
+    mutate(Type = str_remove_all(Type, "s$")) %>%
     mutate(Reprod = str_extract(Type, "hfr$|str$|bull$|cow$|heifer$|steer$|pair$|bow$|hrf$|hr$"),
            .before = 7)
-  
+
   lajunta <- lajunta %>% 
     mutate(Reprod = Reprod %>% 
              str_replace_all("pair", "cow") %>%   #replacing 'pair' with cow. It seemed reasonable...
@@ -20,13 +20,13 @@ cleaning <- function(lajunta){
              str_replace_all("hrf|hr", "hfr") %>% #replacing typos with the intended values
              str_replace_all("heifer", "hfr") %>% #shortening name
              str_replace_all("steer", "str"))     #shortening name
-  
-  
+
+
   # Categorizing cattle -----------------------------------------------------------------
   # Removing the plural of the type (Ex. "black cows" becomes "black cow")
   lajunta$Type <- str_remove(lajunta$Type, "s$")
-  
-  
+
+
   # The bulk of the edits
   lajunta$Type <- lajunta %>% 
     dplyr::pull(Type) %>% 
@@ -72,18 +72,18 @@ cleaning <- function(lajunta){
     str_replace_all("red\\s+(char)", "\\1") %>%     # removing color ends on this line
     str_squish() %>% 
     str_trim()
-  
-  
+
+
   # Combining all colors into a new category--"clr" (optional)
   lajunta$Type <- lajunta %>% 
     dplyr::pull(Type) %>% 
     str_replace_all("black red|black|balck|red|gray|grey|roan|brown|brwn|bwn", "clr") %>%   # "black red," "black," and "red" are all colors
     str_replace_all("bwf|rwf|wf|spot", "face") %>%
     str_replace_all("face", "clr")                  # remove this line if you want to stop pooling the face group with the color group
-  
-  
-  
-  
+
+
+
+
   # Miscellaneous Corrections -----------------------------------------------------------
   # This correction of the Type column is done after finding errors explicitly. I am 'hard-coding' in the correct values. I checked the distinct Type values after running the above lines in this section, then fixed the remaining values to fit into a few categories. An admittedly lazy way of doing things, but the file is small--and I'm not a software engineer!
   #Note: many of these operations assume that cross-breeds have already been assigned "mix"
@@ -107,15 +107,16 @@ cleaning <- function(lajunta){
     str_replace_all("hererord", "here") %>%  # Fixing Errors
     str_replace_all("ang strs", "ang") %>% 
     str_replace_all("mixck", "mix")          # End of Fixing Errors
-  
-  
+
+
   # After doing more testing it would appear that the remaining breeds do not have a large enough sample to be worth using. All cattle types not in the below list will be assigned to "clr":
   types <- c("clr", "ang", "mix", "char", "lim", "gel", "here", "mot")
-  
-  
+
+
   lajunta$Type[which(!lajunta$Type %in% types)] <- "clr"
   # We now have eight categories in the "Type" variable
-  
-  
+
+
   return(lajunta)
 }
+
