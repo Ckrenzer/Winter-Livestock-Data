@@ -49,7 +49,7 @@ Sys.sleep(3.2)
 # Close the browser, close the server, and kill all java instances
 remote_driver$closeall()
 browser$server$stop()
-system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
+system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
 
 
 # Append New Data -------------------------------------------------------------
@@ -71,7 +71,7 @@ if(appended_new_data){
   reponame <- "Winter-Livestock-Data"
   rootdir <- normalizePath("/", winslash = "/")
   while(basename(getwd()) != reponame & getwd() != rootdir) setwd(dirname(getwd()))
-  
+
   # Write to the log and print the results to the R console
   # (overwrites previous log).
   out <- "log/lajunta.txt"
@@ -89,3 +89,4 @@ if(Sys.info()["effective_user"] == "crkre" & appended_new_data){
   git2r::commit(repo = getwd(), message = "Weekly Market Update", all = TRUE, session = TRUE)
   gert::git_push(repo = getwd(), verbose = FALSE)
 }
+
