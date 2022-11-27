@@ -1,8 +1,37 @@
 # UPDATES
 Major changes to this repo are listed with each update.
 Updates are written arbitrarily, but--when something big changes--I usually know "it's time."
-Think of this as a history lesson rather than a feature preview.
+Think of this as a history lesson rather than a feature overview.
 
+
+### UPDATE 11/26/2022
+This update overhauls the collection process, moving
+the collection files directly under **scripts/**.
+The collection process itself has been revamped in
+the following ways:
+
+1. The scraper now parses raw HTML to identify relevant data
+in the market reports instead of the results from rvest functions.
+This reduces 3rd party package dependencies for scraping and
+basic data formatting. Curl and awk now take care of the initial
+processing.
+1. The number of scripts have been reduced and many helpers
+are now consolidated into a single file.
+1. The tests on the scraper have been removed in favor of
+more robust error checks during the collection process.
+1. Attribute cleaning is now separate from the initial
+scrape. This allows for the preservation of information
+lost during the old cleaning process--particularly
+in the type field.
+1. The market report ID (the number in the URL field) is now
+used to determine the distinctness of a URL because you can
+get to the same web page using different URLs so long as it
+points to the correct report ID. Therefore,
+data-info/reports/wl_reportIDs.txt has replaced data/urls.txt.
+1. The automatic commits and pushes in control.R have been removed.
+I will use local scripts to update the repository.
+1. A gitignore file has been added.
+1. Removed mentioning of the dashboard from README.md.
 
 ### UPDATE 6/5/2022
 All archived output has been removed from the repository.
