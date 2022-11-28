@@ -20,14 +20,21 @@ BEGIN{
           && datetext !~ /[0-9]/){
         numlines_checked++
         getline
+        if($0 ~ /junta/) market = "MARKET: " $0
         datetext = "DATE: " $0
     }
+
+    # The records with market report data begin
+    # on the lines following the date line
+    startrecord = NR
 }
 
 # Format the text
-{
+NR == startrecord, NR == EOF {
    if($0 ~ /estimate/) nextfile;
-   if(length($0) < MAX_LINE_LENGTH && $0 ~ /[0-9]{2,4}[ \t][0-9.]{3,}[^0-9]*<br \/>/){
+   if($0 ~ /[0-9]{2,4}[ \t]+[0-9.]{3,}[^0-9]*<br \/>/ \
+      && length($0) < MAX_LINE_LENGTH){
+
        # Remove characters after the price
        # (everything after {3,} in the conditional's pattern)
        gsub(/[^0-9]+$/, "", $0)
