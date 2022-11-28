@@ -1,8 +1,68 @@
 # UPDATES
 Major changes to this repo are listed with each update.
 Updates are written arbitrarily, but--when something big changes--I usually know "it's time."
-Think of this as a history lesson rather than a feature preview.
+Think of this as a history lesson rather than a feature overview.
 
+
+### UPDATE 11/28/2022
+This update builds upon those from 11/26/2022:
+
+1. lajunta.awk has been improved to extract the market
+and date properly and now hits all sales without reading
+any lines in the 'ESTIMATE' section.
+1. The R package dependencies have been reduced to data.table,
+stringr, and lubridate. These, along with curl and GNU awk being
+environment variables, are the only requirements to run the
+collection code.
+1. The URL extraction process has been simplified to use
+curl and awk instead of selenium, making the process
+faster and more portable.
+1. The bug overwriting wl_reportIDs.txt with the current
+report ID instead of appending the current report ID has
+been fixed. wl_reportIDs.txt is now sorted and must be
+sorted to pass the raw validation step.
+1. Added checks ensuring dates do not repeat at
+the same market for any two reportIDs.
+1. The sections of the collection process have been formalized
+into three sections: raw, refine, and clean. The raw section
+reads in the HTML and organizes the sales data into a list
+of data frames. The refine section extracts the date
+and market from the raw text of each report, preserving
+the original raw text. The refine section ends by binding
+the list into a single data frame, writing it to disk
+(wl_raw.csv). The clean section performs attribute cleaning.
+This overwrites values in the type, reprod, or buyer fields
+and saves the results to disk (wl_market_reports.csv).
+This is the final data set.
+
+### UPDATE 11/26/2022
+This update overhauls the collection process, moving
+the collection files directly under **scripts/**.
+The collection process itself has been revamped in
+the following ways:
+
+1. The scraper now parses raw HTML to identify relevant data
+in the market reports instead of the results from rvest functions.
+This reduces 3rd party package dependencies for scraping and
+basic data formatting. Curl and awk now perform the initial
+processing.
+1. The number of scripts have been reduced and many helpers
+are now consolidated into a single file.
+1. The tests on the scraper have been removed in favor of
+more robust error checks during the collection process.
+1. Attribute cleaning is now separate from the initial
+scrape. This allows for the preservation of information
+lost during the old cleaning process--particularly
+in the type field.
+1. The market report ID (the number in the URL field) is now
+used to determine the distinctness of a URL because you can
+get to the same web page using different URLs so long as it
+points to the correct report ID. Therefore,
+data-info/reports/wl_reportIDs.txt has replaced data/urls.txt.
+1. The automatic commits and pushes in control.R have been removed.
+I will use local scripts to update the repository.
+1. A gitignore file has been added.
+1. Removed mentioning of the dashboard from README.md.
 
 ### UPDATE 6/5/2022
 All archived output has been removed from the repository.

@@ -4,6 +4,7 @@
 
 # Session Data files
 .RData
+.RDataTmp
 
 # User-specific files
 .Ruserdata
@@ -38,25 +39,17 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# Old Scripts
-Collection/Archived/
-La Junta cleaning.R
-La Junta.R
-La Junta long format.R
+# pkgdown site
+docs/
 
-# Debugging Files
-La Junta Market Reports (before cleaning) 2016 to 10 Aug 2021.csv
-Collection/collection troubleshooting.R
+# translation temp files
+po/*~
 
-# Miscellaneous References
-References/
-
-# HTML Output
-La-Junta-Collection.html
-
-# GitHub files
-PAT.txt
-local/
-
-# shinyapps.io files
+# RStudio Connect folder
 rsconnect/
+
+# Scraper download files
+data-info/reports/*.html
+
+# Local files
+session/
