@@ -26,11 +26,11 @@ BEGIN{
 
     # The records with market report data begin
     # on the lines following the date line
-    startrecord = NR
+    startrecord = FNR
 }
 
 # Format the text
-NR == startrecord, NR == EOF {
+FNR == startrecord, FNR == EOF {
    if($0 ~ /estimate/) nextfile;
    if($0 ~ /[0-9]{2,4}[ \t]+[0-9.]{3,}[^0-9]*<br \/>/ \
       && length($0) < MAX_LINE_LENGTH){
