@@ -50,3 +50,6 @@ rsconnect/
 
 # Scraper download files
 data-info/reports/*.html
+
+# Local files
+session/
