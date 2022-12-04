@@ -4,6 +4,15 @@ Updates are written arbitrarily, but--when something big changes--I usually know
 Think of this as a history lesson rather than a feature overview.
 
 
+## UPDATE 12/3/2022
+This update builds upon those from 11/26/2022:
+
+1. lajunta.awk has been limited in scope. The insertion
+of buyer names is now done in R. The rationale for doing
+this is to make it do one thing, just one thing, and do it well.
+1. A dependency on the dos2unix command line utility
+has been added to convert the raw HTML files to UNIX.
+
 ### UPDATE 11/28/2022
 This update builds upon those from 11/26/2022:
 

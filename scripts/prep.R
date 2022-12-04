@@ -9,6 +9,18 @@
 # Preserves all information from the original text.
 raw_extraction <- function(urls){
     str2df <- function(x) as.data.table(matrix(x, ncol = length(x)))
+    locf <- function(x){
+        missingval <- ""
+        fillval <- missingval
+        for(i in seq_along(x)){
+            if(x[[i]] != missingval){
+                fillval <- x[[i]]
+            } else {
+                x[[i]] <- fillval
+            }
+        }
+        x
+    }
     urls <- unique(urls)
 
     salesinfo <- structure(vector("list", length(urls)), names = urls)
@@ -20,8 +32,8 @@ raw_extraction <- function(urls){
         if(!file.exists(reportfile)){
             # Pay the server tax
             Sys.sleep(runif(1, 15, 25))
-            shell(str_glue("curl {url} -o {reportfile}"),
-                  mustWork = TRUE)
+            shell(str_glue("curl {url} -o {reportfile}"), mustWork = TRUE)
+            shell(str_glue("dos2unix {reportfile}"), mustWork = TRUE)
             cat(reportID, "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
         }
         lajunta <- shell(str_glue("gawk -f scripts/lajunta.awk -v url={url} {reportfile}"),
@@ -39,6 +51,11 @@ raw_extraction <- function(urls){
 
         # Put the reportID in its own field
         obs[, reportid := reportID]
+
+        # Remove characters after the price in the sale line
+        # (lines end with the price, so removing everything after
+        # the last digit should do the trick)
+        obs[, sale := str_remove(sale, "[^0-9]+$")]
 
         # Organize fields into columns
         # (extracting from the end of the string, the price, until
@@ -63,6 +80,7 @@ raw_extraction <- function(urls){
         # All that's left should be the buyer
         setnames(obs, "sale", "buyer")
         obs[, (colnames(obs)) := lapply(.SD, str_trim), .SDcols = colnames(obs)]
+        obs[, buyer := locf(buyer)]
 
 
         # Get reproductive typing

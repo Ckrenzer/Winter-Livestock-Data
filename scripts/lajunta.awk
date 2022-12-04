@@ -29,36 +29,13 @@ BEGIN{
     startrecord = FNR
 }
 
-# Format the text
+# Insert data
 FNR == startrecord, FNR == EOF {
    if($0 ~ /estimate/) nextfile;
    if($0 ~ /[0-9]{2,4}[ \t]+[0-9.]{3,}[^0-9]*<br \/>/ \
       && length($0) < MAX_LINE_LENGTH){
 
-       # Remove characters after the price
-       # (everything after {3,} in the conditional's pattern)
-       gsub(/[^0-9]+$/, "", $0)
-
-       # Fields with only one character are
-       # likely typos and should be removed
-       for(i = 1; i <= NF; i++){
-           if(length($i) == 1) $i = ""
-       }
-
-       # Get or set buyer name
-       # (condition 1 addresses lines that begin with quantity)
-       # (condition 2 addresses space-delimited lines)
-       if($1 !~ /^[0-9]/ && length($1) > 1){
-           name = $1
-       } else {
-           $1 = name " " $1
-       }
-
-       # Update $0, remove fields that do not belong
-       $(NF + 1) = datetext
-       $(NF + 1) = market
-       $(NF + 1) = "URL: " url
-
+       $(NF + 1) = datetext " " market " URL: " url
        print $0
    }
 }
