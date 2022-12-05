@@ -9,20 +9,21 @@
 # Preserves all information from the original text.
 raw_extraction <- function(urls){
     str2df <- function(x) as.data.table(matrix(x, ncol = length(x)))
-    locf <- function(x){
-        missingval <- ""
-        fillval <- missingval
-        for(i in seq_along(x)){
-            if(x[[i]] != missingval){
-                fillval <- x[[i]]
-            } else {
-                x[[i]] <- fillval
-            }
-        }
-        x
-    }
-    urls <- unique(urls)
+    cppFunction('CharacterVector locf(CharacterVector x){
+                String missingval = "";
+                String fillval = missingval;
+                CharacterVector fillvec = clone(x);
+                for(int i = 0; i < x.size(); i++){
+                    if(fillvec[i] != missingval){
+                        fillval = fillvec[i];
+                    } else {
+                        fillvec[i] = fillval;
+                    }
+                }
+                return fillvec;
+    }')
 
+    urls <- unique(urls)
     salesinfo <- structure(vector("list", length(urls)), names = urls)
     for(url in urls){
 
@@ -45,8 +46,8 @@ raw_extraction <- function(urls){
         obs <- str_split(lajunta, "\\ *(DATE|MARKET|URL):\\ *")
         obs <- lapply(obs, str2df)
         obs <- rbindlist(obs)
-        setnames(obs, c("sale", "datetext", "markettext", "url"))
-        lowercase_cols <- c("sale", "datetext", "markettext")
+        setnames(obs, c("saletext", "datetext", "markettext", "url"))
+        lowercase_cols <- c("saletext", "datetext", "markettext")
         obs[, (lowercase_cols) := lapply(.SD, str_to_lower), .SDcols = lowercase_cols]
 
         # Put the reportID in its own field
@@ -55,7 +56,7 @@ raw_extraction <- function(urls){
         # Remove characters after the price in the sale line
         # (lines end with the price, so removing everything after
         # the last digit should do the trick)
-        obs[, sale := str_remove(sale, "[^0-9]+$")]
+        obs[, sale := str_remove(saletext, "[^0-9]+$")]
 
         # Organize fields into columns
         # (extracting from the end of the string, the price, until
@@ -89,7 +90,7 @@ raw_extraction <- function(urls){
         obs[, type := str_trim(str_remove(type, patt))]
 
 
-        setcolorder(obs, c("markettext", "datetext", "buyer", "quantity", "weight",
+        setcolorder(obs, c("markettext", "datetext", "saletext", "buyer", "quantity", "weight",
                            "price", "type", "reprod", "url", "reportid"))
         salesinfo[[url]] <- obs[]; rm(obs)
     }
@@ -101,7 +102,7 @@ raw_extraction <- function(urls){
 # No news is good news.
 raw_validation <- function(saleslist = NULL, urls = NULL){
     reportIDs_file <- "data-info/reports/wl_reportIDs.txt"
-    salescols <- c("markettext", "datetext", "buyer", "quantity", "weight",
+    salescols <- c("markettext", "datetext", "saletext", "buyer", "quantity", "weight",
                    "price", "type", "reprod", "url", "reportid")
 
     stopifnot(!is.null(saleslist), !is.null(urls), file.exists(reportIDs_file))

@@ -10,6 +10,7 @@
     installed_packages <- rownames(installed.packages())
     if(!"data.table" %in% installed_packages) install.packages("data.table"); library(data.table)
     if(!"stringr" %in% installed_packages) install.packages("stringr"); library(stringr)
+    if(!"Rcpp" %in% installed_packages) install.packages("Rcpp"); library(Rcpp)
 
     source("scripts/prep.R")
 
