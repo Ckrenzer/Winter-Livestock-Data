@@ -329,13 +329,13 @@ clean_attributes <- function(salesdf){
 
     # Standardize reprod to get 'cow', 'bull', 'heifer', and 'steer'
     salesdf[, reprod := str_remove_all(reprod, "[^a-z]")]
-    salesdf[reprod %in% c("strrs", "strs", "str", "steers", "steer"), reprod := "steer"]
-    salesdf[reprod %in% c("hfrs", "hfr", "heifers", "hrfs", "hrs"), reprod := "heifer"]
     salesdf[reprod %in% c("cow", "cows", "dcow", "bow"), reprod := "cow"]
     salesdf[reprod %in% c("bull", "bulls"), reprod := "bull"]
+    salesdf[reprod %in% c("hfrs", "hfr", "heifers", "hrfs", "hrs"), reprod := "heifer"]
+    salesdf[reprod %in% c("strrs", "strs", "str", "steers", "steer"), reprod := "steer"]
     # Cases where reprod was not provided
-    salesdf[reprod == "pairs", reprod := "cow"]
-    salesdf[reprod == "sim", `:=`(type = "sim", reprod = "bull")]
+    salesdf[reportid == 7308 & reprod == "pairs", reprod := "cow"]
+    salesdf[reportid == 9929 & reprod == "sim", `:=`(type = "sim", reprod = "bull")]
 
 
     # Standardize types

@@ -10,8 +10,8 @@ This update builds upon those from 11/26/2022:
 1. lajunta.awk has been limited in scope. The insertion
 of buyer names is now done in R. The rationale for doing
 this is to make it do one thing, just one thing, and do it well.
-1. A dependency on the dos2unix command line utility
-has been added to convert the raw HTML files to UNIX.
+1. The use of shell() is now restricted to the awk call only.
+The curl call has been replaced by a call to download.file() in R.
 
 ### UPDATE 11/28/2022
 This update builds upon those from 11/26/2022:

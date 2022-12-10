@@ -46,7 +46,6 @@
         fwrite(lajunta, "data-info/wl_raw.csv.gz", compress = "gzip")
         lajunta <- lajunta[, .(market, date, buyer, quantity, type, reprod, weight, price, reportid)]
     }
-
     lajunta <- clean_attributes(lajunta)
     ready_to_save <- clean_validation(lajunta)
     if(ready_to_save){
