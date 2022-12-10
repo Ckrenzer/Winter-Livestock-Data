@@ -33,9 +33,9 @@ raw_extraction <- function(urls){
         if(!file.exists(reportfile)){
             # Pay the server tax
             Sys.sleep(runif(1, 15, 25))
-            shell(str_glue("curl {url} -o {reportfile}"), mustWork = TRUE)
-            shell(str_glue("dos2unix {reportfile}"), mustWork = TRUE)
-            cat(reportID, "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
+            download.file(url = url, destfile = reportfile, method = "curl")
+            TAF::dos2unix(reportfile)
+            cat(reportID, file = "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
         }
         lajunta <- shell(str_glue("gawk -f scripts/lajunta.awk -v url={url} {reportfile}"),
                          intern = TRUE,
@@ -320,7 +320,33 @@ refine_validation <- function(saleslist, valid_markets){
 
 # Clean attributes
 clean_attributes <- function(salesdf){
+
     message("clean_attributes() has not been implemented.")
+    return(salesdf)
+
+
+    salesdf <- copy(salesdf)
+
+    # Standardize reprod to get 'cow', 'bull', 'heifer', and 'steer'
+    salesdf[, reprod := str_remove_all(reprod, "[^a-z]")]
+    salesdf[reprod %in% c("strrs", "strs", "str", "steers", "steer"), reprod := "steer"]
+    salesdf[reprod %in% c("hfrs", "hfr", "heifers", "hrfs", "hrs"), reprod := "heifer"]
+    salesdf[reprod %in% c("cow", "cows", "dcow", "bow"), reprod := "cow"]
+    salesdf[reprod %in% c("bull", "bulls"), reprod := "bull"]
+    # Cases where reprod was not provided
+    salesdf[reprod == "pairs", reprod := "cow"]
+    salesdf[reprod == "sim", `:=`(type = "sim", reprod = "bull")]
+
+
+    # Standardize types
+    # Only allow letters, hyphens, ampersands, and spaces
+    salesdf[, type := str_remove_all(type, "[^a-z&\\-\\ ]")]
+    # Remove trailing 'x' characters
+    salesdf[, type := str_remove(type, "\\ +x$")]
+
+    salesdf[type %in% c("angus")]
+    as.matrix(unique(salesdf$type), ncol = 1)
+
     salesdf
 }
 
