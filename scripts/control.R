@@ -34,7 +34,7 @@
                     readLines("data-info/reports/wl_reportIDs.txt"),
                     "#marketreport"),
               urls)
-    permitted_markets <- readLines("data-info/reports/valid_markets.txt")
+    permitted_markets <- readLines("data-info/valid_markets.txt")
 
     lajunta <- raw_extraction(urls = urls)
     raw_validation(saleslist = lajunta, urls = urls)
