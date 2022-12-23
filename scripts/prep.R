@@ -4,6 +4,12 @@
 #   Holds functions used to collect and tidy market reports.
 
 
+# Useful for printing problematic data
+# in data frames in error messages
+df2str <- function(df){
+    str_c(capture.output(df), collapse = "\n")
+}
+
 # Parses the HTML from the URL and stores the sale information
 # in a list of data frames: one data frame for each URL.
 # Preserves all information from the original text.
@@ -300,9 +306,6 @@ refine_validation <- function(saleslist, valid_markets){
         }
     })
 
-    df2str <- function(df){
-        str_c(capture.output(df), collapse = "\n")
-    }
     # Check for market-date distinctness
     reportkey <- lapply(saleslist, function(report_df) report_df[1, .(key = str_c(market, "_", date), reportid)])
     reportkey <- rbindlist(reportkey)
@@ -320,39 +323,236 @@ refine_validation <- function(saleslist, valid_markets){
 
 # Clean attributes
 clean_attributes <- function(salesdf){
-
-    message("clean_attributes() has not been implemented.")
-    return(salesdf)
-
-
     salesdf <- copy(salesdf)
 
-    # Standardize reprod to get 'cow', 'bull', 'heifer', and 'steer'
+    # Standardize reprod to only use 'bull', 'cow', 'heifer', and 'steer'
     salesdf[, reprod := str_remove_all(reprod, "[^a-z]")]
-    salesdf[reprod %in% c("cow", "cows", "dcow", "bow"), reprod := "cow"]
     salesdf[reprod %in% c("bull", "bulls"), reprod := "bull"]
+    salesdf[reprod %in% c("cow", "cows", "dcow", "bow"), reprod := "cow"]
     salesdf[reprod %in% c("hfrs", "hfr", "heifers", "hrfs", "hrs"), reprod := "heifer"]
     salesdf[reprod %in% c("strrs", "strs", "str", "steers", "steer"), reprod := "steer"]
     # Cases where reprod was not provided
     salesdf[reportid == 7308 & reprod == "pairs", reprod := "cow"]
     salesdf[reportid == 9929 & reprod == "sim", `:=`(type = "sim", reprod = "bull")]
 
+    # Standardize typing (type1, type2, color1, color2)
+    setnames(salesdf, "type", "type1")
+    salesdf[, type1 := str_remove_all(type1, "[^a-z&\\-\\ ]")]
+    salesdf[, type1 := str_remove(type1, "\\ +x$")]
+    salesdf[, `:=`(color1 = "none", color2 = "none", type2 = "none")]
+    salesdf[type1 %in% c("ang-char",
+                         "ang-gel",
+                         "ang-here",
+                         "ang-lim",
+                         "ang-maine",
+                         "ang-sal",
+                         "ang-saler",
+                         "ang-stab",
+                         "angus-char",
+                         "angus-gel",
+                         "angus-here",
+                         "angus-lim",
+                         "char-ang",
+                         "char-angus",
+                         "char-lim",
+                         "gel-ang",
+                         "gel-angus",
+                         "gel-lim",
+                         "gelb-ang",
+                         "here-angus",
+                         "lim-ang",
+                         "lim-angus",
+                         "lim-char",
+                         "lim-flex",
+                         "maine-ang",
+                         "maine-angus",
+                         "sal-lim",
+                         "saler-ang",
+                         "sim-ang",
+                         "sim-angus"),
+                c("type1", "type2") := tstrsplit(type1, fixed("-"))]
+    for(typecol in c("type1", "type2")){
+        salesdf[get(typecol) == "ang", (typecol) := "angus"]
+        salesdf[get(typecol) == "bal", (typecol) := "balancer"]
+        salesdf[get(typecol) == "beefmstr", (typecol) := "beefmaster"]
+        salesdf[get(typecol) == "brah", (typecol) := "brahman"]
+        salesdf[get(typecol) %in% c("chr", "char"), (typecol) := "charolais"]
+        salesdf[get(typecol) %in% c("here", "hererord"), (typecol) := "hereford"]
+        salesdf[get(typecol) %in% c("gel", "gelvieh", "gelb"), (typecol) := "gelbvieh"]
+        salesdf[get(typecol) %in% c("lim", "limo"), (typecol) := "limousin"]
+        salesdf[get(typecol) == "maine", (typecol) := "maine_anjou"]
+        salesdf[get(typecol) == "maine", (typecol) := "maine_anjou"]
+        salesdf[get(typecol) == "sal", (typecol) := "saler"]
+        salesdf[get(typecol) == "sim", (typecol) := "simmental"]
+        salesdf[get(typecol) == "stab", (typecol) := "stabilizer"]
+    }
+    salesdf[type1 == "flex" & type2 == "angus", type1 := "limousin"]
+    salesdf[type1 == "limousin" & type2 == "flex", type2 := "angus"]
+    salesdf[, type1 := str_replace_all(type1, "blk|balck", "black")]
+    salesdf[, type1 := str_replace_all(type1, fixed("mot"), "motley")]
+    salesdf[, type1 := str_replace_all(type1, fixed("wf"), "whiteface")]
+    salesdf[, type1 := str_replace_all(type1, fixed("bwhiteface"), "black whiteface")]
+    salesdf[, type1 := str_replace_all(type1, fixed("rwhiteface"), "red whiteface")]
+    salesdf[type1 == "black & black whiteface",                type1 := "black whiteface"]
+    salesdf[type1 == "black whiteface & whiteface",            type1 := "black whiteface"]
+    salesdf[type1 == "whiteface & black whiteface",            type1 := "black whiteface"]
+    salesdf[type1 == "black whiteface strs &",                 type1 := "black whiteface"]
+    salesdf[type1 == "red & red whiteface",                    type1 := "red whiteface"]
+    salesdf[type1 == "red whiteface & whiteface",              type1 := "red whiteface"]
+    salesdf[type1 == "whiteface & x-bred",                     type1 := "whiteface"]
+    salesdf[type1 == "red whiteface & whiteface",              type1 := "red whiteface"]
+    salesdf[type1 == "black black whiteface",                  type1 := "black whiteface"]
+    salesdf[type1 == "black black whiteface red face",         type1 := "black whiteface & red whiteface"]
+    salesdf[type1 == "black whiteface red whiteface",          type1 := "black whiteface & red whiteface"]
+    salesdf[type1 %in% c("black",
+                         "brown",
+                         "motley",
+                         "red",
+                         "roan",
+                         "black whiteface",
+                         "red whiteface",
+                         "whiteface"),                         `:=`(color1 = type1, type1 = "none")]
+    salesdf[type1 == "black & red",                            `:=`(color1 = "black", color2 = "red", type1 = "none")]
+    salesdf[type1 == "red & black",                            `:=`(color1 = "red", color2 = "black", type1 = "none")]
+    salesdf[type1 == "red whiteface & black",                  `:=`(color1 = "red whiteface", color2 = "black", type1 = "none")]
+    salesdf[type1 == "black bred",                             `:=`(color1 = "black", type1 = "none")]
+    salesdf[type1 == "black & red ang",                        `:=`(color1 = "black", color2 = "red", type1 = "angus")]
+    salesdf[type1 == "black whiteface & red whiteface",        `:=`(color1 = "black whiteface", color2 = "red whiteface", type1 = "none")]
+    salesdf[type1 == "black black whiteface red whiteface",    `:=`(color1 = "black whiteface", color2 = "red whiteface", type1 = "none")]
+    salesdf[type1 == "black red char",                         `:=`(color1 = "black", color2 = "red", type1 = "charolais")]
+    salesdf[type1 == "red & black ang",                        `:=`(color1 = "red", color2 = "black", type1 = "angus")]
+    salesdf[type1 == "black & red angus",                      `:=`(color1 = "black", color2 = "red", type1 = "angus")]
+    salesdf[type1 == "red & black angus",                      `:=`(color1 = "red", color2 = "black", type1 = "angus")]
+    salesdf[type1 == "black red & char",                       `:=`(color1 = "black", color2 = "red", type1 = "charolais")]
+    salesdf[type1 == "black & red limo",                       `:=`(color1 = "black", color2 = "red", type1 = "limousin")]
+    salesdf[type1 == "black & red whiteface",                  `:=`(color1 = "black", color2 = "red whiteface", type1 = "none")]
+    salesdf[type1 == "red black",                              `:=`(color1 = "red", color2 = "black", type1 = "none")]
+    salesdf[type1 == "red whiteface & black whiteface",        `:=`(color1 = "red whiteface", color2 = "black whiteface", type1 = "none")]
+    salesdf[type1 == "whiteface-ang",                          `:=`(color1 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "ang-whiteface",                          `:=`(color1 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "red ang",                                `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "black sim",                              `:=`(color1 = "black", type1 = "simmental")]
+    salesdf[type1 == "black lim",                              `:=`(color1 = "black", type1 = "limousin")]
+    salesdf[type1 == "red ang-whiteface",                      `:=`(color1 = "red", color2 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "irish black",                            `:=`(color1 = "irish black", type1 = "none")]
+    salesdf[type1 == "sim x char",                             `:=`(type1 = "simmental", type2 = "charolais")]
+    salesdf[type1 == "red lim",                                `:=`(color1 = "red", type1 = "limousin")]
+    salesdf[type1 == "x-bred",                                 type1 := "none"]
+    salesdf[type1 == "ang & red ang",                          `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "ang x strs &",                           type1 := "angus"]
+    salesdf[type1 == "red limo",                               `:=`(color1 = "red", type1 = "limousin")]
+    salesdf[type1 %in% c("brwn", "bwn"),                       `:=`(color1 = "brown", type1 = "none")]
+    salesdf[type1 == "black ang",                              `:=`(color1 = "black", type1 = "angus")]
+    salesdf[type1 == "char x & red",                           `:=`(color1 = "red", type1 = "charolais")]
+    salesdf[type1 == "red & char",                             `:=`(color1 = "red", type1 = "charolais")]
+    salesdf[type1 == "white park",                             type1 := "white_park"]
+    salesdf[type1 == "red angus",                              `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "spot",                                   `:=`(color1 = "spot", type1 = "none")]
+    salesdf[type1 == "santa gert",                             type1 := "santa_gertrudis"]
+    salesdf[type1 == "black & char",                           `:=`(color1 = "black", type1 = "charolais")]
+    salesdf[type1 == "black gel",                              `:=`(color1 = "black", type1 = "gelbvieh")]
+    salesdf[type1 == "black maine",                            `:=`(color1 = "black", type1 = "maine_anjou")]
+    salesdf[type1 == "red ang-char",                           `:=`(color1 = "red", type1 = "angus", type2 = "charolais")]
+    salesdf[type1 == "black limo",                             `:=`(color1 = "black", type1 = "limousin")]
+    salesdf[type1 == "whiteface & red whiteface",              `:=`(color1 = "red whiteface", type1 = "none")]
+    salesdf[type1 == "red gel",                                `:=`(color1 = "red", type1 = "gelbvieh")]
+    salesdf[type1 == "red brangus",                            `:=`(color1 = "red", type1 = "brangus")]
+    salesdf[type1 == "black strs &",                           `:=`(color1 = "black", type1 = "none")]
+    salesdf[type1 == "lh",                                     type1 := "longhorn"]
+    salesdf[type1 == "hol",                                    type1 := "holstein"]
+    salesdf[type1 == "char x lim",                             `:=`(type1 = "charolais", type2 = "limousin")]
+    salesdf[type1 == "brang",                                  type1 := "brangus"]
+    salesdf[type1 == "shthrn",                                 type1 := "shorthorn"]
+    salesdf[type1 == "char-black",                             `:=`(color1 = "black", type1 = "charolais")]
+    salesdf[type1 == "lim-whiteface",                          `:=`(color1 = "whiteface", type1 = "limousin")]
+    salesdf[type1 == "black & whiteface",                      `:=`(color1 = "black", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "red & whiteface",                        `:=`(color1 = "red", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "mix",                                    type1 := "mixed"]
+    salesdf[type1 == "ang x whiteface",                        `:=`(color1 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "black & whiteface",                      `:=`(color1 = "black", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "red & whiteface",                        `:=`(color1 = "red", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "gray",                                   `:=`(color1 = "grey", type1 = "none")]
+    salesdf[type1 == "char & red",                             `:=`(color1 = "red", type1 = "charolais")]
+    salesdf[type1 == "red sim-ang",                            `:=`(color1 = "red", type1 = "simmental", type2 = "angus")]
+    salesdf[type1 == "char x ang",                             `:=`(type1 = "charolais", type2 = "angus")]
+    salesdf[type1 == "lim x char",                             `:=`(type1 = "limousin", type2 = "charolais")]
+    salesdf[type1 == "red sim-angus",                          `:=`(color1 = "red", type1 = "simmental", type2 = "angus")]
+    salesdf[type1 == "lim x sim",                              `:=`(type1 = "limousin", type2 = "simmental")]
+    salesdf[type1 == "black here",                             `:=`(color1 = "black", type1 = "hereford")]
+    salesdf[type1 == "char & black",                           `:=`(color1 = "black", type1 = "charolais")]
+    salesdf[type1 == "angus-red angus",                        `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "angus-whiteface",                        `:=`(color1 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "char-whiteface",                         `:=`(color1 = "whiteface", type1 = "charolais")]
+    salesdf[type1 == "red & whiteface",                        `:=`(color1 = "red", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "lim x bulls &",                          `:=`(type1 = "limousin")]
+    salesdf[type1 == "black longhorn",                         `:=`(color1 = "black", type1 = "longhorn")]
+    salesdf[type1 == "x bred",                                 type1 := "none"]
+    salesdf[type1 == "whiteface-angus",                        `:=`(color1 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "angus & char",                           `:=`(type1 = "angus", type2 = "charolais")]
+    salesdf[type1 == "red angus-whiteface",                    `:=`(color1 = "red", color2 = "whiteface", type1 = "angus")]
+    salesdf[type1 == "red sim",                                `:=`(color1 = "red", type1 = "simmental")]
+    salesdf[type1 == "rd angus",                               `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "black gelbvieh",                         `:=`(color1 = "black", type1 = "gelbvieh")]
+    salesdf[type1 == "red limousin",                           `:=`(color1 = "red", type1 = "limousin")]
+    salesdf[type1 == "angus strs &",                           type1 := "angus"]
+    salesdf[type1 == "angus-lh",                               `:=`(type1 = "angus", type2 = "longhorn")]
+    salesdf[type1 == "black angus",                            `:=`(color1 = "black", type1 = "angus")]
+    salesdf[type1 == "angus & red angus",                      `:=`(color1 = "red", type1 = "angus")]
+    salesdf[type1 == "char-red angus",                         `:=`(color1 = "red", type1 = "charolais", type2 = "angus")]
+    salesdf[type1 == "choice angus",                           type1 := "angus"]
+    salesdf[type1 == "lim flex",                               `:=`(type1 = "limousin", type2 = "angus")]
+    salesdf[type1 == "motley & whiteface",                     `:=`(color1 = "motley", color2 = "whiteface", type1 = "none")]
+    salesdf[type1 == "whiteface & motley",                     `:=`(color1 = "whiteface", color2 = "motley", type1 = "none")]
+    salesdf[type1 == "black limousin",                         `:=`(color1 = "black", type1 = "limousin")]
+    salesdf[type1 == "sim angus",                              `:=`(type1 = "simmental", type2 = "angus")]
+    salesdf[type1 == "red motley",                             `:=`(color1 = "red", color2 = "motley", type1 = "none")]
+    salesdf[type1 == "black whiteface & black",                `:=`(color1 = "black whiteface", color2 = "black", type1 = "none")]
+    salesdf[type1 == "hereford & black whiteface",             `:=`(color1 = "black whiteface", type1 = "hereford")]
+    salesdf[type1 == "white face",                             `:=`(color1 = "whiteface", type1 = "none")]
+    salesdf[type1 == "angus&char",                             `:=`(type1 = "angus", type2 = "charolais")]
+    salesdf[type1 == "balacner",                               type1 := "balancer"]
+    salesdf[type1 == "glebvieh",                               type1 := "gelbvieh"]
+    salesdf[type1 == "ang x here",                             `:=`(type1 = "angus", type2 = "hereford")]
+    salesdf[type1 == "whiteface & black",                      `:=`(color1 = "whiteface", color2 = "black", type1 = "none")]
+    salesdf[type1 == "red ang & char",                         `:=`(color1 = "red", type1 = "angus", type2 = "charolais")]
+    salesdf[type1 %in% c("brnd", "mis", "re", "weaned"), type1 := "none"] # Not sure how to classify these
+    setcolorder(salesdf, c("market", "reportid", "date", "buyer", "quantity", "type1", "type2", "color1", "color2", "reprod", "weight", "price"))
 
-    # Standardize types
-    # Only allow letters, hyphens, ampersands, and spaces
-    salesdf[, type := str_remove_all(type, "[^a-z&\\-\\ ]")]
-    # Remove trailing 'x' characters
-    salesdf[, type := str_remove(type, "\\ +x$")]
-
-    salesdf[type %in% c("angus")]
-    as.matrix(unique(salesdf$type), ncol = 1)
-
-    salesdf
+    salesdf[]
 }
 
 # Verify that the cleaning process went according to plan
 clean_validation <- function(salesdf){
-    message("clean_validation() has not been implemented.")
-    FALSE
+
+    # Check for NA values
+    missinginds <- unique(unlist(lapply(salesdf, function(x) which(is.na(x)))))
+    if(any(missinginds)){
+        elements_with_missing_values <- salesdf[missinginds]
+        elements_with_missing_values[, row_in_table := missinginds]
+        stop(sprintf("The following tuples contain missing data:\n%s",
+                     df2str(elements_with_missing_values)))
+    }
+
+    # Check for colors and types that have not been handled
+    valid_colors <- readLines("data-info/valid_colors.txt")
+    valid_types <- readLines("data-info/valid_types.txt")
+    stop_for_invalid_values <- function(inputcol, valid_values){
+        valid_values_source <- "valid_colors"
+        if(inputcol %in% c("type1", "type2")) valid_values_source <- "valid_types"
+        if(!all(salesdf[[inputcol]] %in% valid_values)){
+            invalid <- setdiff(unique(salesdf[[inputcol]]), valid_values)
+            stop(sprintf("The following values are not included in data-info/%s.txt:\n%s\n\n%s",
+                         valid_values_source,
+                         paste(invalid, collapse = "\n")),
+            "You may need to update the clean_*() functions or a valid inputs file.")
+        }
+    }
+    stop_for_invalid_values("color1", valid_colors)
+    stop_for_invalid_values("color2", valid_colors)
+    stop_for_invalid_values("type1", valid_types)
+    stop_for_invalid_values("type2", valid_types)
+
+    # Return TRUE if all tests pass
+    TRUE
 }
 

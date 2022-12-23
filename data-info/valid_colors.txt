@@ -1,0 +1,12 @@
+black
+black whiteface
+brown
+grey
+irish black
+motley
+none
+red
+red whiteface
+roan
+spot
+whiteface
