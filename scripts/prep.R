@@ -381,7 +381,6 @@ clean_attributes <- function(salesdf){
         salesdf[get(typecol) %in% c("gel", "gelvieh", "gelb"), (typecol) := "gelbvieh"]
         salesdf[get(typecol) %in% c("lim", "limo"), (typecol) := "limousin"]
         salesdf[get(typecol) == "maine", (typecol) := "maine_anjou"]
-        salesdf[get(typecol) == "maine", (typecol) := "maine_anjou"]
         salesdf[get(typecol) == "sal", (typecol) := "saler"]
         salesdf[get(typecol) == "sim", (typecol) := "simmental"]
         salesdf[get(typecol) == "stab", (typecol) := "stabilizer"]
