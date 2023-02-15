@@ -514,6 +514,9 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "ang x here",                             `:=`(type1 = "angus", type2 = "hereford")]
     salesdf[type1 == "whiteface & black",                      `:=`(color1 = "whiteface", color2 = "black", type1 = "none")]
     salesdf[type1 == "red ang & char",                         `:=`(color1 = "red", type1 = "angus", type2 = "charolais")]
+    salesdf[type1 == "char-red",                               `:=`(color1 = "red", type1 = "charolais")]
+    salesdf[type1 == "sim-angus-whiteface",                    `:=`(color1 = "whiteface", type1 = "simmental", type2 = "angus")]
+    salesdf[type1 == "lim-flex & whiteface",                   `:=`(color1 = "whiteface", type1 = "limousin", type2 = "angus")]
     salesdf[type1 %in% c("brnd", "mis", "re", "weaned"), type1 := "none"] # Not sure how to classify these
     setcolorder(salesdf, c("market", "reportid", "date", "buyer", "quantity", "type1", "type2", "color1", "color2", "reprod", "weight", "price"))
 
@@ -542,8 +545,8 @@ clean_validation <- function(salesdf){
             invalid <- setdiff(unique(salesdf[[inputcol]]), valid_values)
             stop(sprintf("The following values are not included in data-info/%s.txt:\n%s\n\n%s",
                          valid_values_source,
-                         paste(invalid, collapse = "\n")),
-            "You may need to update the clean_*() functions or a valid inputs file.")
+                         paste(invalid, collapse = "\n"),
+                 "You may need to update the clean_*() functions or a valid inputs file."))
         }
     }
     stop_for_invalid_values("color1", valid_colors)
