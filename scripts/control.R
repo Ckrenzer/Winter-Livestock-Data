@@ -13,31 +13,16 @@
     if(!"TAF" %in% installed_packages) install.packages("TAF");
 
     source("scripts/prep.R")
-
-    urls <- local({
-        webpage <- readLines("https://www.winterlivestock.com/lajunta.php")
-        reportID <- str_subset(webpage, "Current Report")
-        if(length(reportID) == 0){
-            stop("Current Report not found!")
-        } else if(length(reportID) > 1){
-            stop("More than one match found for Current Report!")
-        }
-        reportID <- str_extract(reportID, "\\d+")
-        str_glue("https://www.winterlivestock.com/lajunta.php?reportID={reportID}#marketreport")
-    })
+    permitted_markets <- readLines("data-info/valid_markets.txt")
+    past_reportIDs <- as.integer(readLines("data-info/reports/wl_reportIDs.txt"))
 
 }
 
 {# Load Market Reports ---------------------------------------------------------
 
-    urls <- c(str_c("https://www.winterlivestock.com/lajunta.php?reportID=",
-                    readLines("data-info/reports/wl_reportIDs.txt"),
-                    "#marketreport"),
-              urls)
-    permitted_markets <- readLines("data-info/valid_markets.txt")
-
-    lajunta <- raw_extraction(urls = urls)
-    raw_validation(saleslist = lajunta, urls = urls)
+    reportIDs <- identify_possible_reportIDs(previous_reportIDs = past_reportIDs)
+    lajunta <- raw_extraction(reportIDs = reportIDs, previous_reportIDs = past_reportIDs)
+    raw_validation(saleslist = lajunta, reportIDs = reportIDs)
     lajunta <- refine_date(saleslist = lajunta)
     lajunta <- refine_market(saleslist = lajunta)
     ready_to_save <- refine_validation(saleslist = lajunta, valid_markets = permitted_markets)

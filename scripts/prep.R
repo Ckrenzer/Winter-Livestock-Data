@@ -4,48 +4,78 @@
 #   Holds functions used to collect and tidy market reports.
 
 
+# Convert a reportID to a URL
+to_url <- function(reportIDs){
+    str_c("https://www.winterlivestock.com/lajunta.php?reportID=", reportIDs, "#marketreport")
+}
+
+# Identify possible urls to check for market reports
+identify_possible_reportIDs <- function(previous_reportIDs){
+    newest_reportID <- local({
+        webpage <- readLines("https://www.winterlivestock.com/lajunta.php")
+        reportID <- str_subset(webpage, "Current Report")
+        if(length(reportID) == 0){
+            stop("Current Report not found!")
+        } else if(length(reportID) > 1){
+            stop("More than one match found for Current Report!")
+        }
+        as.integer(str_extract(reportID, "\\d+"))
+    })
+    if(newest_reportID == max(previous_reportIDs)){
+        warning("The newest report ID has already been recorded.", immediate. = TRUE)
+        return(previous_reportIDs)
+    }
+    c(previous_reportIDs, seq(max(previous_reportIDs) + 1L, newest_reportID))
+}
+
 # Useful for printing problematic data
 # in data frames in error messages
 df2str <- function(df){
     str_c(capture.output(df), collapse = "\n")
 }
 
+# Last Observation Carried Forward
+cppFunction('CharacterVector locf(CharacterVector x){
+            String missingval = "";
+            String fillval = missingval;
+            CharacterVector fillvec = clone(x);
+            for(int i = 0; i < x.size(); i++){
+                if(fillvec[i] != missingval){
+                    fillval = fillvec[i];
+                } else {
+                    fillvec[i] = fillval;
+                }
+            }
+            return fillvec;
+}')
+
 # Parses the HTML from the URL and stores the sale information
 # in a list of data frames: one data frame for each URL.
 # Preserves all information from the original text.
-raw_extraction <- function(urls){
+raw_extraction <- function(reportIDs, previous_reportIDs){
     str2df <- function(x) as.data.table(matrix(x, ncol = length(x)))
-    cppFunction('CharacterVector locf(CharacterVector x){
-                String missingval = "";
-                String fillval = missingval;
-                CharacterVector fillvec = clone(x);
-                for(int i = 0; i < x.size(); i++){
-                    if(fillvec[i] != missingval){
-                        fillval = fillvec[i];
-                    } else {
-                        fillvec[i] = fillval;
-                    }
-                }
-                return fillvec;
-    }')
 
-    urls <- unique(urls)
-    salesinfo <- structure(vector("list", length(urls)), names = urls)
-    for(url in urls){
+    reportIDs <- as.character(reportIDs)
+    urls <- to_url(reportIDs)
+    salesinfo <- structure(vector("list", length(reportIDs)), names = reportIDs)
+    for(i in seq_along(reportIDs)){
+        reportID <- reportIDs[i]
+        url <- urls[i]
 
         # Load, pre-process the text with awk
-        reportID <- str_extract(url, "(?<=reportID\\=)\\d+")
         reportfile <- str_glue("data-info/reports/wl_reportID{reportID}.html")
         if(!file.exists(reportfile)){
             # Pay the server tax
             Sys.sleep(runif(1, 15, 25))
             download.file(url = url, destfile = reportfile, method = "curl")
             TAF::dos2unix(reportfile)
-            cat(reportID, file = "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
         }
-        lajunta <- shell(str_glue("gawk -f scripts/lajunta.awk -v url={url} {reportfile}"),
-                         intern = TRUE,
-                         mustWork = TRUE)
+        lajunta <- system(str_glue("gawk -f scripts/lajunta.awk -v url={url} {reportfile}"),
+                          intern = TRUE)
+        if(length(lajunta) == 0){
+            warning("The preprocessor didn't identify any data for the following url:\n", url, "\n", immediate. = TRUE)
+            next
+        }
 
 
         # Get the data into workable format
@@ -98,24 +128,31 @@ raw_extraction <- function(urls){
 
         setcolorder(obs, c("markettext", "datetext", "saletext", "buyer", "quantity", "weight",
                            "price", "type", "reprod", "url", "reportid"))
-        salesinfo[[url]] <- obs[]; rm(obs)
+        salesinfo[[reportID]] <- obs[]; rm(obs)
     }
+    processed_reportIDs <- names(salesinfo[lengths(salesinfo) > 0])
+    new_reportIDs <- setdiff(processed_reportIDs, previous_reportIDs)
+    if(length(new_reportIDs) > 0){
+        # wl_reportIDs.txt should only contain information for used market reports
+        cat(new_reportIDs, file = "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
+    }
+
     salesinfo
 }
 
 # Ensures the values from the scraper came through properly.
 # These checks must pass before continuing with the process.
 # No news is good news.
-raw_validation <- function(saleslist = NULL, urls = NULL){
+raw_validation <- function(saleslist = NULL, reportIDs = NULL){
     reportIDs_file <- "data-info/reports/wl_reportIDs.txt"
-    salescols <- c("markettext", "datetext", "saletext", "buyer", "quantity", "weight",
-                   "price", "type", "reprod", "url", "reportid")
+    salescols <- c("markettext", "datetext", "saletext", "buyer", "quantity",
+                   "weight", "price", "type", "reprod", "url", "reportid")
+    urls <- to_url(reportIDs)
 
-    stopifnot(!is.null(saleslist), !is.null(urls), file.exists(reportIDs_file))
-    reportIDs_stored <- as.character(sort(as.integer(readLines(reportIDs_file))))
-    reportIDs_asis <- unique(as.integer(str_extract(urls, "(?<=reportID\\=)\\d+")))
-    reportIDs <- as.character(sort(reportIDs_asis))
-    reportIDs_asis <- as.character(reportIDs_asis)
+    stopifnot(!is.null(saleslist), !is.null(reportIDs), file.exists(reportIDs_file))
+    reportIDs_stored <- str_sort(readLines(reportIDs_file), numeric = TRUE)
+    reportIDs_asis <- as.character(reportIDs)
+    reportIDs <- str_sort(reportIDs_asis, numeric = TRUE)
     if(any(is.na(reportIDs_stored),
            is.na(reportIDs),
            !is.character(reportIDs_stored),
@@ -136,68 +173,68 @@ raw_validation <- function(saleslist = NULL, urls = NULL){
     }
     recorded_IDs <- reportIDs %in% reportIDs_stored
     if(!all(recorded_IDs)){
-        stop(sprintf("The following Report IDs were used to collect data but not recorded:\n%s",
+        stop(sprintf("The following reports were used to collect data but not are recorded:\n%s",
                      paste(urls[!recorded_IDs], collapse = "\n")))
     }
     if(!is.list(saleslist)){
         stop("`saleslist` is not a list!")
     }
-    if(length(saleslist) != length(urls)){
-        stop("The length of `saleslist` does not match the number of URLs!")
+    if(length(saleslist) != length(reportIDs_asis)){
+        stop("The length of `saleslist` does not match the number of reports!")
     }
-    if(!all(sort(names(saleslist)) == sort(urls))){
-        stop("The names of `saleslist` are not the values of `urls`!")
+    if(!all(sort(names(saleslist)) == sort(reportIDs))){
+        stop("The names of `saleslist` are not the values of `reportIDs`!")
     }
 
-    for(url in urls){
+    for(reportID in reportIDs){
+        salestable <- saleslist[[reportID]]
         # Ensure each element of the list is a data frame with the required fields
-        if(!is.data.frame(saleslist[[url]])){
-            stop(sprintf("`saleslist`[[\"%s\"]] is not a data.frame!", url))
+        if(!is.data.frame(salestable)){
+            stop(sprintf("`saleslist`[[\"%s\"]] is not a data.frame!", reportID))
         }
-        if(nrow(saleslist[[url]]) == 0){
-            stop(sprintf("`saleslist`[[\"%s\"]] does not have any observations!", url))
+        if(nrow(salestable) == 0){
+            stop(sprintf("`saleslist`[[\"%s\"]] does not have any observations!", reportID))
         }
-        dfcols <- colnames(saleslist[[url]])
+        dfcols <- colnames(salestable)
         cols_in_dfcols_not_in_salescols <- setdiff(dfcols, salescols)
         if(length(cols_in_dfcols_not_in_salescols) > 0){
             stop(sprintf("`saleslist`[[\"%s\"]] contains extra columns:\n%s",
-                         url,
+                         reportID,
                          paste(cols_in_dfcols_not_in_salescols, collapse = "\n")))
         }
         cols_in_salescols_not_in_dfcols <- setdiff(salescols, dfcols)
         if(length(cols_in_salescols_not_in_dfcols) > 0){
             stop(sprintf("`saleslist`[[\"%s\"]] is missing these columns:\n%s",
-                         url,
+                         reportID,
                          paste(cols_in_salescols_not_in_dfcols, collapse = "\n")))
         }
 
         # Ensure the values in each field came through properly
         check_missingness <- function(df, field){
             if(any(is.na(df[[field]]) | df[[field]] == "")){
-                stop(sprintf("`saleslist`[[\"%s\"]] has NAs or an empty string in the %s field!", url, field))
+                stop(sprintf("`saleslist`[[\"%s\"]] has NAs or an empty string in the %s field!", reportID, field))
             }
         }
         check_digitsonly <- function(df, field){
             if(any(str_detect(df[[field]], "^[^ \\d.]$"))){
-                stop(sprintf("`saleslist`[[\"%s\"]] has non-digits in the %s field!", url, field))
+                stop(sprintf("`saleslist`[[\"%s\"]] has non-digits in the %s field!", reportID, field))
             }
         }
         check_nonumbers <- function(df, field){
             if(any(str_detect(df[[field]], "\\d"))){
-                stop(sprintf("`saleslist`[[\"%s\"]] has digits in the %s field!", url, field))
+                stop(sprintf("`saleslist`[[\"%s\"]] has digits in the %s field!", reportID, field))
             }
         }
-        for(col in dfcols) check_missingness(df = saleslist[[url]], field = col)
-        for(col in c("quantity", "weight", "price")) check_digitsonly(df = saleslist[[url]], field = col)
-        for(col in c("type", "reprod")) check_nonumbers(df = saleslist[[url]], field = col)
-        if(any(saleslist[[url]][, str_detect(type, "\\d")])){
-            stop(sprintf("`saleslist`[[\"%s\"]] has numbers in the type field!", url))
+        for(col in dfcols) check_missingness(df = salestable, field = col)
+        for(col in c("quantity", "weight", "price")) check_digitsonly(df = salestable, field = col)
+        for(col in c("type", "reprod")) check_nonumbers(df = salestable, field = col)
+        if(any(salestable[, str_detect(type, "\\d")])){
+            stop(sprintf("`saleslist`[[\"%s\"]] has numbers in the type field!", reportID))
         }
-        if(!all(saleslist[[url]][["url"]] == url)){
-            stop(sprintf("The url field of `saleslist`[[\"%s\"]] is not equal to \"%s\"!", url, url))
+        if(!all(salestable[["url"]] == to_url(reportID))){
+            stop(sprintf("The url field of `saleslist`[[\"%s\"]] is not equal to \"%s\"!", reportID, to_url(reportID)))
         }
     }
-    suppressWarnings(file.remove(reportIDs_file))
     writeLines(reportIDs, reportIDs_file)
 }
 
@@ -360,6 +397,7 @@ clean_attributes <- function(salesdf){
                          "gel-lim",
                          "gelb-ang",
                          "here-angus",
+                         "hereford-angus",
                          "lim-ang",
                          "lim-angus",
                          "lim-char",
@@ -517,6 +555,9 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "char-red",                               `:=`(color1 = "red", type1 = "charolais")]
     salesdf[type1 == "sim-angus-whiteface",                    `:=`(color1 = "whiteface", type1 = "simmental", type2 = "angus")]
     salesdf[type1 == "lim-flex & whiteface",                   `:=`(color1 = "whiteface", type1 = "limousin", type2 = "angus")]
+    salesdf[type1 == "black or char",                          `:=`(type1 = "charolais", color1 = "black")]
+    salesdf[type1 == "black or black whiteface",               `:=`(color1 = "black", type1 = "none")]
+    salesdf[type1 == "black or red",                           `:=`(color1 = "black", type1 = "none")]
     salesdf[type1 %in% c("brnd", "mis", "re", "weaned"), type1 := "none"] # Not sure how to classify these
     setcolorder(salesdf, c("market", "reportid", "date", "buyer", "quantity", "type1", "type2", "color1", "color2", "reprod", "weight", "price"))
 
