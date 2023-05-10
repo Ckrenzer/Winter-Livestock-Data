@@ -558,6 +558,7 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "black or char",                          `:=`(type1 = "charolais", color1 = "black")]
     salesdf[type1 == "black or black whiteface",               `:=`(color1 = "black", type1 = "none")]
     salesdf[type1 == "black or red",                           `:=`(color1 = "black", type1 = "none")]
+    salesdf[type1 == "red or black",                           `:=`(color1 = "red", type1 = "none")]
     salesdf[type1 %in% c("brnd", "mis", "re", "weaned"), type1 := "none"] # Not sure how to classify these
     setcolorder(salesdf, c("market", "reportid", "date", "buyer", "quantity", "type1", "type2", "color1", "color2", "reprod", "weight", "price"))
 

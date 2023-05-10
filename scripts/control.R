@@ -22,6 +22,7 @@
 
     reportIDs <- identify_possible_reportIDs(previous_reportIDs = past_reportIDs)
     lajunta <- raw_extraction(reportIDs = reportIDs, previous_reportIDs = past_reportIDs)
+    reportIDs <- as.integer(readLines("data-info/reports/wl_reportIDs.txt"))
     raw_validation(saleslist = lajunta, reportIDs = reportIDs)
     lajunta <- refine_date(saleslist = lajunta)
     lajunta <- refine_market(saleslist = lajunta)
