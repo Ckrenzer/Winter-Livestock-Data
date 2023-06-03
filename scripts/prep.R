@@ -137,7 +137,7 @@ raw_extraction <- function(reportIDs, previous_reportIDs){
         cat(new_reportIDs, file = "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
     }
 
-    salesinfo
+    salesinfo[lengths(salesinfo) > 0]
 }
 
 # Ensures the values from the scraper came through properly.
@@ -550,6 +550,7 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "balacner",                               type1 := "balancer"]
     salesdf[type1 == "glebvieh",                               type1 := "gelbvieh"]
     salesdf[type1 == "ang x here",                             `:=`(type1 = "angus", type2 = "hereford")]
+    salesdf[type1 == "char or angus",                          `:=`(type1 = "charolais", type2 = "angus")]
     salesdf[type1 == "whiteface & black",                      `:=`(color1 = "whiteface", color2 = "black", type1 = "none")]
     salesdf[type1 == "red ang & char",                         `:=`(color1 = "red", type1 = "angus", type2 = "charolais")]
     salesdf[type1 == "char-red",                               `:=`(color1 = "red", type1 = "charolais")]
@@ -559,6 +560,7 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "black or black whiteface",               `:=`(color1 = "black", type1 = "none")]
     salesdf[type1 == "black or red",                           `:=`(color1 = "black", type1 = "none")]
     salesdf[type1 == "red or black",                           `:=`(color1 = "red", type1 = "none")]
+    salesdf[type1 == "red or red whiteface",                   `:=`(color1 = "red", type1 = "none")]
     salesdf[type1 %in% c("brnd", "mis", "re", "weaned"), type1 := "none"] # Not sure how to classify these
     setcolorder(salesdf, c("market", "reportid", "date", "buyer", "quantity", "type1", "type2", "color1", "color2", "reprod", "weight", "price"))
 
