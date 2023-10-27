@@ -11,15 +11,18 @@ to_url <- function(reportIDs){
 
 # Identify possible urls to check for market reports
 identify_possible_reportIDs <- function(previous_reportIDs){
-    newest_reportID <- local({
-        webpage <- readLines("https://www.winterlivestock.com/lajunta.php")
+    newest_reportID <- tryCatch({
+        webpage <- suppressWarnings(readLines("https://www.winterlivestock.com/lajunta.php"))
         reportID <- str_subset(webpage, "Current Report")
-        if(length(reportID) == 0){
+        if(length(reportID) == 0L){
             stop("Current Report not found!")
-        } else if(length(reportID) > 1){
+        } else if(length(reportID) > 1L){
             stop("More than one match found for Current Report!")
         }
-        as.integer(str_extract(reportID, "\\d+"))
+        newest_reportID <- as.integer(str_extract(reportID, "\\d+"))
+    }, error = function(cnd){
+        warning("Could not identify newest report. Only using historical reportIDs.", immediate. = TRUE)
+        max(as.integer(str_extract(previous_reportIDs, "\\d+")))
     })
     if(newest_reportID == max(previous_reportIDs)){
         warning("The newest report ID has already been recorded.", immediate. = TRUE)
@@ -28,55 +31,78 @@ identify_possible_reportIDs <- function(previous_reportIDs){
     c(previous_reportIDs, seq(max(previous_reportIDs) + 1L, newest_reportID))
 }
 
+# Ensure all files are found on disk
+download_reports <- function(reportIDs){
+    report_files <- sprintf("data-info/reports/wl_reportID%s.html", reportIDs)
+    file_not_found <- !file.exists(report_files)
+    report_files <- report_files[file_not_found]
+    urls <- to_url(reportIDs[file_not_found])
+    original_timeout <- getOption("timeout")
+    options(timeout = 10L)
+    on.exit(options(timeout = original_timeout), add = TRUE)
+    for(i in seq_along(report_files)){
+        reportfile <- report_files[i]
+        url <- urls[i]
+        attempt <- 1L
+        # Handle timeouts
+        while(attempt == 1L || is(dl_status, "try-error")){
+            attempt <- attempt + 1L
+            # Pay the server tax
+            Sys.sleep(runif(1, 15, 25))
+            dl_status <- try(download.file(url = url, destfile = reportfile, method = "curl"))
+            if(attempt > 5L) stop("the download failures are likely not caused by timeouts!")
+        }
+        TAF::dos2unix(reportfile)
+    }
+}
+
 # Useful for printing problematic data
 # in data frames in error messages
 df2str <- function(df){
     str_c(capture.output(df), collapse = "\n")
 }
 
-# Last Observation Carried Forward
-cppFunction('CharacterVector locf(CharacterVector x){
-            String missingval = "";
-            String fillval = missingval;
-            CharacterVector fillvec = clone(x);
-            for(int i = 0; i < x.size(); i++){
-                if(fillvec[i] != missingval){
-                    fillval = fillvec[i];
-                } else {
-                    fillvec[i] = fillval;
-                }
-            }
-            return fillvec;
-}')
+# last observation carried forward
+locf <- function(x, missingval = ""){
+    hasval <- `if`(is.na(missingval), is.na(x), x != missingval)
+    c(x[hasval][1L], x[hasval])[cumsum(hasval) + 1L]
+}
 
 # Parses the HTML from the URL and stores the sale information
-# in a list of data frames: one data frame for each URL.
-# Preserves all information from the original text.
+# in a list of data frames: one data frame per URL.
 raw_extraction <- function(reportIDs, previous_reportIDs){
     str2df <- function(x) as.data.table(matrix(x, ncol = length(x)))
-
     reportIDs <- as.character(reportIDs)
-    urls <- to_url(reportIDs)
-    salesinfo <- structure(vector("list", length(reportIDs)), names = reportIDs)
-    for(i in seq_along(reportIDs)){
-        reportID <- reportIDs[i]
-        url <- urls[i]
+    report_info <- Map(list,
+                       reportID = reportIDs,
+                       filename = sprintf("data-info/reports/wl_reportID%s.html", reportIDs),
+                       url = to_url(reportIDs))
 
-        # Load, pre-process the text with awk
-        reportfile <- str_glue("data-info/reports/wl_reportID{reportID}.html")
-        if(!file.exists(reportfile)){
-            # Pay the server tax
-            Sys.sleep(runif(1, 15, 25))
-            download.file(url = url, destfile = reportfile, method = "curl")
-            TAF::dos2unix(reportfile)
-        }
+    cores <- max(parallel::detectCores() - 1L, 1L)
+    cl <- parallel::makeCluster(cores)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+    cat("", file = "data-info/logs/extraction.txt", sep = "", append = FALSE)
+    salesinfo <- foreach(report = report_info,
+                         .packages = c("data.table", "stringr"),
+                         .export = "locf",
+                         .inorder = FALSE,
+                         .errorhandling = "pass", # must use "pass" because of the .final call
+                         .final = function(x) setNames(x, reportIDs)) %dopar% {
+
+        reportID <- report[["reportID"]]
+        reportfile <- report[["filename"]]
+        url <- report[["url"]]
+
+        # Load, pre-process text with awk
         lajunta <- system(str_glue("gawk -f scripts/lajunta.awk -v url={url} {reportfile}"),
+                          ignore.stderr = TRUE,
                           intern = TRUE)
-        if(length(lajunta) == 0){
-            warning("The preprocessor didn't identify any data for the following url:\n", url, "\n", immediate. = TRUE)
-            next
+        if(length(lajunta) == 0L){
+            msg <- sprintf("The preprocessor didn't identify any data for the following url: %s\n", url)
+            cat(msg, file = "data-info/logs/extraction.txt", append = TRUE)
+            return(NULL)
         }
-
 
         # Get the data into workable format
         obs <- str_split(lajunta, "\\ *(DATE|MARKET|URL):\\ *")
@@ -119,25 +145,24 @@ raw_extraction <- function(reportIDs, previous_reportIDs){
         obs[, (colnames(obs)) := lapply(.SD, str_trim), .SDcols = colnames(obs)]
         obs[, buyer := locf(buyer)]
 
-
         # Get reproductive typing
         patt <- "[^[:space:]]+$"
         obs[, reprod := str_extract(type, patt)]
         obs[, type := str_trim(str_remove(type, patt))]
 
-
         setcolorder(obs, c("markettext", "datetext", "saletext", "buyer", "quantity", "weight",
                            "price", "type", "reprod", "url", "reportid"))
-        salesinfo[[reportID]] <- obs[]; rm(obs)
+        return(obs)
     }
-    processed_reportIDs <- names(salesinfo[lengths(salesinfo) > 0])
+
+    salesinfo <- salesinfo[lengths(salesinfo) > 0L]
+    processed_reportIDs <- names(salesinfo)
     new_reportIDs <- setdiff(processed_reportIDs, previous_reportIDs)
     if(length(new_reportIDs) > 0){
         # wl_reportIDs.txt should only contain information for used market reports
         cat(new_reportIDs, file = "data-info/reports/wl_reportIDs.txt", sep = "\n", append = TRUE)
     }
-
-    salesinfo[lengths(salesinfo) > 0]
+    salesinfo
 }
 
 # Ensures the values from the scraper came through properly.
@@ -242,42 +267,62 @@ raw_validation <- function(saleslist = NULL, reportIDs = NULL){
 refine_date <- function(saleslist){
     extract_date <- function(report_df){
         mnames <- str_to_lower(str_c(month.name, collapse = "|"))
-        report_df[, date := datetext]
+        dateinfo <- report_df[1L, datetext]
 
         # Remove characters before the month name
-        report_df[, date := str_remove(date, str_glue("^.*(?=({mnames}))"))]
+        dateinfo <- str_remove(dateinfo, str_glue("^.*(?=({mnames}))"))
         # Remove characters after the first period
-        report_df[, date := str_remove(date, "\\..*$")]
+        dateinfo <- str_remove(dateinfo, "\\..*$")
         # Remove characters after the year
-        report_df[, date := str_replace(date, "((?<=[0-9]{4})).*$", "\\1")]
+        dateinfo <- str_replace(dateinfo, "((?<=[0-9]{4})).*$", "\\1")
 
         # Remove date-formatting characters
-        report_df[, date := str_remove_all(date, "(?<=\\d)(st|nd|rd|th)|,")]
+        dateinfo <- str_remove_all(dateinfo, "(?<=\\d)(st|nd|rd|th)|,")
         # Remove the day of the month for Mondays on multi-day sales
-        report_df[, date := str_remove(date, "\\d+\\ +(&|and)")]
+        dateinfo <- str_remove(dateinfo, "\\d+\\ +(&|and)")
         # Remove extra whitespace
-        report_df[, date := str_squish(date)]
+        dateinfo <- str_squish(dateinfo)
 
-        # The date should now have [month, day, (optional) year] format
-        # Remove anything after this pattern
-        report_df[, date := str_extract(date, str_c("^(", mnames, ")\\ \\d{1,2}(\\ \\d{4})?"))]
+        # Final formatting attempts
+        date_delimiter_pattern <- " \\-/"
+        patterns_to_test <- c(
+                              # month dd yyyy, month-dd-yyyy, etc.
+                              sprintf("^(%s)[%s]\\d{1,2}([%s]\\d{4})?", mnames, date_delimiter_pattern, date_delimiter_pattern),
+                              # mm-dd-yyyy, mm/dd/yyyy, mm dd yyyy, dd-mm-yyyy, etc.
+                              sprintf("\\d{1,2}[%s]\\d{2}([%s]\\d{4})?", date_delimiter_pattern, date_delimiter_pattern)
+        )
+        report_date <- vapply(patterns_to_test, str_extract, character(1L), string = dateinfo, USE.NAMES = FALSE)
+        report_date <- report_date[!is.na(report_date)]
+        multiple_successful_date_formats <- any(duplicated(report_date)[-1L])
+        report_date <- str_replace_all(report_date[1L], "-|/", " ")
+        if(multiple_successful_date_formats){
+            warning(sprintf("Multiple successful date parsings. Choosing %s as the date for report ID %s.",
+                            report_date, report_df[1L, reportid]),
+                    immediate. = TRUE)
+        }
 
+        report_df[, date := report_date]
         report_df[]
     }
     impute_year <- function(saleslist_){
-        previous_date <- saleslist_[[1]][1, as.Date(date, "%B %d %Y")]
-
+        previous_date <- saleslist_[[1L]][1L, as.Date(date, "%B %d %Y")]
+        to_date <- function(datestring){
+            formats_to_try <- c("%B %d %Y", "%m %d %Y")
+            d <- as.Date(datestring, formats_to_try)
+            d <- d[!is.na(d)]
+            d[1L]
+        }
         for(report_df in saleslist_){
-            current_reportID <- report_df[1, reportid]
+            current_reportID <- report_df[1L, reportid]
             current_date <- report_df[1, date]
             missing_year <- str_detect(current_date, "\\d{4}$", negate = TRUE)
             if(missing_year){
-                impute_date <- previous_date + 7
-                if(wday(impute_date) != 3){
+                impute_date <- previous_date + 7L
+                if(wday(impute_date) != 3L){
                     stop(sprintf("The imputed date for reportID %s is not a Tuesday!", current_reportID))
                 }
                 current_date <- str_c(current_date, year(impute_date), sep = " ")
-                current_date <- as.Date(current_date, "%B %d %Y")
+                current_date <- to_date(current_date)
                 if(is.na(current_date)){
                     stop(sprintf("The date for reportID %s is NA!", current_reportID))
                 }
@@ -287,7 +332,7 @@ refine_date <- function(saleslist){
                          "year imputation!")
                 }
             } else {
-                current_date <- as.Date(current_date, "%B %d %Y")
+                current_date <- to_date(current_date)
             }
             report_df[, date := as.character(current_date)][]
             previous_date <- current_date
@@ -543,6 +588,7 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "black limousin",                         `:=`(color1 = "black", type1 = "limousin")]
     salesdf[type1 == "sim angus",                              `:=`(type1 = "simmental", type2 = "angus")]
     salesdf[type1 == "red motley",                             `:=`(color1 = "red", color2 = "motley", type1 = "none")]
+    salesdf[type1 == "motley & red",                           `:=`(color1 = "red", color2 = "motley", type1 = "none")]
     salesdf[type1 == "black whiteface & black",                `:=`(color1 = "black whiteface", color2 = "black", type1 = "none")]
     salesdf[type1 == "hereford & black whiteface",             `:=`(color1 = "black whiteface", type1 = "hereford")]
     salesdf[type1 == "white face",                             `:=`(color1 = "whiteface", type1 = "none")]
@@ -554,6 +600,7 @@ clean_attributes <- function(salesdf){
     salesdf[type1 == "whiteface & black",                      `:=`(color1 = "whiteface", color2 = "black", type1 = "none")]
     salesdf[type1 == "red ang & char",                         `:=`(color1 = "red", type1 = "angus", type2 = "charolais")]
     salesdf[type1 == "char-red",                               `:=`(color1 = "red", type1 = "charolais")]
+    salesdf[type1 == "red or char",                            `:=`(color1 = "red", type1 = "charolais")]
     salesdf[type1 == "sim-angus-whiteface",                    `:=`(color1 = "whiteface", type1 = "simmental", type2 = "angus")]
     salesdf[type1 == "lim-flex & whiteface",                   `:=`(color1 = "whiteface", type1 = "limousin", type2 = "angus")]
     salesdf[type1 == "black or char",                          `:=`(type1 = "charolais", color1 = "black")]

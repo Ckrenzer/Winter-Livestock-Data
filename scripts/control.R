@@ -9,7 +9,7 @@
     installed_packages <- rownames(installed.packages())
     if(!"data.table" %in% installed_packages) install.packages("data.table"); library(data.table)
     if(!"stringr" %in% installed_packages) install.packages("stringr"); library(stringr)
-    if(!"Rcpp" %in% installed_packages) install.packages("Rcpp"); library(Rcpp)
+    if(!"doParallel" %in% installed_packages) install.packages("doParallel"); library(doParallel)
     if(!"TAF" %in% installed_packages) install.packages("TAF");
 
     source("scripts/prep.R")
@@ -21,6 +21,7 @@
 {# Load Market Reports ---------------------------------------------------------
 
     reportIDs <- identify_possible_reportIDs(previous_reportIDs = past_reportIDs)
+    download_reports(reportIDs)
     lajunta <- raw_extraction(reportIDs = reportIDs, previous_reportIDs = past_reportIDs)
     reportIDs <- as.integer(readLines("data-info/reports/wl_reportIDs.txt"))
     raw_validation(saleslist = lajunta, reportIDs = reportIDs)
@@ -39,4 +40,3 @@
     }
 
 }
-
