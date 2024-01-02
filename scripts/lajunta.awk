@@ -16,8 +16,8 @@ BEGIN{
     numlines_checked = 0
     # Keep checking subsequent lines if the date wasn't
     # on the line containing the market
-    while(numlines_checked < NUMLINES_TO_CHECK_FOR_DATE \
-          && datetext !~ /[0-9]/){
+    while(numlines_checked < NUMLINES_TO_CHECK_FOR_DATE && \
+          (datetext ~ /[0-9]{3}\-[0-9]{3}\-[0-9]{4}/ || datetext !~ /[0-9]/)){# need numbers, but not phone numbers
         numlines_checked++
         getline
         if($0 ~ /junta/) market = "MARKET: " $0
